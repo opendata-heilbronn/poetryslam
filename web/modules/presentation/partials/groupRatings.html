@@ -4,13 +4,25 @@
 <div class="video-overlay">
     <div class="overlay-center anim-participant animated fadeInLeftBig">
         <div class="participant-list">
-            <div class="participant-row box-highlight" ng-repeat="participant in event.participants track by $index">
-                <div class="participant-column-name">
-                    <div class="participant-list-name">{{participant.name}}</div>
-                    <div class="participant-list-slam">{{participant.slam}}</div>
+            <div class="participant-row" ng-repeat="participant in event.participants track by $index">
+                <div class="box participant-row-main"
+                     ng-class="{'box-highlight': participant.state == 'highlight', 'box-ignored': participant.state == 'ignored', 'box-grey': !participant.state}">
+                    <div class="participant-column-name">
+                        <div class="participant-list-name">{{participant.name}}</div>
+                        <div class="participant-list-slam">{{participant.slam}}</div>
+                    </div>
+                    <div class="participant-column-score">
+                        {{participant.totalScore}}
+                    </div>
                 </div>
-                <div class="participant-column-score">
-                    {{participant.totalScore}}
+                <div class="box box-grey participant-row-ignored-scores participant-row-column"
+                     ng-class="{'invisible': !participant.showIgnoredScores}">
+                    <div>3,0</div>
+                    <div>10,0</div>
+                </div>
+                <div class="box box-highlight participant-column-score participant-row-column"
+                     ng-class="{'invisible': !participant.showIgnoredScores}">
+                    79,3
                 </div>
             </div>
         </div>
