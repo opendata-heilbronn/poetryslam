@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/" />
+    <meta charset="UTF-8">
+    <title>Poetry Slam Admin</title>
+    <script src="components/angular/angular.js"></script>
+    <script src="modules/ps.admin.js"></script>
+    <script src="modules/sync/ps.sync.js"></script>
+    <script src="modules/sync/persist.js"></script>
+</head>
+<body ng-app="ps.admin">
+    <form>
+        <input type="text" name="name" ng-model="event.participant.name" placeholder="Teilnehmer" />
+    </form>
+</body>
+</html>
