@@ -5,14 +5,17 @@
         this.updateScope = function () {
             var event = localStorage.getItem('event');
             if (event) {
-                $rootScope.event = JSON.parse(event);
+                $rootScope.event = angular.fromJson(event);
                 $rootScope.$apply();
                 console.log('updated scope');
             }
         };
 
-        this.persistScope = function() {
-            localStorage.setItem('event', JSON.stringify($rootScope.event));
+        this.persistScope = function () {
+            if (!$rootScope.event) {
+                $rootScope.event = {};
+            }
+            localStorage.setItem('event', angular.toJson($rootScope.event));
             console.log('persisted scope');
         };
 
