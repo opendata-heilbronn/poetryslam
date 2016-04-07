@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "Source Sans Pro Light";
+    src: url("SourceSansPro-Light.eot"); /* IE9 */
+    src: url("SourceSansPro-Light.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("SourceSansPro-Light.woff") format("woff"), /* chrome, firefox */
+    url("SourceSansPro-Light.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("SourceSansPro-Light.svg#Source Sans Pro Light") format("svg"); /* iOS 4.1- */
+    font-style: normal;
+    font-weight: normal;
+}
+
+

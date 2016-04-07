@@ -1,0 +1,24 @@
+<video class="fullscreen-video" autoplay>
+    <source src="/media/clips/bg.mp4" type="video/mp4">
+</video>
+<div class="video-overlay">
+    <div class="overlay-center anim-participant animated fadeInLeftBig" ng-if="event.phase == 'name'">
+        <div class="overlay-highlight box-highlight">{{event.participant.name}}</div>
+        <div class="overlay-subline">{{event.participant.slam}}</div>
+    </div>
+    <div class="overlay-center anim-participant animated fadeInLeftBig"
+         ng-if="event.phase == 'rating' || event.phase == 'total'">
+        <div class="overlay-highlight box-highlight">
+            <ul class="scores animated" ng-class="{'zoomOut': event.phase == 'total'}">
+                <li class="animated" ng-repeat="score in event.scores track by $index"
+                    ng-class="{'light': score.value == '?', 'hinge': score.ignored}">
+                    {{score.value}}
+                </li>
+            </ul>
+            <div class="animated" ng-class="{'hidden': event.phase == 'rating', 'fadeIn': event.phase == 'total'}">
+                {{event.totalScore}}
+            </div>
+        </div>
+        <div class="overlay-subline">Wertung für {{event.participant.name}}</div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+html, body {
+    font-family: "Source Sans Pro Black", "Helvetica", serif;
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.screen-container {
+    position: relative;
+    width: 100vw;
+    height: 75vw;
+}
+
+video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 20;
+    color: #FFF;
+}
+
+.overlay-center {
+    position: absolute;
+    left: 5%;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    transition: all 1s ease-in;
+}
+
+.ng-leave {
+    animation-name: fadeOut !important;
+    animation-delay: 0.5s !important;
+}
+
+.box-highlight {
+    background: #E65559;
+    border: rgba(230, 85, 89, 0.5) 1px solid;
+    padding: 1%;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.overlay-highlight {
+    width: 100%;
+    font-size: 10vw;
+    font-weight: bold;
+    min-height: 14%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.overlay-subline {
+    margin-top: 0.5vw;
+    font-size: 3.5vw;
+}
+
+/** PARTICIPANT **/
+
+.anim-participant {
+    animation-delay: 2s;
+}
+
+.scores {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    font-size: 3.5vw;
+    transition: all 1s ease-in;
+}
+
+.scores.zoomOut {
+    height: 0;
+}
+
+.scores li {
+    background: rgba(0, 0, 0, 0.2);
+    background-clip: padding-box;
+    padding: 1vw;
+    flex: 1;
+    border: 0.75vw solid transparent;
+}
+
+.scores li.light {
+    opacity: 0.5;
+}
+
+/** PARTICIPANT LIST **/
+
+.participant-list {
+    display: flex;
+    width: 60%;
+    margin-left: 20%;
+    flex-direction: column;
+}
+
+.participant-row {
+    display: flex;
+    background-clip: padding-box;
+    border: 0.5vw solid transparent;
+}
+
+.participant-column-name {
+    flex: 1;
+    text-align: left;
+}
+
+.participant-column-score {
+    flex: 0 0 10%;
+    font-size: 3.5vw;
+    display: flex;
+    align-items: center;
+}
+
+.participant-list-name {
+    font-size: 3vw;
+}
+
+.participant-list-slam {
+    font-size: 2vw;
+}

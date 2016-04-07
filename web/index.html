@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Poetry Slam</title>
+    <link rel="stylesheet" href="fonts/SourceSansPro-Black.css" />
+    <link rel="stylesheet" href="fonts/SourceSansPro-Light.css" />
+    <link rel="stylesheet" href="components/animate.css/animate.css"/>
+    <link rel="stylesheet" href="modules/ps.css" />
     <script src="components/angular/angular.js"></script>
+    <script src="components/angular-animate/angular-animate.js"></script>
     <script src="modules/ps.js"></script>
     <script src="modules/sync/ps.sync.js"></script>
     <script src="modules/sync/SyncService.js"></script>
     <script src="modules/sync/init.js"></script>
     <script src="modules/sync/listen.js"></script>
+    <script src="modules/presentation/ps.presentation.js"></script>
+    <script src="modules/presentation/introDirective.js"></script>
+    <script src="modules/presentation/pauseDirective.js"></script>
+    <script src="modules/presentation/participantDirective.js"></script>
+    <script src="modules/presentation/groupRatingsDirective.js"></script>
 </head>
 <body ng-app="ps">
-    Hallo {{event.participant.name}}
+    <div class="screen-container" ng-switch="event.screen">
+        <intro ng-switch-when="intro"></intro>
+        <pause ng-switch-default></pause>
+        <participant ng-switch-when="participant"></participant>
+        <group-ratings ng-switch-when="groupRatings"></group-ratings>
+    </div>
 </body>
 </html>
