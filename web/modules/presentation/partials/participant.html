@@ -1,1 +1,14 @@
-Participant
+<video class="fullscreen-video" autoplay>
+    <source src="/media/clips/bg.mp4" type="video/mp4">
+</video>
+<div class="video-overlay" ng-switch="event.phase">
+    <div class="overlay-center anim-participant animated fadeInLeftBig" ng-switch-when="name">
+        <div class="overlay-highlight">{{event.participant.name}}</div>
+        <div class="overlay-subline">{{event.participant.slam}}</div>
+    </div>
+    <div class="overlay-center overlay-red" ng-switch-when="rating">
+        <ul class="ratings">
+            <li ng-repeat="rating in event.ratings">{{rating}}</li>
+        </ul>
+    </div>
+</div>

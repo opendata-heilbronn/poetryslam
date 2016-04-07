@@ -18,6 +18,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.5.3"
+    "angular": "^1.5.3",
+    "angular-animate": "^1.5.3",
+    "animate.css": "^3.5.1"
   }
 }
