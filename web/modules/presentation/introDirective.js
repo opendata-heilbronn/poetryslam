@@ -4,6 +4,6 @@
         return {
             restrict: 'E',
             templateUrl: '/modules/presentation/partials/pause.html'
-        }
+        };
     });
 })();
