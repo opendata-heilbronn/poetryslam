@@ -48,18 +48,19 @@ video {
     animation-delay: 0.5s !important;
 }
 
-.anim-participant {
-    animation-delay: 2s;
+.box-highlight {
+    background: #E65559;
+    border: rgba(230, 85, 89, 0.5) 1px solid;
+    padding: 1%;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    opacity: 0.8;
 }
 
 .overlay-highlight {
-    background: #E65559;
-    border: rgba(230, 85, 89, 0.5) 1px solid;
     width: 100%;
     font-size: 10vw;
-    padding: 1%;
     font-weight: bold;
-    box-sizing: border-box;
     min-height: 14%;
     display: flex;
     flex-direction: column;
@@ -69,6 +70,12 @@ video {
 .overlay-subline {
     margin-top: 0.5vw;
     font-size: 3.5vw;
+}
+
+/** PARTICIPANT **/
+
+.anim-participant {
+    animation-delay: 2s;
 }
 
 .scores {
@@ -95,4 +102,39 @@ video {
 
 .scores li.light {
     opacity: 0.5;
+}
+
+/** PARTICIPANT LIST **/
+
+.participant-list {
+    display: flex;
+    width: 60%;
+    margin-left: 20%;
+    flex-direction: column;
+}
+
+.participant-row {
+    display: flex;
+    background-clip: padding-box;
+    border: 0.5vw solid transparent;
+}
+
+.participant-column-name {
+    flex: 1;
+    text-align: left;
+}
+
+.participant-column-score {
+    flex: 0 0 10%;
+    font-size: 3.5vw;
+    display: flex;
+    align-items: center;
+}
+
+.participant-list-name {
+    font-size: 3vw;
+}
+
+.participant-list-slam {
+    font-size: 2vw;
 }
