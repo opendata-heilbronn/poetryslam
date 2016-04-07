@@ -41,6 +41,14 @@
         <p><input type="text" ng-model="participant.name" placeholder="Teilnehmer"/></p>
         <p><input type="text" ng-model="participant.slam" placeholder="Beschreibung"/></p>
         <p><input type="text" ng-model="participant.totalScore" placeholder="Score"/></p>
+        <p>
+            State<br>
+            <select ng-model="participant.state">
+                <option value="">-</option>
+                <option value="highlight">Highlight</option>
+                <option value="ignored">Ignored</option>
+            </select>
+        </p>
     </div>
     <button ng-click="addParticipant()">Teilnehmer hinzufügen</button>
 

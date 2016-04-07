@@ -28,7 +28,6 @@ video {
     bottom: 0;
     right: 0;
     z-index: 20;
-    color: #FFF;
 }
 
 .overlay-center {
@@ -41,6 +40,7 @@ video {
     text-align: center;
     justify-content: center;
     transition: all 1s ease-in;
+    color: #FFF;
 }
 
 .ng-leave {
@@ -48,13 +48,26 @@ video {
     animation-delay: 0.5s !important;
 }
 
-.box-highlight {
-    background: #E65559;
-    border: rgba(230, 85, 89, 0.5) 1px solid;
+.box {
     padding: 1%;
     box-sizing: border-box;
     text-transform: uppercase;
     opacity: 0.8;
+}
+
+.box-highlight {
+    background: #E65559;
+}
+
+.box-grey {
+    background: #EBEBEB;
+    color: #444;
+}
+
+.box-ignored {
+    background: #EBEBEB;
+    color: #444;
+    opacity: 0.4;
 }
 
 .overlay-highlight {

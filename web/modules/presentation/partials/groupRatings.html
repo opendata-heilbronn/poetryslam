@@ -4,7 +4,8 @@
 <div class="video-overlay">
     <div class="overlay-center anim-participant animated fadeInLeftBig">
         <div class="participant-list">
-            <div class="participant-row box-highlight" ng-repeat="participant in event.participants track by $index">
+            <div class="participant-row box" ng-repeat="participant in event.participants track by $index"
+                 ng-class="{'box-highlight': participant.state == 'highlight', 'box-ignored': participant.state == 'ignored', 'box-grey': !participant.state}">
                 <div class="participant-column-name">
                     <div class="participant-list-name">{{participant.name}}</div>
                     <div class="participant-list-slam">{{participant.slam}}</div>
