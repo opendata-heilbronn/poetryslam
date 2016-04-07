@@ -26,7 +26,7 @@
                 }, 10000);
 
                 window.setTimeout(function() {
-                    if (document.querySelector(".to-overlay-subline").classList !== null) {
+                    if (document.querySelector(".to-overlay-subline") !== null && document.querySelector(".to-overlay-subline").classList !== null) {
                         document.querySelector(".to-overlay-subline")
                             .classList
                             .remove("overlay-highlight");
