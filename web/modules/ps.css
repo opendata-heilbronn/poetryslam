@@ -4,6 +4,10 @@ html, body {
     padding: 0;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .screen-container {
     position: relative;
     width: 100vw;
@@ -74,6 +78,11 @@ video {
     margin: 0;
     padding: 0;
     font-size: 3.5vw;
+    transition: all 1s ease-in;
+}
+
+.scores.zoomOut {
+    height: 0;
 }
 
 .scores li {
