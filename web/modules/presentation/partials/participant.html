@@ -6,9 +6,14 @@
         <div class="overlay-highlight">{{event.participant.name}}</div>
         <div class="overlay-subline">{{event.participant.slam}}</div>
     </div>
-    <div class="overlay-center overlay-red" ng-switch-when="rating">
-        <ul class="ratings">
-            <li ng-repeat="rating in event.ratings">{{rating}}</li>
-        </ul>
+    <div class="overlay-center anim-participant animated fadeInLeftBig" ng-switch-when="rating">
+        <div class="overlay-highlight">
+            <ul class="scores">
+                <li ng-repeat="score in event.scores track by $index" ng-class="{'light': score.value == '?'}">
+                    {{score.value}}
+                </li>
+            </ul>
+        </div>
+        <div class="overlay-subline">Wertung für {{event.participant.name}}</div>
     </div>
 </div>
