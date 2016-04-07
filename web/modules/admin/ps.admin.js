@@ -4,6 +4,7 @@
     var psadmin = angular.module('psadmin', ['ngMaterial', 'ngRoute', 'ps.sync']);
     psadmin.config(function ($mdThemingProvider, $mdIconProvider) {
         $mdIconProvider
+            .iconSet('navigation', '/material-icons/navigation-icons.svg', 24)
             .iconSet('social', '/material-icons/social-icons.svg', 24)
             .iconSet('action', '/material-icons/action-icons.svg', 24)
             .iconSet('image', '/material-icons/image-icons.svg', 24)
@@ -44,7 +45,7 @@
             var competition = {}; // TODO init from parameter for editing
             $mdDialog.show({
                 targetEvent: ev,
-                templateUrl: '/modules/presentation/partials/competitionDialog.html',
+                templateUrl: '/modules/admin/partials/competitionDialog.html',
                 locals: {competition: competition},
                 controller: function ($scope, $mdDialog, competition) {
                     $scope.competition = competition;
@@ -76,7 +77,7 @@
             var group = {}; // TODO init from parameter for editing
             $mdDialog.show({
                 targetEvent: ev,
-                templateUrl: '/modules/presentation/partials/groupDialog.html',
+                templateUrl: '/modules/admin/partials/groupDialog.html',
                 locals: {group: group},
                 controller: function ($scope, $mdDialog, group) {
                     $scope.group = group;
@@ -104,7 +105,7 @@
             var participant = knownParticipant ? angular.extend({}, knownParticipant) : {};
             $mdDialog.show({
                 targetEvent: ev,
-                templateUrl: '/modules/presentation/partials/participantDialog.html',
+                templateUrl: '/modules/admin/partials/participantDialog.html',
                 locals: {participant: participant},
                 controller: function ($scope, $mdDialog, participant) {
                     $scope.participant = participant;
@@ -132,7 +133,7 @@
             var participant = group.sacrifice ? angular.extend({}, group.sacrifice) : {};
             $mdDialog.show({
                 targetEvent: ev,
-                templateUrl: '/modules/presentation/partials/participantDialog.html',
+                templateUrl: '/modules/admin/partials/participantDialog.html',
                 locals: {participant: participant},
                 controller: function ($scope, $mdDialog, participant) {
                     $scope.participant = participant;
@@ -151,7 +152,7 @@
         $scope.assignParticipant = function (ev, group) {
             $mdDialog.show({
                 targetEvent: ev,
-                templateUrl: '/modules/presentation/partials/participantAssignDialog.html',
+                templateUrl: '/modules/admin/partials/participantAssignDialog.html',
                 controller: function ($scope, $mdDialog) {
                     $scope.save = function (participant) {
                         $mdDialog.hide();
