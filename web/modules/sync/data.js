@@ -23,7 +23,7 @@ function Competition(name) {
 function Event() {
     this.name = "BWSLAM16";
     this.competitions = [];
-
+    this.participants = [];
 }
 
 
