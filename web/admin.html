@@ -4,6 +4,8 @@
     <base href="/"/>
     <meta charset="UTF-8">
     <title>Poetry Slam Admin</title>
+    <link rel="stylesheet" href="fonts/SourceSansPro-Black.css"/>
+    <link rel="stylesheet" href="fonts/SourceSansPro-Light.css"/>
     <link rel="stylesheet" href="components/angular-material/angular-material.css">
     <link rel="stylesheet" href="modules/admin/admin.css">
 
@@ -20,23 +22,18 @@
     <script src="modules/sync/persist.js"></script>
 </head>
 <body layout="row" ng-app="psadmin">
-<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
-            md-component-id="left"
-            ng-click="ul.toggleList()" aria-label="Show User List"
-            md-is-locked-open="$mdMedia('gt-sm')">
-    <md-toolbar class="md-whiteframe-z1">
-        <h3>Admin</h3>
-    </md-toolbar>
+<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+    <img src="/media/logo/logo-compact.png" class="sidebar-logo"/>
+
+    <md-content layout-padding layout="column" layout-wrap>
+        <md-button class="text-left" href="admin.html#/participants">Poeten</md-button>
+        <md-button class="text-left" href="admin.html#/competitions">Wettbewerbe</md-button>
+        <md-button class="text-left">Präsentation</md-button>
+    </md-content>
 </md-sidenav>
 
-<div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
-    <md-toolbar layout="row" class="md-whiteframe-z1">
-        <h3>BWSlam 2016</h3>
-    </md-toolbar>
-
-    <md-content flex id="content" ng-view></md-content>
-</div>
-
-
+<md-content flex class="md-whiteframe-z2">
+    <section class="content-container" ng-view></section>
+</md-content>
 </body>
 </html>

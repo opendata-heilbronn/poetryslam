@@ -11,7 +11,7 @@
             .iconSet('communication', '/material-icons/communication-icons.svg', 24);
         $mdThemingProvider.theme('default')
             .primaryPalette('red')
-            .accentPalette('indigo');
+            .accentPalette('grey');
     });
 
     psadmin.controller('ParticipantAssignCtrl', function ($scope, $rootScope, $q) {

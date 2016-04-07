@@ -1,3 +1,8 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 /* Toolbar area */
 
 .menu {
@@ -15,6 +20,12 @@ md-toolbar h3 {
 }
 
 /* Sidenav area */
+
+.sidebar-logo {
+    width: 80%;
+    margin: 1em auto;
+    display: block;
+}
 
 md-list-item > button {
     width:100%;
@@ -45,12 +56,11 @@ md-list-item {
 
 /* Primary content area */
 
-
-#content  {
+.content-container {
     padding: 2em;
 }
 
-#content .md-button.contact {
+.md-button.contact {
     background-color: transparent;
     border: none;
     width: 48px;
@@ -61,18 +71,17 @@ md-list-item {
     right: 40px;
 }
 
-#content md-icon.avatar {
+md-icon.avatar {
     margin-top: 10px;
 }
 
-#content .md-button.contact > md-icon {
+.md-button.contact > md-icon {
     fill:black;
     width:36px;
     height:36px;
 }
 
-
-#content .md-button.contact:active > md-icon {
+.md-button.contact:active > md-icon {
     background-color: #dadada;
     border-radius: 75%;
     padding:4px;
@@ -81,6 +90,10 @@ md-list-item {
 
 
 /* Utils */
+
+.text-left {
+    text-align: left;
+}
 
 /* Typography support coming in 0.8.0 */
 
