@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/"/>
+    <meta charset="UTF-8">
+    <title>Poetry Slam Admin</title>
+    <script src="components/angular/angular.js"></script>
+    <script src="modules/ps.admin.js"></script>
+    <script src="modules/sync/ps.sync.js"></script>
+    <script src="modules/sync/SyncService.js"></script>
+    <script src="modules/sync/init.js"></script>
+    <script src="modules/sync/persist.js"></script>
+    <script>
+        (function () {
+            'use strict';
+            angular.module('psadmin').run(function ($rootScope) {
+                $rootScope.addScore = function () {
+                    if (!$rootScope.event.scores) {
+                        $rootScope.event.scores = [{value: 10}];
+                    }
+                    else {
+                        $rootScope.event.scores.push({value: 10});
+                    }
+                };
+
+                $rootScope.addParticipant = function () {
+                    if (!$rootScope.event.participants) {
+                        $rootScope.event.participants = [{}];
+                    }
+                    else {
+                        $rootScope.event.participants.push({});
+                    }
+                }
+            });
+        })();
+    </script>
+</head>
+<body ng-app="psadmin">
+<form>
+    <div ng-repeat="participant in event.participants track by $index">
+        <p><input type="text" ng-model="participant.name" placeholder="Teilnehmer"/></p>
+        <p><input type="text" ng-model="participant.slam" placeholder="Beschreibung"/></p>
+        <p><input type="text" ng-model="participant.totalScore" placeholder="Score"/></p>
+    </div>
+    <button ng-click="addParticipant()">Teilnehmer hinzufügen</button>
+
+    <p><input type="text" name="name" ng-model="event.participant.name" placeholder="Teilnehmer"/></p>
+    <p><input type="text" name="slam" ng-model="event.participant.slam" placeholder="Beschreibung"/></p>
+    <p ng-repeat="score in event.scores track by $index">
+        <input type="text" ng-model="score.value" placeholder="Punkt {{$index}}"/>
+        <input type="checkbox" ng-model="score.ignored"/>
+    </p>
+    <button ng-click="addScore()">Score hinzufügen</button>
+    <p><input type="text" ng-model="event.totalScore" placeholder="TotalScore"/></p>
+
+    <p>
+        Screen<br>
+        <select name="screen" ng-model="event.screen">
+            <option value="intro">Intro</option>
+            <option value="pause">Pause</option>
+            <option value="participant">Teilnehmer</option>
+            <option value="groupRatings">Gruppenrating</option>
+        </select>
+    </p>
+    <p ng-if="event.screen == 'participant'">
+        Phase<br>
+        <select name="phase" ng-model="event.phase">
+            <option value="name">Name</option>
+            <option value="rating">Rating</option>
+            <option value="total">Total</option>
+        </select>
+    </p>
+</form>
+</body>
+</html>
