@@ -9,7 +9,8 @@
     <div class="overlay-center anim-participant animated fadeInLeftBig" ng-switch-when="rating">
         <div class="overlay-highlight">
             <ul class="scores">
-                <li ng-repeat="score in event.scores track by $index" ng-class="{'light': score.value == '?'}">
+                <li class="animated" ng-repeat="score in event.scores track by $index"
+                    ng-class="{'light': score.value == '?', 'hinge': score.ignored}">
                     {{score.value}}
                 </li>
             </ul>
