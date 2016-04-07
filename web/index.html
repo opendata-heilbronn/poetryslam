@@ -12,12 +12,18 @@
     <script src="modules/sync/SyncService.js"></script>
     <script src="modules/sync/init.js"></script>
     <script src="modules/sync/listen.js"></script>
+    <script src="modules/presentation/ps.presentation.js"></script>
+    <script src="modules/presentation/introDirective.js"></script>
+    <script src="modules/presentation/pauseDirective.js"></script>
+    <script src="modules/presentation/participantDirective.js"></script>
+    <script src="modules/presentation/groupRatingsDirective.js"></script>
 </head>
 <body ng-app="ps">
-    <div class="screen-container">
-        <video class="fullscreen-video" autoplay>
-            <source src="media/clips/intro_eroeffnung.mp4" type="video/mp4">
-        </video>
+    <div class="screen-container" ng-switch="event.screen">
+        <intro ng-switch-when="intro"></intro>
+        <pause ng-switch-default></pause>
+        <participant ng-switch-when="participant"></participant>
+        <group-ratings ng-switch-when="groupRatings"></group-ratings>
     </div>
 </body>
 </html>

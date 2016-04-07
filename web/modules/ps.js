@@ -1,5 +1,5 @@
 (function () {
     'use strict';
 
-    angular.module('ps', ['ps.sync']);
+    angular.module('ps', ['ps.sync', 'ps.presentation']);
 })();
