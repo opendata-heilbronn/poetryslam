@@ -18,23 +18,18 @@
         $scope.searchText = "";
 
 
-        $scope.filterParticipants = function(searchText) {
-            console.log("searchText: "+searchText);
+        $scope.filterParticipants = function (searchText) {
+            console.log("searchText: " + searchText);
             var defer = $q.defer();
 
-            if (searchText) {
-                var result = [];
-                var searchFor = searchText.toLowerCase();
-                event.participants.forEach(function(elem) {
-                    console.log(elem.name.toLowerCase() + " - " + searchText.toLowerCase());
-                    if (elem.name.toLowerCase().indexOf(searchFor) != -1) {
-                        result.push(elem);
-                    }
-                });
-                defer.resolve(result);
-            } else {
-                defer.resolve(event.participants);
-            }
+            var result = [];
+            var searchFor = searchText.toLowerCase();
+            event.participants.forEach(function (elem) {
+                if (!elem.assigned && (elem.name.toLowerCase().indexOf(searchFor) != -1 || !searchFor)) {
+                    result.push(elem);
+                }
+            });
+            defer.resolve(result);
             return defer.promise;
         };
 
@@ -44,6 +39,7 @@
     psadmin.controller('AdminCtrl', function ($scope, $rootScope, $mdDialog, $q) {
         var event = $scope.event;
         //event.competitions = [];
+        //event.participants = [];
         $scope.promptCompetition = function (ev) {
             var competition = {}; // TODO init from parameter for editing
             $mdDialog.show({
@@ -66,6 +62,15 @@
         $scope.deleteCompetition = function (ev, event, competition) {
             var index = event.competitions.indexOf(competition);
             event.competitions.splice(index, 1);
+            if (competition.groups) {
+                competition.groups.forEach(function (group) {
+                    if (group.participants) {
+                        group.participants.forEach(function (element) {
+                            element.assigned = false;
+                        });
+                    }
+                });
+            }
         };
         $scope.promptGroup = function (ev, competition) {
             var group = {}; // TODO init from parameter for editing
@@ -88,6 +93,11 @@
         $scope.deleteGroup = function (ev, competition, group) {
             var index = competition.groups.indexOf(group);
             competition.groups.splice(index, 1);
+            if (group.participants) {
+                group.participants.forEach(function (element) {
+                    element.assigned = false;
+                });
+            }
         };
 
         $scope.promptParticipant = function (ev, group, knownParticipant) {
@@ -115,6 +125,7 @@
         $scope.deleteParticipant = function (ev, group, knownParticipant) {
             var index = group.participants.indexOf(knownParticipant);
             group.participants.splice(index, 1);
+            knownParticipant.assigned = false;
         };
 
         $scope.promptSacrifice = function (ev, group) {
@@ -142,12 +153,13 @@
                 targetEvent: ev,
                 templateUrl: 'templates/participantAssignDialog.html',
                 controller: function ($scope, $mdDialog) {
-                    $scope.save = function(participant) {
+                    $scope.save = function (participant) {
                         $mdDialog.hide();
                         if (!group.participants) {
                             group.participants = [];
                         }
                         group.participants.push(participant);
+                        participant.assigned = true;
                     }
                 }
             });
