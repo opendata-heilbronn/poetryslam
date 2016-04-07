@@ -24,6 +24,11 @@
     "animate.css": "^3.5.1",
     "angular-route": "^1.5.3",
     "angular-flowtype": "*",
-    "Flowtype.js": "^1.1.0"
+    "Flowtype.js": "^1.1.0",
+    "odometer": "^0.4.7",
+    "angular-odometer-js": "^0.1.1"
+  },
+  "resolutions": {
+    "angular": "^1.5.3"
   }
 }

@@ -5,10 +5,10 @@
     
     
     <div class="overlay-center anim-participant animated fadeInLeftBig" ng-if="event.phase == 'name'">
-        <div class="overlay-highlight to-overlay-subline">{{event.participant.slam}}</div>
+        <div class="overlay-highlight to-overlay-subline" ng->{{event.participant.slam}}</div>
     </div>
     <div class="overlay-center anim-participant animated fadeInLeftBig delay-5s" ng-if="event.phase == 'name'">
-        <div class="overlay-highlight box-highlight" flowtype>{{event.participant.name}}</div>
+        <div class="overlay-highlight box-highlight fitInside">{{event.participant.name}}</div>
     </div>
     
     <div class="overlay-center anim-participant animated fadeInLeftBig"
@@ -20,9 +20,7 @@
                     {{score.value}}
                 </li>
             </ul>
-            <div class="animated" ng-class="{'hidden': event.phase == 'rating', 'fadeIn': event.phase == 'total'}">
-                {{event.totalScore}}
-            </div>
+            <div ng-if="event.phase == 'total'" class="animated" ng-class="{'hidden': event.phase == 'rating', 'fadeIn': event.phase == 'total'}" odometer="event.totalScore"></div>
         </div>
         <div class="overlay-subline">Wertung für {{event.participant.name}}</div>
     </div>
