@@ -1,19 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/" />
+    <base href="/"/>
     <meta charset="UTF-8">
     <title>Poetry Slam Admin</title>
+    <link rel="stylesheet" href="components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="modules/admin.css">
+
     <script src="components/angular/angular.js"></script>
+    <script src="components/angular-aria/angular-aria.js"></script>
+    <script src="components/angular-animate/angular-animate.js"></script>
+    <script src="components/angular-material/angular-material.js"></script>
     <script src="modules/ps.admin.js"></script>
     <script src="modules/sync/ps.sync.js"></script>
     <script src="modules/sync/SyncService.js"></script>
     <script src="modules/sync/init.js"></script>
     <script src="modules/sync/persist.js"></script>
 </head>
-<body ng-app="psadmin">
-    <form>
-        <input type="text" name="name" ng-model="event.participant.name" placeholder="Teilnehmer" />
-    </form>
+<body layout="row" ng-app="psadmin">
+<md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+            md-component-id="left"
+            ng-click="ul.toggleList()" aria-label="Show User List"
+            md-is-locked-open="$mdMedia('gt-sm')">
+
+    <md-toolbar class="md-whiteframe-z1">
+        <h3>PoetrySlamAdmin</h3>
+    </md-toolbar>
+
+</md-sidenav>
+
+<div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+
+    <md-toolbar layout="row" class="md-whiteframe-z1">
+        <md-button id="main" class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show User List">
+            <md-icon md-svg-icon="menu"></md-icon>
+        </md-button>
+        <h3>BW Poetry Slam 2016</h3>
+    </md-toolbar>
+
+    <md-content flex id="content" ng-controller="AdminCtrl">
+        <form>
+            <input type="text" name="name" ng-model="event.name" placeholder="Eventname"/>
+        </form>
+        <br/>
+
+        <section class="md-whiteframe-z1">
+
+            <md-toolbar class="md-secondary">
+                <div class="md-toolbar-tools">
+                    <h3 class="ng-binding">Teilnehmer</h3>
+                    <span flex="" class="flex"></span>
+
+                    <md-button class="md-primary" ng-click="promptParticipant($event, event)">
+                        + Poet
+                    </md-button>
+                </div>
+            </md-toolbar>
+
+            <md-list>
+
+                <md-subheader ng-show="event.participants && event.participants.length > 0"
+                              class="md-no-sticky">{{event.participants.length}} Poet(en)
+                </md-subheader>
+
+                <md-list-item class="md-2-line" ng-repeat="participant in event.participants">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ participant.name }}</h3>
+                        <p>{{ participant.subtitle}}</p>
+                    </div>
+
+                    <md-checkbox ng-disabled="true" ng-model="participant.assigned"></md-checkbox>
+                    <md-button class="md-icon-button" ng-click="deleteParticipant($event, event, participant)">
+                        <md-icon md-svg-icon="action:delete"></md-icon>
+                    </md-button>
+
+                    <md-button class="md-icon-button" ng-click="promptParticipant($event, event, participant)">
+                        <md-icon md-svg-icon="image:edit"></md-icon>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </section>
+        <br/>
+
+        <div ng-repeat="competition in event.competitions">
+
+            <md-toolbar class="md-primary">
+                <div class="md-toolbar-tools">
+                    <h3 class="ng-binding">{{competition.name}} (Juroren: {{competition.jurors}})</h3>
+                    <span flex="" class="flex"></span>
+
+                    <md-button class="md-primary" ng-click="promptGroup($event, competition)">
+                        + Gruppe
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="deleteCompetition($event, event, competition)">
+                        <md-icon md-svg-icon="action:delete"></md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+
+            <br/>
+
+            <section class="md-whiteframe-z1" ng-repeat="group in competition.groups">
+
+                <md-toolbar class="md-secondary">
+                    <div class="md-toolbar-tools">
+                        <h3 class="ng-binding">{{$index+1}} Gruppe (Gewinner: {{group.winners}})</h3>
+                        <span flex="" class="flex"></span>
+
+                        <md-button class="md-primary" ng-click="promptSacrifice($event, group)">
+                            Opferlamm
+                        </md-button>
+                        <md-button class="md-primary" ng-click="assignParticipant($event, group)">
+                            + Poet
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="deleteGroup($event, competition, group)">
+                            <md-icon md-svg-icon="action:delete"></md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+
+
+                <md-list>
+                    <md-subheader class="md-no-sticky" ng-show="group.sacrifice && group.sacrifice.name">Opferlamm
+                    </md-subheader>
+                    <md-list-item class="md-2-line" ng-show="group.sacrifice && group.sacrifice.name">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{ group.sacrifice.name }}</h3>
+
+                            <p>{{ group.sacrifice.subtitle }}</p>
+                        </div>
+
+                        <md-button class="md-icon-button" ng-click="deleteSacrifice(group)">
+                            <md-icon md-svg-icon="action:delete"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="promptSacrifice($event,  group)">
+                            <md-icon md-svg-icon="image:edit"></md-icon>
+                        </md-button>
+                    </md-list-item>
+
+                    <md-subheader ng-show="group.participants && group.participants.length > 0"
+                                  class="md-no-sticky">{{group.participants.length}} Poet(en)
+                    </md-subheader>
+
+                    <md-list-item class="md-2-line" ng-repeat="participant in group.participants">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{ participant.name }}</h3>
+
+                            <p>{{ participant.subtitle}}</p>
+                        </div>
+
+                        <md-button class="md-icon-button" ng-click="deleteParticipant($event, group, participant)">
+                            <md-icon md-svg-icon="action:delete"></md-icon>
+                        </md-button>
+
+                        <!--<md-button class="md-icon-button" ng-click="promptParticipant($event, group, participant)">
+                            <md-icon md-svg-icon="image:edit"></md-icon>
+                        </md-button>-->
+
+                    </md-list-item>
+                </md-list>
+            </section>
+        </div>
+
+        <md-button class="md-primary" ng-click="promptCompetition($event)">
+            + Wettbewerb
+        </md-button>
+    </md-content>
+
+</div>
+
+
 </body>
 </html>
