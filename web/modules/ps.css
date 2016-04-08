@@ -74,9 +74,7 @@ video {
     color: #444;
     opacity: 0.4;
 }
-.delay-5s {
-    animation-delay: 5s !important;
-}
+
 .overlay-highlight {
     width: 100%;
     font-size: 10vw;
@@ -86,12 +84,10 @@ video {
     flex-direction: column;
     justify-content: center;
 }
+
 .overlay-subline {
-    transition: all 1s;
+    margin-top: 0.5vw;
     font-size: 3.5vw;
-}
-.overlay-subline-with-margin-top {
-    margin-top: 20.5vw;
 }
 
 /** PARTICIPANT **/

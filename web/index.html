@@ -18,8 +18,6 @@
     <script src="modules/ps.js"></script>
     <script src="modules/sync/ps.sync.js"></script>
     <script src="modules/sync/SyncService.js"></script>
-    <script src="modules/sync/init.js"></script>
-    <script src="modules/sync/listen.js"></script>
     <script src="modules/presentation/ps.presentation.js"></script>
     <script src="modules/presentation/introDirective.js"></script>
     <script src="modules/presentation/pauseDirective.js"></script>
@@ -31,7 +29,7 @@
  
 </head>
 <body ng-app="ps">
-    <div class="screen-container" ng-switch="event.screen">
+<div class="screen-container" ng-switch="presentation.screen">
         <intro ng-switch-when="intro"></intro>
         <pause ng-switch-default></pause>
         <participant ng-switch-when="participant"></participant>

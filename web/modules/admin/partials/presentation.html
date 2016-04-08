@@ -1,19 +1,77 @@
 <section class="md-whiteframe-z2 admin-section">
     <md-toolbar class="md-secondary">
         <div class="md-toolbar-tools">
-            <h3 class="ng-binding">Hauptsteuerung</h3>
+            <h3 class="ng-binding">Präsentation</h3>
         </div>
     </md-toolbar>
 
     <md-content class="md-padding">
-        <md-input-container>
-            <label>Bildschirm</label>
-            <md-select ng-model="event.screen">
-                <md-option value="intro">Intro</md-option>
-                <md-option value="pause">Pause</md-option>
-                <md-option value="participant">Teilnehmer</md-option>
-                <md-option value="groupRatings">Gruppenrating</md-option>
-            </md-select>
-        </md-input-container>
+        <div layout="row">
+            <md-input-container>
+                <label>Wettbewerb</label>
+                <md-select ng-model="event.view.competitionId" ng-change="updatePresentation()"
+                           ng-disabled="event.view.competitionId">
+                    <md-option ng-repeat="competition in event.competitions" value="{{competition.id}}">
+                        {{competition.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-button ng-show="event.view.competitionId" ng-click="reset()">Zurücksetzen</md-button>
+        </div>
+
+        <div ng-show="event.view.competitionId">
+            <div layout="row">
+                <md-input-container>
+                    <label>Gruppe</label>
+                    <md-select ng-model="event.view.groupId" ng-change="updatePresentation()"
+                               ng-disabled="event.view.groupId">
+                        <md-option
+                                ng-repeat="group in getCompetition().groups"
+                                value="{{group.id}}">
+                            Gruppe {{$index + 1}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-button ng-show="event.view.groupId" ng-click="resetGroup()">Zurücksetzen</md-button>
+            </div>
+        </div>
+
+        <div ng-show="event.view.groupId">
+            <md-input-container>
+                <label>Teilnehmer</label>
+                <md-select ng-model="event.view.participantId">
+                    <md-option
+                            ng-repeat="participant in getGroup().participants"
+                            value="{{participant.id}}">
+                        {{ (participant.id | participantOfId).name }}, {{ (participant.id | participantOfId).slam }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <div ng-show="event.view.participantId">
+                <md-button ng-click="setScreen('participant', 'name')">Poet anzeigen</md-button>
+                <md-button ng-click="setScreen('participant', 'rating')">Wertungen anzeigen</md-button>
+                <md-button ng-click="setScreen('participant', 'ratingFinal')">höchste / niedrigste Wertung streichen
+                </md-button>
+                <md-button ng-click="setScreen('participant', 'total')">Wertungssumme anzeigen</md-button>
+
+                <div>
+                    <p>Wertungen</p>
+                    <md-input-container ng-repeat="score in getScores()">
+                        <label>Wertung {{$index+1}}</label>
+                        <input ng-model="score.value" ng-blur="updatePresentation()">
+                    </md-input-container>
+                </div>
+            </div>
+
+            <md-button ng-click="setScreen('groupRatings')">Ergebnistabelle anzeigen</md-button>
+        </div>
+
+        <div ng-show="event.view.competitionId">
+            <div layout="row">
+                <md-button ng-click="setScreen('intro')">Intro-Video</md-button>
+                <md-button ng-click="setScreen('pause')">Warte-Anzeige</md-button>
+            </div>
+        </div>
     </md-content>
 </section>

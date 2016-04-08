@@ -2,26 +2,24 @@
     <source src="/media/clips/bg.mp4" type="video/mp4">
 </video>
 <div class="video-overlay">
-    
-    
-    <div class="overlay-center anim-participant animated fadeInLeftBig" ng-if="event.phase == 'name'">
-        <div class="overlay-highlight to-overlay-subline" ng->{{event.participant.slam}}</div>
+    <div class="overlay-center anim-participant animated fadeInLeftBig" ng-if="presentation.phase == 'name'">
+        <div class="overlay-highlight box box-highlight">{{presentation.participant.name}}</div>
+        <div class="overlay-subline">{{presentation.participant.slam}}</div>
     </div>
-    <div class="overlay-center anim-participant animated fadeInLeftBig delay-5s" ng-if="event.phase == 'name'">
-        <div class="overlay-highlight box-highlight fitInside">{{event.participant.name}}</div>
-    </div>
-    
     <div class="overlay-center anim-participant animated fadeInLeftBig"
-         ng-if="event.phase == 'rating' || event.phase == 'total'">
+         ng-if="presentation.phase == 'rating' || presentation.phase == 'total' || presentation.phase == 'ratingFinal'">
         <div class="overlay-highlight box box-highlight">
-            <ul class="scores animated" ng-class="{'zoomOut': event.phase == 'total'}">
-                <li class="animated" ng-repeat="score in event.scores track by $index"
-                    ng-class="{'light': score.value == '?', 'hinge': score.ignored}">
-                    {{score.value}}
+            <ul class="scores animated" ng-class="{'zoomOut': presentation.phase == 'total'}">
+                <li class="animated" ng-repeat="score in presentation.scores track by $index"
+                    ng-class="{'light': score.value === '', 'hinge': score.ignored && presentation.phase == 'ratingFinal'}">
+                    {{score.value ? score.value : '?'}}
                 </li>
             </ul>
-            <div ng-if="event.phase == 'total'" class="animated" ng-class="{'hidden': event.phase == 'rating', 'fadeIn': event.phase == 'total'}" odometer="event.totalScore"></div>
+            <div class="animated"
+                 ng-class="{'hidden': presentation.phase != 'total', 'fadeIn': presentation.phase == 'total'}">
+                {{presentation.totalScore}}
+            </div>
         </div>
-        <div class="overlay-subline">Wertung für {{event.participant.name}}</div>
+        <div class="overlay-subline">Wertung für {{presentation.participant.name}}</div>
     </div>
 </div>

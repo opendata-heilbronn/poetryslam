@@ -71,7 +71,12 @@
             })
             .when('/presentation', {
                 templateUrl: '/modules/admin/partials/presentation.html',
-                controller: 'AdminCtrl'
+                controller: 'PresentationCtrl',
+                resolve: {
+                    event: function ($rootScope) {
+                        return $rootScope.event;
+                    }
+                }
             })
             .otherwise({
                 redirectTo: '/participants'
