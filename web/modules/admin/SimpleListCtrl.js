@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-    angular.module('psadmin').controller('SimpleListCtrl', function ($scope, entries, dialogFn) {
+    angular.module('psadmin').controller('SimpleListCtrl', function ($scope, entries, dialogFn, newEntryFn) {
         $scope.entries = entries;
 
         $scope.addEntry = function () {
-            dialogFn().then(function (entry) {
+            dialogFn(newEntryFn()).then(function (entry) {
                 $scope.entries.push(entry);
             })
         };

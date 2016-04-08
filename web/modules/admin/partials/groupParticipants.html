@@ -1,0 +1,55 @@
+<div class="md-whiteframe-z2">
+    <md-toolbar class="md-secondary">
+        <div class="md-toolbar-tools">
+            <h3 class="ng-binding">Gruppe</h3>
+            <span flex="" class="flex"></span>
+
+            <md-button class="md-primary" aria-label="Opferlamm" ng-click="addSacrifice()" ng-hide="group.sacrifice">
+                + Opferlamm
+            </md-button>
+            <md-button class="md-primary" aria-label="Poet" ng-click="addParticipant()">
+                + Poet
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-list>
+        <md-subheader class="md-no-sticky" ng-show="group.sacrifice && group.sacrifice.name">Opferlamm</md-subheader>
+        <md-list-item class="md-2-line md-no-proxy" ng-show="group.sacrifice && group.sacrifice.name">
+            <div class="md-list-item-text" layout="column">
+                <h3>{{ group.sacrifice.name }}</h3>
+                <p>{{ group.sacrifice.slam }}</p>
+            </div>
+
+            <div class="md-secondary">
+                <md-button class="md-icon-button" aria-label="Löschen" ng-click="deleteSacrifice()">
+                    <md-icon md-svg-icon="action:delete"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Bearbeiten" ng-click="editSacrifice(group.sacrifice)">
+                    <md-icon md-svg-icon="image:edit"></md-icon>
+                </md-button>
+            </div>
+        </md-list-item>
+
+        <md-subheader ng-show="group.participants && group.participants.length > 0" class="md-no-sticky">
+            {{group.participants.length}} Poet(en)
+        </md-subheader>
+
+        <md-list-item class="md-2-line md-no-proxy" ng-repeat="participant in group.participants">
+            <div class="md-list-item-text" layout="column">
+                <h3>{{ (participant.id | participantOfId).name }}</h3>
+                <p>{{ (participant.id | participantOfId).slam}}</p>
+            </div>
+
+            <div class="md-secondary">
+                <md-button class="md-icon-button" aria-label="Löschen" ng-click="deleteParticipant(participant)">
+                    <md-icon md-svg-icon="action:delete"></md-icon>
+                </md-button>
+
+                <md-button class="md-icon-button" aria-label="Bearbeiten" ng-click="editParticipant(participant)">
+                    <md-icon md-svg-icon="image:edit"></md-icon>
+                </md-button>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>

@@ -3,14 +3,15 @@
         <h3>Poet zuordnen</h3>
         <div>
             <md-autocomplete
-                    md-selected-item="participant"
-                    md-items="item in filterParticipants(searchText)"
-                    md-item-text="item.name +' - '+ item.subtitle"
+                    md-selected-item="data.participant"
+                    md-items="item in data.filterParticipantsFn(searchText)"
+                    md-item-text="item.name +' - '+ item.slam"
                     md-search-text="searchText"
                     md-min-length="0"
                     placeholder="Poetname">
                 <md-item-template>
-                    <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.name}} - {{item.subtitle}}</span>
+                    <span md-highlight-text="ctrl.searchText"
+                          md-highlight-flags="^i">{{item.name}} - {{item.slam}}</span>
                 </md-item-template>
                 <md-not-found>
                     Keine Teilnehmer gefunden
@@ -19,6 +20,6 @@
         </div>
     </md-dialog-content>
     <md-dialog-actions>
-        <md-button ng-click="save(participant)" class="md-primary">Speichern</md-button>
+        <md-button ng-click="save()" class="md-primary">Speichern</md-button>
     </md-dialog-actions>
 </md-dialog>

@@ -4,12 +4,14 @@
         return {
             restrict: 'E',
             scope: true,
-            template: '<md-button class="text-left" href="admin.html#{{path}}" ng-class="{\'md-primary\': isActive()}">{{label}}</md-button>',
+            template: '<md-button class="text-left" href="admin.html#{{path}}" ng-class="{\'md-primary\': isActive()}">{{getLabel()}}</md-button>',
             link: function (scope, element, attrs) {
-                scope.path = attrs.path;
-                scope.label = attrs.label;
+                scope.path = scope.$eval(attrs.path);
+                scope.getLabel = function () {
+                    return scope.$eval(attrs.label);
+                };
                 scope.isActive = function () {
-                    return $location.path().indexOf(scope.path) === 0;
+                    return $location.path() == scope.path;
                 }
             }
         }

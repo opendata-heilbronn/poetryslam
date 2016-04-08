@@ -1,20 +1,24 @@
 (function () {
     'use strict';
     angular.module('psadmin').service('DialogService', function ($mdDialog) {
-        var openSimpleEditDialog = function (templateUrl, entry) {
-            entry = entry ? angular.copy(entry) : {};
+        var openDialog = function (templateUrl, data) {
             return new Promise(function (resolve) {
                 $mdDialog.show({
                     templateUrl: templateUrl,
                     controller: function ($scope, $mdDialog) {
-                        $scope.entry = entry;
+                        $scope.data = data;
                         $scope.save = function () {
                             $mdDialog.hide();
-                            resolve(entry);
+                            resolve(data);
                         }
                     }
                 });
             })
+        };
+
+        var openSimpleEditDialog = function (templateUrl, entry) {
+            entry = entry ? angular.copy(entry) : {};
+            return openDialog(templateUrl, entry);
         };
 
         this.showParticipantDialog = function (participant) {
@@ -23,6 +27,18 @@
 
         this.showCompetitionDialog = function (competition) {
             return openSimpleEditDialog('/modules/admin/partials/dialogs/competitionDialog.html', competition);
+        };
+
+        this.showGroupDialog = function (group) {
+            return openSimpleEditDialog('/modules/admin/partials/dialogs/groupDialog.html', group);
+        };
+
+        this.showGroupParticipantDialog = function (groupParticipant, filterParticipantsFn) {
+            groupParticipant = groupParticipant ? angular.copy(groupParticipant) : {};
+            return openDialog('/modules/admin/partials/dialogs/groupParticipantDialog.html', {
+                groupParticipant: groupParticipant,
+                filterParticipantsFn: filterParticipantsFn
+            });
         };
 
         return this;
