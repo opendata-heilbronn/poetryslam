@@ -18,6 +18,7 @@
     <script src="modules/admin/routes.js"></script>
     <script src="modules/admin/DialogService.js"></script>
     <script src="modules/admin/SimpleListCtrl.js"></script>
+    <script src="modules/admin/sidenavEntryDirective.js"></script>
     <script src="modules/sync/ps.sync.js"></script>
     <script src="modules/sync/SyncService.js"></script>
     <script src="modules/sync/init.js"></script>
@@ -28,9 +29,9 @@
     <img src="/media/logo/logo-compact.png" class="sidebar-logo"/>
 
     <md-content layout-padding layout="column" layout-wrap>
-        <md-button class="text-left" href="admin.html#/participants">Poeten</md-button>
-        <md-button class="text-left" href="admin.html#/competitions">Wettbewerbe</md-button>
-        <md-button class="text-left" href="admin.html#/presentation">Präsentation</md-button>
+        <sidenav-entry path="/participants" label="Poeten"></sidenav-entry>
+        <sidenav-entry path="/competitions" label="Wettbewerbe"></sidenav-entry>
+        <sidenav-entry path="/presentation" label="Präsentation"></sidenav-entry>
     </md-content>
 
     <iframe src="/index.html" class="preview-frame"></iframe>

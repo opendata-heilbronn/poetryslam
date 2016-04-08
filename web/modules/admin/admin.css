@@ -11,6 +11,11 @@ html, body {
     display: block;
 }
 
+sidenav-entry {
+    display: flex;
+    flex-direction: column;
+}
+
 .site-sidenav {
     position: relative;
     width: 400px;
