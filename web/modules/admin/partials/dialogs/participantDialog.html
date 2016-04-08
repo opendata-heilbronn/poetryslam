@@ -2,14 +2,20 @@
     <md-dialog-content class="edit-dialog">
         <h3>Poet bearbeiten</h3>
         <div>
-        <md-input-container>
-            <input placeholder="Name" ng-model="participant.name" md-auto-focus>
-        </md-input-container>
+            <md-input-container>
+                <input placeholder="Name" ng-model="entry.name" md-auto-focus>
+            </md-input-container>
         </div>
         <div>
-        <md-input-container>
-            <input placeholder="Zusatz / Slam" ng-model="participant.subtitle">
-        </md-input-container>
+            <md-input-container>
+                <input placeholder="Zusatz / Slam" ng-model="entry.subtitle">
+            </md-input-container>
+        </div>
+        <div>
+            <md-radio-group ng-model="entry.gender">
+                <md-radio-button value="w" class="md-primary">weiblich</md-radio-button>
+                <md-radio-button value="m" class="md-primary">männlich</md-radio-button>
+            </md-radio-group>
         </div>
     </md-dialog-content>
     <md-dialog-actions>
