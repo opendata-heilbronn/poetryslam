@@ -4,16 +4,14 @@
             <h3 class="ng-binding">Poeten</h3>
             <span flex></span>
 
-            <md-button class="md-primary" ng-click="promptParticipant($event, event)">+ Poet</md-button>
+            <md-button class="md-primary" ng-click="addParticipant()">+ Poet</md-button>
         </div>
     </md-toolbar>
 
     <md-list>
-        <md-subheader ng-show="event.participants && event.participants.length > 0" class="md-no-sticky">
-            {{event.participants.length}} Poet(en)
-        </md-subheader>
+        <md-subheader ng-show="participants" class="md-no-sticky">{{participants.length}} Poet(en)</md-subheader>
 
-        <md-list-item class="md-2-line md-no-proxy" ng-repeat="participant in event.participants">
+        <md-list-item class="md-2-line md-no-proxy" ng-repeat="participant in participants">
             <div class="md-list-item-text">
                 <h3>{{ participant.name }}</h3>
                 <p>{{ participant.subtitle}}</p>
@@ -21,12 +19,12 @@
 
             <div class="md-secondary">
                 <md-button class="md-icon-button" aria-label="Löschen"
-                           ng-click="deleteParticipant($event, event, participant)">
+                           ng-click="deleteParticipant(participant)">
                     <md-icon md-svg-icon="action:delete"></md-icon>
                 </md-button>
 
                 <md-button class="md-icon-button" aria-label="Bearbeiten"
-                           ng-click="promptParticipant($event, event, participant)">
+                           ng-click="editParticipant(participant)">
                     <md-icon md-svg-icon="image:edit"></md-icon>
                 </md-button>
             </div>

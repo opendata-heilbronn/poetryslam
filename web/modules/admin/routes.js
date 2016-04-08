@@ -5,7 +5,7 @@
         $routeProvider
             .when('/participants', {
                 templateUrl: '/modules/admin/partials/participants.html',
-                controller: 'AdminCtrl'
+                controller: 'ParticipantsCtrl'
             })
             .when('/competitions', {
                 templateUrl: '/modules/admin/partials/competitions.html',
