@@ -9,6 +9,6 @@ app.use(express.static('web'));
 
 http.listen(3000, function() {
     console.log('listening on ' + ip.address() + ':3000');
-    opener("http://" + ip.address() + ":3000/index.html");
-    opener("http://" + ip.address() + ":3000/admin.html");
+    opener("http://localhost:3000/index.html");
+    opener("http://localhost:3000/admin.html");
 });

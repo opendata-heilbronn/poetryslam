@@ -11,6 +11,10 @@
                 templateUrl: '/modules/admin/partials/competitions.html',
                 controller: 'AdminCtrl'
             })
+            .when('/presentation', {
+                templateUrl: '/modules/admin/partials/presentation.html',
+                controller: 'AdminCtrl'
+            })
             .otherwise({
                 redirectTo: '/participants'
             });
