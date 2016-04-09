@@ -2,9 +2,10 @@
     <source src="/media/clips/bg.mp4" type="video/mp4">
 </video>
 <div class="video-overlay">
-    <div class="overlay-center anim-participant animated fadeInLeftBig">
+    <div class="overlay-center">
         <div class="participant-list">
-            <div class="participant-row" ng-repeat="participant in presentation.resultList track by $index">
+            <div class="participant-row animated fadeInLeft" style="animation-delay: {{($index * 0.5) + 2.5}}s"
+                 ng-repeat="participant in presentation.resultList | orderBy: getOrderByField() track by $index">
                 <div class="box participant-row-main"
                      ng-class="{'box-highlight': participant.state == 'highlight', 'box-ignored': participant.state == 'ignored', 'box-grey': !participant.state}">
                     <div class="participant-column-name">

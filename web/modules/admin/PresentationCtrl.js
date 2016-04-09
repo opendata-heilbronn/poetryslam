@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('psadmin').controller('PresentationCtrl', function ($scope, event, PresentationService) {
+    angular.module('psadmin').controller('PresentationCtrl', function ($scope, event, PresentationService, $timeout) {
         $scope.event = event;
 
         $scope.reset = function () {
@@ -52,6 +52,13 @@
                 $scope.getGroupParticipant().scores = scores;
             }
             return scores;
+        };
+
+        $scope.showWinners = function () {
+            $scope.setScreen('intro');
+            $timeout(function () {
+                $scope.setScreen('groupRatings', 'winners');
+            }, 100);
         };
 
         $scope.updatePresentation = function () {

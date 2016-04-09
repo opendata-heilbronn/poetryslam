@@ -97,8 +97,8 @@
             if (groupParticipant) {
                 result.scores = groupParticipant.scores;
                 that.markIgnoredScores(result.scores);
-                result.totalScore = that.sumScore(result.scores);
-                groupParticipant.totalScore = result.totalScore;
+                groupParticipant.totalScore = that.sumScore(result.scores);
+                result.totalScore = groupParticipant.totalScore;
             }
 
             if (group.participants) {
