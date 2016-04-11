@@ -99,16 +99,19 @@ video {
 @keyframes sublineIntro {
     0% {
         opacity: 0;
-        -webkit-transform: translate3d(-2000px, -15vh, 0) scale(2.5);
+        -webkit-transform: translate3d(-2000px, -15vh, 0);
+        font-size: 10vw;
     }
 
     30% {
         opacity: 1;
-        transform: translate3d(0, -15vh, 0) scale(2.5);
+        transform: translate3d(0, -15vh, 0);
+        font-size: 10vw;
     }
 
     80% {
-        transform: translate3d(0, -15vh, 0) scale(2.5);
+        transform: translate3d(0, -15vh, 0);
+        font-size: 10vw;
     }
 
     100% {
