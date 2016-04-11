@@ -11,12 +11,12 @@
             <ul class="scores animated" ng-class="{'zoomOut': presentation.phase == 'total'}">
                 <li class="animated" ng-repeat="score in presentation.scores track by $index"
                     ng-class="{'light': score.value === '', 'hinge': score.ignored && presentation.phase == 'ratingFinal'}">
-                    {{score.value ? score.value : '?'}}
+                    {{score.value ? (score.value | number: 1) : '?'}}
                 </li>
             </ul>
             <div class="animated"
                  ng-class="{'hidden': presentation.phase != 'total', 'fadeIn': presentation.phase == 'total'}">
-                {{presentation.totalScore}}
+                {{presentation.totalScore | number: 1}}
             </div>
         </div>
         <div class="overlay-subline">Wertung für {{presentation.participant.name}}
