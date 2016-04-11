@@ -37,6 +37,10 @@
         </div>
 
         <div ng-show="event.view.groupId">
+            <p>
+                <md-button ng-click="setScreen('group')">Gruppe ankündigen</md-button>
+            </p>
+
             <md-input-container>
                 <label>Teilnehmer</label>
                 <md-select ng-model="event.view.participantId">

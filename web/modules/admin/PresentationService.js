@@ -89,6 +89,7 @@
             var groupParticipant = that.getGroupParticipant(group, event.view.participantId);
             var result = {
                 competitionName: competition.name,
+                groupName: group.name,
                 participant: participant,
                 screen: event.view.screen,
                 phase: event.view.phase,

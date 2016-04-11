@@ -21,6 +21,7 @@
     <script src="modules/presentation/ps.presentation.js"></script>
     <script src="modules/presentation/introDirective.js"></script>
     <script src="modules/presentation/participantDirective.js"></script>
+    <script src="modules/presentation/groupDirective.js"></script>
     <script src="modules/presentation/groupRatingsDirective.js"></script>
 
     <script src="components/odometer/odometer.js"></script>
@@ -37,6 +38,7 @@
     </video>
     <div ng-switch="presentation.screen" ng-hide="presentation.video === 'pause'">
         <intro ng-switch-when="intro"></intro>
+        <group ng-switch-when="group"></group>
         <participant ng-switch-when="participant"></participant>
         <group-ratings ng-switch-when="groupRatings"></group-ratings>
     </div>
