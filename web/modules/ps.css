@@ -92,8 +92,38 @@ video {
 
 /** PARTICIPANT **/
 
-.anim-participant {
+.anim-video-delay {
     animation-delay: 2s;
+}
+
+@keyframes sublineIntro {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(-2000px, -15vh, 0) scale(2.5);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translate3d(0, -15vh, 0) scale(2.5);
+    }
+
+    80% {
+        transform: translate3d(0, -15vh, 0) scale(2.5);
+    }
+
+    100% {
+        transform: none;
+    }
+}
+
+.animation-subline-intro {
+    animation-duration: 5s;
+    animation-name: sublineIntro;
+    animation-delay: 2s;
+}
+
+.animation-subline-intro-after {
+    animation-delay: 6s;
 }
 
 .scores {
@@ -152,14 +182,6 @@ video {
     flex-direction: column;
     justify-content: center;
     font-size: 2.3vw;
-}
-
-.diagonal-line-through {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 0.2vw;
-    transform: rotate(90deg);
 }
 
 .participant-column-name {
