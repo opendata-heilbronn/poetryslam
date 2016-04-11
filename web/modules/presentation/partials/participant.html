@@ -2,9 +2,9 @@
     <source src="/media/clips/bg.mp4" type="video/mp4">
 </video>
 <div class="video-overlay">
-    <div class="overlay-center anim-participant animated fadeInLeftBig" ng-if="presentation.phase == 'name'">
-        <div class="overlay-highlight box box-highlight">{{presentation.participant.name}}</div>
-        <div class="overlay-subline">{{presentation.participant.slam}}</div>
+    <div class="overlay-center" ng-if="presentation.phase == 'name'">
+        <div class="overlay-highlight box box-highlight animated fadeInLeftBig">{{presentation.participant.name}}</div>
+        <div class="overlay-subline anim-participant animated fadeInLeftBig">{{presentation.participant.slam}}</div>
     </div>
     <div class="overlay-center anim-participant animated fadeInLeftBig"
          ng-if="presentation.phase == 'rating' || presentation.phase == 'total' || presentation.phase == 'ratingFinal'">
