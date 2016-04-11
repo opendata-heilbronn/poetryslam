@@ -1,5 +1,5 @@
 <video class="fullscreen-video" autoplay>
-    <source src="/media/clips/bg.mp4" type="video/mp4">
+    <source src="/media/clips/logo_to_bg.mp4" type="video/mp4">
 </video>
 <div class="video-overlay">
     <div class="overlay-center" ng-if="presentation.phase == 'name'">
@@ -8,9 +8,9 @@
         </div>
         <div class="overlay-subline animated animation-subline-intro">{{presentation.participant.slam}}</div>
     </div>
-    <div class="overlay-center"
+    <div class="overlay-center anim-video-delay animated fadeInLeftBig"
          ng-if="presentation.phase == 'rating' || presentation.phase == 'total' || presentation.phase == 'ratingFinal'">
-        <div class="overlay-highlight box box-highlight animated fadeInLeftBig animation-subline-intro-after">
+        <div class="overlay-highlight box box-highlight">
             <ul class="scores animated" ng-class="{'zoomOut': presentation.phase == 'total'}">
                 <li class="animated" ng-repeat="score in presentation.scores track by $index"
                     ng-class="{'light': score.value === '', 'hinge': score.ignored && presentation.phase == 'ratingFinal'}">
@@ -22,7 +22,7 @@
                 {{presentation.totalScore}}
             </div>
         </div>
-        <div class="overlay-subline animated animation-subline-intro">Wertung für {{presentation.participant.name}}
+        <div class="overlay-subline">Wertung für {{presentation.participant.name}}
         </div>
     </div>
 </div>

@@ -120,13 +120,13 @@ video {
 }
 
 .animation-subline-intro {
-    animation-duration: 5s;
+    animation-duration: 3s;
     animation-name: sublineIntro;
-    animation-delay: 2s;
+    animation-delay: 1.5s;
 }
 
 .animation-subline-intro-after {
-    animation-delay: 6s;
+    animation-delay: 3.9s;
 }
 
 .scores {
