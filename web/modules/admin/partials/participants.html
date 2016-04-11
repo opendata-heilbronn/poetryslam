@@ -9,7 +9,9 @@
     </md-toolbar>
 
     <md-list>
-        <md-subheader ng-show="entries" class="md-no-sticky">{{entries.length}} Poet(en)</md-subheader>
+        <md-subheader ng-show="entries" class="md-no-sticky">{{entries.length}}
+            <ng-pluralize count="entries.length" when="{1: 'Poet', 'other' :'Poeten'}"></ng-pluralize>
+        </md-subheader>
 
         <md-list-item class="md-2-line md-no-proxy" ng-repeat="entry in entries">
             <div class="md-list-item-text">

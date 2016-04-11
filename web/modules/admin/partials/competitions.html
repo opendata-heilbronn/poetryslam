@@ -9,12 +9,14 @@
     </md-toolbar>
 
     <md-list>
-        <md-subheader ng-show="entries" class="md-no-sticky">{{entries.length}} Wettbewerb(e)</md-subheader>
+        <md-subheader ng-show="entries" class="md-no-sticky">{{entries.length}}
+            <ng-pluralize count="entries.length" when="{1: 'Wettbewerb', 'other' :'Wettbewerbe'}"></ng-pluralize>
+        </md-subheader>
 
         <md-list-item class="md-2-line md-no-proxy" ng-repeat="entry in entries">
             <div class="md-list-item-text">
                 <h3>{{ entry.name }}</h3>
-                <p>{{ entry.jurors }} Juroren</p>
+                <p>{{ entry.jurors }} Juroren, {{ entry.winners }} Gewinner</p>
             </div>
 
             <div class="md-secondary">

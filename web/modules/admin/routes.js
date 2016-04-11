@@ -48,9 +48,11 @@
                     dialogFn: function (DialogService) {
                         return DialogService.showGroupDialog;
                     },
-                    newEntryFn: function (EntityUtils) {
+                    newEntryFn: function ($rootScope, $route, $filter, EntityUtils) {
                         return function () {
-                            return {id: EntityUtils.getUid(), participants: []}
+                            var competition = $filter('entryOfId')($route.current.params.id, $rootScope.event.competitions);
+                            var groupNumber = competition.groups ? competition.groups.length + 1 : 1;
+                            return {id: EntityUtils.getUid(), name: "Gruppe " + groupNumber, participants: []};
                         }
                     }
                 }
