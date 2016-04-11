@@ -14,9 +14,8 @@
                     {{score.value ? (score.value | number: 1) : '?'}}
                 </li>
             </ul>
-            <div class="animated"
-                 ng-class="{'hidden': presentation.phase != 'total', 'fadeIn': presentation.phase == 'total'}">
-                {{presentation.totalScore | number: 1}}
+            <div class="animated fadeIn remove-instant" ng-if="presentation.phase == 'total'">
+                <odometer value="presentation.totalScore"></odometer>
             </div>
         </div>
         <div class="overlay-subline">Wertung für {{presentation.participant.name}}

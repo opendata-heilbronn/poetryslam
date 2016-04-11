@@ -98,6 +98,9 @@
 
             if (groupParticipant) {
                 result.scores = groupParticipant.scores;
+                result.scores.forEach(function (score) {
+                    if (score.value) score.value = score.value.replace(/,/, '.');
+                });
                 that.markIgnoredScores(result.scores);
                 groupParticipant.totalScore = that.sumScore(result.scores);
                 result.totalScore = groupParticipant.totalScore;

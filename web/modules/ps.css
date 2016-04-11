@@ -12,14 +12,18 @@ html, body {
     visibility: hidden !important;
 }
 
-.ng-hide-add {
+.ng-hide-add:not(.hide-instant) {
     transition: 0.3s ease-in all;
 }
 
-/*.ng-leave {*/
-/*animation-name: fadeOut !important;*/
-/*animation-delay: 0.5s !important;*/
-/*}*/
+.ng-leave:not(.remove-instant) {
+    animation-name: fadeOut !important;
+    animation-delay: 0.5s !important;
+}
+
+.ng-leave.remove-instant {
+    display: none !important;
+}
 
 .screen-container {
     position: relative;
