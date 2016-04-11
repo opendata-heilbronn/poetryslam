@@ -13,7 +13,7 @@
         </div>
     </md-toolbar>
 
-    <md-list>
+    <md-list style="padding-bottom: 0">
         <md-subheader class="md-no-sticky" ng-show="group.sacrifice && group.sacrifice.name">Opferlamm</md-subheader>
         <md-list-item class="md-2-line md-no-proxy" ng-show="group.sacrifice && group.sacrifice.name">
             <div class="md-list-item-text" layout="column">
@@ -35,7 +35,8 @@
             {{group.participants.length}}
             <ng-pluralize count="group.participants.length" when="{1: 'Poet', 'other' :'Poeten'}"></ng-pluralize>
         </md-subheader>
-
+    </md-list>
+    <md-list ng-sortable style="padding-top: 0">
         <md-list-item class="md-2-line md-no-proxy" ng-repeat="participant in group.participants">
             <div class="md-list-item-text" layout="column">
                 <h3>{{ (participant.id | participantOfId).name }}</h3>
@@ -54,3 +55,7 @@
         </md-list-item>
     </md-list>
 </div>
+
+<p>
+    <small>Die Reihenfolge der Teilnehmer kannst du mit Drag & Drop ändern</small>
+</p>

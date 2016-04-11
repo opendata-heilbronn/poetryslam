@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
 
-    var psadmin = angular.module('psadmin', ['ngMaterial', 'ngRoute', 'ps.sync']);
+    var psadmin = angular.module('psadmin', ['ngMaterial', 'ngRoute', 'ng-sortable', 'ps.sync']);
 
     psadmin.config(function ($mdThemingProvider, $mdIconProvider) {
         $mdIconProvider

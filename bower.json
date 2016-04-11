@@ -26,7 +26,8 @@
     "angular-i18n": "^1.5.3",
     "angular-flowtype": "*",
     "Flowtype.js": "^1.1.0",
-    "odometer": "^0.4.7"
+    "odometer": "^0.4.7",
+    "Sortable": "^1.4.2"
   },
   "resolutions": {
     "angular": "^1.5.3"
