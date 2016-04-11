@@ -88,10 +88,11 @@
             var participant = that.getParticipant(event, event.view.participantId);
             var groupParticipant = that.getGroupParticipant(group, event.view.participantId);
             var result = {
-                competitonName: competition.name,
+                competitionName: competition.name,
                 participant: participant,
                 screen: event.view.screen,
-                phase: event.view.phase
+                phase: event.view.phase,
+                video: event.view.video
             };
 
             if (groupParticipant) {

@@ -3,37 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Poetry Slam</title>
-    <link rel="stylesheet" href="fonts/SourceSansPro-Black.css" />
-    <link rel="stylesheet" href="fonts/SourceSansPro-Light.css" />
+    <link rel="stylesheet" href="fonts/SourceSansPro-Black.css"/>
+    <link rel="stylesheet" href="fonts/SourceSansPro-Light.css"/>
     <link rel="stylesheet" href="components/animate.css/animate.css"/>
-    <link rel="stylesheet" href="modules/ps.css" />
+    <link rel="stylesheet" href="modules/ps.css"/>
     <link rel="stylesheet" href="components/odometer/themes/odometer-theme-minimal.css"/>
-    
+
     <script src='components/jquery/dist/jquery.min.js'></script>
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-animate/angular-animate.js"></script>
     <script src="components/Flowtype.js/flowtype.js"></script>
     <script src="components/angular-flowtype/angular-flowtype.js"></script>
-    
+
     <script src="modules/ps.js"></script>
     <script src="modules/sync/ps.sync.js"></script>
     <script src="modules/sync/SyncService.js"></script>
     <script src="modules/presentation/ps.presentation.js"></script>
     <script src="modules/presentation/introDirective.js"></script>
-    <script src="modules/presentation/pauseDirective.js"></script>
     <script src="modules/presentation/participantDirective.js"></script>
     <script src="modules/presentation/groupRatingsDirective.js"></script>
-    
+
     <script src="components/odometer/odometer.js"></script>
     <script src="components/angular-odometer-js/dist/angular-odometer.js"></script>
- 
+
 </head>
 <body ng-app="ps">
-<div class="screen-container" ng-switch="presentation.screen">
+<div class="screen-container">
+    <video class="fullscreen-video" autoplay ng-if="presentation.video === 'pause'">
+        <source src="/media/clips/bg_to_logo.mp4" type="video/mp4">
+    </video>
+    <video class="fullscreen-video" autoplay ng-if="presentation.video !== 'pause'">
+        <source src="/media/clips/logo_to_bg.mp4" type="video/mp4">
+    </video>
+    <div ng-switch="presentation.screen" ng-hide="presentation.video === 'pause'">
         <intro ng-switch-when="intro"></intro>
-        <pause ng-switch-default></pause>
         <participant ng-switch-when="participant"></participant>
         <group-ratings ng-switch-when="groupRatings"></group-ratings>
     </div>
+</div>
 </body>
 </html>

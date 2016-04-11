@@ -21,6 +21,12 @@
         $scope.setScreen = function (screenName, phase) {
             $scope.event.view.screen = screenName;
             $scope.event.view.phase = phase;
+            $scope.event.view.video = 'bg';
+            $scope.updatePresentation();
+        };
+
+        $scope.setVideo = function (videoName) {
+            $scope.event.view.video = videoName;
             $scope.updatePresentation();
         };
 
