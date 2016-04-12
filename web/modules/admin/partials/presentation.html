@@ -7,8 +7,8 @@
 
     <md-content class="md-padding">
         <div layout="row">
-            <md-input-container>
-                <label>Wettbewerb</label>
+            <md-input-container style="width:200px;">
+                <label>1. Wettbewerb auswählen</label>
                 <md-select ng-model="event.view.competitionId" ng-change="updatePresentation()"
                            ng-disabled="event.view.competitionId">
                     <md-option ng-repeat="competition in event.competitions" value="{{competition.id}}">
@@ -18,11 +18,18 @@
             </md-input-container>
             <md-button ng-show="event.view.competitionId" ng-click="reset()">Zurücksetzen</md-button>
         </div>
+        <div ng-show="event.view.competitionId">
+            <md-button ng-click="setScreen('intro')">1. Wettbewerb ankündigen</md-button>
+            <br>
+            <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
+        </div>
+
+        <hr>
 
         <div ng-show="event.view.competitionId">
             <div layout="row">
-                <md-input-container>
-                    <label>Gruppe</label>
+                <md-input-container style="width:200px;">
+                    <label>2. Gruppe auswählen</label>
                     <md-select ng-model="event.view.groupId" ng-change="updatePresentation()"
                                ng-disabled="event.view.groupId">
                         <md-option
@@ -35,15 +42,18 @@
                 <md-button ng-show="event.view.groupId" ng-click="resetGroup()">Zurücksetzen</md-button>
             </div>
         </div>
+        <div ng-show="event.view.groupId">
+            <md-button ng-click="setScreen('group')">1. Gruppe ankündigen</md-button>
+            <br>
+            <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
+        </div>
+
+        <hr>
 
         <div ng-show="event.view.groupId">
-            <p>
-                <md-button ng-click="setScreen('group')">Gruppe ankündigen</md-button>
-            </p>
-
             <md-input-container>
-                <label>Teilnehmer</label>
-                <md-select ng-model="event.view.participantId">
+                <label>3. Teilnehmer auswählen</label>
+                <md-select ng-model="event.view.participantId" style="width:200px;">
                     <md-option
                             ng-repeat="participant in getGroup().participants"
                             value="{{participant.id}}">
@@ -53,13 +63,21 @@
             </md-input-container>
 
             <div ng-show="event.view.participantId">
-                <md-button ng-click="setScreen('participant', 'name')">Poet anzeigen</md-button>
-                <md-button ng-click="setScreen('participant', 'rating')">Wertungen anzeigen</md-button>
-                <md-button ng-click="setScreen('participant', 'ratingFinal')">höchste / niedrigste Wertung streichen
+                <md-button ng-click="setScreen('participant', 'name')" ng-class="{'md-primary': event.view.screen != 'participant'}">1. Poet anzeigen</md-button>
+                <br>
+                <md-button ng-click="setScreen('participant', 'rating')" ng-class="{'md-primary': event.view.phase == 'name'}">2. Wertungen anzeigen</md-button>
+                <br>
+                <md-button ng-click="setScreen('participant', 'ratingFinal')" ng-class="{'md-primary': event.view.phase == 'rating'}">3. höchste / niedrigste Wertung
+                    streichen
                 </md-button>
-                <md-button ng-click="setScreen('participant', 'total')">Wertungssumme anzeigen</md-button>
+                <br>
+                <md-button ng-click="setScreen('participant', 'total')" ng-class="{'md-primary': event.view.phase == 'ratingFinal'}">4. Wertungssumme anzeigen</md-button>
+                <br>
+                <md-button ng-click="setScreen('groupRatings')" ng-class="{'md-primary': event.view.phase == 'total'}">5. Zwischenstand der Gruppe anzeigen</md-button>
+                <br>
+                <md-button ng-click="setVideo('pause')" ng-class="{'md-primary': event.view.screen == 'groupRatings' && !event.view.phase}">6. Pause-Screen anzeigen</md-button>
 
-                <div>
+                <div ng-show="event.view.screen == 'participant' && event.view.phase != 'name'">
                     <p>Wertungen</p>
                     <md-input-container ng-repeat="score in getScores()">
                         <label>Wertung {{$index+1}}</label>
@@ -67,19 +85,18 @@
                     </md-input-container>
                 </div>
             </div>
-
-            <md-button ng-click="setScreen('groupRatings')">Ergebnistabelle anzeigen</md-button>
-            <br><br><br>
-            <md-button ng-click="setScreen('groupRatings', 'winners')">Gewinner anzeigen</md-button>
-            <br><br><br>
-            <md-button ng-click="setScreen('competitionRatings')">Gewinner des Wettbewerbs anzeigen</md-button>
-        </div>
-
-        <div ng-show="event.view.competitionId">
-            <div layout="row">
-                <md-button ng-click="setScreen('intro')">Intro-Video</md-button>
-                <md-button ng-click="setVideo('pause')">Warte-Anzeige</md-button>
+            <hr>
+            <div>
+                <p><small style="color:rgba(0,0,0,0.54)">4. Wenn alle Teilnehmer bewertet wurden:</small></p>
+                <md-button ng-click="setScreen('groupRatings', 'winners')">1. Gewinner der Gruppe anzeigen</md-button><br>
+                <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button><br>
+                <p style="padding-left:13px;">3. Gruppe zurücksetzen, falls noch nicht am Ende des Wettbewerbs (siehe oben)</p>
             </div>
+        </div>
+        <div ng-show="event.view.competitionId">
+            <hr>
+            <p><small style="color:rgba(0,0,0,0.54)">5. Am Ende des Wettbewerbs:</small></p>
+            <md-button ng-click="setScreen('competitionRatings')">Gewinner des Wettbewerbs anzeigen</md-button>
         </div>
     </md-content>
 </section>
