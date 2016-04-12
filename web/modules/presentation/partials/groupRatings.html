@@ -1,32 +1,20 @@
 <div class="video-overlay">
-    <div class="overlay-center">
-        <div class="participant-list">
-            <div class="participant-row animated fadeInLeft"
-                 style="animation-delay: {{getRowDelay($index, presentation.resultList, presentation.phase)}}s"
-                 ng-repeat="participant in presentation.resultList track by $index">
-                <div class="box participant-row-main"
-                     ng-class="{'box-highlight': participant.state == 'highlight', 'box-ignored': participant.state == 'ignored', 'box-grey': !participant.state}">
-                    <div class="participant-column-name">
-                        <div class="participant-list-name">{{participant.name}}</div>
-                        <div class="participant-list-slam">{{participant.slam}}</div>
-                    </div>
-                    <div class="participant-column-score">
-                        {{participant.totalScore | number: 1}}
-                    </div>
-                </div>
-                <div class="box box-grey participant-row-ignored-scores participant-row-column"
-                     ng-class="{'invisible': !participant.showIgnoredScores}">
-                    <div>3,0</div>
-                    <div>10,0</div>
-                </div>
-                <div class="box box-highlight participant-column-score participant-row-column"
-                     ng-class="{'invisible': !participant.showIgnoredScores}">
-                    79,3
-                </div>
-            </div>
+    <div class="overlay-center" ng-switch="presentation.phase">
+        <div class="participant-list" ng-switch-default>
+            <rating-participant ng-repeat="participant in presentation.resultList track by $index"
+                                class="participant-row animated fadeInLeft"
+                                style="animation-delay: {{($index * 0.5) + 2.5}}s"></rating-participant>
             <div class="overlay-subline list-subline animated fadeIn"
-                 style="animation-delay: {{getSublineDelay(presentation.resultList, presentation.phase)}}s">
-                {{presentation.phase === 'winners' ? 'Ergebnisse' : 'Zwischenstand'}} {{presentation.groupName}}
+                 style="animation-delay: {{(presentation.resultList.length * 0.5) + 3}}s">
+                Zwischenstand {{presentation.groupName}}
+            </div>
+        </div>
+        <div class="participant-list" ng-switch-when="winners">
+            <rating-participant ng-repeat="participant in presentation.resultList track by $index"
+                                class="participant-row animated fadeInLeft"
+                                style="animation-delay: {{((presentation.resultList.length - $index) * 2) + 2}}s"></rating-participant>
+            <div class="overlay-subline list-subline animated fadeIn" style="animation-delay: 2s">
+                Ergebnisse {{presentation.groupName}}
             </div>
         </div>
     </div>

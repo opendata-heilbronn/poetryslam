@@ -204,6 +204,7 @@ html, body {
     flex-direction: column;
     justify-content: center;
     font-size: 2.3vw;
+    min-width: 8vw;
 }
 
 .participant-column-name {
@@ -216,6 +217,8 @@ html, body {
     font-size: 3.5vw;
     display: flex;
     align-items: center;
+    justify-content: center;
+    min-width: 10vw;
 }
 
 .participant-list-name {

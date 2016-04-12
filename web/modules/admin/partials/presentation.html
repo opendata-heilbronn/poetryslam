@@ -70,7 +70,9 @@
 
             <md-button ng-click="setScreen('groupRatings')">Ergebnistabelle anzeigen</md-button>
             <br><br><br>
-            <md-button ng-click="showWinners()">Gewinner anzeigen</md-button>
+            <md-button ng-click="setScreen('groupRatings', 'winners')">Gewinner anzeigen</md-button>
+            <br><br><br>
+            <md-button ng-click="setScreen('competitionRatings')">Gewinner des Wettbewerbs anzeigen</md-button>
         </div>
 
         <div ng-show="event.view.competitionId">

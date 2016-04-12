@@ -2,7 +2,7 @@
     'use strict';
 
     var toFloat = function (value) {
-        return parseFloat(value);
+        return Math.round(parseFloat(value) * 10) / 10;
     };
 
     angular.module('psadmin').service('PresentationService', function ($filter) {
@@ -35,7 +35,17 @@
                     total += toFloat(score.value);
                 }
             });
-            return total;
+            return Math.round(total * 10) / 10;
+        };
+
+        this.sumScoreSecond = function (scores) {
+            var total = 0;
+            scores.forEach(function (score) {
+                if (score.value) {
+                    total += toFloat(score.value);
+                }
+            });
+            return Math.round(total * 10) / 10;
         };
 
         this.markIgnoredScores = function (scores) {
@@ -62,7 +72,8 @@
             }
         };
 
-        var generateResultList = function (groupParticipants, event, competition) {
+        var generateGroupResultList = function (groupParticipants, event) {
+            if (!groupParticipants || !groupParticipants.length) return [];
             var result = groupParticipants
                 .filter(function (groupParticipant) {
                     return groupParticipant.scores && groupParticipant.scores[0].value !== '';
@@ -73,14 +84,48 @@
                         name: participant.name,
                         slam: participant.slam,
                         participantId: participant.id,
-                        totalScore: groupParticipant.totalScore
+                        scores: groupParticipant.scores,
+                        totalScore: groupParticipant.totalScore,
+                        secondTotalScore: groupParticipant.secondTotalScore
                     };
                 });
+
+            result.forEach(function (entry, index) {
+                if (index > 0) {
+                    console.log(result[index - 1].totalScore + ' - ' + entry.totalScore);
+                    if (result[index - 1].totalScore == entry.totalScore) {
+                        result[index - 1].showIgnoredScores = true;
+                        entry.showIgnoredScores = true;
+                    }
+                }
+            });
+            return result;
+        };
+
+        var generateWinnerList = function (event, competition) {
+            var resultList = [];
+            if (competition.groups) {
+                competition.groups.forEach(function (group) {
+                    resultList = resultList.concat(generateGroupResultList(group.participants, event));
+                });
+            }
+            resultList.sort(function (a, b) {
+                return b.secondTotalScore - a.secondTotalScore;
+            });
+            for (var winnerCount = 1; winnerCount <= competition.winners && winnerCount <= resultList.length; winnerCount++) {
+                resultList[winnerCount - 1].state = 'highlight';
+            }
+            var winnerListLength = competition.acrossGroupsWinners ? competition.winners + competition.acrossGroupsWinners : competition.winners;
+            return resultList.slice(0, winnerListLength);
+        };
+
+        var generateResultList = function (groupParticipants, event, competition) {
+            var result = generateGroupResultList(groupParticipants, event);
             // highlight
             if (result.length <= 0) return result;
             if (event.view.phase === 'winners') {
                 result.sort(function (a, b) {
-                    return b.totalScore - a.totalScore;
+                    return b.secondTotalScore - a.secondTotalScore;
                 });
                 for (var winnerCount = 1; winnerCount <= competition.fixedWinnersPerGroup; winnerCount++) {
                     result[winnerCount - 1].state = 'highlight';
@@ -130,11 +175,17 @@
                 });
                 that.markIgnoredScores(result.scores);
                 groupParticipant.totalScore = that.sumScore(result.scores);
+                groupParticipant.secondTotalScore = that.sumScoreSecond(result.scores);
                 result.totalScore = groupParticipant.totalScore;
+                result.secondTotalScore = groupParticipant.secondTotalScore;
             }
 
             if (group.participants) {
                 result.resultList = generateResultList(group.participants, event, competition);
+            }
+
+            if (competition) {
+                result.winnerList = generateWinnerList(event, competition);
             }
 
             return result;

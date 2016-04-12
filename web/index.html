@@ -26,6 +26,8 @@
     <script src="modules/presentation/groupDirective.js"></script>
     <script src="modules/presentation/groupRatingsDirective.js"></script>
     <script src="modules/presentation/odometerDirective.js"></script>
+    <script src="modules/presentation/ratingParticipantDirective.js"></script>
+    <script src="modules/presentation/competitionRatingsDirective.js"></script>
 </head>
 <body ng-app="ps">
 <div class="screen-container">
@@ -40,6 +42,7 @@
         <group ng-switch-when="group"></group>
         <participant ng-switch-when="participant"></participant>
         <group-ratings ng-switch-when="groupRatings"></group-ratings>
+        <competition-ratings ng-switch-when="competitionRatings"></competition-ratings>
     </div>
 </div>
 </body>

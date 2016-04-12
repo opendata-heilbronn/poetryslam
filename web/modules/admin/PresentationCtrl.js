@@ -60,13 +60,6 @@
             return scores;
         };
 
-        $scope.showWinners = function () {
-            $scope.setScreen('intro');
-            $timeout(function () {
-                $scope.setScreen('groupRatings', 'winners');
-            }, 100);
-        };
-
         $scope.updatePresentation = function () {
             PresentationService.updatePresentation($scope.event);
         };
