@@ -1,8 +1,9 @@
 <div class="video-overlay">
     <div class="overlay-center">
         <div class="participant-list">
-            <div class="participant-row animated fadeInLeft" style="animation-delay: {{($index * 0.5) + 2.5}}s"
-                 ng-repeat="participant in presentation.resultList | orderBy: getOrderByField() track by $index">
+            <div class="participant-row animated fadeInLeft"
+                 style="animation-delay: {{getRowDelay($index, presentation.resultList, presentation.phase)}}s"
+                 ng-repeat="participant in presentation.resultList track by $index">
                 <div class="box participant-row-main"
                      ng-class="{'box-highlight': participant.state == 'highlight', 'box-ignored': participant.state == 'ignored', 'box-grey': !participant.state}">
                     <div class="participant-column-name">
@@ -22,6 +23,10 @@
                      ng-class="{'invisible': !participant.showIgnoredScores}">
                     79,3
                 </div>
+            </div>
+            <div class="overlay-subline list-subline animated fadeIn"
+                 style="animation-delay: {{getSublineDelay(presentation.resultList, presentation.phase)}}s">
+                {{presentation.phase === 'winners' ? 'Ergebnisse' : 'Zwischenstand'}} {{presentation.groupName}}
             </div>
         </div>
     </div>

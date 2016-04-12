@@ -2,7 +2,7 @@
     'use strict';
 
     var toFloat = function (value) {
-        return parseFloat(value.replace(/,/g, '.'));
+        return parseFloat(value);
     };
 
     angular.module('psadmin').service('PresentationService', function ($filter) {
@@ -62,7 +62,7 @@
             }
         };
 
-        var generateResultList = function (groupParticipants, event) {
+        var generateResultList = function (groupParticipants, event, competition) {
             var result = groupParticipants
                 .filter(function (groupParticipant) {
                     return groupParticipant.scores && groupParticipant.scores[0].value !== '';
@@ -72,13 +72,38 @@
                     return {
                         name: participant.name,
                         slam: participant.slam,
+                        participantId: participant.id,
                         totalScore: groupParticipant.totalScore
                     };
                 });
-            if (result.length > 0) {
-                result[result.length - 1].state = 'highlight';
+            // highlight
+            if (result.length <= 0) return result;
+            if (event.view.phase === 'winners') {
+                result.sort(function (a, b) {
+                    return b.totalScore - a.totalScore;
+                });
+                for (var winnerCount = 1; winnerCount <= competition.fixedWinnersPerGroup; winnerCount++) {
+                    result[winnerCount - 1].state = 'highlight';
+                }
+            } else {
+                if (!event.view.participantId) {
+                    result[result.length - 1].state = 'highlight';
+                } else {
+                    result
+                        .filter(function (resultEntry) {
+                            return resultEntry.participantId === event.view.participantId;
+                        })
+                        .forEach(function (resultEntry) {
+                            resultEntry.state = 'highlight';
+                        });
+                }
             }
             return result;
+        };
+
+        var udpateWinnerProperties = function (competition) {
+            competition.acrossGroupsWinners = competition.winners % competition.groups.length;
+            competition.fixedWinnersPerGroup = (competition.winners - competition.acrossGroupsWinners) / competition.groups.length;
         };
 
         var generatePresentation = function (event) {
@@ -96,6 +121,8 @@
                 video: event.view.video
             };
 
+            udpateWinnerProperties(competition);
+
             if (groupParticipant) {
                 result.scores = groupParticipant.scores;
                 result.scores.forEach(function (score) {
@@ -107,7 +134,7 @@
             }
 
             if (group.participants) {
-                result.resultList = generateResultList(group.participants, event);
+                result.resultList = generateResultList(group.participants, event, competition);
             }
 
             return result;

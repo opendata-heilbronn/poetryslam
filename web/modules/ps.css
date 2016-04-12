@@ -178,10 +178,15 @@ html, body {
     flex-direction: column;
 }
 
+.list-subline {
+    text-align: left;
+}
+
 .participant-row {
     display: flex;
     background-clip: padding-box;
     border: 0.5vw solid transparent;
+    border-left: none;
 }
 
 .participant-row-main {
