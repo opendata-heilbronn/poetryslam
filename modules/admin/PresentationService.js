@@ -91,7 +91,9 @@
                         name: participant.name,
                         slam: participant.slam,
                         participantId: participant.id,
-                        scores: groupParticipant.scores,
+                        ignoredScores: groupParticipant.scores.filter(function (score) {
+                            return score.ignored;
+                        }),
                         totalScore: groupParticipant.totalScore,
                         secondTotalScore: groupParticipant.secondTotalScore
                     };
@@ -121,7 +123,7 @@
             for (var winnerCount = 1; winnerCount <= competition.winners && winnerCount <= resultList.length; winnerCount++) {
                 resultList[winnerCount - 1].state = 'highlight';
             }
-            var winnerListLength = competition.acrossGroupsWinners ? competition.winners + competition.acrossGroupsWinners : competition.winners;
+            var winnerListLength = competition.acrossGroupsWinners ? (parseInt(competition.winners, 10) + competition.acrossGroupsWinners) : competition.winners;
             return resultList.slice(0, winnerListLength);
         };
 

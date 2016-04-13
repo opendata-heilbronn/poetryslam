@@ -5,16 +5,15 @@
         $scope.event = event;
 
         $scope.reset = function () {
-            $scope.event.view = {screen: 'pause'};
+            $scope.event.view = {video: 'pause'};
             $scope.updatePresentation();
         };
 
         $scope.resetGroup = function () {
+            $scope.event.view.video = 'pause';
+            $scope.updatePresentation();
             $scope.event.view.groupId = null;
             $scope.event.view.participantId = null;
-            if ($scope.event.view.screen !== 'intro' && $scope.event.view.screen !== 'pause') {
-                $scope.event.view.screen = 'pause';
-            }
             $scope.updatePresentation();
         };
 
