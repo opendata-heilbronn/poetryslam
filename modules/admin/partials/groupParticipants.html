@@ -15,17 +15,17 @@
 
     <md-list style="padding-bottom: 0">
         <md-subheader class="md-no-sticky" ng-show="group.sacrifice && group.sacrifice.name">Opferlamm</md-subheader>
-        <md-list-item class="md-2-line md-no-proxy" ng-show="group.sacrifice && group.sacrifice.name">
+        <md-list-item class="md-2-line md-no-proxy" ng-show="group.sacrifice && group.sacrifice.id">
             <div class="md-list-item-text" layout="column">
-                <h3>{{ group.sacrifice.name }}</h3>
-                <p>{{ group.sacrifice.slam }}</p>
+                <h3>{{ (group.sacrifice.id | participantOfId).name }}</h3>
+                <p>{{ (group.sacrifice.id | participantOfId).slam }}</p>
             </div>
 
             <div class="md-secondary">
                 <md-button class="md-icon-button" aria-label="Löschen" ng-click="deleteSacrifice()">
                     <md-icon md-svg-icon="action:delete"></md-icon>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="Bearbeiten" ng-click="editSacrifice(group.sacrifice)">
+                <md-button class="md-icon-button" aria-label="Bearbeiten" ng-click="editParticipant(group.sacrifice)">
                     <md-icon md-svg-icon="image:edit"></md-icon>
                 </md-button>
             </div>

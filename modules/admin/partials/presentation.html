@@ -54,6 +54,10 @@
             <md-input-container>
                 <label>3. Teilnehmer auswählen</label>
                 <md-select ng-model="event.view.participantId" style="width:200px;">
+                    <md-option ng-if="getGroup().sacrifice" value="{{getGroup().sacrifice.id}}">OPFERLAMM, {{
+                        (getGroup().sacrifice.id | participantOfId).name }}, {{ (getGroup().sacrifice.id |
+                        participantOfId).slam }}
+                    </md-option>
                     <md-option
                             ng-repeat="participant in getGroup().participants"
                             value="{{participant.id}}">
@@ -81,7 +85,8 @@
                 </md-button>
                 <br>
                 <md-button ng-click="setScreen('groupRatings')"
-                           ng-class="{'md-primary': event.view.phase == 'groupRatings'}">5. Zwischenstand der Gruppe
+                           ng-class="{'md-primary': event.view.phase == 'groupRatings'}"
+                           ng-disabled="event.view.participantId == getGroup().sacrifice.id">5. Zwischenstand der Gruppe
                     anzeigen
                 </md-button>
                 <br>

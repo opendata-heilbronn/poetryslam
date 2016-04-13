@@ -19,6 +19,9 @@
 
         this.getGroupParticipant = function (group, id) {
             var result = $filter('entryOfId')(id, group.participants);
+            if (!result && group.sacrifice && group.sacrifice.id == id) {
+                result = group.sacrifice;
+            }
             return result ? result : null;
         };
 
@@ -49,7 +52,7 @@
         };
 
         this.markIgnoredScores = function (scores) {
-            var lowest = 11, highest = -1;
+            var lowest = 99999, highest = -99999;
 
             scores.forEach(function (score) {
                 if (score !== '') {
@@ -60,15 +63,19 @@
                 score.ignored = false;
             });
 
-            if (lowest < 11) {
-                scores.filter(function (score) {
-                    return toFloat(score.value) === lowest;
-                })[0].ignored = true;
+            if (scores.length >= 1) {
+                if (lowest < 11) {
+                    scores.filter(function (score) {
+                        return toFloat(score.value) === lowest;
+                    })[0].ignored = true;
+                }
             }
-            if (highest > -1) {
-                scores.filter(function (score) {
-                    return toFloat(score.value) === highest;
-                })[0].ignored = true;
+            if (scores.length >= 2) {
+                if (highest > -1) {
+                    scores.filter(function (score) {
+                        return toFloat(score.value) === highest && !score.ignored;
+                    })[0].ignored = true;
+                }
             }
         };
 
@@ -92,7 +99,6 @@
 
             result.forEach(function (entry, index) {
                 if (index > 0) {
-                    console.log(result[index - 1].totalScore + ' - ' + entry.totalScore);
                     if (result[index - 1].totalScore == entry.totalScore) {
                         result[index - 1].showIgnoredScores = true;
                         entry.showIgnoredScores = true;
@@ -152,7 +158,7 @@
         };
 
         var generatePresentation = function (event) {
-            if (!event ||  !event.view) return false;
+            if (!event || !event.view) return false;
             var competition = that.getCompetition(event, event.view.competitionId);
             var group = that.getGroup(competition, event.view.groupId);
             var participant = that.getParticipant(event, event.view.participantId);
@@ -166,7 +172,7 @@
                 video: event.view.video
             };
 
-            if(competition && Object.keys(competition).length > 0) {
+            if (competition && Object.keys(competition).length > 0) {
                 updateWinnerProperties(competition);
             }
 

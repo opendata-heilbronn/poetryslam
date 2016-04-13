@@ -30,7 +30,11 @@
             })
         };
 
-        $scope.editParticipant = function (participant) {
+        $scope.editParticipant = function (groupParticipant) {
+            var participant = $filter('entryOfId')(groupParticipant.id, globalParticipants);
+            DialogService.showParticipantDialog(participant).then(function (editedParticipant) {
+                angular.extend(participant, editedParticipant);
+            })
         };
 
         $scope.deleteParticipant = function (participant) {
@@ -38,14 +42,12 @@
         };
 
         $scope.addSacrifice = function () {
-            DialogService.showParticipantDialog().then(function (sacrifice) {
-                $scope.group.sacrifice = sacrifice;
-            })
-        };
-
-        $scope.editSacrifice = function (sacrifice) {
-            DialogService.showParticipantDialog(sacrifice).then(function (editedSacrifice) {
-                angular.extend(sacrifice, editedSacrifice);
+            DialogService.showGroupParticipantDialog(null, filterParticipants).then(function (data) {
+                if (data.participant) {
+                    $scope.group.sacrifice = {
+                        id: data.participant.id
+                    };
+                }
             })
         };
 
