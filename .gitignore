@@ -25,4 +25,6 @@ components/Sortable/*
 !components/angular-flowtype/angular-flowtype.js
 
 !components/animate.css/animate.css
+!components/odometer/themes
+components/odometer/themes/*
 !components/odometer/themes/odometer-theme-minimal.css
