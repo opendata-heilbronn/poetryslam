@@ -63,19 +63,31 @@
             </md-input-container>
 
             <div ng-if="event.view.participantId">
-                <md-button ng-click="setScreen('participant', 'name')" ng-class="{'md-primary': event.view.screen != 'participant'}">1. Poet anzeigen</md-button>
+                <md-button ng-click="setScreen('participant', 'name')"
+                           ng-class="{'md-primary': event.view.phase == 'name'}">1. Poet anzeigen
+                </md-button>
                 <br>
-                <md-button ng-click="setScreen('participant', 'rating')" ng-class="{'md-primary': event.view.phase == 'name'}">2. Wertungen anzeigen</md-button>
+                <md-button ng-click="setScreen('participant', 'rating')"
+                           ng-class="{'md-primary': event.view.phase == 'rating'}">2. Wertungen anzeigen
+                </md-button>
                 <br>
-                <md-button ng-click="setScreen('participant', 'ratingFinal')" ng-class="{'md-primary': event.view.phase == 'rating'}">3. höchste / niedrigste Wertung
+                <md-button ng-click="setScreen('participant', 'ratingFinal')"
+                           ng-class="{'md-primary': event.view.phase == 'ratingFinal'}">3. höchste / niedrigste Wertung
                     streichen
                 </md-button>
                 <br>
-                <md-button ng-click="setScreen('participant', 'total')" ng-class="{'md-primary': event.view.phase == 'ratingFinal'}">4. Wertungssumme anzeigen</md-button>
+                <md-button ng-click="setScreen('participant', 'total')"
+                           ng-class="{'md-primary': event.view.phase == 'total'}">4. Wertungssumme anzeigen
+                </md-button>
                 <br>
-                <md-button ng-click="setScreen('groupRatings')" ng-class="{'md-primary': event.view.phase == 'total'}">5. Zwischenstand der Gruppe anzeigen</md-button>
+                <md-button ng-click="setScreen('groupRatings')"
+                           ng-class="{'md-primary': event.view.phase == 'groupRatings'}">5. Zwischenstand der Gruppe
+                    anzeigen
+                </md-button>
                 <br>
-                <md-button ng-click="setVideo('pause')" ng-class="{'md-primary': event.view.screen == 'groupRatings' && !event.view.phase}">6. Pause-Screen anzeigen</md-button>
+                <md-button ng-click="setVideo('pause')" ng-class="{'md-primary': event.view.video == 'pause'}">6.
+                    Pause-Screen anzeigen
+                </md-button>
 
                 <div ng-show="event.view.screen == 'participant' && event.view.phase != 'name'">
                     <p>Wertungen</p>
