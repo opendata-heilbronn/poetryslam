@@ -24,9 +24,8 @@
             <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
         </div>
 
-        <hr>
-
-        <div ng-show="event.view.competitionId">
+        <div ng-if="event.view.competitionId">
+            <hr>
             <div layout="row">
                 <md-input-container style="width:200px;">
                     <label>2. Gruppe auswählen</label>
@@ -48,9 +47,10 @@
             <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
         </div>
 
-        <hr>
 
-        <div ng-show="event.view.groupId">
+        <div ng-if="event.view.groupId">
+            <hr>
+
             <md-input-container>
                 <label>3. Teilnehmer auswählen</label>
                 <md-select ng-model="event.view.participantId" style="width:200px;">
@@ -62,7 +62,7 @@
                 </md-select>
             </md-input-container>
 
-            <div ng-show="event.view.participantId">
+            <div ng-if="event.view.participantId">
                 <md-button ng-click="setScreen('participant', 'name')" ng-class="{'md-primary': event.view.screen != 'participant'}">1. Poet anzeigen</md-button>
                 <br>
                 <md-button ng-click="setScreen('participant', 'rating')" ng-class="{'md-primary': event.view.phase == 'name'}">2. Wertungen anzeigen</md-button>

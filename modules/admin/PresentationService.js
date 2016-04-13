@@ -146,13 +146,13 @@
             return result;
         };
 
-        var udpateWinnerProperties = function (competition) {
+        var updateWinnerProperties = function (competition) {
             competition.acrossGroupsWinners = competition.winners % competition.groups.length;
             competition.fixedWinnersPerGroup = (competition.winners - competition.acrossGroupsWinners) / competition.groups.length;
         };
 
         var generatePresentation = function (event) {
-            if (!event) return false;
+            if (!event ||  !event.view) return false;
             var competition = that.getCompetition(event, event.view.competitionId);
             var group = that.getGroup(competition, event.view.groupId);
             var participant = that.getParticipant(event, event.view.participantId);
@@ -166,7 +166,9 @@
                 video: event.view.video
             };
 
-            udpateWinnerProperties(competition);
+            if(competition && Object.keys(competition).length > 0) {
+                updateWinnerProperties(competition);
+            }
 
             if (groupParticipant) {
                 result.scores = groupParticipant.scores;
@@ -184,7 +186,7 @@
                 result.resultList = generateResultList(group.participants, event, competition);
             }
 
-            if (competition) {
+            if (competition && Object.keys(competition).length > 0) {
                 result.winnerList = generateWinnerList(event, competition);
             }
 
