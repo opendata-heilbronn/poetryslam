@@ -58,20 +58,20 @@
                 if (score !== '') {
                     var value = toFloat(score.value);
                     if (value < lowest) lowest = value;
-                    else if (value > highest) highest = value;
+                    if (value > highest) highest = value;
                 }
                 score.ignored = false;
             });
 
             if (scores.length >= 1) {
-                if (lowest < 11) {
+                if (lowest < 99999) {
                     scores.filter(function (score) {
                         return toFloat(score.value) === lowest;
                     })[0].ignored = true;
                 }
             }
             if (scores.length >= 2) {
-                if (highest > -1) {
+                if (highest > -99999) {
                     scores.filter(function (score) {
                         return toFloat(score.value) === highest && !score.ignored;
                     })[0].ignored = true;
