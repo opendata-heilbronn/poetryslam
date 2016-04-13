@@ -1,6 +1,11 @@
 (function () {
     'use strict';
-    angular.module('ps').directive('odometer', function ($timeout) {
+    angular.module('ps').directive('odometer', function ($timeout, $filter) {
+        // modify Odometer to always show a fractional digit
+        Odometer.prototype.getFractionalDigitCount = function () {
+            return 1;
+        };
+
         return {
             restrict: 'E',
             template: '<span><span class="odometer" ng-show="valueSet"></span><span ng-hide="valueSet" class="hide-instant">?</span></span>',
@@ -11,6 +16,9 @@
                     el: element[0].querySelector('.odometer'),
                     duration: 10000,
                     format: '( ddd),d',
+                    formatFunction: function (value) {
+                        return $filter('number')(value, 1);
+                    },
                     value: 0
                 });
 
