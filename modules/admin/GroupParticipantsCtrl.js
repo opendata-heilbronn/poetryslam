@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('psadmin').controller('GroupParticipantsCtrl', function ($scope, group, globalParticipants, DialogService, $q, $filter) {
+    angular.module('psadmin').controller('GroupParticipantsCtrl', function ($scope, group, groups, globalParticipants, DialogService, $q, $filter) {
         $scope.group = group;
 
         var filterParticipants = function (searchText) {
@@ -12,7 +12,9 @@
                         return participant.name.toLowerCase().indexOf(searchFor) != -1 || !searchFor;
                     })
                     .filter(function (participant) {
-                        return !$filter('entryOfId')(participant.id, $scope.group.participants)
+                        return groups.filter(function (group) {
+                                return $filter('entryOfId')(participant.id, group.participants);
+                            }).length <= 0;
                     });
                 resolve(result);
             })

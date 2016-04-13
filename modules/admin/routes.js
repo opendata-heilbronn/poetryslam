@@ -63,8 +63,11 @@
                 resolve: {
                     group: function ($rootScope, $route, $filter) {
                         var competition = $filter('entryOfId')($route.current.params.competitionId, $rootScope.event.competitions);
-                        var group = $filter('entryOfId')($route.current.params.id, competition.groups);
-                        return group;
+                        return $filter('entryOfId')($route.current.params.id, competition.groups);
+                    },
+                    groups: function ($rootScope, $route, $filter) {
+                        var competition = $filter('entryOfId')($route.current.params.competitionId, $rootScope.event.competitions);
+                        return competition.groups;
                     },
                     globalParticipants: function ($rootScope) {
                         return $rootScope.event.participants;
