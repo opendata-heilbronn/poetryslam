@@ -81,7 +81,8 @@
                     <p>Wertungen</p>
                     <md-input-container ng-repeat="score in getScores()">
                         <label>Wertung {{$index+1}}</label>
-                        <input ng-model="score.value" ng-blur="updatePresentation()">
+                        <input ng-model="score.value" ng-blur="updatePresentation()"
+                               ng-keydown="$event.which === 13 && updatePresentation()">
                     </md-input-container>
                 </div>
             </div>
