@@ -31,10 +31,10 @@
 </head>
 <body ng-app="ps">
 <div class="screen-container">
-    <video class="fullscreen-video" autoplay ng-if="presentation.video === 'pause'">
+    <video class="fullscreen-video" autoplay ng-if="presentation.video !== 'bg'">
         <source src="/media/clips/bg_to_logo.mp4" type="video/mp4">
     </video>
-    <video class="fullscreen-video" autoplay ng-if="presentation.video !== 'pause'">
+    <video class="fullscreen-video" autoplay ng-if="presentation.video === 'bg'">
         <source src="/media/clips/logo_to_bg.mp4" type="video/mp4">
     </video>
     <div ng-switch="presentation.screen" ng-hide="presentation.video === 'pause'">
