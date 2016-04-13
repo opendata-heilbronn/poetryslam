@@ -14,7 +14,7 @@
                     .filter(function (participant) {
                         return groups.filter(function (group) {
                                 return $filter('entryOfId')(participant.id, group.participants);
-                            }).length <= 0;
+                            }).length <= 0 && (!group.sacrifice || group.sacrifice.id !== participant.id);
                     });
                 resolve(result);
             })
