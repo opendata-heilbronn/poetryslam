@@ -34,22 +34,23 @@ gulp.task('copy-cname', ['clean'], function () {
     return gulp.src('CNAME')
         .pipe(gulp.dest('build'));
 });
+
+gulp.task('package', ['copy-images', 'copy-fonts', 'copy-icons', 'copy-modules', 'copy-html', 'copy-cname'], function () {
+    return gulp.src('src/*.html')
+        .pipe(usemin({
+            css: ['concat'],
+            js: ['concat']
+        }))
+        .pipe(gulp.dest('build'));
+});
+
 gulp.task('manifest', ['package'], function () {
-    gulp.src(['build/**/*'], {base: './build/'})
+    return gulp.src(['build/**/*'], {base: './build/'})
         .pipe(manifest({
             hash: true,
             network: [],
             filename: 'app.manifest',
             exclude: ['app.manifest', 'CNAME']
-        }))
-        .pipe(gulp.dest('build'));
-});
-
-gulp.task('package', ['copy-images', 'copy-fonts', 'copy-icons', 'copy-modules', 'copy-html', 'copy-cname'], function () {
-    gulp.src('src/*.html')
-        .pipe(usemin({
-            css: ['concat'],
-            js: ['concat']
         }))
         .pipe(gulp.dest('build'));
 });
