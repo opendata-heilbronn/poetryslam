@@ -9,6 +9,7 @@ Das Hosting erfolgt über [GitHub Pages](https://pages.github.com).
 ### Funktionsweise
 
 Die Webanwendung wird in zwei Browser-Fenstern parallel geöffnet. Ein Browser-Fenster dient zur Steuerung, das andere zur Präsentation.
+Einmal aufgerufen kann die Webanwendung auch offline verwendet werden.
 
 * [Admin-Oberfläche](http://poetryslam.opendatalab.de/admin.html#/)
 * [Präsentation](http://poetryslam.opendatalab.de/index.html)
