@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var del = require('del');
 var ghPages = require('gulp-gh-pages');
+var manifest = require('gulp-manifest');
+var usemin = require('gulp-usemin');
 
 /**
  * build tasks
@@ -21,12 +23,8 @@ gulp.task('copy-icons', ['clean'], function () {
         .pipe(gulp.dest('build/material-icons'));
 });
 gulp.task('copy-modules', ['clean'], function () {
-    return gulp.src('src/modules/**/*')
+    return gulp.src('src/modules/**/*.html')
         .pipe(gulp.dest('build/modules'));
-});
-gulp.task('copy-components', ['clean'], function () {
-    return gulp.src('src/components/**/*.{js,css}')
-        .pipe(gulp.dest('build/components'));
 });
 gulp.task('copy-html', ['clean'], function () {
     return gulp.src('src/*.html')
@@ -36,8 +34,27 @@ gulp.task('copy-cname', ['clean'], function () {
     return gulp.src('CNAME')
         .pipe(gulp.dest('build'));
 });
+gulp.task('manifest', ['package'], function () {
+    gulp.src(['build/**/*'], {base: './build/'})
+        .pipe(manifest({
+            hash: true,
+            network: [],
+            filename: 'app.manifest',
+            exclude: ['app.manifest', 'CNAME']
+        }))
+        .pipe(gulp.dest('build'));
+});
 
-gulp.task('build', ['copy-images', 'copy-fonts', 'copy-icons', 'copy-modules', 'copy-components', 'copy-html', 'copy-cname']);
+gulp.task('package', ['copy-images', 'copy-fonts', 'copy-icons', 'copy-modules', 'copy-html', 'copy-cname'], function () {
+    gulp.src('src/*.html')
+        .pipe(usemin({
+            css: ['concat'],
+            js: ['concat']
+        }))
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('build', ['manifest']);
 
 gulp.task('deploy', ['build'], function () {
     return gulp.src('./build/**/*')
