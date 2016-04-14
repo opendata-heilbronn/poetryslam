@@ -113,9 +113,11 @@
         };
 
         var markWinners = function (resultList, winners) {
-            if (!winners) return resultList;
+            if (!winners || !resultList) return resultList;
             for (var winnerCount = 1; winnerCount <= winners; winnerCount++) {
-                resultList[winnerCount - 1].state = 'highlight';
+                if (resultList[winnerCount - 1]) {
+                    resultList[winnerCount - 1].state = 'highlight';
+                }
             }
             // handle point equality
             if (resultList[winners] && resultList[winners].thirdTotalScore == resultList[winners - 1].thirdTotalScore) {
@@ -194,7 +196,7 @@
             var group = that.getGroup(competition, event.view.groupId);
             var participant = that.getParticipant(event, event.view.participantId);
             var groupParticipant = that.getGroupParticipant(group, event.view.participantId);
-            if (competition) competition.winners = parseInt(competition.winners, 10);
+            if (competition && Object.keys(competition).length > 0) competition.winners = parseInt(competition.winners, 10);
             var result = {
                 competitionName: competition.name,
                 groupName: group.name,
@@ -214,16 +216,18 @@
                 competition.groups.forEach(function (cGroup) {
                     if (cGroup.participants) {
                         cGroup.participants.forEach(function (cGroupParticipant) {
-                            cGroupParticipant.scores.forEach(function (score) {
-                                if (score.value) score.value = score.value.replace(/,/, '.');
-                            });
-                            if (cGroupParticipant.extraScore) {
-                                cGroupParticipant.extraScore = cGroupParticipant.extraScore.replace(/,/, '.');
+                            if (cGroupParticipant.scores) {
+                                cGroupParticipant.scores.forEach(function (score) {
+                                    if (score.value) score.value = score.value.replace(/,/, '.');
+                                });
+                                if (cGroupParticipant.extraScore) {
+                                    cGroupParticipant.extraScore = cGroupParticipant.extraScore.replace(/,/, '.');
+                                }
+                                that.markIgnoredScores(cGroupParticipant.scores);
+                                cGroupParticipant.totalScore = that.sumScore(cGroupParticipant.scores);
+                                cGroupParticipant.secondTotalScore = that.sumScoreSecond(cGroupParticipant.scores);
+                                cGroupParticipant.thirdTotalScore = addExtraScore(cGroupParticipant.extraScore, cGroupParticipant.secondTotalScore);
                             }
-                            that.markIgnoredScores(cGroupParticipant.scores);
-                            cGroupParticipant.totalScore = that.sumScore(cGroupParticipant.scores);
-                            cGroupParticipant.secondTotalScore = that.sumScoreSecond(cGroupParticipant.scores);
-                            cGroupParticipant.thirdTotalScore = addExtraScore(cGroupParticipant.extraScore, cGroupParticipant.secondTotalScore);
                         })
                     }
                 })

@@ -8,7 +8,7 @@
     <md-content class="md-padding">
         <div>
             <p>
-                <small style="color:rgba(0,0,0,0.54)">Zwischendurch / frei wählbar:</small>
+                <small style="color:rgba(0,0,0,0.54)">Freitext anzeigen:</small>
             </p>
             <md-input-container style="margin-bottom: 0">
                 <label>Erste Zeile</label>
@@ -20,8 +20,8 @@
                 <input ng-model="event.view.customTextSubline" ng-blur="updatePresentation()"
                        ng-keydown="$event.which === 13 && updatePresentation()">
             </md-input-container>
-            <div>
-                <md-button ng-show="event.view.customText" ng-click="setScreen('customText')">1. Text anzeigen
+            <div ng-show="event.view.customText">
+                <md-button ng-click="setScreen('customText')">1. Text anzeigen
                 </md-button>
                 <br>
                 <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
