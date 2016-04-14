@@ -13,8 +13,16 @@ Die Webanwendung wird in zwei Browser-Fenstern parallel geöffnet. Ein Browser-F
 * [Admin-Oberfläche](http://poetryslam.opendatalab.de/admin.html#/)
 * [Präsentation](http://poetryslam.opendatalab.de/index.html)
 
+Steuerung der Präsentation:
+
 ![Steuerung der Präsentation](/doc/screenshot-admin.png)
+
+Admin-Oberfläche:
+
 ![Admin-Oberfläche](/doc/screenshot-about.png)
+
+Präsentation:
+
 ![Präsentation](/doc/screenshot-presentation.png)
 
 ## Dev-Setup
