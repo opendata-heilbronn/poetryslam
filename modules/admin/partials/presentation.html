@@ -34,7 +34,7 @@
                         <md-option
                                 ng-repeat="group in getCompetition().groups"
                                 value="{{group.id}}">
-                            Gruppe {{$index + 1}}
+                            {{group.name}}
                         </md-option>
                     </md-select>
                 </md-input-container>
@@ -109,16 +109,58 @@
             </div>
             <hr>
             <div>
-                <p><small style="color:rgba(0,0,0,0.54)">4. Wenn alle Teilnehmer bewertet wurden:</small></p>
-                <md-button ng-click="setScreen('groupRatings', 'winners')">1. Gewinner der Gruppe anzeigen</md-button><br>
-                <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button><br>
-                <p style="padding-left:13px;">3. Gruppe zurücksetzen, falls noch nicht am Ende des Wettbewerbs (siehe oben)</p>
+                <p>
+                    <small style="color:rgba(0,0,0,0.54)">4. Wenn alle Teilnehmer bewertet wurden:</small>
+                </p>
+                <md-button ng-click="setScreen('groupRatings', 'winners')">1. Gewinner der Gruppe anzeigen</md-button>
+                <br>
+                <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
+                <br>
+                <p style="padding-left:13px;">3. Gruppe zurücksetzen, falls noch nicht am Ende des Wettbewerbs (siehe
+                    oben)</p>
+
+                <div ng-if="event.view.screen == 'groupRatings' && event.view.phase == 'winners'">
+                    <br>
+                    <p>
+                        Extrapunkte
+                        <small style="color:rgba(0,0,0,0.54)">bei Punktgleichheit</small>
+                        :
+                    </p>
+                    <md-input-container ng-repeat="participant in getGroup().participants" style="margin: 0">
+                        <label>{{ (participant.id | participantOfId).name }}, {{ (participant.id |
+                            participantOfId).slam}}</label>
+                        <input ng-model="participant.extraScore" ng-blur="updatePresentation()"
+                               ng-keydown="$event.which === 13 && updatePresentation()">
+                    </md-input-container>
+                </div>
             </div>
         </div>
         <div ng-show="event.view.competitionId">
             <hr>
-            <p><small style="color:rgba(0,0,0,0.54)">5. Am Ende des Wettbewerbs:</small></p>
+            <p>
+                <small style="color:rgba(0,0,0,0.54)">5. Am Ende des Wettbewerbs:</small>
+            </p>
             <md-button ng-click="setScreen('competitionRatings')">Gewinner des Wettbewerbs anzeigen</md-button>
+
+            <div ng-if="event.view.screen == 'competitionRatings'">
+                <br>
+                <p>
+                    Extrapunkte
+                    <small style="color:rgba(0,0,0,0.54)">bei Punktgleichheit</small>
+                    :
+                </p>
+                <div ng-repeat="group in getCompetition().groups">
+                    <p>
+                        <small style="color:rgba(0,0,0,0.54)">{{group.name}}</small>
+                    </p>
+                    <md-input-container ng-repeat="participant in group.participants">
+                        <label>{{ (participant.id | participantOfId).name }}, {{ (participant.id |
+                            participantOfId).slam}}</label>
+                        <input ng-model="participant.extraScore" ng-blur="updatePresentation()"
+                               ng-keydown="$event.which === 13 && updatePresentation()">
+                    </md-input-container>
+                </div>
+            </div>
         </div>
     </md-content>
 </section>

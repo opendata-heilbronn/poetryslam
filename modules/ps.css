@@ -173,7 +173,7 @@ html, body {
 
 .participant-list {
     display: flex;
-    width: 76%;
+    width: 84%;
     margin-left: 6%;
     flex-direction: column;
 }
