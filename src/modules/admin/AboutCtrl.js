@@ -33,13 +33,14 @@
 
     var offerReload = false;
 
-    window.addEventListener('load', function (e) {
+    window.addEventListener('load', function () {
         window.applicationCache.addEventListener('updateready', function () {
+            console.log('UPDATE READY');
+            offerReload = true;
             if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+                console.log('UPDATE READY CHECK');
                 // Browser downloaded a new app cache.
                 // Swap it in and reload the page to get the new hotness.
-                window.applicationCache.swapCache();
-                offerReload = true;
             } else {
                 // Manifest didn't changed. Nothing new to server.
             }
@@ -54,7 +55,8 @@
         };
 
         $scope.reload = function () {
-            window.location.reload();
+            window.applicationCache.swapCache();
+            window.location.reload(true);
         };
 
         $interval(function () {
