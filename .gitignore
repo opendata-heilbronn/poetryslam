@@ -5,3 +5,4 @@ node_modules/
 components/
 .vscode
 build/
+.publish

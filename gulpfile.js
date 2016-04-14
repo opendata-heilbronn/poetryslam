@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var del = require('del');
+var ghPages = require('gulp-gh-pages');
 
 /**
  * build tasks
@@ -31,5 +32,14 @@ gulp.task('copy-html', ['clean'], function () {
     return gulp.src('src/*.html')
         .pipe(gulp.dest('build'));
 });
+gulp.task('copy-cname', ['clean'], function () {
+    return gulp.src('CNAME')
+        .pipe(gulp.dest('build'));
+});
 
-gulp.task('build', ['copy-images', 'copy-fonts', 'copy-icons', 'copy-modules', 'copy-components', 'copy-html']);
+gulp.task('build', ['copy-images', 'copy-fonts', 'copy-icons', 'copy-modules', 'copy-components', 'copy-html', 'copy-cname']);
+
+gulp.task('deploy', ['build'], function () {
+    return gulp.src('./build/**/*')
+        .pipe(ghPages());
+});
