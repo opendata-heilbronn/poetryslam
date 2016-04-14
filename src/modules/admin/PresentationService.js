@@ -201,7 +201,8 @@
                 participant: participant,
                 screen: event.view.screen,
                 phase: event.view.phase,
-                video: event.view.video
+                video: event.view.video,
+                winnersToShow: event.view.winnersToShow
             };
 
             if (competition && Object.keys(competition).length > 0) {

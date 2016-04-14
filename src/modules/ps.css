@@ -189,6 +189,15 @@ html, body {
     border-left: none;
 }
 
+.winner-row {
+    visibility: hidden;
+}
+
+.winner-row-visible {
+    visibility: visible;
+    animation-name: fadeInLeftBig;
+}
+
 .participant-row-main {
     display: flex;
     flex: 1;

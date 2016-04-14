@@ -112,7 +112,10 @@
                 <p>
                     <small style="color:rgba(0,0,0,0.54)">4. Wenn alle Teilnehmer bewertet wurden:</small>
                 </p>
-                <md-button ng-click="setScreen('groupRatings', 'winners')">1. Gewinner der Gruppe anzeigen</md-button>
+                <md-button ng-click="showGroupWinners()">1. Gewinner der Gruppe anzeigen</md-button>
+                <div ng-if="event.view.screen == 'groupRatings' && event.view.phase == 'winners'">
+                    <md-button ng-click="increaseWinnerCount()">1.1 Nächsten Gewinner anzeigen</md-button>
+                </div>
                 <br>
                 <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
                 <br>
@@ -140,7 +143,10 @@
             <p>
                 <small style="color:rgba(0,0,0,0.54)">5. Am Ende des Wettbewerbs:</small>
             </p>
-            <md-button ng-click="setScreen('competitionRatings')">Gewinner des Wettbewerbs anzeigen</md-button>
+            <md-button ng-click="showCompetitionWinners()">1. Gewinner des Wettbewerbs anzeigen</md-button>
+            <div ng-if="event.view.screen == 'competitionRatings'">
+                <md-button ng-click="increaseWinnerCount()">1.1 Nächsten Gewinner anzeigen</md-button>
+            </div>
 
             <div ng-if="event.view.screen == 'competitionRatings'">
                 <br>

@@ -29,6 +29,21 @@
             $scope.updatePresentation();
         };
 
+        $scope.showGroupWinners = function () {
+            $scope.event.view.winnersToShow = 1;
+            $scope.setScreen('groupRatings', 'winners');
+        };
+
+        $scope.showCompetitionWinners = function () {
+            $scope.event.view.winnersToShow = 1;
+            $scope.setScreen('competitionRatings');
+        };
+
+        $scope.increaseWinnerCount = function () {
+            $scope.event.view.winnersToShow++;
+            $scope.updatePresentation();
+        };
+
         $scope.getCompetition = function () {
             return PresentationService.getCompetition($scope.event, $scope.event.view.competitionId);
         };
