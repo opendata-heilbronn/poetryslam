@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var currentVersion = '1.0';
+    var currentVersion = '1.0.2';
 
     var getAppCacheStatus = function () {
         var appCache = window.applicationCache;
@@ -55,7 +55,6 @@
         };
 
         $scope.reload = function () {
-            window.applicationCache.swapCache();
             window.location.reload(true);
         };
 

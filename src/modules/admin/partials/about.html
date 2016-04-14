@@ -8,7 +8,8 @@
     <md-content class="md-padding">
         <p>Offline-Verfügbarkeit</p>
         <md-button class="md-secondary" ng-disabled="!appCache.offerReload"
-                   ng-class="{'md-primary': appCache.offerReload, 'md-raised': appCache.offerReload}" ng-click="reload">
+                   ng-class="{'md-primary': appCache.offerReload, 'md-raised': appCache.offerReload}"
+                   ng-click="reload()">
             {{appCache.status}}
         </md-button>
         <p>Version</p>
