@@ -83,8 +83,12 @@
                     }
                 }
             })
+            .when('/', {
+                templateUrl: '/modules/admin/partials/about.html',
+                controller: 'AboutCtrl'
+            })
             .otherwise({
-                redirectTo: '/participants'
+                redirectTo: '/'
             });
 
         $locationProvider.html5Mode(false);
