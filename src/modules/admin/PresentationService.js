@@ -202,7 +202,9 @@
                 screen: event.view.screen,
                 phase: event.view.phase,
                 video: event.view.video,
-                winnersToShow: event.view.winnersToShow
+                winnersToShow: event.view.winnersToShow,
+                customText: event.view.customText,
+                customTextSubline: event.view.customTextSubline
             };
 
             if (competition && Object.keys(competition).length > 0) {

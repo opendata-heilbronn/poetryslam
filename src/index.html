@@ -30,6 +30,7 @@
     <script src="modules/presentation/odometerDirective.js"></script>
     <script src="modules/presentation/ratingParticipantDirective.js"></script>
     <script src="modules/presentation/competitionRatingsDirective.js"></script>
+    <script src="modules/presentation/customTextDirective.js"></script>
     <!-- endbuild -->
 </head>
 <body ng-app="ps">
@@ -43,6 +44,7 @@
     <div ng-switch="presentation.screen" ng-hide="presentation.video === 'pause'">
         <intro ng-switch-when="intro"></intro>
         <group ng-switch-when="group"></group>
+        <custom-text ng-switch-when="customText"></custom-text>
         <participant ng-switch-when="participant"></participant>
         <group-ratings ng-switch-when="groupRatings"></group-ratings>
         <competition-ratings ng-switch-when="competitionRatings"></competition-ratings>
