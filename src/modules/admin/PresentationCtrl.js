@@ -30,12 +30,12 @@
         };
 
         $scope.showGroupWinners = function () {
-            $scope.event.view.winnersToShow = 1;
+            $scope.event.view.winnersToShow = 0;
             $scope.setScreen('groupRatings', 'winners');
         };
 
         $scope.showCompetitionWinners = function () {
-            $scope.event.view.winnersToShow = 1;
+            $scope.event.view.winnersToShow = 0;
             $scope.setScreen('competitionRatings');
         };
 

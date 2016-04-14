@@ -245,6 +245,7 @@
 
             if (competition && Object.keys(competition).length > 0) {
                 result.winnerList = generateWinnerList(event, competition);
+                result.showWinnersInReverseOrder = competition.acrossGroupsWinners ? true : false;
             }
 
             return result;
