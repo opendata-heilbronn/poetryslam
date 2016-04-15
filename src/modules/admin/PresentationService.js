@@ -172,18 +172,6 @@
             if (event.view.phase === 'winners') {
                 result.sort(sortByScore);
                 result = markWinners(result, competition.fixedWinnersPerGroup, 'manualGroupWinner');
-            } else {
-                if (!event.view.participantId) {
-                    result[result.length - 1].state = 'highlight';
-                } else {
-                    result
-                        .filter(function (resultEntry) {
-                            return resultEntry.participantId === event.view.participantId;
-                        })
-                        .forEach(function (resultEntry) {
-                            resultEntry.state = 'highlight';
-                        });
-                }
             }
             return result;
         };
