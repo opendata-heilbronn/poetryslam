@@ -51,6 +51,12 @@
             return Math.round(total * 10) / 10;
         };
 
+        var setSingleScoreToIgnoredFailsafe = function (scores) {
+            if (scores && scores[0]) {
+                scores[0].ignored = true;
+            }
+        };
+
         this.markIgnoredScores = function (scores) {
             var lowest = 99999, highest = -99999;
 
@@ -63,19 +69,16 @@
                 score.ignored = false;
             });
 
-            if (scores.length >= 1) {
-                if (lowest < 99999) {
-                    scores.filter(function (score) {
-                        return toFloat(score.value) === lowest;
-                    })[0].ignored = true;
-                }
+            if (lowest < 99999) {
+                setSingleScoreToIgnoredFailsafe(scores.filter(function (score) {
+                    return toFloat(score.value) === lowest;
+                }));
             }
-            if (scores.length >= 2) {
-                if (highest > -99999) {
-                    scores.filter(function (score) {
-                        return toFloat(score.value) === highest && !score.ignored;
-                    })[0].ignored = true;
-                }
+
+            if (highest > -99999) {
+                setSingleScoreToIgnoredFailsafe(scores.filter(function (score) {
+                    return toFloat(score.value) === highest && !score.ignored;
+                }));
             }
         };
 
@@ -190,6 +193,21 @@
             competition.fixedWinnersPerGroup = (competition.winners - competition.acrossGroupsWinners) / competition.groups.length;
         };
 
+        var updateGroupParticipant = function (cGroupParticipant) {
+            if (cGroupParticipant.scores) {
+                cGroupParticipant.scores.forEach(function (score) {
+                    if (score.value) score.value = score.value.replace(/,/, '.');
+                });
+                if (cGroupParticipant.extraScore) {
+                    cGroupParticipant.extraScore = cGroupParticipant.extraScore.replace(/,/, '.');
+                }
+                that.markIgnoredScores(cGroupParticipant.scores);
+                cGroupParticipant.totalScore = that.sumScore(cGroupParticipant.scores);
+                cGroupParticipant.secondTotalScore = that.sumScoreSecond(cGroupParticipant.scores);
+                cGroupParticipant.thirdTotalScore = addExtraScore(cGroupParticipant.extraScore, cGroupParticipant.secondTotalScore);
+            }
+        };
+
         var generatePresentation = function (event) {
             if (!event || !event.view) return false;
             var competition = that.getCompetition(event, event.view.competitionId);
@@ -215,20 +233,10 @@
             if (competition && competition.groups) {
                 competition.groups.forEach(function (cGroup) {
                     if (cGroup.participants) {
-                        cGroup.participants.forEach(function (cGroupParticipant) {
-                            if (cGroupParticipant.scores) {
-                                cGroupParticipant.scores.forEach(function (score) {
-                                    if (score.value) score.value = score.value.replace(/,/, '.');
-                                });
-                                if (cGroupParticipant.extraScore) {
-                                    cGroupParticipant.extraScore = cGroupParticipant.extraScore.replace(/,/, '.');
-                                }
-                                that.markIgnoredScores(cGroupParticipant.scores);
-                                cGroupParticipant.totalScore = that.sumScore(cGroupParticipant.scores);
-                                cGroupParticipant.secondTotalScore = that.sumScoreSecond(cGroupParticipant.scores);
-                                cGroupParticipant.thirdTotalScore = addExtraScore(cGroupParticipant.extraScore, cGroupParticipant.secondTotalScore);
-                            }
-                        })
+                        cGroup.participants.forEach(updateGroupParticipant);
+                    }
+                    if (cGroup.sacrifice) {
+                        updateGroupParticipant(cGroup.sacrifice);
                     }
                 })
             }
