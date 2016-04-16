@@ -15,7 +15,7 @@
 
         <md-list-item class="md-2-line md-no-proxy" ng-repeat="entry in entries">
             <div class="md-list-item-text">
-                <h3>Gruppe {{ $index + 1 }}</h3>
+                <h3>{{ entry.name }}</h3>
                 <p>Teilnehmer: {{ entry.participants.length }}</p>
             </div>
 

@@ -52,7 +52,7 @@
                 <div layout="column" class="sidenav-sublevel" ng-show="competition.groups">
                     <sidenav-entry ng-repeat="group in competition.groups"
                                    path="'/competitions/' + competition.id + '/groups/' + group.id"
-                                   label="'Gruppe ' + ($index+1)"></sidenav-entry>
+                                   label="group.name"></sidenav-entry>
                 </div>
             </div>
         </div>
