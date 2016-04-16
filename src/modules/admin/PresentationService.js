@@ -128,7 +128,7 @@
                 }
             }
             // handle point equality
-            if (resultList[winners] && resultList[winners].thirdTotalScore == resultList[winners - 1].thirdTotalScore) {
+            if (resultList[winners] && resultList[winners].secondTotalScore == resultList[winners - 1].secondTotalScore && resultList[winners].thirdTotalScore == resultList[winners - 1].thirdTotalScore) {
                 var pointEquality = resultList[winners].thirdTotalScore;
                 resultList
                     .filter(function (resultEntry) {
