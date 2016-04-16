@@ -82,6 +82,19 @@
             }
         };
 
+        var updateShowIngoredScores = function (resultList) {
+            if (!resultList) return resultList;
+            resultList.forEach(function (entry, index) {
+                entry.showIgnoredScores = false;
+                if (index > 0) {
+                    if (resultList[index - 1].totalScore == entry.totalScore) {
+                        resultList[index - 1].showIgnoredScores = true;
+                        entry.showIgnoredScores = true;
+                    }
+                }
+            });
+        };
+
         var generateGroupResultList = function (groupParticipants, event) {
             if (!groupParticipants || !groupParticipants.length) return [];
             var result = groupParticipants
@@ -104,14 +117,6 @@
                     };
                 });
 
-            result.forEach(function (entry, index) {
-                if (index > 0) {
-                    if (result[index - 1].totalScore == entry.totalScore) {
-                        result[index - 1].showIgnoredScores = true;
-                        entry.showIgnoredScores = true;
-                    }
-                }
-            });
             return result;
         };
 
@@ -153,25 +158,40 @@
         };
 
         var generateWinnerList = function (event, competition) {
-            var resultList = [];
+            var fixedWinnerList = [];
+            var variableWinnerList = [];
             if (competition.groups) {
                 competition.groups.forEach(function (group) {
-                    resultList = resultList.concat(generateGroupResultList(group.participants, event));
+                    var groupResultList = generateGroupResultList(group.participants, event);
+                    groupResultList.sort(sortByScore);
+                    var fixedWinnersOfGroup = groupResultList.slice(0, competition.fixedWinnersPerGroup);
+                    fixedWinnersOfGroup.forEach(function (resultEntry) {
+                        resultEntry.slam = "Gewinner " + group.name;
+                    });
+                    fixedWinnerList = fixedWinnerList.concat(fixedWinnersOfGroup);
+                    var variableWinnersOfGroup = groupResultList.slice(competition.fixedWinnersPerGroup, competition.acrossGroupsWinners + competition.fixedWinnersPerGroup);
+                    variableWinnersOfGroup.forEach(function (resultEntry) {
+                        resultEntry.slam = (groupResultList.indexOf(resultEntry) + 1) + ". Platz " + group.name;
+                    });
+                    variableWinnerList = variableWinnerList.concat(variableWinnersOfGroup);
                 });
             }
-            resultList.sort(sortByScore);
-            resultList = markWinners(resultList, competition.winners, 'manualCompetitionWinner');
-            var winnerListLength = competition.acrossGroupsWinners ? (parseInt(competition.winners, 10) + competition.acrossGroupsWinners) : competition.winners;
-            return resultList.slice(0, winnerListLength);
+            fixedWinnerList.sort(sortByScore);
+            variableWinnerList.sort(sortByScore);
+            var resultList = fixedWinnerList.concat(variableWinnerList);
+            resultList = markWinners(resultList, competition.winners);
+            updateShowIngoredScores(resultList);
+            return resultList;
         };
 
         var generateResultList = function (groupParticipants, event, competition) {
             var result = generateGroupResultList(groupParticipants, event);
             // highlight
             if (result.length <= 0) return result;
+            updateShowIngoredScores(result);
             if (event.view.phase === 'winners') {
                 result.sort(sortByScore);
-                result = markWinners(result, competition.fixedWinnersPerGroup, 'manualGroupWinner');
+                result = markWinners(result, competition.fixedWinnersPerGroup);
             }
             return result;
         };
