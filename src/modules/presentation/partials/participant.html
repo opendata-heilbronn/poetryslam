@@ -5,7 +5,8 @@
         </div>
         <div class="overlay-subline animated animation-subline-intro">{{presentation.participant.slam}}</div>
     </div>
-    <div class="overlay-center anim-video-delay animated fadeInLeftBig remove-instant"
+    <div class="overlay-center animated fadeInLeftBig remove-instant"
+         ng-class="{'anim-video-delay': presentation.videoPlays}"
          ng-if="presentation.phase == 'rating' || presentation.phase == 'total' || presentation.phase == 'ratingFinal'">
         <div class="overlay-highlight box box-highlight">
             <ul class="scores animated" ng-class="{'zoomOut': presentation.phase == 'total'}">

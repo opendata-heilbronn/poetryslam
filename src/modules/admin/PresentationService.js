@@ -216,7 +216,7 @@
             }
         };
 
-        var generatePresentation = function (event) {
+        var generatePresentation = function (event, previousPresentation) {
             if (!event || !event.view) return false;
             var competition = that.getCompetition(event, event.view.competitionId);
             var group = that.getGroup(competition, event.view.groupId);
@@ -234,6 +234,8 @@
                 customText: event.view.customText,
                 customTextSubline: event.view.customTextSubline
             };
+
+            result.videoPlays = previousPresentation && previousPresentation.video != result.video ? true : false;
 
             if (competition && Object.keys(competition).length > 0) {
                 updateWinnerProperties(competition);
@@ -261,18 +263,20 @@
 
             if (competition && Object.keys(competition).length > 0) {
                 result.winnerList = generateWinnerList(event, competition);
-                result.showWinnersInReverseOrder = competition.acrossGroupsWinners ? true : false;
+                // result.showWinnersInReverseOrder = competition.acrossGroupsWinners ? true : false;
             }
 
             return result;
         };
 
+        var previousPresentation = {};
         this.updatePresentation = function (event) {
-            var presentation = generatePresentation(event);
+            var presentation = generatePresentation(event, previousPresentation);
             console.log(angular.toJson(presentation));
             if (presentation) {
                 localStorage.setItem('presentation', angular.toJson(presentation));
                 console.log('persisted presentation');
+                previousPresentation = presentation;
             }
             return presentation;
         };
