@@ -178,9 +178,10 @@
             }
             fixedWinnerList.sort(sortByScore);
             variableWinnerList.sort(sortByScore);
+            updateShowIngoredScores(fixedWinnerList);
+            updateShowIngoredScores(variableWinnerList);
             var resultList = fixedWinnerList.concat(variableWinnerList);
             resultList = markWinners(resultList, competition.winners);
-            updateShowIngoredScores(resultList);
             return resultList;
         };
 
@@ -188,9 +189,9 @@
             var result = generateGroupResultList(groupParticipants, event);
             // highlight
             if (result.length <= 0) return result;
-            updateShowIngoredScores(result);
             if (event.view.phase === 'winners') {
                 result.sort(sortByScore);
+                updateShowIngoredScores(result);
                 result = markWinners(result, competition.fixedWinnersPerGroup);
             }
             return result;
