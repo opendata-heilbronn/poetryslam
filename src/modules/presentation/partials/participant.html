@@ -1,9 +1,12 @@
 <div class="video-overlay">
     <div class="overlay-center remove-instant" ng-if="presentation.phase == 'name'">
-        <div class="overlay-highlight box box-highlight animated fadeInLeftBig animation-subline-intro-after">
+        <div class="overlay-highlight box box-highlight animated fadeInLeftBig animation-subline-intro-after"
+             ng-class="{'after-video': presentation.videoPlays}">
             {{presentation.participant.name}}
         </div>
-        <div class="overlay-subline animated animation-subline-intro">{{presentation.participant.slam}}</div>
+        <div class="overlay-subline animated animation-subline-intro"
+             ng-class="{'after-video': presentation.videoPlays}">{{presentation.participant.slam}}
+        </div>
     </div>
     <div class="overlay-center animated fadeInLeftBig remove-instant"
          ng-class="{'anim-video-delay': presentation.videoPlays}"

@@ -2,6 +2,7 @@ html, body {
     font-family: "Source Sans Pro Black", "Helvetica", serif;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .hidden {
@@ -136,10 +137,17 @@ html, body {
 .animation-subline-intro {
     animation-duration: 3s;
     animation-name: sublineIntro;
+}
+
+.animation-subline-intro.after-video {
     animation-delay: 1.5s;
 }
 
 .animation-subline-intro-after {
+    animation-delay: 2.4s;
+}
+
+.animation-subline-intro-after.after-video {
     animation-delay: 3.9s;
 }
 
