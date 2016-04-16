@@ -17,6 +17,6 @@
     {{participant.secondTotalScore | number: 1}}
 </div>
 <div class="box box-highlight participant-column-score participant-row-column"
-     ng-class="{'invisible': !participant.extraScore}">
+     ng-class="{'invisible': !participant.showIgnoredScores || !participant.extraScore}">
     +{{participant.extraScore | number: 1}}
 </div>
