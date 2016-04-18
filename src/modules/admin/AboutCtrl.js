@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var currentVersion = '1.0.5';
+    var currentVersion = '1.0.6';
 
     var getAppCacheStatus = function () {
         var appCache = window.applicationCache;
