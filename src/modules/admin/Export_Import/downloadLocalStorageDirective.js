@@ -4,15 +4,15 @@
 
 (function () {
     'use strict';
-    angular.module('psadmin').directive('downloadLocalStorage', function (storageService) {
+    angular.module('psadmin').directive('downloadLocalStorage', function (FileSaver, Blob, storageService) {
         return {
             restrict: 'E',
             scope: true,
-            template: '<button ng-click="click()">Click me</button> Clicked {{clicked}} times',
+            template: '<button ng-click="click()">Download current Slam</button> Clicked {{clicked}} times',
             controller: function($scope){
-                $scope.clicked = 0;
                 $scope.click = function(){
-                    storageService.getEventFromLocalStorage();
+                    var data = new Blob([storageService.getEventFromLocalStorage()], { type: 'text/plain;charset=utf-8' });
+                    FileSaver.saveAs(data, 'PoetryBackup.slam');
                 }
             }
         }

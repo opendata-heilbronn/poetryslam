@@ -1,8 +1,9 @@
 (function () {
     'use strict';
 
-    angular.module('ps.admin').service('storageService', function () {
+    angular.module('psadmin').service('storageService', function () {
         this.getEventFromLocalStorage = function () {
+            console.log(localStorage.getItem('event'));
             return localStorage.getItem('event');
         };
         return this;
