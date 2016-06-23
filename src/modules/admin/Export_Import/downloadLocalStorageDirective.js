@@ -4,7 +4,7 @@
 
 (function () {
     'use strict';
-    angular.module('psadmin').directive('downloadLocalStorage', function ($localStorage) {
+    angular.module('psadmin').directive('downloadLocalStorage', function (storageService) {
         return {
             restrict: 'E',
             scope: true,
@@ -12,7 +12,7 @@
             controller: function($scope){
                 $scope.clicked = 0;
                 $scope.click = function(){
-                    $scope.clicked++
+                    storageService.getEventFromLocalStorage();
                 }
             }
         }
