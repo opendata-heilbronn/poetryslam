@@ -1,5 +1,13 @@
 # poetryslam
 
+## Wording für Projekt
+
+* Wizard - Zur Installation - Ein Setup-Prozess - Fragt Dinge wie Farben, Hintergrund, etc ab
+* Admin - Dinge die vor derm Event erledigt werden
+* Regie - Dinge die während des Events erledigt werden
+
+
+
 ## Über
 
 Für den [BWSLAM 2016](http://www.bwslam16.de/) in Heilbronn hat die Initiative [Code for Heilbronn](http://codefor.de/heilbronn) für das [Popbüro Heilbronn](http://www.skjr-hn.de/index.php/popbuero) diese Präsentationssoftware ehrenamtlich entwickelt.
