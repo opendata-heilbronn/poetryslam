@@ -13,7 +13,6 @@
                         }
                         $scope.cancel = function () {
                             $mdDialog.hide();
-                            resolve(data);
                         }
                     }
                 });
