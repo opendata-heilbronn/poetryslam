@@ -11,6 +11,10 @@
                             $mdDialog.hide();
                             resolve(data);
                         }
+                        $scope.cancel = function () {
+                            $mdDialog.hide();
+                            resolve(data);
+                        }
                     }
                 });
             })
