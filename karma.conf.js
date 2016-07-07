@@ -20,6 +20,8 @@ module.exports = function (config) {
             'src/components/odometer/odometer.js',
             'src/components/Flowtype.js/flowtype.js',
             'src/components/angular-flowtype/angular-flowtype.js',
+            'src/modules/**/*ps.*js',
+            'src/modules/**/*.js',
             'test/**/*.spec.js'
         ],
 
