@@ -1,6 +1,5 @@
-/**
- * Created by moritz on 23/06/16.
- */
+//create UI Button to upload a file that overrides all of the content stored in localStorage
+//TODO: handle wrong files, project should crash on pdf file and throw error msg
 
 (function () {
     'use strict';

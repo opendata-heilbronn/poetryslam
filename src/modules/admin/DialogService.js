@@ -11,6 +11,9 @@
                             $mdDialog.hide();
                             resolve(data);
                         }
+                        $scope.cancel = function () {
+                            $mdDialog.hide();
+                        }
                     }
                 });
             })
