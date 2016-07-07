@@ -1,7 +1,4 @@
-/**
- * Created by moritz on 23/06/16.
- */
-
+//create UI Button to download all of the content stored in localStorage
 (function () {
     'use strict';
     angular.module('psadmin').directive('downloadLocalStorage', function (FileSaver, Blob, storageService) {
