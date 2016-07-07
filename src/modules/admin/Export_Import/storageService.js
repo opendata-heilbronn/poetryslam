@@ -6,6 +6,9 @@
             console.log(localStorage.getItem('event'));
             return localStorage.getItem('event');
         };
+        this.overrideEventFromLocalStorage = function (jsonObject) {
+            localStorage.setItem('event', JSON.stringify(jsonObject));
+        };
         return this;
     });
 })();
