@@ -9,8 +9,8 @@
             scope: true,
             template: 'Upload: '+
             '<form name="form">' +
-            '<button class="button" ngf-select ng-model="file" name="file">Select</button>' +
-            '<button type="submit" ng-click="submit()">submit</button>'+
+            '<md-button class="md-secondary" ngf-select ng-model="file" name="file">Select</md-button>' +
+            '<md-button class="md-secondary" type="submit" ng-click="submit()">submit</md-button>'+
             '</form>' ,
             controller: function($scope){
                 $scope.submit = function() {
