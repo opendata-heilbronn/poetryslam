@@ -25,7 +25,6 @@
                     competitions: [],
                     view: {}
                 };
-                console.log('initialized event');
             }
         };
 
