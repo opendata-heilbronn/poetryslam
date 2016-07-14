@@ -15,6 +15,7 @@
     "128": "media/logo/logo-128x128.png"
   },
   "permissions": [
+    "storage",
     {
       "fileSystem": [
         "write",
