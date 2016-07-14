@@ -18,5 +18,5 @@
 
     psadmin.run(function ($rootScope, SyncService) {
         SyncService.updateEventScope();
-    })
+    });
 })(angular);
