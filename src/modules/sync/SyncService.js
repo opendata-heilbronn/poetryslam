@@ -27,7 +27,6 @@
                 };
                 console.log('initialized event');
             }
-            $rootScope.$apply();
         };
 
         this.persistScope = function (event) {
