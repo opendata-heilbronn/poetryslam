@@ -7,10 +7,10 @@
         return {
             restrict: 'E',
             scope: true,
-            template: 'Upload: '+
+            template:
             '<form name="form">' +
-            '<md-button class="md-secondary" ngf-select ng-model="file" name="file">Select</md-button>' +
-            '<md-button class="md-secondary" type="submit" ng-click="submit()">submit</md-button>'+
+            '<md-button class="md-secondary md-raised" ngf-select ng-model="file" name="file">Datei auswählen</md-button>' +
+            '<md-button class="md-secondary md-raised" type="submit" ng-click="submit()">Bestätigen</md-button>'+
             '</form>' ,
             controller: function($scope){
                 $scope.submit = function() {

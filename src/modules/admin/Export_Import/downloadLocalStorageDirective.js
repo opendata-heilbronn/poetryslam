@@ -5,7 +5,7 @@
         return {
             restrict: 'E',
             scope: true,
-            template: '<md-button class="md-secondary md-button" ng-click="click()">Download current Slam</md-button>',
+            template: '<md-button class="md-secondary md-raised" ng-click="click()">Akutelle Veranstaltung herunterladen</md-button>',
             controller: function($scope){
                 $scope.click = function(){
                     var data = new Blob([storageService.getEventFromLocalStorage()], { type: 'text/plain;charset=utf-8' });
