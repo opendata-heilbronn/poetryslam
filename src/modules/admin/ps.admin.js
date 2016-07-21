@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
 
-    var psadmin = angular.module('psadmin', ['ngMaterial', 'ngRoute', 'ng-sortable', 'ps.sync', 'ngFileSaver', 'ngFileUpload']);
+    var psadmin = angular.module('psadmin', ['ngMaterial', 'ngRoute', 'ng-sortable', 'ps.sync', 'ps.storage', 'ngFileSaver', 'ngFileUpload']);
 
     psadmin.config(function ($mdThemingProvider, $mdIconProvider) {
         $mdIconProvider
@@ -14,6 +14,10 @@
         $mdThemingProvider.theme('default')
             .primaryPalette('red')
             .accentPalette('grey');
+    });
+
+    psadmin.config(function ($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
     });
 
     psadmin.run(function ($rootScope, SyncService) {

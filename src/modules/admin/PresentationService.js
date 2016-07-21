@@ -5,7 +5,7 @@
         return Math.round(parseFloat(value) * 10) / 10;
     };
 
-    angular.module('psadmin').service('PresentationService', function ($filter) {
+    angular.module('psadmin').service('PresentationService', function ($filter, StorageService) {
         var that = this;
         this.getCompetition = function (event, id) {
             var result = $filter('entryOfId')(id, event.competitions);
@@ -275,9 +275,15 @@
             var presentation = generatePresentation(event, previousPresentation);
             console.log(angular.toJson(presentation));
             if (presentation) {
-                localStorage.setItem('presentation', angular.toJson(presentation));
-                console.log('persisted presentation');
-                previousPresentation = presentation;
+                StorageService.setItem('presentation', presentation)
+                    .then(function () {
+                        previousPresentation = presentation;
+                        console.log('persisted presentation');
+                    })
+                    .catch(function (e) {
+                        console.trace(e.stack);
+                        console.error('failed to persist presentation');
+                    });
             }
             return presentation;
         };

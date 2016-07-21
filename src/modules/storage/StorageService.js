@@ -1,47 +1,61 @@
 (function (angular) {
     'use strict';
 
-    angular.module('ps.sync')
+    angular.module('ps.storage')
         .constant('env', {
             runtime: (window.chrome && chrome.runtime && chrome.runtime.id) ? 'chrome' : 'web'
         })
-        .service('StorageService', function (env, $window) {
+        .service('StorageService', function (env, ChromeStorageService, LocalStorageService) {
             var storage = null;
 
-            if (env == chrome) {
-                storage = chrome.storage;
-            } else if (env == "web") {
-                storage = $window.localStorage;
+            if (env.runtime == "chrome") {
+                storage = ChromeStorageService;
+            } else if (env.runtime == "web") {
+                storage = LocalStorageService;
             } else {
-                $window.log("unkown storage type found. is not chrome or web. please add in StorageService.js");
+                console.log("unkown storage type found. is not chrome or web. please add in StorageService.js");
                 throw new Error("unkown storage type found. is not chrome or web. please add in StorageService.js");
             }
 
             return storage;
         })
         .service('ChromeStorageService', function ($q) {
-            var store = chrome.storage.sync;
+            var getStore = function () {
+                return chrome.storage.local;
+            };
 
             this.getItem = function (key) {
-                return store.get(key);
+                return $q(function (resolve) {
+                    getStore().get(key, function (value) {
+                        resolve(value[key]);
+                    });
+                })
             };
 
             this.setItem = function (key, value) {
-                var obj = {};
-                obj[key] = value;
-                return store.set(obj);
+                return $q(function (resolve) {
+                    var obj = {};
+                    obj[key] = value;
+                    getStore().set(obj, function () {
+                        resolve();
+                    });
+                });
             };
 
             this.removeItem = function (key) {
-                return store.remove(key);
+                return $q(function (resolve) {
+                    getStore().remove(key, function () {
+                        resolve();
+                    });
+                });
             };
 
             this.clear = function () {
                 return $q(function (resolve, reject) {
-                    store.clear(function () {
+                    getStore().clear(function () {
                         // check if store is clear
-                        store.get(function (result) {
-                            if (result == {}) {
+                        getStore().get(function (result) {
+                            if (Object.keys(result) > 0) {
                                 // if result is not an empty object
                                 reject();
                             } else {
@@ -51,6 +65,42 @@
                         });
                     });
                 });
+            };
+
+            this.onChange = function (callback) {
+                chrome.storage.onChanged.addListener(callback);
+            };
+        })
+        .service('LocalStorageService', function ($window, $q) {
+            this.getItem = function (key) {
+                return $q(function (resolve) {
+                    resolve(angular.fromJson($window.localStorage.getItem(key)));
+                });
+            };
+
+            this.setItem = function (key, value) {
+                return $q(function (resolve) {
+                    $window.localStorage.setItem(key, angular.toJson(value));
+                    resolve();
+                });
+            };
+
+            this.removeItem = function (key) {
+                return $q(function (resolve) {
+                    $window.localStorage.removeItem(key);
+                    resolve();
+                });
+            };
+
+            this.clear = function () {
+                return $q(function (resolve) {
+                    $window.localStorage.clear();
+                    resolve();
+                });
+            };
+
+            this.onChange = function (callback) {
+                $window.addEventListener('storage', callback);
             };
         });
 })(angular);

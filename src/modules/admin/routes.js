@@ -24,6 +24,23 @@
                 templateUrl: '/modules/admin/partials/admistrationInterface.html',
                 controller: 'AdministrationInterfaceCtrl'
             })
+            .when('/competitions', {
+                templateUrl: '/modules/admin/partials/competitions.html',
+                controller: 'SimpleListCtrl',
+                resolve: {
+                    entries: function ($rootScope) {
+                        return $rootScope.event.competitions;
+                    },
+                    dialogFn: function (DialogService) {
+                        return DialogService.showCompetitionDialog;
+                    },
+                    newEntryFn: function (EntityUtils) {
+                        return function () {
+                            return {id: EntityUtils.getUid(), groups: []}
+                        }
+                    }
+                }
+            })
             .when('/competitions/:id/groups', {
                 templateUrl: '/modules/admin/partials/competitionGroups.html',
                 controller: 'SimpleListCtrl',
