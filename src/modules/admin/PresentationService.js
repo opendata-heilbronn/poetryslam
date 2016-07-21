@@ -2,6 +2,7 @@
     'use strict';
 
     var toFloat = function (value) {
+        //if you pass NaN in value, this function also returns NaN
         return Math.round(parseFloat(value) * 10) / 10;
     };
 
@@ -59,12 +60,21 @@
 
         this.markIgnoredScores = function (scores) {
             var lowest = 99999, highest = -99999;
-
+            var counterForRealNumbers = 0;
             scores.forEach(function (score) {
-                if (score !== '') {
-                    var value = toFloat(score.value);
-                    if (value < lowest) lowest = value;
-                    if (value > highest) highest = value;
+                if (!isNaN(parseFloat(score.value))) {
+                    counterForRealNumbers++;
+                }
+            });
+            //exit if there are less than 4 values
+            if(counterForRealNumbers < 4){
+                return;
+            }
+            scores.forEach(function (score) {
+                if (!isNaN(parseFloat(score.value))) {
+                        var value = toFloat(score.value);
+                        if (value < lowest) lowest = value;
+                        if (value > highest) highest = value;
                 }
                 score.ignored = false;
             });
