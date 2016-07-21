@@ -22,9 +22,7 @@
             </div>
 
             <div class="md-secondary">
-                <md-button class="md-icon-button" aria-label="Löschen" ng-click="deleteSacrifice()">
-                    <md-icon md-svg-icon="action:delete"></md-icon>
-                </md-button>
+                <delete-button entry="group.sacrifice"></delete-button>
                 <md-button class="md-icon-button" aria-label="Bearbeiten" ng-click="editParticipant(group.sacrifice)">
                     <md-icon md-svg-icon="image:edit"></md-icon>
                 </md-button>
@@ -44,9 +42,7 @@
             </div>
 
             <div class="md-secondary">
-                <md-button class="md-icon-button" aria-label="Löschen" ng-click="deleteParticipant(participant)">
-                    <md-icon md-svg-icon="action:delete"></md-icon>
-                </md-button>
+                <delete-button list="group.participants" entry="participant"></delete-button>
 
                 <md-button class="md-icon-button" aria-label="Bearbeiten" ng-click="editParticipant(participant)">
                     <md-icon md-svg-icon="image:edit"></md-icon>

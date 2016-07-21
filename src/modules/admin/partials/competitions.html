@@ -22,11 +22,7 @@
             <div class="md-secondary">
                 <csv-export></csv-export>
 
-                <md-button class="md-icon-button" aria-label="Löschen"
-                           ng-click="deleteEntry(entry)">
-                    <md-icon md-svg-icon="action:delete"></md-icon>
-                </md-button>
-
+                <delete-button list="entries" entry="entry"></delete-button>
                 <md-button class="md-icon-button" aria-label="Bearbeiten"
                            ng-click="editEntry(entry)">
                     <md-icon md-svg-icon="image:edit"></md-icon>

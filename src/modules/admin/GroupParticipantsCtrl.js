@@ -37,10 +37,6 @@
             })
         };
 
-        $scope.deleteParticipant = function (participant) {
-            $scope.group.participants.splice($scope.group.participants.indexOf(participant), 1);
-        };
-
         $scope.addSacrifice = function () {
             DialogService.showGroupParticipantDialog(null, filterParticipants).then(function (data) {
                 if (data.participant) {
@@ -49,10 +45,6 @@
                     };
                 }
             })
-        };
-
-        $scope.deleteSacrifice = function () {
-            $scope.group.sacrifice = null;
         };
     });
 })();
