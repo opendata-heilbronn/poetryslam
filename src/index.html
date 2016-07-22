@@ -31,10 +31,11 @@
     <script src="modules/presentation/ratingParticipantDirective.js"></script>
     <script src="modules/presentation/competitionRatingsDirective.js"></script>
     <script src="modules/presentation/customTextDirective.js"></script>
+    <script src="modules/presentation/html2canvas.js"></script>
     <!-- endbuild -->
 </head>
 <body ng-app="ps">
-<div class="screen-container">
+<div class="screen-container" id="screen-container">
     <video class="fullscreen-video" autoplay ng-if="presentation.video !== 'bg'">
         <source src="/media/clips/bg_to_logo.mp4" type="video/mp4">
     </video>
