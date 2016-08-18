@@ -24,6 +24,14 @@
                 return chrome.storage.local;
             };
 
+            this.getAll = function () {
+                return $q(function(resolve) {
+                    getStore().get(null, function(values) {
+                        resolve(values);
+                    });
+                });
+            };
+
             this.getItem = function (key) {
                 return $q(function (resolve) {
                     getStore().get(key, function (value) {
