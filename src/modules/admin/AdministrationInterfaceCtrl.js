@@ -4,7 +4,12 @@
 (function () {
     'use strict';
 
-    angular.module('psadmin').controller('AdministrationInterfaceCtrl', function () {
+    angular.module('psadmin')
+        .controller('AdministrationInterfaceCtrl', function ($scope, StorageService) {
+            $scope.files = [];
 
-    });
+            StorageService.getAll().then(function (values) {
+                $scope.files = values;
+            });
+        });
 })();

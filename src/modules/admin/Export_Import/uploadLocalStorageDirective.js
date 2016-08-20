@@ -3,20 +3,19 @@
 
 (function () {
     'use strict';
-    angular.module('psadmin').directive('uploadLocalStorage', function (FileSaver, Blob, storageService) {
+    angular.module('psadmin').directive('uploadLocalStorage', function (FileSaver, Blob, StorageService) {
         return {
             restrict: 'E',
             scope: true,
-            template:
-            '<form name="form">' +
+            template: '<form name="form">' +
             '<md-button class="md-secondary md-raised" ngf-select ng-model="file" name="file">Datei auswählen</md-button>' +
-            '<md-button class="md-secondary md-raised" type="submit" ng-click="submit()">Bestätigen</md-button>'+
-            '</form>' ,
-            controller: function($scope){
-                $scope.submit = function() {
+            '<md-button class="md-secondary md-raised" type="submit" ng-click="submit()">Bestätigen</md-button>' +
+            '</form>',
+            controller: function ($scope) {
+                $scope.submit = function () {
                     var filereader = new FileReader();
                     filereader.onload = function (event) {
-                        storageService.overrideEventFromLocalStorage(JSON.parse(event.target.result));
+                        StorageService.setItem("event", JSON.parse(event.target.result));
                     };
                     filereader.readAsText($scope.file);
                 };
