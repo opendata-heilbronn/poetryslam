@@ -126,19 +126,46 @@
                 return chrome.fileSystem;
             };
 
-            this.openFile = function () {
+            var getCustomFileObject = function (entry) {
+                return $q(function (resolve, reject) {
+                    entry.file(function (file) {
+
+                        var foobar = {
+                            "file": file,
+                            "entry": entry,
+                            "id": chrome.fileSystem.retainEntry(entry),
+                            "objectUrl": URL.createObjectURL(file)
+                        };
+
+                        resolve(foobar);
+                    });
+                });
+            };
+
+            var list = [];
+
+            this.get = function () {
+                return $q(function (resolve, reject) {
+                    resolve(list);
+                });
+            };
+
+            this.getDisplayPath = function (fileEntry, callback) {
+                chrome.fileSystem.getDisplayPath(fileEntry, callback);
+            };
+
+            this.open = function () {
                 return $q(function (resolve, reject) {
                     chrome.fileSystem.chooseEntry({
                         type: 'openFile',
-                        accepts: [{
-                            description: 'Text files (*.txt)',
-                            extensions: ['txt']
-                        }],
                         acceptsAllTypes: true
-                    }, function (file) {
-
+                    }, function (entry) {
+                        getCustomFileObject(entry).then(function (file) {
+                            list.push(file);
+                            resolve(file);
+                        });
                     });
                 });
-            }
+            };
         });
 })(angular);
