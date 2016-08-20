@@ -23,15 +23,7 @@
             var getStore = function () {
                 return chrome.storage.local;
             };
-            this.getAll = function () {
-                return $q(function (resolve) {
-                    var arrayToReturn = [];
-                    for (var i = 0, len = localStorage.length; i < len; ++i) {
-                        arrayToReturn.push(localStorage.getItem(localStorage.key(i)));
-                    }
-                    resolve(arrayToReturn);
-                });
-            };
+
 
             this.getAll = function () {
                 return $q(function (resolve) {
@@ -94,7 +86,15 @@
                     resolve(angular.fromJson($window.localStorage.getItem(key)));
                 });
             };
-
+            this.getAll = function () {
+                return $q(function (resolve) {
+                    var arrayToReturn = [];
+                    for (var i = 0, len = localStorage.length; i < len; ++i) {
+                        arrayToReturn.push(localStorage.getItem(localStorage.key(i)));
+                    }
+                    resolve(arrayToReturn);
+                });
+            };
             this.setItem = function (key, value) {
                 return $q(function (resolve) {
                     console.log('setItem called');
