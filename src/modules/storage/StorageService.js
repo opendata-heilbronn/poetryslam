@@ -145,11 +145,26 @@
             var list = [];
 
             this.get = function () {
+
                 return $q(function (resolve, reject) {
                     resolve(list);
                 });
             };
-
+            this.getAllAudio = function () {
+                var get = this.get;
+                return $q(function (resolve, reject) {
+                    get().then(function(res) {
+                        var audioList = [];
+                        var i;
+                        for (i= 0; i < res.length; i++){
+                            if(res[i].file.type.indexOf('audio') == 0){
+                                audioList.push(res[i]);
+                            }
+                        }
+                        resolve(audioList);
+                    });
+                });
+            };
             this.getDisplayPath = function (fileEntry, callback) {
                 chrome.fileSystem.getDisplayPath(fileEntry, callback);
             };
