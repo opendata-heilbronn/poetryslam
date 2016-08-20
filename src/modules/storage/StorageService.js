@@ -120,5 +120,6 @@
             this.onChange = function (callback) {
                 $window.addEventListener('storage', callback);
             };
+
         });
 })(angular);
