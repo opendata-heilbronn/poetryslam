@@ -23,10 +23,19 @@
             var getStore = function () {
                 return chrome.storage.local;
             };
+            this.getAll = function () {
+                return $q(function (resolve) {
+                    var arrayToReturn = [];
+                    for (var i = 0, len = localStorage.length; i < len; ++i) {
+                        arrayToReturn.push(localStorage.getItem(localStorage.key(i)));
+                    }
+                    resolve(arrayToReturn);
+                });
+            };
 
             this.getAll = function () {
-                return $q(function(resolve) {
-                    getStore().get(null, function(values) {
+                return $q(function (resolve) {
+                    getStore().get(null, function (values) {
                         resolve(values);
                     });
                 });
@@ -80,15 +89,6 @@
             };
         })
         .service('LocalStorageService', function ($window, $q) {
-            this.getAll = function (){
-                return $q(function (resolve){
-                    var arrayToReturn = [];
-                    for ( var i = 0, len = localStorage.length; i < len; ++i ) {
-                        arrayToReturn.push(localStorage.getItem( localStorage.key( i ) ));
-                    }
-                   resolve(arrayToReturn);
-                });
-            };
             this.getItem = function (key) {
                 return $q(function (resolve) {
                     resolve(angular.fromJson($window.localStorage.getItem(key)));
@@ -119,5 +119,25 @@
             this.onChange = function (callback) {
                 $window.addEventListener('storage', callback);
             };
+        })
+        .service('FileStorage', function ($q) {
+            var getStore = function () {
+                return chrome.fileSystem;
+            };
+
+            this.openFile = function () {
+                return $q(function (resolve, reject) {
+                    chrome.fileSystem.chooseEntry({
+                        type: 'openFile',
+                        accepts: [{
+                            description: 'Text files (*.txt)',
+                            extensions: ['txt']
+                        }],
+                        acceptsAllTypes: true
+                    }, function (file) {
+
+                    });
+                });
+            }
         });
 })(angular);

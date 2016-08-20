@@ -5,11 +5,15 @@
     'use strict';
 
     angular.module('psadmin')
-        .controller('AdministrationInterfaceCtrl', function ($scope, StorageService) {
+        .controller('AdministrationInterfaceCtrl', function ($scope, StorageService, FileStorage) {
             $scope.files = [];
 
             StorageService.getAll().then(function (values) {
                 $scope.files = values;
             });
+
+            $scope.openFile = function () {
+                var file = FileStorage.openFile();
+            };
         });
 })();
