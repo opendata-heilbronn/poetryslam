@@ -12,7 +12,7 @@
                 };
                 scope.isActive = function () {
                     return $location.path() == scope.path;
-                }
+                };
             }
         }
     });

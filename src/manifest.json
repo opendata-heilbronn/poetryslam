@@ -1,0 +1,28 @@
+{
+  "name": "Poetry Slam Presentation App",
+  "description": "announce participants, show and calculate jury scores, list results",
+  "version": "0.1",
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": [
+        "background.js"
+      ]
+    }
+  },
+  "icons": {
+    "16": "media/logo/logo-16x16.png",
+    "128": "media/logo/logo-128x128.png"
+  },
+  "permissions": [
+    "storage",
+    {
+      "fileSystem": [
+        "write",
+        "retainEntries",
+        "directory"
+      ]
+    }
+  ],
+  "offline_enabled": true
+}

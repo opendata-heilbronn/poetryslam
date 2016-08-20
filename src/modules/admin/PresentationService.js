@@ -2,10 +2,11 @@
     'use strict';
 
     var toFloat = function (value) {
+        //if you pass NaN in value, this function also returns NaN
         return Math.round(parseFloat(value) * 10) / 10;
     };
 
-    angular.module('psadmin').service('PresentationService', function ($filter) {
+    angular.module('psadmin').service('PresentationService', function ($filter, StorageService) {
         var that = this;
         this.getCompetition = function (event, id) {
             var result = $filter('entryOfId')(id, event.competitions);
@@ -59,12 +60,21 @@
 
         this.markIgnoredScores = function (scores) {
             var lowest = 99999, highest = -99999;
-
+            var counterForRealNumbers = 0;
             scores.forEach(function (score) {
-                if (score !== '') {
-                    var value = toFloat(score.value);
-                    if (value < lowest) lowest = value;
-                    if (value > highest) highest = value;
+                if (!isNaN(parseFloat(score.value))) {
+                    counterForRealNumbers++;
+                }
+            });
+            //exit if there are less than 4 values
+            if(counterForRealNumbers < 4){
+                return;
+            }
+            scores.forEach(function (score) {
+                if (!isNaN(parseFloat(score.value))) {
+                        var value = toFloat(score.value);
+                        if (value < lowest) lowest = value;
+                        if (value > highest) highest = value;
                 }
                 score.ignored = false;
             });
@@ -275,9 +285,15 @@
             var presentation = generatePresentation(event, previousPresentation);
             console.log(angular.toJson(presentation));
             if (presentation) {
-                localStorage.setItem('presentation', angular.toJson(presentation));
-                console.log('persisted presentation');
-                previousPresentation = presentation;
+                StorageService.setItem('presentation', presentation)
+                    .then(function () {
+                        previousPresentation = presentation;
+                        console.log('persisted presentation');
+                    })
+                    .catch(function (e) {
+                        console.trace(e.stack);
+                        console.error('failed to persist presentation');
+                    });
             }
             return presentation;
         };

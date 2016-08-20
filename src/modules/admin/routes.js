@@ -20,6 +20,10 @@
                     }
                 }
             })
+            .when('/AdmistrationInterface', {
+                templateUrl: '/modules/admin/partials/admistrationInterface.html',
+                controller: 'AdministrationInterfaceCtrl'
+            })
             .when('/competitions', {
                 templateUrl: '/modules/admin/partials/competitions.html',
                 controller: 'SimpleListCtrl',

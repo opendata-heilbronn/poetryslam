@@ -22,6 +22,8 @@
     <script src="modules/ps.js"></script>
     <script src="modules/sync/ps.sync.js"></script>
     <script src="modules/sync/SyncService.js"></script>
+    <script src="modules/storage/ps.storage.js"></script>
+    <script src="modules/storage/StorageService.js"></script>
     <script src="modules/presentation/ps.presentation.js"></script>
     <script src="modules/presentation/introDirective.js"></script>
     <script src="modules/presentation/participantDirective.js"></script>
@@ -31,10 +33,11 @@
     <script src="modules/presentation/ratingParticipantDirective.js"></script>
     <script src="modules/presentation/competitionRatingsDirective.js"></script>
     <script src="modules/presentation/customTextDirective.js"></script>
+    <script src="modules/presentation/html2canvas.js"></script>
     <!-- endbuild -->
 </head>
 <body ng-app="ps">
-<div class="screen-container">
+<div class="screen-container" id="screen-container">
     <video class="fullscreen-video" autoplay ng-if="presentation.video !== 'bg'">
         <source src="/media/clips/bg_to_logo.mp4" type="video/mp4">
     </video>
