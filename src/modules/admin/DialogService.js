@@ -8,12 +8,12 @@
                     controller: function ($scope, $mdDialog) {
                         $scope.data = data;
                         $scope.save = function () {
-                            $mdDialog.hide();
-                            resolve(data);
-                        }
+                          $mdDialog.hide();
+                          resolve(data);
+                        };
                         $scope.cancel = function () {
-                            $mdDialog.hide();
-                        }
+                          $mdDialog.hide();
+                        };
                     }
                 });
             })

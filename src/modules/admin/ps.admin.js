@@ -10,7 +10,8 @@
             .iconSet('content', '/material-icons/content-icons.svg', 24)
             .iconSet('action', '/material-icons/action-icons.svg', 24)
             .iconSet('image', '/material-icons/image-icons.svg', 24)
-            .iconSet('communication', '/material-icons/communication-icons.svg', 24);
+            .iconSet('communication', '/material-icons/communication-icons.svg', 24)
+            .iconSet('file', '/material-icons/file-icons.svg', 24);
         $mdThemingProvider.theme('default')
             .primaryPalette('red')
             .accentPalette('grey');

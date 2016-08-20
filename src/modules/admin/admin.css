@@ -148,3 +148,8 @@ md-sidenav > md-toolbar {
 md-list-item {
     overflow: hidden;
 }
+
+.sacrifice-mark {
+    font-size: 12px;
+    color: gray;
+}
