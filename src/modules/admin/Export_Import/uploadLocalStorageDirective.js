@@ -3,7 +3,7 @@
 
 (function () {
     'use strict';
-    angular.module('psadmin').directive('uploadLocalStorage', function (FileSaver, Blob, StorageService) {
+    angular.module('psadmin').directive('uploadLocalStorage', function (FileSaver, Blob, StorageService, SyncService) {
         return {
             restrict: 'E',
             scope: true,
@@ -15,7 +15,13 @@
                 $scope.submit = function () {
                     var filereader = new FileReader();
                     filereader.onload = function (event) {
-                        StorageService.setItem("event", JSON.parse(event.target.result));
+                        StorageService.setItem("event", JSON.parse(event.target.result))
+                            .then(SyncService.updateEventScope)
+                            .then(function () {
+                                console.log('upload successful');
+                            }).catch(function (err) {
+                            console.log('err: ' + err);
+                        });
                     };
                     filereader.readAsText($scope.file);
                 };
