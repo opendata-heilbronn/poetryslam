@@ -1,41 +1,26 @@
 (function () {
     'use strict';
 
-    /*
-    group
-    name
-    slam
-    score1
-    score2
-    scoreN
-    ignoredScore1
-    ignoredScore2
-    extraScore
-    totalScore
-    totalScoreWithIgnoredScore
-    totalScoreWithIgnoredScoreAndExtraScore
-    */
-
     angular.module('psadmin').service('csvExportService', function ($rootScope, Blob, FileSaver) {
         this.exportCSV = function(competitionId) {
             var e = $rootScope.event;
 
-          var competition = {};
-          for(var element of e.competitions) {
-            if(element.id == competitionId) {
-              competition = element;
-              break;
-            }
+            var competition = null;
+            var matchingCompetitionKeys = Object.keys(e.competitions).filter(function (key) {
+                return e.competitions[key].id == competitionId;
+            });
+            if (matchingCompetitionKeys && matchingCompetitionKeys.length === 1) {
+                competition = e.competitions[matchingCompetitionKeys[0]];
           }
-          if(competition == {}) {
-            return;
+            if (competition === null) {
+                return false;
           }
 
           var content = "";
 
           var append = function(value) {
             content += "\"" + value + "\";";
-          }
+          };
 
           append("group");
           append("name");
@@ -51,33 +36,33 @@
           append("totalScoreWithIgnoredScoreAndExtraScore");
           content += "\n";
 
-          for(var group of competition.groups) {
-            for(var participant of group.participants) {
-              console.log(participant);
-              for(var p of e.participants) {
+            competition.groups.forEach(function (group) {
+                group.participants.forEach(function (participant) {
+                    console.log(participant);
+                    e.participants.forEach(function (p) {
                 if(p.id == participant.id) {
                   append(group.name);
                   append(p.name);
                   append(p.slam);
-                  for(var score of participant.scores) {
+                    participant.scores.forEach(function (score) {
                     append(score.value);
-                  }
-                  for(var score of participant.scores) {
+                    });
+                    participant.scores.forEach(function (score) {
                     if(score.ignored) {
                       append(score.value);
                     }
-                  }
+                    });
                   append(participant.extraScore);
                   append(participant.totalScore);
                   append(participant.secondTotalScore);
                   append(participant.thirdTotalScore);
                   content += "\n";
                 }
-              }
-            }
-          }
+                    })
+                })
+            });
 
-          var blob = new Blob([content], {type: "text/plain;charset=utf-8"})
+            var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
           FileSaver.saveAs(blob, competition.name + "-scores.csv");
         };
 
