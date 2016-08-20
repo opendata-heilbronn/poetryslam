@@ -167,5 +167,25 @@
                     });
                 });
             };
+
+            this.loadFromStorage = function () {
+                return $q(function (resolve, reject) {
+                   var idList = [];
+
+                    idList.forEach(function (item, index, array) {
+                        chrome.fileSystem.isRestorable(item, function (isRestorable) {
+                            if (isRestorable) {
+                                chrome.fileSystem.restoreEntry(item, function (entry) {
+                                    getCustomFileObject(entry).then(function (file) {
+                                        list.push(file);
+                                    });
+                                });
+                            }
+                        });
+                    });
+
+                    resolve(list);
+                });
+            }
         });
 })(angular);
