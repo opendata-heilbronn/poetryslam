@@ -1,4 +1,5 @@
 <md-dialog>
+  <form name="competition">
     <md-dialog-content class="edit-dialog">
         <h3>Wettbewerb bearbeiten</h3>
         <div>
@@ -8,12 +9,34 @@
         </div>
         <div>
         <md-input-container>
-            <input type="number" placeholder="Anzahl Juroren" ng-model="data.jurors">
+            <input type="number" placeholder="Anzahl Juroren" name="jurors" ng-model="data.jurors" ng-min="1" ng-max="8" required="true">
+            <div ng-messages="competition.jurors.$error" multiple md-auto-hide="false">
+              <div ng-message="required">
+                Fülle bitte dieses Feld aus
+              </div>
+              <div ng-message="min">
+                Ohne Juror kein Wettbewerb
+              </div>
+              <div ng-message="max">
+                Acht Juroren kannst du wählen, sonst wird dich die Software quälen.
+              </div>
+            </div>
         </md-input-container>
         </div>
         <div>
             <md-input-container>
-                <input type="number" placeholder="Anzahl Gewinner" ng-model="data.winners">
+                <input type="number" placeholder="Anzahl Gewinner" name="winners" ng-model="data.winners" ng-min="1" ng-max="8" required="true">
+                <div ng-messages="competition.winners.$error" multiple md-auto-hide="false">
+                  <div ng-message="required">
+                    Fülle bitte dieses Feld aus
+                  </div>
+                  <div ng-message="min">
+                    Es muss mindestens einen Gewinner geben
+                  </div>
+                  <div ng-message="max">
+                    Nicht jeder kann Gewinner sein
+                  </div>
+                </div>
             </md-input-container>
         </div>
     </md-dialog-content>
@@ -21,4 +44,5 @@
         <md-button ng-click="cancel()" class="md-secondary">Abbrechen</md-button>
         <md-button ng-click="save()" class="md-primary">Speichern</md-button>
     </md-dialog-actions>
+  </form>
 </md-dialog>
