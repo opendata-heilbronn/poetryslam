@@ -16,9 +16,9 @@
     totalScoreWithIgnoredScoreAndExtraScore
     */
 
-    angular.module('psadmin').service('csvExportService', function (storageService, Blob, FileSaver) {
+    angular.module('psadmin').service('csvExportService', function ($rootScope, Blob, FileSaver) {
         this.exportCSV = function(competitionId) {
-          var e = angular.fromJson(storageService.getEventFromLocalStorage());
+            var e = $rootScope.event;
 
           var competition = {};
           for(var element of e.competitions) {
