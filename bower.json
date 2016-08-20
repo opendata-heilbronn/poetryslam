@@ -24,6 +24,7 @@
     "animate.css": "^3.5.1",
     "angular-route": "^1.5.8",
     "angular-i18n": "^1.5.8",
+    "angular-messages": "^1.5.8",
     "angular-flowtype": "*",
     "Flowtype.js": "^1.1.0",
     "odometer": "^0.4.7",
