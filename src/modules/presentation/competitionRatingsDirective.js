@@ -11,18 +11,16 @@
                         number = index + 1;
                     }
                     return number <= $scope.presentation.winnersToShow;
-                }
-                $timeout(function () {
-                    html2canvas(document.body, {
-                        onrendered: function (canvas) {
-                            console.log("html2canvas render done");
-                            var img = canvas.toDataURL("image/png");
-                            alert('This will currently open image in a new window called "data:". Instead I want to save to users local computer. Ideally as a jpg instead of png.');
-                            window.open(img);
-
-                        }
-                    });
-                }, 0);
+                };
+                // $timeout(function () {
+                //     html2canvas(document.body, {
+                //         onrendered: function (canvas) {
+                //             console.log("html2canvas render done");
+                //             var img = canvas.toDataURL("image/png");
+                //             window.open(img);
+                //         }
+                //     });
+                // }, 0);
             }
         }
     });

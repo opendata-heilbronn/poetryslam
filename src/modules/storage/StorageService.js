@@ -97,6 +97,7 @@
 
             this.setItem = function (key, value) {
                 return $q(function (resolve) {
+                    console.log('setItem called');
                     $window.localStorage.setItem(key, angular.toJson(value));
                     resolve();
                 });
