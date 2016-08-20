@@ -7,7 +7,11 @@
         return {
             restrict: 'E',
             scope: true,
-            template: '<audio controls id="media-audio"></audio><div ng-repeat="file in soundFileList"> <md-button ng-class="{\'md-raised\':file.active == true}" ng-click="toggle($index)">{{soundFileList[$index].title}}</md-button></div><md-button ng-click="stop()"><md-icon md-svg-icon="av:stop"></md-icon></md-button>',
+            template: '<audio controls id="media-audio"></audio>' +
+                '<div layout="row" layout-wrap> <div ng-repeat="file in soundFileList"><div flex="33">'
+            +'<md-button ng-class="{\'md-raised\':file.active == true}" ng-click="toggle($index)">{{soundFileList[$index].title}}</md-button>'
+            +'</div></div></div><md-button ng-click="stop()"><md-icon md-svg-icon="av:stop"></md-icon></md-button>' +
+            '<md-progress-linear id="progress-bar" md-mode="determinate" value="{{determinateValue}}"></md-progress-linear>',
             link: function (scope) {
                 var mediaPlayer;
                     mediaPlayer = document.getElementById('media-audio');
@@ -16,16 +20,16 @@
                 var i;
 
                 scope.soundFileList.push({
-                    'title': "one1",
+                    'title': "oneasdfkjasdhfkljasdfhasdf1",
                     'src': "/modules/admin/testAudioFiles/TRUEFORCEYOU_TALKIN_TO_ME.mp3"
                 },{
-                    'title': "one2",
+                    'title': "oasdfsadfne2",
                     'src': "/modules/admin/testAudioFiles/PaulKalkbrenner_BackToTheFuture_PT.3.mp3"
                 },{
-                    'title': "one3",
+                    'title': "onasdfasdfsdfe3",
                     'src': "/modules/admin/testAudioFiles/PaulKalkbrenner_BackToTheFuture_PT.2.mp3"
                 },{
-                    'title': "one4",
+                    'title': "onasdfsdfsdfasdfasdfe4",
                     'src': "/modules/admin/testAudioFiles/Wouldn't it be nice.MP3"
                 },{
                     'title': "MAX-Vell",
@@ -34,7 +38,7 @@
                     'title': "asdfsdf",
                     'src': "/modules/admin/testAudioFiles/Brennan Heart Presents 'WE R Yearmix 2013' Slam FM 192.mp3"
                 },{
-                    'title': "Hardstyle",
+                    'title': "Hardstyle - THe Best ",
                     'src': "/modules/admin/testAudioFiles/MAKJ & Lil Jon - Let's Get Fucked Up (Zatox Hardstyle Bootleg).wav"
                 });
                 scope.toggle = function (index) {
@@ -48,6 +52,18 @@
                         mediaPlayer.load();
                         mediaPlayer.play();
                 };
+                //md-mode="determinate" value="{{determinateValue}}"
+                mediaPlayer.addEventListener('timeupdate', updateProgressBar, false);
+                function updateProgressBar() {
+                    var progressBar = document.getElementById('progress-bar');
+                    var percentage = Math.floor((100 / mediaPlayer.duration) *
+                        mediaPlayer.currentTime);
+                    scope.determinateValue = percentage;
+                    console.log(mediaPlayer.currentTime);
+                    scope.$apply();
+                    progressBar.value = percentage;
+                    //progressBar.innerHTML = percentage + '% played';
+                }
                 scope.stop = function (){
                     mediaPlayer.pause();
                     mediaPlayer.currentTime = 0;
