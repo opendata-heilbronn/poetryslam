@@ -3,7 +3,7 @@
  */
 (function () {
     'use strict';
-    angular.module('psadmin').directive('soundPad', function (StorageService) {
+    angular.module('psadmin').directive('soundPad', function (StorageService, FileStorage) {
         return {
             restrict: 'E',
             scope: true,
@@ -11,36 +11,24 @@
                 '<div layout="row" layout-wrap> <div ng-repeat="file in soundFileList"><div flex="33">'
             +'<md-button ng-class="{\'md-raised\':file.active == true}" ng-click="toggle($index)">{{soundFileList[$index].title}}</md-button>'
             +'</div></div></div><md-button ng-click="stop()"><md-icon md-svg-icon="av:stop"></md-icon></md-button>' +
-            '<md-progress-linear id="progress-bar" md-mode="determinate" value="{{determinateValue}}"></md-progress-linear>',
+            '<md-progress-linear id="progress-bar" md-mode="determinate" value="{{determinateValue}}"></md-progress-linear>'+
+            '<md-button ng-click="log()">sadfsadfsadf</md-button>',
             link: function (scope) {
                 var mediaPlayer;
                     mediaPlayer = document.getElementById('media-audio');
                     mediaPlayer.controls = false;
+                //link with rootscope object here
                 scope.soundFileList = [];
+
+                //strike this code when the root scope works
+                FileStorage.getAllAudio().then(function (res) {
+                    for (i= 0; i < res.length; i++){
+                        scope.soundFileList.push({'src': res[i].objectUrl,'title':res[i].file.name});
+                    }
+                });
+
                 var i;
 
-                scope.soundFileList.push({
-                    'title': "oneasdfkjasdhfkljasdfhasdf1",
-                    'src': "/modules/admin/testAudioFiles/TRUEFORCEYOU_TALKIN_TO_ME.mp3"
-                },{
-                    'title': "oasdfsadfne2",
-                    'src': "/modules/admin/testAudioFiles/PaulKalkbrenner_BackToTheFuture_PT.3.mp3"
-                },{
-                    'title': "onasdfasdfsdfe3",
-                    'src': "/modules/admin/testAudioFiles/PaulKalkbrenner_BackToTheFuture_PT.2.mp3"
-                },{
-                    'title': "onasdfsdfsdfasdfasdfe4",
-                    'src': "/modules/admin/testAudioFiles/Wouldn't it be nice.MP3"
-                },{
-                    'title': "MAX-Vell",
-                    'src': "/modules/admin/testAudioFiles/Max-Vell - Sky.mp3"
-                },{
-                    'title': "asdfsdf",
-                    'src': "/modules/admin/testAudioFiles/Brennan Heart Presents 'WE R Yearmix 2013' Slam FM 192.mp3"
-                },{
-                    'title': "Hardstyle - THe Best ",
-                    'src': "/modules/admin/testAudioFiles/MAKJ & Lil Jon - Let's Get Fucked Up (Zatox Hardstyle Bootleg).wav"
-                });
                 scope.toggle = function (index) {
                     var i;
                     for(i=0; i < scope.soundFileList.length ;i++){
@@ -68,6 +56,12 @@
                     mediaPlayer.pause();
                     mediaPlayer.currentTime = 0;
                 };
+                scope.log = function () {
+                    //console.log(JSON.stringify(FileStorage.get()));
+                    FileStorage.getAllAudio().then(function (res) {
+                        console.log(JSON.stringify(res[0].file.name)+" #");
+                    })
+                }
             }
         }
     });

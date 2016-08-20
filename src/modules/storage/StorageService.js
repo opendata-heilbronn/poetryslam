@@ -121,7 +121,7 @@
                 $window.addEventListener('storage', callback);
             };
         })
-        .service('FileStorage', function ($q) {
+        .service('FileStorage', function ($q, $rootScope, StorageService) {
             var getStore = function () {
                 return chrome.fileSystem;
             };
@@ -142,14 +142,42 @@
                 });
             };
 
+            var addFileToRootScope = function (file) {
+                if ($rootScope.event && $rootScope.event.files == undefined) {
+                    $rootScope.event.files = [];
+                }
+
+                $rootScope.event.files.push({
+                    "id": file.id,
+                    "name": file.file.name,
+                    "url": file.objectUrl
+                });
+            };
+
             var list = [];
+            const localStorageKey = "file-ids";
 
             this.get = function () {
+
                 return $q(function (resolve, reject) {
                     resolve(list);
                 });
             };
-
+            this.getAllAudio = function () {
+                var get = this.get;
+                return $q(function (resolve, reject) {
+                    get().then(function(res) {
+                        var audioList = [];
+                        var i;
+                        for (i= 0; i < res.length; i++){
+                            if(res[i].file.type.indexOf('audio') == 0){
+                                audioList.push(res[i]);
+                            }
+                        }
+                        resolve(audioList);
+                    });
+                });
+            };
             this.getDisplayPath = function (fileEntry, callback) {
                 chrome.fileSystem.getDisplayPath(fileEntry, callback);
             };
@@ -162,6 +190,7 @@
                     }, function (entry) {
                         getCustomFileObject(entry).then(function (file) {
                             list.push(file);
+                            addFileToRootScope(file);
                             resolve(file);
                         });
                     });
@@ -170,22 +199,28 @@
 
             this.loadFromStorage = function () {
                 return $q(function (resolve, reject) {
-                   var idList = [];
+                    StorageService.getItem(localStorageKey).then(function (arr) {
+                        var idList = [];
+                        idList = idList.concat(arr);
 
-                    idList.forEach(function (item, index, array) {
-                        chrome.fileSystem.isRestorable(item, function (isRestorable) {
-                            if (isRestorable) {
-                                chrome.fileSystem.restoreEntry(item, function (entry) {
-                                    getCustomFileObject(entry).then(function (file) {
-                                        list.push(file);
+                        idList.forEach(function (item, index, array) {
+                            chrome.fileSystem.isRestorable(item, function (isRestorable) {
+                                if (isRestorable) {
+                                    chrome.fileSystem.restoreEntry(item, function (entry) {
+                                        getCustomFileObject(entry).then(function (file) {
+                                            list.push(file);
+                                            addFileToRootScope(file);
+                                        });
                                     });
-                                });
-                            }
+                                }
+                            });
                         });
-                    });
 
-                    resolve(list);
+                        resolve(list);
+                    });
                 });
-            }
+            };
+
+            this.loadFromStorage();
         });
 })(angular);
