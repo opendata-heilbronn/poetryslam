@@ -4,13 +4,13 @@
         <h3>Wettbewerb bearbeiten</h3>
         <div>
         <md-input-container>
-            <input placeholder="Name" ng-model="data.name" md-auto-focus>
+            <input placeholder="Name" ng-model="data.name" md-auto-focus required="true">
         </md-input-container>
         </div>
         <div>
         <md-input-container>
             <input type="number" placeholder="Anzahl Juroren" name="jurors" ng-model="data.jurors" ng-min="1" ng-max="8" required="true">
-            <div ng-messages="competition.jurors.$error" multiple md-auto-hide="false">
+            <div ng-messages="competition.jurors.$error" md-auto-hide="false">
               <div ng-message="required">
                 Fülle bitte dieses Feld aus
               </div>
@@ -42,7 +42,7 @@
     </md-dialog-content>
     <md-dialog-actions>
         <md-button ng-click="cancel()" class="md-secondary">Abbrechen</md-button>
-        <md-button ng-click="save()" class="md-primary">Speichern</md-button>
+        <md-button ng-click="save()" class="md-primary" ng-disabled="!competition.$valid">Speichern</md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>

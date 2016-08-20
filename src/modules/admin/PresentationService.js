@@ -109,7 +109,7 @@
             if (!groupParticipants || !groupParticipants.length) return [];
             var result = groupParticipants
                 .filter(function (groupParticipant) {
-                    return groupParticipant.scores && groupParticipant.scores[0].value !== '';
+                    return Array.isArray(groupParticipant.scores) && groupParticipant.scores.length > 0 && groupParticipant.scores[0].value !== '';
                 })
                 .map(function (groupParticipant) {
                     var participant = that.getParticipant(event, groupParticipant.id);
@@ -213,7 +213,7 @@
         };
 
         var updateGroupParticipant = function (cGroupParticipant) {
-            if (cGroupParticipant.scores) {
+            if (Array.isArray(cGroupParticipant.scores)) {
                 cGroupParticipant.scores.forEach(function (score) {
                     if (score.value) score.value = score.value.replace(/,/, '.');
                 });
