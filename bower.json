@@ -29,8 +29,7 @@
     "odometer": "^0.4.7",
     "Sortable": "^1.4.2",
     "ng-file-upload": "^12.0.4",
-    "angular-file-saver": "^1.1.1",
-    "angular-local-storage": "^0.2.7"
+    "angular-file-saver": "^1.1.1"
   },
   "resolutions": {
     "angular": "^1.5.3"
