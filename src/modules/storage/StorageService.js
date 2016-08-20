@@ -121,7 +121,7 @@
                 $window.addEventListener('storage', callback);
             };
         })
-        .service('FileStorage', function ($q, $rootScope, StorageService) {
+        .service('FileStorage', function ($q, $rootScope, StorageService, env) {
             var getStore = function () {
                 return chrome.fileSystem;
             };
@@ -221,6 +221,8 @@
                 });
             };
 
-            this.loadFromStorage();
+            if (env.runtime === 'chrome') {
+                this.loadFromStorage();
+            }
         });
 })(angular);
