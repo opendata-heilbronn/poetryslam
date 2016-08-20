@@ -80,6 +80,15 @@
             };
         })
         .service('LocalStorageService', function ($window, $q) {
+            this.getAll = function (){
+                return $q(function (resolve){
+                    var arrayToReturn = [];
+                    for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+                        arrayToReturn.push(localStorage.getItem( localStorage.key( i ) ));
+                    }
+                   resolve(arrayToReturn);
+                });
+            };
             this.getItem = function (key) {
                 return $q(function (resolve) {
                     resolve(angular.fromJson($window.localStorage.getItem(key)));

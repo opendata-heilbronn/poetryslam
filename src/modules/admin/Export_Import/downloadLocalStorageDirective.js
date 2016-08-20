@@ -8,7 +8,8 @@
             template: '<md-button class="md-secondary md-raised" ng-click="click()">Akutelle Veranstaltung herunterladen</md-button>',
             controller: function ($scope) {
                 $scope.click = function () {
-                    StorageService.getItem('event', function (event) {
+                    StorageService.getItem('event').then(function (event) {
+                        event = JSON.stringify(event);
                         var data = new Blob([event], {type: 'text/plain;charset=utf-8'});
                         FileSaver.saveAs(data, 'PoetryBackup.slam');
                     })
