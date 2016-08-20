@@ -14,6 +14,12 @@
     </md-toolbar>
 
     <md-list style="padding-bottom: 0">
+        <md-subheader ng-show="group.participants && group.participants.length > 0" class="md-no-sticky">
+            {{group.participants.length}}
+            <ng-pluralize count="group.participants.length" when="{1: 'Poet', 'other' :'Poeten'}"></ng-pluralize>
+            <span ng-show="group.sacrifice && group.sacrifice.id">+ Opferlamm</span>
+        </md-subheader>
+
         <md-list-item class="md-2-line md-no-proxy" ng-show="group.sacrifice && group.sacrifice.id">
             <div class="md-list-item-text" layout="column">
                 <h3>{{ (group.sacrifice.id | participantOfId).name }} <span class="sacrifice-mark">- Opferlamm</span></h3>
@@ -44,12 +50,6 @@
             </div>
         </md-list-item>
     </md-list>
-
-    <md-subheader ng-show="group.participants && group.participants.length > 0" class="md-no-sticky">
-        {{group.participants.length}}
-        <ng-pluralize count="group.participants.length" when="{1: 'Poet', 'other' :'Poeten'}"></ng-pluralize>
-        <span ng-show="group.sacrifice && group.sacrifice.id">+ Opferlamm</span>
-    </md-subheader>
 </div>
 
 <p>
