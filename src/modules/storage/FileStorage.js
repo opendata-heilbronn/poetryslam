@@ -63,6 +63,21 @@
                     });
                 });
             };
+            this.getAllVideo = function () {
+                var get = this.get;
+                return $q(function (resolve, reject) {
+                    get().then(function (res) {
+                        var videoList = [];
+                        var i;
+                        for (i = 0; i < res.length; i++) {
+                            if (res[i].file.type.indexOf('video') == 0) {
+                                videoList.push(res[i]);
+                            }
+                        }
+                        resolve(videoList);
+                    });
+                });
+            };
             this.getDisplayPath = function (fileEntry, callback) {
                 chrome.fileSystem.getDisplayPath(fileEntry, callback);
             };

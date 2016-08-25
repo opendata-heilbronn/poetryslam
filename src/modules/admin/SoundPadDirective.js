@@ -18,7 +18,7 @@
                 mediaPlayer = document.getElementById('media-audio');
                 mediaPlayer.controls = false;
 
-                scope.soundFileList = scope.$root.event.files;
+                scope.soundFileList = scope.$root.event.files.audio;
                 //play or stop function
                 scope.toggle = function (index) {
                     var i;
