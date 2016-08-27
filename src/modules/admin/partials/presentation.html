@@ -177,9 +177,11 @@
     </md-tab>
     <md-tab label="Video">
       <md-content class="md-padding">
-        <!--div class="md-whiteframe-z2" ng-repeat="">
-        </div-->
-        <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
+        <div class="md-whiteframe-z2" ng-repeat="video in $event.files.videos">
+          {{video.name}}
+          <br>
+          <video controls file="video.file"></video>
+        </div>
       </md-content>
     </md-tab>
     <md-tab label="Audio">
