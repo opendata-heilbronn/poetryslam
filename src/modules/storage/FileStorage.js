@@ -107,6 +107,7 @@
                         resolve(filter([]));
                     }
 
+                    var customFileObjects = [];
                     files.forEach(function (item, index, array) {
                         chrome.fileSystem.isRestorable(item.id, function (isRestorable) {
                             if (isRestorable) {
@@ -114,12 +115,10 @@
                                     item.entry = entry;
 
                                     getCustomFileObject(entry, item).then(function (file) {
-                                        item = file;
+                                        customFileObjects.push(file);
 
                                         if (index == array.length - 1) {
-                                            var f = filter(array);
-
-                                            var obj = filter(files);
+                                            var obj = filter(customFileObjects);
                                             $rootScope.event.files = obj;
                                             resolve();
                                         }
