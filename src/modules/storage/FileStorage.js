@@ -7,7 +7,7 @@
                 return chrome.fileSystem;
             };
 
-            var getCustomFileObject = function (entry) {
+            var getCustomFileObject = function (entry, oldFile) {
                 return $q(function (resolve, reject) {
                     entry.file(function (file) {
 
@@ -23,50 +23,30 @@
                 });
             };
 
-            var cleanFilesInRootScope = function () {
-                $rootScope.event.files = [];
-            };
+            var filter = function (arr) {
+                var result = {
+                    "audio": [],
+                    "video": []
+                };
 
-            var addFileToRootScope = function (file) {
-                if ($rootScope.event && $rootScope.event.files == undefined) {
-                    $rootScope.event.files = [];
+                if (arr == null) {
+                    return result;
                 }
 
-                $rootScope.event.files.push({
-                    "id": file.id,
-                    "name": file.file.name,
-                    "url": file.objectUrl
-                });
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].file.type.indexOf('audio') == 0) {
+                        result.audio.push(arr[i]);
+                    } else {
+                        result.audio.push(arr[i]);
+                    }
+                }
+
+                return result;
             };
 
-            var list = [];
-            const localStorageKey = "file-ids";
-
-            this.get = function () {
-
-                return $q(function (resolve, reject) {
-                    resolve(list);
-                });
-            };
-            this.getAllAudio = function () {
-                var get = this.get;
-                return $q(function (resolve, reject) {
-                    get().then(function (res) {
-                        var audioList = [];
-                        var i;
-                        for (i = 0; i < res.length; i++) {
-                            if (res[i].file.type.indexOf('audio') == 0) {
-                                audioList.push(res[i]);
-                            }
-                        }
-                        resolve(audioList);
-                    });
-                });
-            };
-            this.getDisplayPath = function (fileEntry, callback) {
-                chrome.fileSystem.getDisplayPath(fileEntry, callback);
-            };
-
+            /**
+             * Öffnet eine neue File mittels des FileExplorers
+             */
             this.open = function () {
                 return $q(function (resolve, reject) {
                     chrome.fileSystem.chooseEntry({
@@ -74,41 +54,81 @@
                         acceptsAllTypes: true
                     }, function (entry) {
                         getCustomFileObject(entry).then(function (file) {
-                            list.push(file);
-                            addFileToRootScope(file);
-                            resolve(file);
+                            if ($rootScope.event == undefined) {
+                                console.error("Event object not found in rootstate, creating.");
+                                $rootScope.event = {};
+                            }
+
+                            if ($rootScope.event.files == undefined) {
+                                console.warn("Object files not found in event-object, creating");
+                                $rootScope.event.files = {
+                                    audio: [],
+                                    video: []
+                                };
+                            }
+
+                            var obj = filter([file]);
+                            if (obj.audio.length > 0) {
+                                $rootScope.event.files.audio.push(obj.audio[0])
+                            }
+                            if (obj.video.length > 0) {
+                                $rootScope.event.files.video.push(obj.video[0])
+                            }
+
+                            resolve();
                         });
                     });
                 });
             };
 
+            /**
+             * Läd Files aus einer alten Session aus dem Eventobject neu
+             */
             this.loadFromStorage = function () {
                 return $q(function (resolve, reject) {
-                    StorageService.getItem(localStorageKey).then(function (arr) {
-                        var idList = [];
-                        idList = idList.concat(arr);
-                        cleanFilesInRootScope();
+                    var files = [];
 
-                        idList.forEach(function (item, index, array) {
-                            chrome.fileSystem.isRestorable(item, function (isRestorable) {
-                                if (isRestorable) {
-                                    chrome.fileSystem.restoreEntry(item, function (entry) {
-                                        getCustomFileObject(entry).then(function (file) {
-                                            list.push(file);
-                                            addFileToRootScope(file);
+                    if ($rootScope.event == undefined) {
+                        console.error("Event object not found in rootstate, creating.");
+                        $rootScope.event = {};
+                    }
 
-                                            if (index == array.length - 1) {
-                                                resolve(list);
-                                            }
-                                        });
+                    if ($rootScope.event.files == undefined) {
+                        console.warn("Object files not found in event-object, creating");
+                        $rootScope.event.files = {
+                            audio: [],
+                            video: []
+                        };
+                    }
+
+                    var files = $rootScope.event.files.audio.concat($rootScope.event.files.video);
+
+                    if (files.length == 0) {
+                        resolve(filter([]));
+                    }
+
+                    files.forEach(function (item, index, array) {
+                        chrome.fileSystem.isRestorable(item.id, function (isRestorable) {
+                            if (isRestorable) {
+                                chrome.fileSystem.restoreEntry(item.id, function (entry) {
+                                    item.entry = entry;
+
+                                    getCustomFileObject(entry, item).then(function (file) {
+                                        item = file;
+
+                                        if (index == array.length - 1) {
+                                            var f = filter(array);
+
+                                            var obj = filter(files);
+                                            $rootScope.event.files = obj;
+                                            resolve();
+                                        }
                                     });
-                                }
-                            });
-
-                            
+                                });
+                            }
                         });
-
                     });
+
                 });
             };
 
