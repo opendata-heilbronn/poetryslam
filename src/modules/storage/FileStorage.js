@@ -11,14 +11,21 @@
                 return $q(function (resolve, reject) {
                     entry.file(function (file) {
 
-                        var foobar = {
-                            "file": file,
-                            "entry": entry,
-                            "id": chrome.fileSystem.retainEntry(entry),
-                            "objectUrl": URL.createObjectURL(file)
-                        };
+                        if (oldFile == undefined) {
+                            oldFile = {
+                                "name": file.name,
+                                "file": null,
+                                "entry": null,
+                                "id": chrome.fileSystem.retainEntry(entry),
+                                "objectUrl": null
+                            }
+                        }
 
-                        resolve(foobar);
+                        oldFile.file = file;
+                        oldFile.entry = entry;
+                        oldFile.objectUrl = URL.createObjectURL(file);
+
+                        resolve(oldFile);
                     });
                 });
             };
@@ -37,7 +44,7 @@
                     if (arr[i].file.type.indexOf('audio') == 0) {
                         result.audio.push(arr[i]);
                     } else {
-                        result.audio.push(arr[i]);
+                        result.video.push(arr[i]);
                     }
                 }
 

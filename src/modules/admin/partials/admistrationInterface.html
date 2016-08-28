@@ -13,47 +13,4 @@
     </md-content>
 </section>
 
-
-<section class="md-whiteframe-z2 admin-section">
-    <md-toolbar class="md-secondary">
-        <div class="md-toolbar-tools">
-            <span class="ng-binding">Offlinefiles</span>
-            <span flex></span>
-            <md-button ng-click="openFile()">
-                upload file
-            </md-button>
-        </div>
-    </md-toolbar>
-
-    <md-content class="md-padding">
-        <md-list flex>
-            <md-subheader class="md-no-sticky" ng-if="files.length == 0">keine Offlinefiles verfügbar</md-subheader>
-
-            <md-list-item class="md-3-line"
-                          ng-repeat="file in files"
-                          ng-click="null">
-                <video class="md-avatar"
-                       controls
-                       file="file"></video>
-                <div class="md-list-item-text" layout="column">
-                    <h3>{{ file.name }}</h3>
-                    <h4>{{ item.what }}</h4>
-                    <p>{{ item.notes }}</p>
-                </div>
-            </md-list-item>
-            <md-divider></md-divider>
-        </md-list>
-    </md-content>
-</section>
-<!-- Sound Pad -->
-<section class="md-whiteframe-z2 admin-section">
-    <md-toolbar class="md-secondary">
-        <div class="md-toolbar-tools">
-            <h3 class="ng-binding">Sound Pad</h3>
-        </div>
-    </md-toolbar>
-
-    <md-content class="md-padding">
-        <sound-pad></sound-pad>
-    </md-content>
-</section>
+<media-panel></media-panel>

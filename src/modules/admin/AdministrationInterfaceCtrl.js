@@ -8,10 +8,6 @@
         .controller('AdministrationInterfaceCtrl', function ($scope, StorageService, FileStorage) {
             $scope.files = [];
 
-            $scope.openFile = function () {
-                FileStorage.open().then(function (file) {
-                    // $scope.files.push(file);
-                });
-            };
+            
         });
 })();
