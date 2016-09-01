@@ -11,6 +11,7 @@
 
                 if (scope.file && scope.file.objectUrl) {
                     element[0].src = scope.file.objectUrl;
+                    element[0].muted = true;
                     element[0].play();
                 }
             }

@@ -12,7 +12,9 @@
             .iconSet('image', '/material-icons/image-icons.svg', 24)
             .iconSet('av', '/material-icons/av-icons.svg', 24)
             .iconSet('communication', '/material-icons/communication-icons.svg', 24)
-            .iconSet('file', '/material-icons/file-icons.svg', 24);
+            .iconSet('file', '/material-icons/file-icons.svg', 24)
+            .iconSet('action', '/material-icons/action-icons.svg', 24)
+            .iconSet('editor', '/material-icons/editor-icons.svg', 24);
         $mdThemingProvider.theme('default')
             .primaryPalette('red')
             .accentPalette('grey');
@@ -22,7 +24,9 @@
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
     });
 
-    psadmin.run(function ($rootScope, SyncService) {
-        SyncService.updateEventScope();
+    psadmin.run(function ($rootScope, SyncService, FileStorage) {
+        SyncService.updateEventScope().then(function () {
+            FileStorage.loadFromStorage();
+        });
     });
 })(angular);

@@ -1,33 +1,55 @@
 <section class="md-whiteframe-z2 admin-section">
     <md-toolbar class="md-secondary">
         <div class="md-toolbar-tools">
-            <span class="ng-binding">Offlinefiles</span>
+            <span class="ng-binding">Einblendungen</span>
             <span flex></span>
-            <md-button ng-click="openFile()">
-                upload file
-            </md-button>
+
         </div>
     </md-toolbar>
 
     <md-content class="md-padding">
         <md-tabs md-dynamic-height md-border-bottom>
-            <md-tab label="Videos">
-                <md-content class="md-padding" layout="row">
-                    <md-list flex>
-                        <md-list-item class="md-3-line" ng-repeat="video in videos">
-                            <div class="md-list-item-text" layout="column">
-                                <h3>{{ video.name }}</h3>
-                            </div>
-                            <md-button class="md-secondary" ng-click="openPreview($event, video)">Preview</md-button>
-                        </md-list-item>
-                    </md-list>
-                    <div layout="column" flex="30" ng-if="selectedVideo">
-                        <div>
-                            <md-button aria-label="Schließen" ng-click="closePreview($event)">schliesen</md-button>
-                        </div>
-                        <video flex controls file="selectedVideo" style="max-height:200px"></video>
-                    </div>
+            <md-tab label="Text">
+                <md-content class="md-padding">
+                    <md-input-container style="margin-bottom: 0">
+                        <label>Erste Zeile</label>
+                        <input ng-model="event.view.customText" ng-blur="updatePresentation()" ng-keydown="$event.which === 13 && updatePresentation()">
+                    </md-input-container>
+                    <md-input-container style="margin-bottom: 0">
+                        <label>Zweite Zeile</label>
+                        <input ng-model="event.view.customTextSubline" ng-blur="updatePresentation()" ng-keydown="$event.which === 13 && updatePresentation()">
+                    </md-input-container>
+                    <md-button ng-disabled="!event.view.customText" ng-click="setScreen('customText')">Anzeigen</md-button>
                 </md-content>
+            </md-tab>
+            <md-tab label="Videos">
+                <div>
+                    <md-button ng-click="openFile()">
+                        upload file
+                    </md-button>
+                </div>
+                <div layout="row" layout-align="start center">
+                    <div class="md-whiteframe-z2" ng-repeat="video in event.files.videos track by $index" layout="column" layout-align="center center"
+                        layout-padding layout-margin flex="15">
+                        <h3>{{ video.name }}</h3>
+                        <video file="video"></video>
+                        <div>
+                            <md-button class="md-icon-button" aria-label="Play" ng-click="playVideo(video)">
+                                <md-icon md-svg-icon="av:play_arrow"></md-icon>
+                            </md-button>
+
+                            <md-button ng-if="readonly != true" class="md-icon-button" aria-label="Play" ng-click="deleteVideo(video)">
+                                <md-icon md-svg-icon="action:delete"></md-icon>
+                            </md-button>
+                        </div>
+                    </div>
+                </div>
+                <div layout="column" flex="30" ng-if="selectedVideo">
+                    <div>
+                        <md-button aria-label="Schließen" ng-click="closePreview($event)">schliesen</md-button>
+                    </div>
+                    <video flex controls file="selectedVideo" style="max-height:200px"></video>
+                </div>
             </md-tab>
             <md-tab label="Audios">
                 <md-content class="md-padding">

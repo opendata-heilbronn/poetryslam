@@ -18,7 +18,7 @@
                                 "entry": null,
                                 "id": chrome.fileSystem.retainEntry(entry),
                                 "objectUrl": null
-                            }
+                            };
                         }
 
                         oldFile.file = file;
@@ -32,8 +32,8 @@
 
             var filter = function (arr) {
                 var result = {
-                    "audio": [],
-                    "video": []
+                    "audios": [],
+                    "videos": []
                 };
 
                 if (arr == null) {
@@ -41,10 +41,10 @@
                 }
 
                 for (var i = 0; i < arr.length; i++) {
-                    if (arr[i].file.type.indexOf('audio') == 0) {
-                        result.audio.push(arr[i]);
+                    if (arr[i].file.type.indexOf('audios') == 0) {
+                        result.audios.push(arr[i]);
                     } else {
-                        result.video.push(arr[i]);
+                        result.videos.push(arr[i]);
                     }
                 }
 
@@ -69,17 +69,17 @@
                             if ($rootScope.event.files == undefined) {
                                 console.warn("Object files not found in event-object, creating");
                                 $rootScope.event.files = {
-                                    audio: [],
-                                    video: []
+                                    audios: [],
+                                    videos: []
                                 };
                             }
 
                             var obj = filter([file]);
-                            if (obj.audio.length > 0) {
-                                $rootScope.event.files.audio.push(obj.audio[0])
+                            if (obj.audios.length > 0) {
+                                $rootScope.event.files.audios.push(obj.audios[0])
                             }
-                            if (obj.video.length > 0) {
-                                $rootScope.event.files.video.push(obj.video[0])
+                            if (obj.videos.length > 0) {
+                                $rootScope.event.files.videos.push(obj.videos[0])
                             }
 
                             resolve();
@@ -93,22 +93,24 @@
              */
             this.loadFromStorage = function () {
                 return $q(function (resolve, reject) {
+                    console.log("FileStorage: start loading files from storage");
                     var files = [];
 
                     if ($rootScope.event == undefined) {
-                        console.error("Event object not found in rootstate, creating.");
+                        console.error("FileStorage: Event object not found in rootstate, creating.");
                         $rootScope.event = {};
                     }
 
                     if ($rootScope.event.files == undefined) {
-                        console.warn("Object files not found in event-object, creating");
+                        console.warn("FileStorage: Object files not found in event-object, creating");
                         $rootScope.event.files = {
-                            audio: [],
-                            video: []
+                            audios: [],
+                            videos: []
                         };
                     }
 
-                    var files = $rootScope.event.files.audio.concat($rootScope.event.files.video);
+                    var files = $rootScope.event.files.audios.concat($rootScope.event.files.videos);
+                    console.log("FileStorage: " + files.length + " files found in storage");
 
                     if (files.length == 0) {
                         resolve(filter([]));
@@ -127,6 +129,7 @@
                                         if (index == array.length - 1) {
                                             var obj = filter(customFileObjects);
                                             $rootScope.event.files = obj;
+                                            document.filesReady = true;
                                             resolve();
                                         }
                                     });
@@ -137,7 +140,5 @@
 
                 });
             };
-
-            this.loadFromStorage();
         });
 })(angular);
