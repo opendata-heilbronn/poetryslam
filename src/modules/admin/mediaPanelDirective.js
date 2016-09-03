@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('psadmin').directive('mediaPanel', function (FileStorage) {
+    angular.module('psadmin').directive('mediaPanel', function (FileStorage, $mdDialog) {
         return {
             restrict: 'E',
             scope: {
@@ -25,17 +25,55 @@
                 };
 
                 scope.deleteVideo = function (video) {
-                    for (var i = scope.event.files.videos.length - 1; i >= 0; i--) {
-                        if (scope.event.files.videos[i].id === video.id) {
-                            scope.event.files.videos.splice(i, 1);
-                            return;
-                        }
-                    }
-                }
+
+                    alert = $mdDialog.confirm({
+                        title: 'Video löschen',
+                        textContent: 'Wollen Sie das Video wirklich löschen?',
+                        ok: 'Video löschen',
+                        cancel: "abbrechen"
+                    });
+                    $mdDialog
+                        .show(alert)
+                        .then(function () {
+                            for (var i = scope.event.files.videos.length - 1; i >= 0; i--) {
+                                if (scope.event.files.videos[i].id === video.id) {
+                                    scope.event.files.videos.splice(i, 1);
+                                    return;
+                                }
+                            }
+                        });
+                };
 
                 // Sounds
-                scope.playSound = function (event, sound) {
+                scope.selectedAudio = null;
+                var mediaPlayer = null;
+                var getAudioElement = function () {
+                    if (mediaPlayer == null) {
+                        mediaPlayer = document.getElementById("media-audio");
+                        mediaPlayer.controls = false;
+                        mediaPlayer.addEventListener('timeupdate', updateProgressBar, false);
+                    }
 
+                    return mediaPlayer;
+                };
+                var updateProgressBar = function () {
+                    scope.determinateValue = Math.floor((100 / mediaPlayer.duration) *
+                        mediaPlayer.currentTime);
+                    scope.$apply();
+                };
+
+                scope.playSound = function (event, sound) {
+                    var element = getAudioElement();
+                    scope.selectedAudio = sound;
+
+                    element.currentTime = 0;
+                    element.src = scope.selectedAudio.objectUrl;
+                    element.load();
+                    element.play();
+                };
+                scope.stopSound = function (event) {
+                    var element = getAudioElement();
+                    element.pause();
                 };
             }
         };

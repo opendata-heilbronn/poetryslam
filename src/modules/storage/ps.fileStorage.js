@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('ps.storage')
-        .service('FileStorage', function ($q, $rootScope, StorageService) {
+        .service('FileStorage', function ($q, $rootScope, StorageService, Models) {
             var getStore = function () {
                 return chrome.fileSystem;
             };
@@ -12,13 +12,10 @@
                     entry.file(function (file) {
 
                         if (oldFile == undefined) {
-                            oldFile = {
-                                "name": file.name,
-                                "file": null,
-                                "entry": null,
-                                "id": chrome.fileSystem.retainEntry(entry),
-                                "objectUrl": null
-                            };
+                            oldFile = new Models.file(
+                                chrome.fileSystem.retainEntry(entry),
+                                file.name
+                            );
                         }
 
                         oldFile.file = file;
@@ -41,7 +38,7 @@
                 }
 
                 for (var i = 0; i < arr.length; i++) {
-                    if (arr[i].file.type.indexOf('audios') == 0) {
+                    if (arr[i].file.type.indexOf('audio') == 0) {
                         result.audios.push(arr[i]);
                     } else {
                         result.videos.push(arr[i]);

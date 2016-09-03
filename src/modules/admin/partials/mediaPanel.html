@@ -62,22 +62,17 @@
                             </div>
                         </div>
                     </div>
-                    <md-button ng-click="stop()">
+                    <md-button ng-click="stopSound($event)">
                         <md-icon md-svg-icon="av:stop"></md-icon>
                     </md-button>
                     <md-progress-linear id="progress-bar" md-mode="determinate" value="{{determinateValue}}"></md-progress-linear>
-                    <md-button ng-click="log()">sadfsadfsadf</md-button>
-
-
-
-
 
                     <md-list flex>
-                        <md-list-item class="md-3-line" ng-repeat="audio in audios" ng-click="null">
+                        <md-list-item class="md-3-line" ng-repeat="audio in event.files.audios" ng-click="null">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ audio.name }}</h3>
                             </div>
-                            <md-button class="md-secondary" ng-click="playAudio($event, audio)">PLAY</md-button>
+                            <md-button class="md-secondary" ng-click="playSound($event, audio)">PLAY</md-button>
                         </md-list-item>
                     </md-list>
                 </md-content>
