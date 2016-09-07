@@ -1,16 +1,22 @@
-<md-content class="md-padding">
-    <div layout="row">
-        <md-input-container style="width:200px;">
-            <label>2. Gruppe auswählen</label>
-            <md-select ng-model="event.view.groupId" ng-change="updatePresentation()" ng-disabled="event.view.groupId">
-                <md-option ng-repeat="group in getCompetition().groups" value="{{group.id}}">
-                    {{group.name}}
-                </md-option>
-            </md-select>
-        </md-input-container>
+<section layout="row" flex>
+    <md-content flex layout-padding>
+      <md-list ng-cloak>
+        <md-list-item
+            ng-repeat="group in getCompetition().groups"
+            ng-class="{selected: groupIsSelected(group)}"
+            ng-click="selectGroup(group)">
+          <p>{{group.name}}</p>
+        </md-list-item>
+      </md-list>
+    </md-content>
+    <md-sidenav
+        class="md-sidenav-right"
+        md-component-id="groupsSidenav"
+        md-is-locked-open="true"
+        md-whiteframe="4">
+      <md-content layout-padding>
         <md-button ng-disabled="!event.view.groupId" ng-click="resetGroup()">Zurücksetzen</md-button>
-    </div>
-    <div ng-disabled="!event.view.groupId">
-        <md-button ng-click="setScreen('group')">1. Gruppe ankündigen</md-button>
-    </div>
-</md-content>
+        <md-button ng-disabled="!event.view.groupId" ng-click="setScreen('group')">1. Gruppe ankündigen</md-button>
+      </md-content>
+    </md-sidenav>
+</section>

@@ -12,13 +12,6 @@
                 } else {
                   return false;
                 }
-
-                $rootScope.event.competitions.forEach(function(val, idx, array) {
-                  if(competition.id == val.id) {
-                    return true;
-                  }
-                });
-                return false;
               };
               $scope.selectCompetition = function(competition) {
                 $rootScope.event.view.competitionId = competition.id;
