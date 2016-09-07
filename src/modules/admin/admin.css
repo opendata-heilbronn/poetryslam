@@ -145,13 +145,17 @@ md-sidenav > md-toolbar {
     height: 64px;
 }
 
-md-list-item {
-    overflow: hidden;
-}
-
 .sacrifice-mark {
     font-size: 12px;
     color: gray;
 }
-/*Styling for the sound pad */
+/* Styling for the sound pad */
 
+/* Lists */
+md-list-item {
+    overflow: hidden;
+}
+
+.selected {
+  color: rgb(244,67,54);
+}

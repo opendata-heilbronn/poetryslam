@@ -8,22 +8,7 @@
     <md-content>
         <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Wettbewerb">
-                <md-content class="md-padding">
-                    <div layout="row">
-                        <md-input-container style="width:200px;">
-                            <label>1. Wettbewerb auswählen</label>
-                            <md-select ng-model="event.view.competitionId" ng-change="updatePresentation()" ng-disabled="event.view.competitionId">
-                                <md-option ng-repeat="competition in event.competitions" value="{{competition.id}}">
-                                    {{competition.name}}
-                                </md-option>
-                            </md-select>
-                        </md-input-container>
-                        <md-button ng-disabled="!event.view.competitionId" ng-click="reset()">Zurücksetzen</md-button>
-                    </div>
-                    <div ng-disabled="!event.view.competitionId">
-                        <md-button ng-click="setScreen('intro')">1. Wettbewerb ankündigen</md-button>
-                    </div>
-                </md-content>
+                <competition-tab></competition-tab>
             </md-tab>
             <md-tab label="Gruppe">
                 <md-content class="md-padding">
