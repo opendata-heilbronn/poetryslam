@@ -1,0 +1,16 @@
+<md-content class="md-padding">
+    <div layout="row">
+        <md-input-container style="width:200px;">
+            <label>2. Gruppe auswählen</label>
+            <md-select ng-model="event.view.groupId" ng-change="updatePresentation()" ng-disabled="event.view.groupId">
+                <md-option ng-repeat="group in getCompetition().groups" value="{{group.id}}">
+                    {{group.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-button ng-disabled="!event.view.groupId" ng-click="resetGroup()">Zurücksetzen</md-button>
+    </div>
+    <div ng-disabled="!event.view.groupId">
+        <md-button ng-click="setScreen('group')">1. Gruppe ankündigen</md-button>
+    </div>
+</md-content>
