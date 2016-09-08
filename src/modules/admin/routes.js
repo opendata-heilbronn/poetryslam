@@ -42,7 +42,7 @@
                 }
             })
             .when('/competitions/:id/groups', {
-                templateUrl: '/modules/admin/partials/competitionGroups.html',
+                templateUrl: '/modules/admin/partials/competitionsGroups.html',
                 controller: 'SimpleListCtrl',
                 resolve: {
                     entries: function ($rootScope, $route, $filter) {
