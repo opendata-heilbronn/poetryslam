@@ -62,6 +62,12 @@
                     scope.$apply();
                 };
 
+                scope.playVideo = function (event, video) {
+                    console.log(video.objectUrl);
+                    event.view.video = video.objectUrl;
+                    scope.updatePresentation();
+                };
+
                 scope.playSound = function (event, sound) {
                     var element = getAudioElement();
                     scope.selectedAudio = sound;

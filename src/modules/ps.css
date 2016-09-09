@@ -1,8 +1,9 @@
 html, body {
-    font-family: "Source Sans Pro Black", "Helvetica", serif;
+    font-family: "Roboto", "Helvetica", serif;
     margin: 0;
     padding: 0;
     overflow: hidden;
+    color: #FFF;
 }
 
 .hidden {
@@ -76,16 +77,22 @@ html, body {
 }
 
 .box-highlight {
-    background-color: #E65559;
+    background-color: #ebebff;
+    color: #000;
+}
+
+.participant-row-main.box-highlight {
+    background-color: #9c3eb4;
+    color: #FFF;
 }
 
 .box-grey {
-    background-color: #EBEBEB;
-    color: #444;
+    background-color: #ebebff;
+    color: #000;
 }
 
 .box-ignored {
-    background-color: #EBEBEB;
+    background-color: #000000;
     color: #444;
     opacity: 0.4;
 }
@@ -102,7 +109,8 @@ html, body {
 
 .overlay-subline {
     margin-top: 0.5vw;
-    font-size: 3.5vw;
+    font-size: 4.5vw;
+    font-family: Georgia;
 }
 
 /** PARTICIPANT **/
@@ -153,11 +161,13 @@ html, body {
 
 .scores {
     display: flex;
+    flex-wrap: wrap;
     list-style-type: none;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     margin: 0;
     padding: 0;
-    font-size: 3.5vw;
+    font-size: 4.5vw;
     transition: all 1s ease-in;
 }
 
@@ -165,11 +175,16 @@ html, body {
     height: 0;
 }
 
+.box-scores.box-highlight {
+    background: #000000;
+}
+
 .scores li {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #ebebff;
+    color: #000;
     background-clip: padding-box;
-    padding: 1vw;
-    flex: 1;
+    padding: 1.4vw;
+    flex: 0 0 10px;
     border: 0.75vw solid transparent;
 }
 
@@ -245,4 +260,6 @@ html, body {
 
 .participant-list-slam {
     font-size: 2vw;
+    font-family: Georgia, serif;
+    text-transform: none;
 }

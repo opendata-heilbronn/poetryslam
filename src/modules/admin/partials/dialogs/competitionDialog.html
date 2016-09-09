@@ -9,7 +9,8 @@
         </div>
         <div>
         <md-input-container>
-            <input type="number" placeholder="Anzahl Juroren" name="jurors" ng-model="data.jurors" ng-min="1" ng-max="8" required="true">
+            <input type="number" placeholder="Anzahl Juroren" name="jurors" ng-model="data.jurors" ng-min="1"
+                   ng-max="11" required="true">
             <div ng-messages="competition.jurors.$error" md-auto-hide="false">
               <div ng-message="required">
                 Fülle bitte dieses Feld aus
