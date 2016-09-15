@@ -49,12 +49,19 @@
                 this.sacrifice = sacrifice;
             };
 
+            /**
+             * Represents a audio or video-file
+             * @constructor
+             * @param {string} name - 
+             */
             models.file = function (id, name, file, entry, objectUrl) {
                 this.name = name;
                 this.file = file;
                 this.entry = entry;
                 this.id = id;
                 this.objectUrl = objectUrl;
+                this.isBackground = false;
+                this.isPause = false;
             }
 
 

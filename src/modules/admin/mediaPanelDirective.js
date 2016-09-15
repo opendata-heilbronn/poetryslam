@@ -43,6 +43,20 @@
                             }
                         });
                 };
+                scope.setVideoAsBackground = function (video) {
+                    for (var i = 0; i < scope.event.files.videos.length; i++) {
+                        scope.event.files.videos[i].isBackground = false;
+                    }
+
+                    video.isBackground = true;
+                };
+                scope.setVideoAsPause = function (video) {
+                    for (var i = 0; i < scope.event.files.videos.length; i++) {
+                        scope.event.files.videos[i].isPause = false;
+                    }
+
+                    video.isPause = true;
+                };
 
                 // Sounds
                 scope.selectedAudio = null;
@@ -50,7 +64,7 @@
                 var getAudioElement = function () {
                     if (mediaPlayer == null) {
                         mediaPlayer = document.getElementById("media-audio");
-                        mediaPlayer.controls = false;
+                        mediaPlayer.controls = true;
                         mediaPlayer.addEventListener('timeupdate', updateProgressBar, false);
                     }
 
