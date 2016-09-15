@@ -58,9 +58,9 @@
             window.location.reload(true);
         };
 
-        $interval(function () {
+        /**$interval(function () {
             $scope.appCache.status = getAppCacheStatus();
             $scope.appCache.offerReload = offerReload;
-        }, 5000);
+        }, 5000); */
     });
 })();

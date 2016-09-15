@@ -241,6 +241,7 @@
                 screen: event.view.screen,
                 phase: event.view.phase,
                 video: event.view.video,
+                videoplayersrc: event.view.videoplayersrc,
                 winnersToShow: event.view.winnersToShow,
                 customText: event.view.customText,
                 customTextSubline: event.view.customTextSubline

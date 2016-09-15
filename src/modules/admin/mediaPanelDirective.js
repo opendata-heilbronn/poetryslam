@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('psadmin').directive('mediaPanel', function (FileStorage, $mdDialog) {
+    angular.module('psadmin').directive('mediaPanel', function (FileStorage, $mdDialog, PresentationService) {
         return {
             restrict: 'E',
             scope: {
@@ -23,7 +23,11 @@
                 scope.closePreview = function (event) {
                     scope.selectedVideo = null;
                 };
-
+                scope.playVideo = function (event, video) {
+                    scope.event.view.screen = "video";
+                    scope.event.view.videoplayersrc = video.objectUrl;
+                    PresentationService.updatePresentation(scope.event);
+                };
                 scope.deleteVideo = function (video) {
 
                     alert = $mdDialog.confirm({
@@ -43,6 +47,20 @@
                             }
                         });
                 };
+                scope.setVideoAsBackground = function (video) {
+                    for (var i = 0; i < scope.event.files.videos.length; i++) {
+                        scope.event.files.videos[i].isBackground = false;
+                    }
+
+                    video.isBackground = true;
+                };
+                scope.setVideoAsPause = function (video) {
+                    for (var i = 0; i < scope.event.files.videos.length; i++) {
+                        scope.event.files.videos[i].isPause = false;
+                    }
+
+                    video.isPause = true;
+                };
 
                 // Sounds
                 scope.selectedAudio = null;
@@ -61,13 +79,6 @@
                         mediaPlayer.currentTime);
                     scope.$apply();
                 };
-
-                scope.playVideo = function (event, video) {
-                    console.log(video.objectUrl);
-                    event.view.video = video.objectUrl;
-                    scope.updatePresentation();
-                };
-
                 scope.playSound = function (event, sound) {
                     var element = getAudioElement();
                     scope.selectedAudio = sound;
