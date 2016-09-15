@@ -34,7 +34,7 @@
                         <h3>{{ video.name }}</h3>
                         <video file="video"></video>
                         <div>
-                            <md-button class="md-icon-button" aria-label="Play" ng-click="playVideo(video)">
+                            <md-button class="md-icon-button" aria-label="Play" ng-click="playVideo($event, video)">
                                 <md-icon md-svg-icon="av:play_arrow"></md-icon>
                             </md-button>
 
@@ -63,7 +63,7 @@
                 <md-content class="md-padding">
 
                     <audio controls id="media-audio"></audio>
-                    
+
                     <md-button ng-click="stopSound($event)">
                         <md-icon md-svg-icon="av:stop"></md-icon>
                     </md-button>
