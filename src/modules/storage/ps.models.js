@@ -55,7 +55,7 @@
                 this.entry = entry;
                 this.id = id;
                 this.objectUrl = objectUrl;
-            }
+            };
 
 
             return models;

@@ -11,13 +11,12 @@
             '<div layout="row" layout-wrap> <div ng-repeat="file in soundFileList track by $index"><div flex="33">'
             + '<md-button ng-class="{\'md-raised\':file.active == true}" ng-click="toggle($index)">{{soundFileList[$index].name}}</md-button>'
             + '</div></div></div><md-button ng-click="stop()"><md-icon md-svg-icon="av:stop"></md-icon></md-button>' +
-            '<md-progress-linear id="progress-bar" md-mode="determinate" value="{{determinateValue}}"></md-progress-linear>' +
-            '<md-button ng-click="log()">sadfsadfsadf</md-button>',
+            '<md-progress-linear id="progress-bar" md-mode="determinate" value="{{determinateValue}}"></md-progress-linear>',
             link: function (scope) {
                 var mediaPlayer;
                 mediaPlayer = document.getElementById('media-audio');
-                mediaPlayer.controls = false;
-
+                //mediaPlayer.controls = true;
+                console.log("TEST");
                 scope.soundFileList = scope.$root.event.files.audio;
                 //play or stop function
                 scope.toggle = function (index) {
