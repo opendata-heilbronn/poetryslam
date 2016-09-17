@@ -2,15 +2,16 @@
     <md-content flex layout-padding>
       <table>
         <tr>
-          <th>Poet</th>
-          <th>Punkte</th>
-          <th>Bonus</th>
+            <th style="padding:0 2rem 0 0;text-align:left;">Poet</th>
+            <th style="padding:0 2rem 0 0;text-align:left;">Punkte</th>
+            <th style="padding:0 2rem 0 0;text-align:left;">Bonus</th>
         </tr>
         <tr ng-repeat="groupParticipant in getGroup().participants" ng-controller="resultsParticipantsCtrl">
-          <td>{{participant.name}}</td>
-          <td>{{groupParticipant.secondTotalScore}}</td>
+            <td style="padding-right:2rem">{{participant.name}}</td>
+            <td style="padding-right:2rem">{{groupParticipant.secondTotalScore}}</td>
           <td>
-            <md-input-container style="width: 20px;">
+              <md-input-container style="width: 100px;margin:1.5rem 0 0 0;">
+                  <label>Bonus-Punkte</label>
                 <input ng-model="groupParticipant.extraScore" aria-label="Extra-Punkte">
             </md-input-container>
           </td>
