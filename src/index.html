@@ -41,9 +41,9 @@
 <body ng-app="ps">
 <div class="screen-container" id="screen-container">
     <video style="position: absolute; top: 0; left: 0; bottom: 0; right: 0;"
-           ng-if="presentation.background.objectUrl && presentation.screen != 'video'" 
-           file="{{presentation.background.objectUrl}}" 
-           type="video/mp4" 
+           ng-if="presentation.background.$objectUrl && presentation.screen != 'video'"
+           file="{{presentation.background.$objectUrl}}"
+           type="video/mp4"
            class="fullscreen-video"></video>
 
     <div ng-switch="presentation.screen" ng-hide="presentation.video === 'pause' || presentation.video === 'play'">
@@ -53,7 +53,8 @@
         <participant ng-switch-when="participant"></participant>
         <group-ratings ng-switch-when="groupRatings"></group-ratings>
         <competition-ratings ng-switch-when="competitionRatings"></competition-ratings>
-        <video ng-switch-when="video" muted="false" file="{{presentation.videoplayersrc}}" class="fullscreen-video" type="video/mp4"></video>
+        <video ng-switch-when="video" muted="false" file="{{presentation.$videoplayersrc}}" class="fullscreen-video"
+               type="video/mp4"></video>
     </div>
 </div>
 </body>

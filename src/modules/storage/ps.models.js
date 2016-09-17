@@ -57,9 +57,9 @@
             models.file = function (id, name, file, entry, objectUrl) {
                 this.name = name;
                 this.$file = file;
-                this.entry = entry;
+                this.$entry = entry;
                 this.id = id;
-                this.objectUrl = objectUrl;
+                this.$objectUrl = objectUrl;
                 this.isBackground = false;
                 this.isPause = false;
             }

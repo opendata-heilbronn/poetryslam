@@ -19,8 +19,8 @@
                         }
 
                         oldFile.$file = file;
-                        oldFile.entry = entry;
-                        oldFile.objectUrl = URL.createObjectURL(file);
+                        oldFile.$entry = entry;
+                        oldFile.$objectUrl = URL.createObjectURL(file);
 
                         resolve(oldFile);
                     });
@@ -91,7 +91,6 @@
             this.loadFromStorage = function () {
                 return $q(function (resolve, reject) {
                     console.log("FileStorage: start loading files from storage");
-                    var filesEntries = [];
 
                     if ($rootScope.event == undefined) {
                         console.error("FileStorage: Event object not found in rootstate, creating.");
@@ -118,12 +117,10 @@
                         chrome.fileSystem.isRestorable(fileEntry.id, function (isRestorable) {
                             if (isRestorable) {
                                 chrome.fileSystem.restoreEntry(fileEntry.id, function (entry) {
-                                    fileEntry.entry = entry;
+                                    fileEntry.$entry = entry;
 
                                     getCustomFileObject(entry, fileEntry).then(function (fileObject) {
                                         customFileObjects.push(fileObject);
-
-                                        console.log(JSON.stringify(fileObject));
 
                                         if (fileObject.isBackground === true) {
                                             console.log("Background set to " + fileObject.name );

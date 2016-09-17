@@ -25,12 +25,11 @@
                 };
                 scope.playVideo = function (event, video) {
                     scope.event.view.screen = "video";
-                    scope.event.view.videoplayersrc = video.objectUrl;
+                    scope.event.view.$videoplayersrc = video.$objectUrl;
                     PresentationService.updatePresentation(scope.event);
                 };
                 scope.deleteVideo = function (video) {
-
-                    alert = $mdDialog.confirm({
+                    var alert = $mdDialog.confirm({
                         title: 'Video löschen',
                         textContent: 'Wollen Sie das Video wirklich löschen?',
                         ok: 'Video löschen',
@@ -85,7 +84,7 @@
                     var element = getAudioElement();
                     scope.selectedAudio = sound;
                     element.currentTime = 0;
-                    element.src = scope.selectedAudio.objectUrl;
+                    element.src = scope.selectedAudio.$objectUrl;
                     element.load();
                     element.volume = 0.0;
                     var fadePoint = 0;
