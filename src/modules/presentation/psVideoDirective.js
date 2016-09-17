@@ -5,15 +5,16 @@
             restrict: 'E',
             link: function (scope, element, attrs) {
 
-                
+
 
                 var file = attrs.file;
+                var muted = attrs.muted == null ? true : attrs.muted;
 
                 console.log(file);
 
                 if (file) {
                     element[0].src = file;
-                    element[0].muted = true;
+                    element[0].muted = muted;
                     element[0].play();
                 }
             }

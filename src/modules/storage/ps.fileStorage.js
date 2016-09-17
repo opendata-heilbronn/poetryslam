@@ -123,9 +123,12 @@
                                     getCustomFileObject(entry, fileEntry).then(function (fileObject) {
                                         customFileObjects.push(fileObject);
 
-                                        if (fileEntry.isBackground === true) {
-                                            scope.event.view.background = fileObject;
-                                            PresentationService.updatePresentation(scope.event);
+                                        console.log(JSON.stringify(fileObject));
+
+                                        if (fileObject.isBackground === true) {
+                                            console.log("Background set to " + fileObject.name );
+                                            $rootScope.event.view.background = fileObject;
+                                            PresentationService.updatePresentation($rootScope.event);
                                         }
 
                                         if (index == array.length - 1) {

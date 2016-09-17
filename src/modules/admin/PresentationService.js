@@ -243,6 +243,7 @@
                 phase: event.view.phase,
                 video: event.view.video,
                 videoplayersrc: event.view.videoplayersrc,
+                background: event.view.background,
                 winnersToShow: event.view.winnersToShow,
                 customText: event.view.customText,
                 customTextSubline: event.view.customTextSubline
