@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Poetry Slam</title>
-    <link rel="stylesheet" href="fonts/SourceSansPro-Black.css"/>
-    <link rel="stylesheet" href="fonts/SourceSansPro-Light.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/Roboto.css"/>
     <!-- build:css index.min.css -->
     <link rel="stylesheet" href="components/animate.css/animate.css"/>
     <link rel="stylesheet" href="components/odometer/themes/odometer-theme-minimal.css"/>
@@ -41,8 +39,6 @@
 <body ng-app="ps">
 <div class="screen-container" id="screen-container">
     
-<h3>{{presentation}}</h3>
-
     <video id="videobackground" class="fullscreen-video" autoplay ng-if="presentation.video !== 'bg'">
         <source src="/media/clips/bg_to_logo.mp4" type="video/mp4">
     </video>
