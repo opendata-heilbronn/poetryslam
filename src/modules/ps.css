@@ -177,6 +177,7 @@ html, body {
 
 .box-scores.box-highlight {
     background: #000000;
+    color: #FFF;
 }
 
 .scores li {

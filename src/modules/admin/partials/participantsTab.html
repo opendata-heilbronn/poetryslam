@@ -11,13 +11,14 @@
             </md-option>
         </md-select>
 
-        <br>
-        <md-input-container
-          ng-repeat="score in getScores()"
-          ng-disabled="!event.view.participantId">
-            <label>Wertung {{$index+1}}</label>
-            <input ng-model="score.value" ng-blur="updatePresentation()" ng-keydown="$event.which === 13 && updatePresentation()">
-        </md-input-container>
+        <div ng-if="event.view.participantId" style="margin-top:2rem;">
+            <md-input-container
+                    ng-repeat="score in getScores()">
+                <label>Wertung {{$index+1}}</label>
+                <input ng-model="score.value" ng-blur="updatePresentation()"
+                       ng-keydown="$event.which === 13 && updatePresentation()">
+            </md-input-container>
+        </div>
     </md-input-container>
   </md-content>
   <md-sidenav

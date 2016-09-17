@@ -57,10 +57,14 @@
         };
 
         $scope.getScores = function () {
-            var scores = $scope.getGroupParticipant().scores;
+            var groupParticipant = $scope.getGroupParticipant();
+            if (!groupParticipant) {
+                return [];
+            }
+            var scores = groupParticipant.scores;
             if (!scores) {
                 scores = [];
-                $scope.getGroupParticipant().scores = scores;
+                groupParticipant.scores = scores;
             }
             if (scores.length < $scope.getCompetition().jurors) {
                 for (var i = scores.length + 1; i <= $scope.getCompetition().jurors; i++) {
@@ -69,13 +73,26 @@
             }
             if (scores.length > $scope.getCompetition().jurors) {
                 scores = scores.slice(0, $scope.getCompetition().jurors - 1);
-                $scope.getGroupParticipant().scores = scores;
+                groupParticipant.scores = scores;
             }
             return scores;
         };
 
+        $scope.$watch('selectedTabIndex', function (tabIndex) {
+            var competition = $scope.getCompetition();
+            if (tabIndex === 4) {
+                if (!competition) $scope.winnerList = [];
+                else $scope.winnerList = PresentationService.generateWinnerList($scope.event, competition);
+            }
+            else if (tabIndex === 3) {
+                var group = $scope.getGroup();
+                if (!competition || !group) $scope.groupResultList = [];
+                else $scope.groupResultList = PresentationService.generateResultList(group.participants, $scope.event, competition, true);
+            }
+        });
+
         $scope.updatePresentation = function () {
-            PresentationService.updatePresentation($scope.event);
+            $scope.presentation = PresentationService.updatePresentation($scope.event);
         };
         $scope.updatePresentation();
     });

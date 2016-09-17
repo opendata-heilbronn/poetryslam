@@ -1,32 +1,34 @@
 <section layout="row" flex>
     <md-content flex layout-padding>
-      <table>
-        <tr>
-            <th style="padding:0 2rem 0 0;text-align:left;">Poet</th>
-            <th style="padding:0 2rem 0 0;text-align:left;">Punkte</th>
-            <th style="padding:0 2rem 0 0;text-align:left;">Bonus</th>
-        </tr>
-        <tr ng-repeat="groupParticipant in getGroup().participants" ng-controller="resultsParticipantsCtrl">
-            <td style="padding-right:2rem">{{participant.name}}</td>
-            <td style="padding-right:2rem">{{groupParticipant.secondTotalScore}}</td>
-          <td>
-              <md-input-container style="width: 100px;margin:1.5rem 0 0 0;">
-                  <label>Bonus-Punkte</label>
-                <input ng-model="groupParticipant.extraScore" aria-label="Extra-Punkte">
-            </md-input-container>
-          </td>
-        </tr>
-      </table>
+        <table>
+            <tr>
+                <th style="padding:0 2rem 0 0;text-align:left;">Poet</th>
+                <th style="padding:0 2rem 0 0;text-align:left;">Wertung1</th>
+                <th style="padding:0 2rem 0 0;text-align:left;">Wertung2</th>
+                <th style="padding:0 2rem 0 0;text-align:left;">Bonus-Punkte</th>
+            </tr>
+            <tr ng-repeat="groupParticipant in groupResultList track by $index">
+                <td style="padding-right:2rem">{{groupParticipant.name}}</td>
+                <td style="padding-right:2rem">{{groupParticipant.totalScore | number: 1}}</td>
+                <td style="padding-right:2rem">{{groupParticipant.secondTotalScore | number: 1}}</td>
+                <td provide-participant="groupParticipant.participantId">
+                    <md-input-container style="width: 100px;margin:1.5rem 0 0 0;">
+                        <label>Bonus-Punkte</label>
+                        <input ng-model="participant.extraScore" aria-label="Extra-Punkte"
+                               ng-blur="updatePresentation()" ng-keydown="$event.which === 13 && updatePresentation()">
+                    </md-input-container>
+                </td>
+            </tr>
+        </table>
     </md-content>
     <md-sidenav
-        class="md-sidenav-right"
-        md-component-id="resultsSidenav"
-        md-is-locked-open="true"
-        md-whiteframe="4">
-      <md-content layout-padding>
-        <md-button ng-click="showGroupWinners()">1. Ergebnisse der Gruppe anzeigen</md-button>
-        <md-button ng-click="increaseWinnerCount()">2. Nächsten Poet anzeigen</md-button>
-        <md-button ng-click="">3. Nächste Gruppe</md-button>
-      </md-content>
+            class="md-sidenav-right"
+            md-component-id="resultsSidenav"
+            md-is-locked-open="true"
+            md-whiteframe="4">
+        <md-content layout-padding>
+            <md-button ng-click="showGroupWinners()">1. Ergebnisse der Gruppe ankündigen</md-button>
+            <md-button ng-click="increaseWinnerCount()">2. Nächsten Poet anzeigen</md-button>
+        </md-content>
     </md-sidenav>
 </section>
