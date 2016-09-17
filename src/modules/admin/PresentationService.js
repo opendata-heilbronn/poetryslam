@@ -191,15 +191,16 @@
             updateShowIngoredScores(fixedWinnerList);
             updateShowIngoredScores(variableWinnerList);
             var resultList = fixedWinnerList.concat(variableWinnerList);
+            updateShowIngoredScores(resultList);
             resultList = markWinners(resultList, competition.winners);
             return resultList;
         };
 
-        var generateResultList = function (groupParticipants, event, competition) {
+        var generateResultList = function (groupParticipants, event, competition, doMarkWinners) {
             var result = generateGroupResultList(groupParticipants, event);
             // highlight
             if (result.length <= 0) return result;
-            if (event.view.phase === 'winners') {
+            if (doMarkWinners) {
                 result.sort(sortByScore);
                 updateShowIngoredScores(result);
                 result = markWinners(result, competition.fixedWinnersPerGroup);
@@ -270,7 +271,7 @@
             }
 
             if (group.participants) {
-                result.resultList = generateResultList(group.participants, event, competition);
+                result.resultList = generateResultList(group.participants, event, competition, event.view.phase === 'winners');
             }
 
             if (competition && Object.keys(competition).length > 0) {
@@ -284,7 +285,6 @@
         var previousPresentation = {};
         this.updatePresentation = function (event) {
             var presentation = generatePresentation(event, previousPresentation);
-            console.log(angular.toJson(presentation));
             if (presentation) {
                 StorageService.setItem('presentation', presentation)
                     .then(function () {
@@ -298,6 +298,9 @@
             }
             return presentation;
         };
+
+        this.generateWinnerList = generateWinnerList;
+        this.generateResultList = generateResultList;
 
         return this;
     });

@@ -41,7 +41,17 @@
 <body ng-app="ps">
 <div class="screen-container" id="screen-container">
     
+<<<<<<< HEAD
     <video file="/media/clips/test_bg.mp4" type="video/mp4" class="fullscreen-video"></video>
+=======
+    <video id="videobackground" class="fullscreen-video" autoplay ng-if="presentation.video !== 'bg'">
+        <source src="/media/clips/bg_to_logo.mp4" type="video/mp4">
+    </video>
+
+    <video id="videopause" class="fullscreen-video" autoplay ng-if="presentation.video === 'bg'">
+        <source src="/media/clips/logo_to_bg.mp4" type="video/mp4">
+    </video>
+>>>>>>> 7d7347b51beeee71f05f1bfc6e1ded06b91808db
 
     <div ng-switch="presentation.screen" ng-hide="presentation.video === 'pause' || presentation.video === 'play'">
         <intro ng-switch-when="intro"></intro>
