@@ -5,7 +5,7 @@
     <title>Poetry Slam</title>
     <link rel="stylesheet" href="fonts/SourceSansPro-Black.css"/>
     <link rel="stylesheet" href="fonts/SourceSansPro-Light.css"/>
-    <link href="fonts/roboto.css" rel="stylesheet">
+    <link href="fonts/RobotoFonts.css" rel="stylesheet">
     <!-- build:css index.min.css -->
     <link rel="stylesheet" href="components/animate.css/animate.css"/>
     <link rel="stylesheet" href="components/odometer/themes/odometer-theme-minimal.css"/>
@@ -55,13 +55,6 @@
         <competition-ratings ng-switch-when="competitionRatings"></competition-ratings>
         <video ng-switch-when="video" muted="false" file="{{presentation.videoplayersrc}}" class="fullscreen-video" type="video/mp4"></video>
     </div>
-
-
-   <!-- <div id="debug" style="position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;overflow: scroll; z-index: 10000;">
-        <h3>SCREEN: {{presentation.screen}}</h3>
-        <h3>Video: {{presentation.videoplayersrc}}</h3>
-    </div>
-    -->
 </div>
 </body>
 </html>
