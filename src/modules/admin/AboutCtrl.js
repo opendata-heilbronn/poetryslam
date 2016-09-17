@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var currentVersion = '1.0.6';
+    var currentVersion = '1.0.7';
 
     var getAppCacheStatus = function () {
         var appCache = window.applicationCache;
@@ -58,9 +58,9 @@
             window.location.reload(true);
         };
 
-        /**$interval(function () {
+        $interval(function () {
             $scope.appCache.status = getAppCacheStatus();
             $scope.appCache.offerReload = offerReload;
-        }, 5000); */
+        }, 5000);
     });
 })();
