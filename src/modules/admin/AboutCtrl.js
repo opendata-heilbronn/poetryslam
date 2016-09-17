@@ -47,20 +47,24 @@
         }, false);
     }, false);
 
-    angular.module('psadmin').controller('AboutCtrl', function ($scope, $interval) {
+    angular.module('psadmin').controller('AboutCtrl', function ($scope, $interval, env) {
+        $scope.isWeb = env.runtime === 'web';
+
+        $scope.reload = function () {
+            window.location.reload(true);
+        };
+
         $scope.appCache = {
             status: getAppCacheStatus(),
             version: currentVersion,
             offerReload: offerReload
         };
 
-        $scope.reload = function () {
-            window.location.reload(true);
-        };
-
-        $interval(function () {
-            $scope.appCache.status = getAppCacheStatus();
-            $scope.appCache.offerReload = offerReload;
-        }, 5000);
+        if ($scope.isWeb) {
+            $interval(function () {
+                $scope.appCache.status = getAppCacheStatus();
+                $scope.appCache.offerReload = offerReload;
+            }, 5000);
+        }
     });
 })();
