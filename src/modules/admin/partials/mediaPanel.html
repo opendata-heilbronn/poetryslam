@@ -3,7 +3,9 @@
         <div class="md-toolbar-tools">
             <span class="ng-binding">Einblendungen</span>
             <span flex></span>
-
+            <md-button ng-click="openFile()" ng-if="readonly != true">
+                upload file
+            </md-button>
         </div>
     </md-toolbar>
 
@@ -23,11 +25,6 @@
                 </md-content>
             </md-tab>
             <md-tab label="Videos">
-                <div>
-                    <md-button ng-click="openFile()">
-                        upload file
-                    </md-button>
-                </div>
                 <div layout="row" layout-align="start center">
                     <div class="md-whiteframe-z2" ng-repeat="video in event.files.videos track by $index" layout="column" layout-align="center center"
                         layout-padding layout-margin flex="20">
@@ -42,12 +39,14 @@
                                 <md-icon md-svg-icon="action:delete"></md-icon>
                             </md-button>
 
-                            <md-button ng-class="{'md-accent': video.isPause}" ng-if="readonly != true" class="md-icon-button" aria-label="Set as pause" ng-click="setVideoAsPause(video)">
+                            <md-button ng-class="{'md-accent': video.isPause}" ng-if="readonly != true" class="md-icon-button" aria-label="Set as pause"
+                                ng-click="setVideoAsPause(video)">
                                 <md-icon md-svg-icon="av:pause_circle_filled"></md-icon>
                             </md-button>
 
-                            <md-button ng-class="{'md-accent': video.isBackground}" ng-if="readonly != true" class="md-icon-button" aria-label="Set as background" ng-click="setVideoAsBackground(video)">
-                                <md-icon md-svg-icon="editor:insert_photo" ></md-icon>
+                            <md-button ng-class="{'md-accent': video.isBackground}" ng-if="readonly != true" class="md-icon-button" aria-label="Set as background"
+                                ng-click="setVideoAsBackground(video)">
+                                <md-icon md-svg-icon="editor:insert_photo"></md-icon>
                             </md-button>
                         </div>
                     </div>

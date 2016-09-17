@@ -3,9 +3,9 @@
 * Moritz - ja 
 * Adrian - nein
 * Jan - 
-* Lukas - 
+* Lukas - ja
 * Henrie - 
-* Marie - 
+* Marie - am samstag 2x
 
 
 

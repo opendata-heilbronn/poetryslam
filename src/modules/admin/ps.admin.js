@@ -67,7 +67,9 @@
 
     psadmin.run(function ($rootScope, SyncService, FileStorage) {
         SyncService.updateEventScope().then(function () {
+            console.log("START: loading files from storage");
             FileStorage.loadFromStorage();
+            console.log("END: loading files from storage");
         });
     });
 })(angular);

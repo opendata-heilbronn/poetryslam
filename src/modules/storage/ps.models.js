@@ -56,7 +56,7 @@
              */
             models.file = function (id, name, file, entry, objectUrl) {
                 this.name = name;
-                this.file = file;
+                this.$file = file;
                 this.entry = entry;
                 this.id = id;
                 this.objectUrl = objectUrl;

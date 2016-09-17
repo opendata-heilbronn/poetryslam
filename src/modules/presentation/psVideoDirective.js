@@ -1,15 +1,21 @@
 (function () {
     'use strict';
-    angular.module('ps.presentation').directive('ratingParticipant', function () {
+    angular.module('ps.presentation').directive('video', function () {
         return {
             restrict: 'E',
             link: function (scope, element, attrs) {
 
-                alert("test");
+                
 
-                var video = angular.element('<video style="background: red;" class="fullscreen-video" autoplay><source src="' + scope.$root.videoplayersrc + '" type="video/mp4"></video>');
+                var file = attrs.file;
 
-                element.replace(video);
+                console.log(file);
+
+                if (file) {
+                    element[0].src = file;
+                    element[0].muted = true;
+                    element[0].play();
+                }
             }
         }
     });

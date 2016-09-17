@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('ps.storage')
-        .service('FileStorage', function ($q, $rootScope, StorageService, Models) {
+        .service('FileStorage', function ($q, $rootScope, StorageService, Models, PresentationService) {
             var getStore = function () {
                 return chrome.fileSystem;
             };
@@ -18,7 +18,7 @@
                             );
                         }
 
-                        oldFile.file = file;
+                        oldFile.$file = file;
                         oldFile.entry = entry;
                         oldFile.objectUrl = URL.createObjectURL(file);
 
@@ -38,7 +38,7 @@
                 }
 
                 for (var i = 0; i < arr.length; i++) {
-                    if (arr[i].file.type.indexOf('audio') == 0) {
+                    if (arr[i].$file.type.indexOf('audio') == 0) {
                         result.audios.push(arr[i]);
                     } else {
                         result.videos.push(arr[i]);
@@ -91,7 +91,7 @@
             this.loadFromStorage = function () {
                 return $q(function (resolve, reject) {
                     console.log("FileStorage: start loading files from storage");
-                    var files = [];
+                    var filesEntries = [];
 
                     if ($rootScope.event == undefined) {
                         console.error("FileStorage: Event object not found in rootstate, creating.");
@@ -106,27 +106,33 @@
                         };
                     }
 
-                    var files = $rootScope.event.files.audios.concat($rootScope.event.files.videos);
-                    console.log("FileStorage: " + files.length + " files found in storage");
+                    var filesEntries = $rootScope.event.files.audios.concat($rootScope.event.files.videos);
+                    console.log("FileStorage: " + filesEntries.length + " files found in storage");
 
-                    if (files.length == 0) {
+                    if (filesEntries.length == 0) {
                         resolve(filter([]));
                     }
 
                     var customFileObjects = [];
-                    files.forEach(function (item, index, array) {
-                        chrome.fileSystem.isRestorable(item.id, function (isRestorable) {
+                    filesEntries.forEach(function (fileEntry, index, array) {
+                        chrome.fileSystem.isRestorable(fileEntry.id, function (isRestorable) {
                             if (isRestorable) {
-                                chrome.fileSystem.restoreEntry(item.id, function (entry) {
-                                    item.entry = entry;
+                                chrome.fileSystem.restoreEntry(fileEntry.id, function (entry) {
+                                    fileEntry.entry = entry;
 
-                                    getCustomFileObject(entry, item).then(function (file) {
-                                        customFileObjects.push(file);
+                                    getCustomFileObject(entry, fileEntry).then(function (fileObject) {
+                                        customFileObjects.push(fileObject);
+
+                                        if (fileEntry.isBackground === true) {
+                                            scope.event.view.background = fileObject;
+                                            PresentationService.updatePresentation(scope.event);
+                                        }
 
                                         if (index == array.length - 1) {
                                             var obj = filter(customFileObjects);
                                             $rootScope.event.files = obj;
                                             document.filesReady = true;
+
                                             resolve();
                                         }
                                     });

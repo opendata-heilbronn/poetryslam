@@ -53,6 +53,8 @@
                     }
 
                     video.isBackground = true;
+                    scope.event.view.background = video;
+                    PresentationService.updatePresentation(scope.event);
                 };
                 scope.setVideoAsPause = function (video) {
                     for (var i = 0; i < scope.event.files.videos.length; i++) {

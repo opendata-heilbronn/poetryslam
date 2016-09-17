@@ -5,7 +5,7 @@
     <title>Poetry Slam</title>
     <link rel="stylesheet" href="fonts/SourceSansPro-Black.css"/>
     <link rel="stylesheet" href="fonts/SourceSansPro-Light.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
+    <link href="fonts/roboto.css" rel="stylesheet">
     <!-- build:css index.min.css -->
     <link rel="stylesheet" href="components/animate.css/animate.css"/>
     <link rel="stylesheet" href="components/odometer/themes/odometer-theme-minimal.css"/>
@@ -41,15 +41,7 @@
 <body ng-app="ps">
 <div class="screen-container" id="screen-container">
     
-<h3>{{presentation}}</h3>
-
-    <video id="videobackground" class="fullscreen-video" autoplay ng-if="presentation.video !== 'bg'">
-        <source src="/media/clips/bg_to_logo.mp4" type="video/mp4">
-    </video>
-
-    <video id="videopause" class="fullscreen-video" autoplay ng-if="presentation.video === 'bg'">
-        <source src="/media/clips/logo_to_bg.mp4" type="video/mp4">
-    </video>
+    <video file="/media/clips/test_bg.mp4" type="video/mp4" class="fullscreen-video"></video>
 
     <div ng-switch="presentation.screen" ng-hide="presentation.video === 'pause' || presentation.video === 'play'">
         <intro ng-switch-when="intro"></intro>
@@ -58,7 +50,7 @@
         <participant ng-switch-when="participant"></participant>
         <group-ratings ng-switch-when="groupRatings"></group-ratings>
         <competition-ratings ng-switch-when="competitionRatings"></competition-ratings>
-        <ps-video ng-switch-when="video"></ps-video>
+        <video ng-switch-when="video" file="{{videoplayersrc}}"></video>
     </div>
     
 
