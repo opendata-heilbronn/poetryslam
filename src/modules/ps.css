@@ -36,14 +36,14 @@ html, body {
 }
 
 .fullscreen-video {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     z-index: 10;
 }
 
-.fullscreen-video.ng-leave {
-    transition: 0.1s ease-in all;
+.fullscreen-clip {
+    z-index: 99999;
 }
 
 .video-overlay {

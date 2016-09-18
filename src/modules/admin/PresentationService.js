@@ -6,7 +6,7 @@
         return Math.round(parseFloat(value) * 10) / 10;
     };
 
-    angular.module('psadmin').service('PresentationService', function ($filter, StorageService) {
+    angular.module('psadmin').service('PresentationService', function ($filter, StorageService, FileService, $q) {
         var that = this;
         this.getCompetition = function (event, id) {
             var result = $filter('entryOfId')(id, event.competitions);
@@ -67,14 +67,14 @@
                 }
             });
             //exit if there are less than 4 values
-            if(counterForRealNumbers < 4){
+            if (counterForRealNumbers < 4) {
                 return;
             }
             scores.forEach(function (score) {
                 if (!isNaN(parseFloat(score.value))) {
-                        var value = toFloat(score.value);
-                        if (value < lowest) lowest = value;
-                        if (value > highest) highest = value;
+                    var value = toFloat(score.value);
+                    if (value < lowest) lowest = value;
+                    if (value > highest) highest = value;
                 }
                 score.ignored = false;
             });
@@ -229,7 +229,8 @@
         };
 
         var generatePresentation = function (event, previousPresentation) {
-            if (!event || !event.view) return false;
+            if (!event || !event.view) return $q.reject('no event');
+
             var competition = that.getCompetition(event, event.view.competitionId);
             var group = that.getGroup(competition, event.view.groupId);
             var participant = that.getParticipant(event, event.view.participantId);
@@ -241,15 +242,12 @@
                 participant: participant,
                 screen: event.view.screen,
                 phase: event.view.phase,
-                video: event.view.video,
-                $videoplayersrc: event.view.$videoplayersrc,
-                background: event.view.background,
+                bgVideo: event.view.bgVideo,
+                startVideoAt: event.view.startVideoAt,
                 winnersToShow: event.view.winnersToShow,
                 customText: event.view.customText,
                 customTextSubline: event.view.customTextSubline
             };
-
-            result.videoPlays = previousPresentation && previousPresentation.video != result.video ? true : false;
 
             if (competition && Object.keys(competition).length > 0) {
                 updateWinnerProperties(competition);
@@ -280,24 +278,42 @@
                 result.showWinnersInReverseOrder = competition.acrossGroupsWinners ? true : false;
             }
 
-            return result;
+            var promises = [];
+            if (event.view.bgVideo && event.bgVideos && event.bgVideos[event.view.bgVideo]) {
+                promises.push(FileService.getObjectUrl(event.bgVideos[event.view.bgVideo].id).then(function (objectUrl) {
+                    result.bgVideoUrl = objectUrl;
+                }));
+            }
+            if (event.view.video) {
+                promises.push(FileService.getObjectUrl(event.view.video).then(function (objectUrl) {
+                    result.videoUrl = objectUrl;
+                }));
+            }
+
+            return $q.all(promises).then(function () {
+                return result;
+            })
         };
 
         var previousPresentation = {};
         this.updatePresentation = function (event) {
-            var presentation = generatePresentation(event, previousPresentation);
-            if (presentation) {
-                StorageService.setItem('presentation', presentation)
-                    .then(function () {
-                        previousPresentation = presentation;
-                        console.log('persisted presentation');
-                    })
-                    .catch(function (e) {
-                        console.trace(e.stack);
-                        console.error('failed to persist presentation');
-                    });
-            }
-            return presentation;
+            return generatePresentation(event, previousPresentation).then(function (presentation) {
+                if (presentation) {
+                    StorageService.setItem('presentation', presentation)
+                        .then(function () {
+                            previousPresentation = presentation;
+                            console.log('persisted presentation');
+                        })
+                        .catch(function (e) {
+                            console.trace(e.stack);
+                            console.error('failed to persist presentation');
+                        });
+                }
+                return presentation;
+            }).catch(function (e) {
+                console.error('error updating presentation');
+                console.trace(e.stack);
+            });
         };
 
         this.generateWinnerList = generateWinnerList;

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('psadmin').controller('PresentationCtrl', function ($scope, event, PresentationService, $timeout) {
+    angular.module('psadmin').controller('PresentationCtrl', function ($scope, event, PresentationService) {
         $scope.event = event;
 
         $scope.reset = function () {
@@ -10,7 +10,7 @@
         };
 
         $scope.resetGroup = function () {
-            $scope.event.view.video = 'pause';
+            $scope.event.view.bgVideo = 'pause';
             $scope.updatePresentation();
             $scope.event.view.groupId = null;
             $scope.event.view.participantId = null;
@@ -20,12 +20,7 @@
         $scope.setScreen = function (screenName, phase) {
             $scope.event.view.screen = screenName;
             $scope.event.view.phase = phase;
-            $scope.event.view.video = 'bg';
-            $scope.updatePresentation();
-        };
-
-        $scope.setVideo = function (videoName) {
-            $scope.event.view.video = videoName;
+            $scope.event.view.bgVideo = 'bg';
             $scope.updatePresentation();
         };
 
@@ -92,7 +87,7 @@
         });
 
         $scope.updatePresentation = function () {
-            $scope.presentation = PresentationService.updatePresentation($scope.event);
+            PresentationService.updatePresentation($scope.event);
         };
         $scope.updatePresentation();
     });

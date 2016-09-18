@@ -2,9 +2,6 @@
     'use strict';
 
     angular.module('ps.storage')
-        .constant('env', {
-            runtime: (window.chrome && chrome.runtime && chrome.runtime.id) ? 'chrome' : 'web'
-        })
         .service('StorageService', function (env, ChromeStorageService, LocalStorageService) {
             var storage = null;
 

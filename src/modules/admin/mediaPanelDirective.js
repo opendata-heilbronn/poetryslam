@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('psadmin').directive('mediaPanel', function (FileStorage, $mdDialog, PresentationService) {
+    angular.module('psadmin').directive('mediaPanel', function (FileStorage, $mdDialog, PresentationService, FileService) {
         return {
             restrict: 'E',
             scope: {
@@ -9,6 +9,8 @@
             templateUrl: '/modules/admin/partials/mediaPanel.html',
             link: function (scope, element, attrs) {
                 scope.event = scope.$root.event;
+                scope.setScreen = scope.$parent.setScreen;
+                scope.selected = {};
 
                 scope.openFile = function () {
                     FileStorage.open().then(function (file) {
@@ -17,50 +19,23 @@
                 };
 
                 // Movies
-                scope.openPreview = function (event, video) {
-                    scope.selectedVideo = video;
+                scope.playBgVideo = function (type) {
+                    if (scope.event.bgVideos && scope.event.bgVideos[type]) {
+                        scope.event.view.bgVideo = type;
+                        PresentationService.updatePresentation(scope.event);
+                    }
                 };
-                scope.closePreview = function (event) {
-                    scope.selectedVideo = null;
-                };
-                scope.playVideo = function (event, video) {
-                    scope.event.view.screen = "video";
-                    scope.event.view.$videoplayersrc = video.$objectUrl;
+
+                scope.playClip = function (video) {
+                    scope.event.view.video = video.id;
+                    scope.event.view.startVideoAt = Date.now();
                     PresentationService.updatePresentation(scope.event);
                 };
-                scope.deleteVideo = function (video) {
-                    var alert = $mdDialog.confirm({
-                        title: 'Video löschen',
-                        textContent: 'Wollen Sie das Video wirklich löschen?',
-                        ok: 'Video löschen',
-                        cancel: "abbrechen"
-                    });
-                    $mdDialog
-                        .show(alert)
-                        .then(function () {
-                            for (var i = scope.event.files.videos.length - 1; i >= 0; i--) {
-                                if (scope.event.files.videos[i].id === video.id) {
-                                    scope.event.files.videos.splice(i, 1);
-                                    return;
-                                }
-                            }
-                        });
-                };
-                scope.setVideoAsBackground = function (video) {
-                    for (var i = 0; i < scope.event.files.videos.length; i++) {
-                        scope.event.files.videos[i].isBackground = false;
-                    }
 
-                    video.isBackground = true;
-                    scope.event.view.background = video;
+                scope.stopClip = function () {
+                    scope.event.view.video = null;
+                    scope.event.view.startVideoAt = Date.now();
                     PresentationService.updatePresentation(scope.event);
-                };
-                scope.setVideoAsPause = function (video) {
-                    for (var i = 0; i < scope.event.files.videos.length; i++) {
-                        scope.event.files.videos[i].isPause = false;
-                    }
-
-                    video.isPause = true;
                 };
 
                 // Sounds

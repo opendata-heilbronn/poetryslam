@@ -28,29 +28,29 @@
       md-whiteframe="4">
     <md-content layout-padding>
       <md-button
-          ng-click="setScreen('participant', 'name')"
-          ng-class="{'md-primary': event.view.phase == 'name' && event.view.video != 'pause'}">
+              ng-click="setScreen('participant', 'name')"
+              ng-class="{'md-primary': event.view.phase == 'name' && event.view.bgVideo != 'pause'}">
         1. Poet anzeigen
       </md-button>
       <md-button
-          ng-click="setScreen('participant', 'rating')"
-          ng-class="{'md-primary': event.view.phase == 'rating' && event.view.video != 'pause'}">
+              ng-click="setScreen('participant', 'rating')"
+              ng-class="{'md-primary': event.view.phase == 'rating' && event.view.bgVideo != 'pause'}">
         2. Wertungen anzeigen
       </md-button>
       <md-button
-          ng-click="setScreen('participant', 'ratingFinal')"
-          ng-class="{'md-primary': event.view.phase == 'ratingFinal' && event.view.video != 'pause'}">
+              ng-click="setScreen('participant', 'ratingFinal')"
+              ng-class="{'md-primary': event.view.phase == 'ratingFinal' && event.view.bgVideo != 'pause'}">
         3. höchste / niedrigste Wertung streichen
       </md-button>
       <md-button
-          ng-click="setScreen('participant', 'total')"
-          ng-class="{'md-primary': event.view.phase == 'total' && event.view.video != 'pause'}">
+              ng-click="setScreen('participant', 'total')"
+              ng-class="{'md-primary': event.view.phase == 'total' && event.view.bgVideo != 'pause'}">
         4. Wertungssumme anzeigen
       </md-button>
       <md-button
-          ng-click="setScreen('groupRatings')"
-          ng-class="{'md-primary': event.view.phase == 'groupRatings' && event.view.video != 'pause'}"
-          ng-disabled="event.view.participantId == getGroup().sacrifice.id">
+              ng-click="setScreen('groupRatings')"
+              ng-class="{'md-primary': event.view.phase == 'groupRatings' && event.view.bgVideo != 'pause'}"
+              ng-disabled="event.view.participantId == getGroup().sacrifice.id">
         5. Zwischenstand der Gruppe anzeigen
       </md-button>
     </md-content>

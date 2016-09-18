@@ -54,6 +54,8 @@
     <script src="modules/storage/ps.models.js"></script>
     <script src="modules/storage/StorageService.js"></script>
     <script src="modules/storage/ps.fileStorage.js"></script>
+    <script src="modules/storage/FileService.js"></script>
+    <script src="modules/storage/dynamicVideoDirective.js"></script>
 
     <script src="modules/admin/competitionsTabDirective.js"></script>
     <script src="modules/admin/groupsTabDirective.js"></script>
@@ -61,6 +63,7 @@
     <script src="modules/admin/resultsTabDirective.js"></script>
     <script src="modules/admin/endTabDirective.js"></script>
     <script src="modules/admin/offerPresentationWindowDirective.js"></script>
+    <script src="modules/admin/VideoAdminCtrl.js"></script>
     <!-- endbuild -->
 </head>
 <body layout="row" ng-app="psadmin">
@@ -83,6 +86,7 @@
                 </div>
             </div>
         </div>
+        <sidenav-entry path="'/videos'" label="'Videos'"></sidenav-entry>
         <sidenav-entry path="'/AdmistrationInterface'" label="'Administration'"></sidenav-entry>
     </md-content>
 

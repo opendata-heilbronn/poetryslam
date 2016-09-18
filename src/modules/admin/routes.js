@@ -20,6 +20,10 @@
                     }
                 }
             })
+            .when('/videos', {
+                templateUrl: '/modules/admin/partials/videos.html',
+                controller: 'VideoAdminCtrl'
+            })
             .when('/AdmistrationInterface', {
                 templateUrl: '/modules/admin/partials/admistrationInterface.html',
                 controller: 'AdministrationInterfaceCtrl'

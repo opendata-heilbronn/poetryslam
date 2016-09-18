@@ -65,11 +65,15 @@
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
     });
 
-    psadmin.run(function ($rootScope, SyncService, FileStorage) {
+    psadmin.run(function ($rootScope, SyncService, FileStorage, FileService) {
         SyncService.updateEventScope().then(function () {
             console.log("START: loading files from storage");
             FileStorage.loadFromStorage();
             console.log("END: loading files from storage");
+            if (!FileService.isRecoverable()) {
+                $rootScope.event.videos = [];
+                $rootScope.event.bgVideos = {};
+            }
         });
     });
 })(angular);

@@ -3,6 +3,10 @@ html, body {
     padding: 0;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 /* Sidenav area */
 .sidebar-logo {
     max-width: 100%;
@@ -67,18 +71,17 @@ md-icon.avatar {
 }
 
 .md-button.contact > md-icon {
-    fill:black;
-    width:36px;
-    height:36px;
+    fill: black;
+    width: 36px;
+    height: 36px;
 }
 
 .md-button.contact:active > md-icon {
     background-color: #dadada;
     border-radius: 75%;
-    padding:4px;
+    padding: 4px;
     transition: all 100ms ease-out 30ms;
 }
-
 
 /* Utils */
 
@@ -89,7 +92,7 @@ md-icon.avatar {
 /* Typography support coming in 0.8.0 */
 
 .avatar {
-    position:relative;
+    position: relative;
     width: 54px;
     height: 54px;
     border: 1px solid #ddd;
@@ -101,15 +104,14 @@ md-icon.avatar {
 
 }
 
-
-md-bottom-sheet  md-icon {
-    margin-right:20px;
+md-bottom-sheet md-icon {
+    margin-right: 20px;
 }
 
 span.name {
     font-weight: bold;
-    font-size:1.1em;
-    padding-left:5px;
+    font-size: 1.1em;
+    padding-left: 5px;
 }
 
 .edit-dialog {
@@ -149,6 +151,7 @@ md-sidenav > md-toolbar {
     font-size: 12px;
     color: gray;
 }
+
 /* Styling for the sound pad */
 
 /* Lists */
@@ -157,5 +160,29 @@ md-list-item {
 }
 
 .selected {
-  color: rgb(244,67,54);
+    color: #03a9f4;
+}
+
+.video-preview-container {
+    width: 300px;
+    padding: 0;
+}
+
+.video-preview-dimensions {
+    width: 300px;
+    height: 225px;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+}
+
+.video-preview-container.selected {
+    outline: 1px solid #000;
+}
+
+.video-preview-dimensions video {
+    max-width: 100%;
+    max-height: 100%;
 }

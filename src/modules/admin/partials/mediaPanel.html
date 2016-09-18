@@ -9,67 +9,87 @@
         </div>
     </md-toolbar>
 
-    <md-content class="md-padding">
+    <md-content>
         <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Text">
-                <md-content class="md-padding">
-                    <md-input-container style="margin-bottom: 0">
-                        <label>Erste Zeile</label>
-                        <input ng-model="event.view.customText" ng-blur="updatePresentation()" ng-keydown="$event.which === 13 && updatePresentation()">
-                    </md-input-container>
-                    <md-input-container style="margin-bottom: 0">
-                        <label>Zweite Zeile</label>
-                        <input ng-model="event.view.customTextSubline" ng-blur="updatePresentation()" ng-keydown="$event.which === 13 && updatePresentation()">
-                    </md-input-container>
-                    <md-button ng-disabled="!event.view.customText" ng-click="setScreen('customText')">Anzeigen</md-button>
-                </md-content>
+                <section layout="row" flex>
+                    <md-content flex layout-padding>
+                        <div style="max-width:400px;">
+                            <md-input-container class="md-block">
+                                <label>Erste Zeile</label>
+                                <input ng-model="event.view.customText">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Zweite Zeile</label>
+                                <input ng-model="event.view.customTextSubline">
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                    <md-sidenav
+                            class="md-sidenav-right"
+                            md-component-id="groupsSidenav"
+                            md-is-locked-open="true"
+                            md-whiteframe="4">
+                        <md-content layout-padding>
+                            <md-button ng-disabled="!event.view.customText" ng-click="setScreen('customText')">
+                                Anzeigen
+                            </md-button>
+                        </md-content>
+                    </md-sidenav>
+                </section>
             </md-tab>
             <md-tab label="Videos">
-                <div layout="row" layout-align="start center">
-                    <div class="md-whiteframe-z2" ng-repeat="video in event.files.videos track by $index" layout="column" layout-align="center center"
-                        layout-padding layout-margin flex="20">
-                        <h3>{{ video.name }}</h3>
-                        <video file="video"></video>
-                        <div>
-                            <md-button class="md-icon-button" aria-label="Play" ng-click="playVideo($event, video)">
-                                <md-icon md-svg-icon="av:play_arrow"></md-icon>
-                            </md-button>
-
-                            <md-button ng-if="readonly != true" class="md-icon-button" aria-label="Play" ng-click="deleteVideo(video)">
-                                <md-icon md-svg-icon="action:delete"></md-icon>
-                            </md-button>
-
-                            <md-button ng-class="{'md-accent': video.isPause}" ng-if="readonly != true" class="md-icon-button" aria-label="Set as pause"
-                                ng-click="setVideoAsPause(video)">
-                                <md-icon md-svg-icon="av:pause_circle_filled"></md-icon>
-                            </md-button>
-
-                            <md-button ng-class="{'md-accent': video.isBackground}" ng-if="readonly != true" class="md-icon-button" aria-label="Set as background"
-                                ng-click="setVideoAsBackground(video)">
-                                <md-icon md-svg-icon="editor:insert_photo"></md-icon>
-                            </md-button>
+                <section layout="row" flex>
+                    <md-content flex layout="row" layout-wrap layout-padding layout-align="start start"
+                                style="margin: -1rem;">
+                        <div ng-repeat="video in event.videos track by $index" style="padding: 1rem">
+                            <div class="md-whiteframe-z2 video-preview-container"
+                                 ng-class="{selected: selected.video === video}">
+                                <dynamic-video video-id="video.id" ng-click="selected.video = video"
+                                               class="clickable video-preview-dimensions"></dynamic-video>
+                                <div style="padding:0.5rem;">{{ video.name }}</div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div layout="column" flex="30" ng-if="selectedVideo">
-                    <div>
-                        <md-button aria-label="Schließen" ng-click="closePreview($event)">schliesen</md-button>
-                    </div>
-                    <video flex controls file="selectedVideo" style="max-height:200px"></video>
-                </div>
+                    </md-content>
+                    <md-sidenav
+                            class="md-sidenav-right"
+                            md-component-id="groupsSidenav"
+                            md-is-locked-open="true"
+                            md-whiteframe="4">
+                        <md-content layout-padding>
+                            <md-button aria-label="Pause"
+                                       ng-disabled="!event.bgVideos.pause || event.view.bgVideo === 'pause'"
+                                       ng-click="playBgVideo('pause')">
+                                Zu Pause-Screen wechseln
+                            </md-button>
+                            <md-button ng-disabled="!selected.video" aria-label="Play"
+                                       ng-click="playClip(selected.video)">
+                                <md-icon md-svg-icon="av:play_arrow"></md-icon>
+                                Video abspielen
+                            </md-button>
+                            <md-button ng-disabled="!event.view.video" aria-label="Stop"
+                                       ng-click="stopClip()">
+                                <md-icon md-svg-icon="av:stop"></md-icon>
+                                Video stoppen
+                            </md-button>
+                        </md-content>
+                    </md-sidenav>
+                </section>
             </md-tab>
             <md-tab label="Audios">
                 <md-content class="md-padding">
 
                     <audio controls id="media-audio"></audio>
 
-                    <md-button ng-click="stopSound($event)">
+                    <md-button ng-click="stopSound($event)" aria-label="Stop">
                         <md-icon md-svg-icon="av:stop"></md-icon>
                     </md-button>
-                    <md-progress-linear id="progress-bar" md-mode="determinate" value="{{determinateValue}}"></md-progress-linear>
+                    <md-progress-linear id="progress-bar" md-mode="determinate"
+                                        value="{{determinateValue}}"></md-progress-linear>
 
                     <md-list flex>
-                        <md-list-item class="md-3-line" ng-repeat="audio in event.files.audios track by $index" ng-click="null">
+                        <md-list-item class="md-3-line" ng-repeat="audio in event.files.audios track by $index"
+                                      ng-click="null">
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ audio.name }}</h3>
                             </div>
