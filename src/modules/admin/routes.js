@@ -24,6 +24,10 @@
                 templateUrl: '/modules/admin/partials/videos.html',
                 controller: 'VideoAdminCtrl'
             })
+            .when('/sounds', {
+                templateUrl: '/modules/admin/partials/sounds.html',
+                controller: 'SoundAdminCtrl'
+            })
             .when('/AdmistrationInterface', {
                 templateUrl: '/modules/admin/partials/admistrationInterface.html',
                 controller: 'AdministrationInterfaceCtrl'

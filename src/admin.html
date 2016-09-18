@@ -43,7 +43,6 @@
     <script src="modules/admin/Export_Import/csvExportService.js"></script>
     <script src="modules/admin/Export_Import/csvExportDirective.js"></script>
     <script src="modules/admin/SoundPadDirective.js"></script>
-    <script src="modules/admin/videoDirective.js"></script>
     <script src="modules/admin/mediaPanelDirective.js"></script>
     <script src="modules/admin/provideParticipantDirective.js"></script>
 
@@ -53,7 +52,6 @@
     <script src="modules/storage/ps.storage.js"></script>
     <script src="modules/storage/ps.models.js"></script>
     <script src="modules/storage/StorageService.js"></script>
-    <script src="modules/storage/ps.fileStorage.js"></script>
     <script src="modules/storage/FileService.js"></script>
     <script src="modules/storage/dynamicVideoDirective.js"></script>
 
@@ -64,6 +62,7 @@
     <script src="modules/admin/endTabDirective.js"></script>
     <script src="modules/admin/offerPresentationWindowDirective.js"></script>
     <script src="modules/admin/VideoAdminCtrl.js"></script>
+    <script src="modules/admin/SoundAdminCtrl.js"></script>
     <!-- endbuild -->
 </head>
 <body layout="row" ng-app="psadmin">
@@ -87,6 +86,7 @@
             </div>
         </div>
         <sidenav-entry path="'/videos'" label="'Videos'"></sidenav-entry>
+        <sidenav-entry path="'/sounds'" label="'Sounds'"></sidenav-entry>
         <sidenav-entry path="'/AdmistrationInterface'" label="'Administration'"></sidenav-entry>
     </md-content>
 

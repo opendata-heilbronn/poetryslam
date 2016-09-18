@@ -4,10 +4,6 @@
 (function () {
     'use strict';
 
-    angular.module('psadmin')
-        .controller('AdministrationInterfaceCtrl', function ($scope, StorageService, FileStorage) {
-            $scope.files = [];
-
-            
-        });
+    angular.module('psadmin').controller('AdministrationInterfaceCtrl', function ($scope) {
+    });
 })();

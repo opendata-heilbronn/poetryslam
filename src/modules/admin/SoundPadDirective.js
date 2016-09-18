@@ -3,7 +3,7 @@
  */
 (function () {
     'use strict';
-    angular.module('psadmin').directive('soundPad', function (StorageService, FileStorage) {
+    angular.module('psadmin').directive('soundPad', function () {
         return {
             restrict: 'E',
             scope: true,

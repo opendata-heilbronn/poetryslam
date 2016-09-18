@@ -1,0 +1,15 @@
+<section class="md-whiteframe-z2">
+    <md-toolbar class="md-secondary">
+        <div class="md-toolbar-tools">
+            <h3 class="ng-binding">Sounds</h3>
+            <span flex></span>
+            <md-button ng-click="addSounds()" class="md-accent">hinzufügen</md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content class="md-padding">
+        <md-list-item ng-repeat="sound in event.sounds">
+            <p> {{ sound.name }} </p>
+        </md-list-item>
+    </md-content>
+</section>
