@@ -74,7 +74,7 @@
             </md-tab>
             <md-tab label="Audios">
                 <md-content class="md-padding">
-                    <audio controls id="media-audio"></audio>
+                    <audio id="media-audio"></audio>
 
                     <md-button ng-click="stopSound($event)" aria-label="Stop">
                         <md-icon md-svg-icon="av:stop"></md-icon>
@@ -88,7 +88,8 @@
                             <div class="md-list-item-text" layout="column">
                                 <h3>{{ audio.name }}</h3>
                             </div>
-                            <md-button class="md-secondary" ng-click="playSound($event, audio)">PLAY</md-button>
+                            <md-button class="md-secondary" ng-click="playSound($event, audio, $index)"><md-icon ng-show="audiomode.lastIndex == $index" md-svg-icon="av:{{audiomode.symbol}}"></md-icon>
+                                <md-icon ng-show="audiomode.lastIndex != $index" md-svg-icon="av:play_arrow"></md-icon></md-button>
                         </md-list-item>
                     </md-list>
                 </md-content>
