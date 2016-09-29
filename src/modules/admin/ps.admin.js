@@ -65,12 +65,14 @@
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
     });
 
-    psadmin.run(function ($rootScope, SyncService, FileService) {
+    psadmin.run(function ($rootScope, SyncService, FileService, PresentationService) {
         SyncService.updateEventScope().then(function () {
             if (!FileService.isRecoverable()) {
                 $rootScope.event.videos = [];
                 $rootScope.event.sounds = [];
                 $rootScope.event.bgVideos = {};
+            } else {
+                PresentationService.updatePresentation($rootScope.event);
             }
         });
     });
