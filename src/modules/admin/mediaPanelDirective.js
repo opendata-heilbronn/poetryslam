@@ -44,7 +44,6 @@
                 var getAudioElement = function () {
                     if (mediaPlayer == null) {
                         mediaPlayer = document.getElementById("media-audio");
-                        mediaPlayer.controls = true;
                         mediaPlayer.addEventListener('timeupdate', updateProgressBar, false);
                     }
 
