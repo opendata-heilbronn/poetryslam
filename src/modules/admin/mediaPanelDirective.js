@@ -58,28 +58,29 @@
                         var fadePoint = 0;
                         //the duration (metadata) takes longer to load then the sound
                         element.onloadedmetadata = function () {
-                            fadePoint = element.duration - 2;
+                            fadePoint = element.duration - 0.01;
                         };
                         element.play();
+
                         var fadeAudioStart = setInterval(function () {
 
                             // Only fade if past the fade out point or not at zero already
 
-                            if ((element.currentTime <= 2) && (element.volume !== 1.0)) {
+                            if ((element.currentTime <= 0.01) && (element.volume !== 1.0)) {
                                 //multip. for parabel fade
-                                element.volume += 0.1 * element.currentTime;
+                                element.volume = 1;
                             }
                             // When volume at zero stop all the intervalling
                             if (element.volume === 1.0) {
                                 clearInterval(fadeAudioStart);
                             }
-                        }, 200);
+                        }, 1);
                         // Set the point in playback that fadeout begins. This is for a 2 second fade out.
                         var fadeAudioEnd = setInterval(function () {
 
                             // Only fade if past the fade out point or not at zero already
                             if ((element.currentTime >= fadePoint) && (element.volume != 0.0)) {
-                                element.volume -= 0.1 * (element.currentTime - fadePoint);
+                                element.volume = 0;
                             }
                             // When volume at zero stop all the intervalling
                             if (element.volume <= 0.0 && element.currentTime > fadePoint) {
