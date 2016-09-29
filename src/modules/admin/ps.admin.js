@@ -3,7 +3,7 @@
 
     var psadmin = angular.module('psadmin', ['ngMaterial', 'ngRoute', 'ngMessages', 'ng-sortable', 'ps.sync', 'ps.storage', 'ngFileSaver', 'ngFileUpload']);
 
-    psadmin.config(function ($mdThemingProvider, $mdIconProvider) {
+    psadmin.config(function ($mdThemingProvider, $mdIconProvider, $mdAriaProvider) {
         $mdIconProvider
             .iconSet('navigation', '/material-icons/navigation-icons.svg', 24)
             .iconSet('social', '/material-icons/social-icons.svg', 24)
@@ -55,22 +55,24 @@
         });
 
         $mdThemingProvider.theme('default')
-
             .primaryPalette('mcgpalette0')
-
             .accentPalette('mcgpalette1');
+
+        $mdAriaProvider.disableWarnings();
     });
 
     psadmin.config(function ($compileProvider) {
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
     });
 
-    psadmin.run(function ($rootScope, SyncService, FileService) {
+    psadmin.run(function ($rootScope, SyncService, FileService, PresentationService) {
         SyncService.updateEventScope().then(function () {
             if (!FileService.isRecoverable()) {
                 $rootScope.event.videos = [];
                 $rootScope.event.sounds = [];
                 $rootScope.event.bgVideos = {};
+            } else {
+                PresentationService.updatePresentation($rootScope.event);
             }
         });
     });
