@@ -3,7 +3,7 @@
 
     var psadmin = angular.module('psadmin', ['ngMaterial', 'ngRoute', 'ngMessages', 'ng-sortable', 'ps.sync', 'ps.storage', 'ngFileSaver', 'ngFileUpload']);
 
-    psadmin.config(function ($mdThemingProvider, $mdIconProvider) {
+    psadmin.config(function ($mdThemingProvider, $mdIconProvider, $mdAriaProvider) {
         $mdIconProvider
             .iconSet('navigation', '/material-icons/navigation-icons.svg', 24)
             .iconSet('social', '/material-icons/social-icons.svg', 24)
@@ -55,10 +55,10 @@
         });
 
         $mdThemingProvider.theme('default')
-
             .primaryPalette('mcgpalette0')
-
             .accentPalette('mcgpalette1');
+
+        $mdAriaProvider.disableWarnings();
     });
 
     psadmin.config(function ($compileProvider) {
