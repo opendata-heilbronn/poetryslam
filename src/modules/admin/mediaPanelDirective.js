@@ -15,9 +15,6 @@
                 scope.audiomode.time = 0;
                 scope.audiomode.lastIndex = 31000;
 
-                // mediaPlayer = document.getElementById('media-audio');
-                // mediaPlayer.controls = false;
-
                 // Movies
                 scope.playBgVideo = function (type) {
                     if (scope.event.bgVideos && scope.event.bgVideos[type]) {
@@ -69,7 +66,6 @@
                         scope.audiomode.symbol = "pause";
                         scope.audiomode.playing = true;
                         if(index == scope.audiomode.lastIndex){
-                            console.log("index is the same");
                             playWithFadeIn(scope.audiomode.time);
                         }else {
                             scope.audiomode.lastIndex = index;
@@ -100,13 +96,11 @@
                         scope.element.play();
 
                         var fadeAudioStart = setInterval(function () {
-                            console.log("in interval start");
 
                             // Only fade if past the fade out point or not at zero already
 
                             if ((scope.element.currentTime <= 0.02+timeToStart) && (scope.element.volume !== 1.0)) {
                                 //multip. for parabel fade
-                                console.log("in if from start");
 
                                 scope.element.volume = 1;
                             }
@@ -141,6 +135,7 @@
                 scope.stopSound = function (event) {
                     var element = getAudioElement();
                     element.volume = 0;
+                    scope.audiomode.symbol = "play_arrow";
                     setTimeout(function () {
                         element.pause();
                     },1);
