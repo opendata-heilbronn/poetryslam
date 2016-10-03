@@ -72,7 +72,7 @@ html, body {
     padding: 1%;
     box-sizing: border-box;
     text-transform: uppercase;
-    opacity: 0.8;
+    opacity: 0.9;
     background-clip: padding-box;
 }
 
@@ -100,7 +100,6 @@ html, body {
 .overlay-highlight {
     width: 100%;
     font-size: 10vh;
-    font-weight: bold;
     min-height: 14%;
     display: flex;
     flex-direction: column;
@@ -111,6 +110,7 @@ html, body {
     margin-top: 0.5vw;
     font-size: 4vh;
     font-family: Georgia;
+    text-shadow: 3px 3px 3px #000;
 }
 
 /** PARTICIPANT **/
@@ -176,7 +176,7 @@ html, body {
 }
 
 .box-scores.box-highlight {
-    background: #000000;
+    background: transparent;
     color: #FFF;
 }
 
@@ -253,10 +253,12 @@ html, body {
     align-items: center;
     justify-content: center;
     min-width: 10vw;
+    font-weight: bold;
 }
 
 .participant-list-name {
     font-size: 2.5vh;
+    font-weight: bold;
 }
 
 .participant-list-slam {
