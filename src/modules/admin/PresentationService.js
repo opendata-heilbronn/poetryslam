@@ -263,6 +263,7 @@
                 bgVideo: event.view.bgVideo,
                 startVideoAt: event.view.startVideoAt,
                 winnersToShow: event.view.winnersToShow,
+                enableIgnoredScores: event.view.enableIgnoredScores,
                 customText: event.view.customText,
                 customTextSubline: event.view.customTextSubline
             };

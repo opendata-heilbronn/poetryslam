@@ -277,8 +277,7 @@ html, body {
     text-transform: none;
 }
 
-/* TODO temp fix for slam stuttgart - replace with property on competitions which defines, if the highest and lowest score get ignored */
-.participant-second-total,
-.participant-ignored-scores {
+.disable-ignored-scores .participant-second-total,
+.disable-ignored-scores .participant-ignored-scores {
     display: none !important;
 }
