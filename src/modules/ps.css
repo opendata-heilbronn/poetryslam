@@ -116,7 +116,17 @@ html, body {
 /** PARTICIPANT **/
 
 .anim-video-delay {
+    animation-delay: 0s;
+}
+.anim-video-delay-secondary {
+    animation-delay: 1s;
+}
+
+.anim-video-delay-long .anim-video-delay {
     animation-delay: 2s;
+}
+.anim-video-delay-long .anim-video-delay-secondary {
+    animation-delay: 3s;
 }
 
 @keyframes sublineIntro {
