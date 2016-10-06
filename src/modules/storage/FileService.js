@@ -29,9 +29,9 @@
 
             this.askForFiles = function (mimetypes, multiple) {
                 return $q(function (resolve, reject) {
-                    var options = {type: 'openFile', acceptsMultiple: multiple ? true : false};
+                    var options = { type: 'openFile', acceptsMultiple: multiple ? true : false };
                     if (mimetypes) {
-                        options.accepts = [{mimeTypes: [mimetypes]}];
+                        options.accepts = [{ mimeTypes: [mimetypes] }];
                     } else {
                         options.acceptsAllTypes = true;
                     }
@@ -55,15 +55,33 @@
                         resolve(objectUrlCache[id]);
                     } else {
                         chrome.fileSystem.isRestorable(id, function (isRestorable) {
-                            if (!isRestorable) {
-                                reject();
-                            }
-                            chrome.fileSystem.restoreEntry(id, function (entry) {
-                                entry.file(function (file) {
-                                    objectUrlCache[id] = URL.createObjectURL(file);
-                                    resolve(objectUrlCache[id]);
+                            try {
+                                if (!isRestorable) {
+                                    resolve(null);
+                                    return;
+                                }
+                                chrome.fileSystem.restoreEntry(id, function (entry) {
+
+                                    if (chrome.runtime.lastError) {
+                                        console.log("Fehler: " + chrome.runtime.lastError)
+                                        resolve(null);
+                                    } else {
+                                        if (entry) {
+                                            entry.file(function (file) {
+                                                objectUrlCache[id] = URL.createObjectURL(file);
+                                                resolve(objectUrlCache[id]);
+                                            });
+                                        }
+                                        else {
+                                            console.log("Could not restore entry");
+                                            resolve(null);
+                                        }
+                                    }
                                 });
-                            });
+                            } catch (ex) {
+                                console.error("Komischer Error" + ex);
+                                resolve(null);
+                            }
                         });
                     }
                 })

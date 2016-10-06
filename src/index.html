@@ -39,10 +39,10 @@
     <script src="modules/presentation/clipDirective.js"></script>
     <!-- endbuild -->
 </head>
-<body ng-app="ps">
+<body ng-app="ps" class="anim-video-delay-long" ng-class="{'disable-ignored-scores': !presentation.enableIgnoredScores}">
 <div class="screen-container" id="screen-container">
-    <background-video url="presentation.bgVideoUrl"></background-video>
-    <clip url="presentation.videoUrl" start-at="presentation.startVideoAt"></clip>
+    <background-video url="presentation.bgVideoUrl" delay-switch></background-video>
+    <clip url="presentation.videoUrl" start-at="presentation.startVideoAt" ></clip>
 
     <div ng-switch="presentation.screen" ng-hide="presentation.bgVideo === 'pause'">
         <intro ng-switch-when="intro"></intro>

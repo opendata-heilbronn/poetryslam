@@ -84,15 +84,12 @@
                                             value="{{determinateValue}}"></md-progress-linear>
 
                         <md-list flex>
-                            <md-list-item class="md-3-line" ng-repeat="audio in event.sounds track by $index"
-                                          ng-click="null">
-                                <div class="md-list-item-text" layout="column">
-                                    <h3>{{ audio.name }}</h3>
-                                </div>
-                                <md-button class="md-secondary" ng-click="playSound($event, audio, $index)">
-                                    <md-icon ng-show="audiomode.lastIndex == $index"
+                            <md-list-item ng-repeat="audio in event.sounds track by $index">
+                                <p>{{ audio.name && audio.name.length > 40 ? audio.name.substr(0, 40) + '...' : audio.name }}</p>
+                                <md-button class="md-secondary md-icon-button" ng-click="playSound($event, audio, $index)">
+                                    <md-icon ng-if="audiomode.lastIndex == $index"
                                              md-svg-icon="av:{{audiomode.symbol}}"></md-icon>
-                                    <md-icon ng-show="audiomode.lastIndex != $index"
+                                    <md-icon ng-if="audiomode.lastIndex != $index"
                                              md-svg-icon="av:play_arrow"></md-icon>
                                 </md-button>
                             </md-list-item>

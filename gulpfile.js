@@ -34,8 +34,12 @@ gulp.task('copy-cname', ['clean'], function () {
     return gulp.src('CNAME')
         .pipe(gulp.dest('build'));
 });
+gulp.task('copy-chrome-app-files', ['clean'], function () {
+    return gulp.src(['src/manifest.json', 'src/background.js'])
+        .pipe(gulp.dest('build'));
+});
 
-gulp.task('package', ['copy-images', 'copy-fonts', 'copy-icons', 'copy-modules', 'copy-html', 'copy-cname'], function () {
+gulp.task('package', ['copy-images', 'copy-fonts', 'copy-icons', 'copy-modules', 'copy-html', 'copy-cname', 'copy-chrome-app-files'], function () {
     return gulp.src('src/*.html')
         .pipe(usemin({
             css: ['concat'],

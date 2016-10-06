@@ -15,6 +15,7 @@
               };
               $scope.selectCompetition = function(competition) {
                 $rootScope.event.view.competitionId = competition.id;
+                $rootScope.event.view.enableIgnoredScores = competition.enableIgnoredScores;
               };
             }
         }

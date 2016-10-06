@@ -26,6 +26,17 @@
             return result ? result : null;
         };
 
+        this.findGroupParticipant = function (competition, participantId) {
+            if (!competition.groups) return null;
+            var that = this;
+            var result = null;
+            competition.groups.forEach(function (group) {
+                if (result != null) return true;
+                result = that.getGroupParticipant(group, participantId);
+            });
+            return result;
+        };
+
         this.getParticipant = function (event, id) {
             if (!id) return {};
             var result = $filter('entryOfId')(id, event.participants);
@@ -58,7 +69,14 @@
             }
         };
 
-        this.markIgnoredScores = function (scores) {
+        this.markIgnoredScores = function (scores, enableIgnoredScores) {
+            if (!enableIgnoredScores) {
+                scores.forEach(function (score) {
+                    score.ignored = false;
+                });
+                return scores;
+            }
+
             var lowest = 99999, highest = -99999;
             var counterForRealNumbers = 0;
             scores.forEach(function (score) {
@@ -213,7 +231,7 @@
             competition.fixedWinnersPerGroup = (competition.winners - competition.acrossGroupsWinners) / competition.groups.length;
         };
 
-        var updateGroupParticipant = function (cGroupParticipant) {
+        var updateGroupParticipant = function (cGroupParticipant, enableIgnoredScores) {
             if (Array.isArray(cGroupParticipant.scores)) {
                 cGroupParticipant.scores.forEach(function (score) {
                     if (score.value) score.value = score.value.replace(/,/, '.');
@@ -221,7 +239,7 @@
                 if (cGroupParticipant.extraScore) {
                     cGroupParticipant.extraScore = cGroupParticipant.extraScore.replace(/,/, '.');
                 }
-                that.markIgnoredScores(cGroupParticipant.scores);
+                that.markIgnoredScores(cGroupParticipant.scores, enableIgnoredScores);
                 cGroupParticipant.totalScore = that.sumScore(cGroupParticipant.scores);
                 cGroupParticipant.secondTotalScore = that.sumScoreSecond(cGroupParticipant.scores);
                 cGroupParticipant.thirdTotalScore = addExtraScore(cGroupParticipant.extraScore, cGroupParticipant.secondTotalScore);
@@ -245,6 +263,7 @@
                 bgVideo: event.view.bgVideo,
                 startVideoAt: event.view.startVideoAt,
                 winnersToShow: event.view.winnersToShow,
+                enableIgnoredScores: event.view.enableIgnoredScores,
                 customText: event.view.customText,
                 customTextSubline: event.view.customTextSubline
             };
@@ -255,10 +274,12 @@
             if (competition && competition.groups) {
                 competition.groups.forEach(function (cGroup) {
                     if (cGroup.participants) {
-                        cGroup.participants.forEach(updateGroupParticipant);
+                        cGroup.participants.forEach(function (cgParticipant) {
+                            updateGroupParticipant(cgParticipant, event.view.enableIgnoredScores);
+                        });
                     }
                     if (cGroup.sacrifice) {
-                        updateGroupParticipant(cGroup.sacrifice);
+                        updateGroupParticipant(cGroup.sacrifice, event.view.enableIgnoredScores);
                     }
                 })
             }
@@ -312,7 +333,7 @@
                 return presentation;
             }).catch(function (e) {
                 console.error('error updating presentation');
-                console.trace(e.stack);
+                if (e && e.stack) { console.trace(e.stack); }
             });
         };
 
