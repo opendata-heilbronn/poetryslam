@@ -4,14 +4,19 @@
     angular.module('psadmin').controller('PresentationCtrl', function ($scope, event, PresentationService) {
         $scope.event = event;
 
+        $scope.playBgVideo = function (type) {
+            if ($scope.event.bgVideos && $scope.event.bgVideos[type]) {
+                $scope.event.view.bgVideo = type;
+                $scope.updatePresentation();
+            }
+        };
+
         $scope.reset = function () {
-            $scope.event.view = {video: 'pause'};
-            $scope.updatePresentation();
+            $scope.playBgVideo('pause');
         };
 
         $scope.resetGroup = function () {
-            $scope.event.view.bgVideo = 'pause';
-            $scope.updatePresentation();
+            $scope.playBgVideo('pause');
             $scope.event.view.groupId = null;
             $scope.event.view.participantId = null;
             $scope.updatePresentation();
