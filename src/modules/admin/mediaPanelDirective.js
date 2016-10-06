@@ -6,6 +6,31 @@
             templateUrl: '/modules/admin/partials/mediaPanel.html',
             scope: true,
             link: function (scope) {
+            //shortcuts strg/ctrl + numberkey = play/pause song and strg + s = stop
+                if (window.addEventListener)
+                    window.addEventListener("keydown", keycodes, false);
+                else if (window.attachEvent)
+                    var e = window.attachEvent("onkeydown", keycodes(e));
+                function keycodes (e) {
+                  console.log('keycodes');
+                        if (e.ctrlKey) {
+                            console.log('with ctrl');
+                            if(e.key == "S" || e.key == "s"){
+                                scope.stopSound(null);
+                            }else{
+                                var index = parseInt(e.key) - 1;
+                                    // 1 =^ 0, 2 =^ 1,... and 0 =^ 10  (key =^ soundindex)
+                                    if (index == -1 ){
+                                        index = 10;
+                                    }
+                                    if (!isNaN(index) && index <= scope.$root.event.sounds.length && index <11) {
+                                        scope.playSound(null, scope.$root.event.sounds[index], index);
+
+                                    }
+                            }
+                        }
+                }
+
                 scope.event = scope.$root.event;
                 scope.setScreen = scope.$parent.setScreen;
                 scope.selected = {};
