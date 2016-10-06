@@ -332,7 +332,7 @@
                 return presentation;
             }).catch(function (e) {
                 console.error('error updating presentation');
-                console.trace(e.stack);
+                if (e && e.stack) { console.trace(e.stack); }
             });
         };
 

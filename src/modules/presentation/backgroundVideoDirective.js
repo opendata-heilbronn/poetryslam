@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('ps.presentation').directive('backgroundVideo', function () {
+    angular.module('ps.presentation').directive('backgroundVideo', function ($document, $timeout) {
         return {
             restrict: 'E',
             scope: {
@@ -12,6 +12,11 @@
                 var currentVideoElement;
 
                 scope.$watch('url', function (url) {
+                    $document[0].body.classList.add("anim-video-delay-long");
+                    $timeout(function () {
+                        $document[0].body.classList.remove("anim-video-delay-long");
+                    }, 4000);
+
                     console.log('recieved url: ' + url);
                     if (url && url !== currentUrl) {
                         // we have to do this to avoid flickering
