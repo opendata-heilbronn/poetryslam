@@ -115,20 +115,6 @@ html, body {
 
 /** PARTICIPANT **/
 
-.anim-video-delay {
-    animation-delay: 0s;
-}
-.anim-video-delay-secondary {
-    animation-delay: 1s;
-}
-
-.anim-video-delay-long .anim-video-delay {
-    animation-delay: 2s;
-}
-.anim-video-delay-long .anim-video-delay-secondary {
-    animation-delay: 3s;
-}
-
 @keyframes sublineIntro {
     0% {
         opacity: 0;
@@ -152,6 +138,20 @@ html, body {
     }
 }
 
+.anim-video-delay {
+    animation-delay: 0s;
+}
+.anim-video-delay-secondary {
+    animation-delay: 1s;
+}
+
+.anim-video-delay-long .anim-video-delay {
+    animation-delay: 2.5s;
+}
+.anim-video-delay-long .anim-video-delay-secondary {
+    animation-delay: 3.5s;
+}
+
 .animation-subline-intro {
     animation-duration: 3s;
     animation-name: sublineIntro;
@@ -168,6 +168,23 @@ html, body {
 .animation-subline-intro-after.after-video {
     animation-delay: 3.9s;
 }
+
+.anim-video-delay-long .animation-subline-intro {
+    animation-delay: 2.5s;
+}
+
+.anim-video-delay-long .animation-subline-intro.after-video {
+    animation-delay: 4s;
+}
+
+.anim-video-delay-long .animation-subline-intro-after {
+    animation-delay: 4.9s;
+}
+
+.anim-video-delay-long .animation-subline-intro-after.after-video {
+    animation-delay: 6.4s;
+}
+
 
 .scores {
     display: flex;

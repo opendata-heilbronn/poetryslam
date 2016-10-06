@@ -1,10 +1,10 @@
 <div class="video-overlay">
     <div class="overlay-center">
-        <div class="participant-list animated fadeIn" style="animation-delay: 2s">
+        <div class="participant-list animated fadeIn anim-video-delay">
             <rating-participant ng-repeat="participant in presentation.winnerList track by $index"
                                 class="participant-row animated winner-row"
                                 ng-class="{'winner-row-visible': isWinnerRowVisible($index)}"></rating-participant>
-            <div class="overlay-subline list-subline animated fadeIn" style="animation-delay: 2s">
+            <div class="overlay-subline list-subline animated fadeIn anim-video-delay">
                 Ergebnisse {{presentation.competitionName}}
             </div>
         </div>

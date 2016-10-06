@@ -10,12 +10,17 @@
             link: function (scope, element) {
                 var currentUrl;
                 var currentVideoElement;
+                var timeoutPromise;
 
                 scope.$watch('url', function (url) {
+                    if (timeoutPromise) {
+                        $timeout.cancel(timeoutPromise);
+                    }
                     $document[0].body.classList.add("anim-video-delay-long");
-                    $timeout(function () {
+                    timeoutPromise = $timeout(function () {
                         $document[0].body.classList.remove("anim-video-delay-long");
-                    }, 4000);
+                        timeoutPromise = null;
+                    }, 6000);
 
                     console.log('recieved url: ' + url);
                     if (url && url !== currentUrl) {
