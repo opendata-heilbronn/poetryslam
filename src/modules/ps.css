@@ -213,12 +213,18 @@ html, body {
     color: #000;
     background-clip: padding-box;
     padding: 1.4vw;
-    flex: 0 0 10px;
+    flex: 0 0 auto;
     border: 0.75vw solid transparent;
+    min-width: 2.5ch;
 }
 
 .scores li.light {
     opacity: 0.5;
+}
+
+odometer {
+    display: block;
+    min-height: 14vh;
 }
 
 /** PARTICIPANT LIST **/
