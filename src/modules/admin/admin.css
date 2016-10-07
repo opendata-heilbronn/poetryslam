@@ -139,6 +139,10 @@ md-list .md-button.selected {
     color: #03a9f4;
 }
 
+.shortcut-info {
+    color: #03a9f4;
+}
+
 button#main {
     margin-bottom: 10px;
 }

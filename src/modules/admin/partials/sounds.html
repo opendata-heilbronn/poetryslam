@@ -8,8 +8,18 @@
     </md-toolbar>
 
     <md-content class="md-padding">
-        <md-list-item ng-repeat="sound in event.sounds">
-            <p> {{ sound.name }} </p>
-        </md-list-item>
+        <md-list ng-sortable>
+            <md-list-item ng-repeat="sound in event.sounds">
+                <p>{{ sound.name }} <small class="shortcut-info" ng-show="$index <= 8">[Strg + {{$index + 1}}] </small></p>
+            </md-list-item>
+        </md-list>
     </md-content>
 </section>
+
+<p>
+
+</p>
+
+<p>
+    <small>Die Reihenfolge und damit auch die Shortcuts kannst du mit Drag & Drop ändern. Shortcut für Stop: <span class="shortcut-info">[Strg + S]</span></small>
+</p>

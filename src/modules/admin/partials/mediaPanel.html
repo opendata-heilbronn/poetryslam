@@ -80,13 +80,13 @@
                         <md-list flex>
                             <md-list-item ng-repeat="sound in event.sounds track by $index">
                                 <p>{{ sound.name && sound.name.length > 40 ? sound.name.substr(0, 40) + '...' :
-                                    sound.name }}</p>
-                                <md-button class="md-secondary md-icon-button" ng-if="event.sound !== sound || (event.sound === sound && soundState === 'pause')"
+                                    sound.name }} <small class="shortcut-info" ng-show="$index <= 8">[Strg + {{$index + 1}}] </small></p>
+                                <md-button class="md-secondary md-icon-button" ng-show="event.sound !== sound || (event.sound === sound && event.soundState === 'pause')"
                                            aria-label="Play"
                                            ng-click="playSound(sound)">
                                     <md-icon md-svg-icon="av:play_arrow"></md-icon>
                                 </md-button>
-                                <md-button class="md-secondary md-icon-button" ng-if="event.sound === sound && soundState !== 'pause'"
+                                <md-button class="md-secondary md-icon-button" ng-show="event.sound === sound && event.soundState !== 'pause'"
                                            aria-label="Pause"
                                            ng-click="pauseSound(sound)">
                                     <md-icon md-svg-icon="av:pause"></md-icon>
@@ -102,6 +102,7 @@
                         <md-content layout-padding>
                             <md-button ng-click="stopSound()" aria-label="Stop">
                                 <md-icon md-svg-icon="av:stop"></md-icon>
+                                <span class="shortcut-info">[Strg + S]</span>
                             </md-button>
                         </md-content>
                     </md-sidenav>

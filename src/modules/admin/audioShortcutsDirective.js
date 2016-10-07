@@ -19,10 +19,12 @@
                             if (!isNaN(index) && index < 11 && Array.isArray(scope.$root.event.sounds) && scope.$root.event.sounds[index]) {
                                 var newSound = scope.$root.event.sounds[index];
                                 if (scope.$root.event.sound == newSound) {
-                                    scope.$root.$emit('sound.pause');
+                                    scope.$root.event.soundState = scope.$root.event.soundState === 'play' ? 'pause' : 'play';
+                                    scope.$root.$emit('sound.' + scope.$root.event.soundState);
                                 } else {
                                     scope.$root.event.sound = newSound;
                                     scope.$root.$emit('sound.change');
+                                    scope.$root.event.soundState = 'play';
                                     scope.$root.$emit('sound.play');
                                 }
                                 scope.$apply();
