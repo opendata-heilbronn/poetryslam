@@ -110,7 +110,7 @@ html, body {
     margin-top: 0.5vw;
     font-size: 4vh;
     font-family: Georgia;
-    text-shadow: 3px 3px 3px #000;
+    text-shadow: -1px 1px 3px #000, -2px 2px 3px #000, -3px 3px 3px #000, -4px 4px 3px #000, -5px 5px 3px #000, -6px 6px 3px #000, -7px 7px 3px #000, -8px 8px 3px #000, -9px 9px 3px #000, -10px 10px 3px #000;
 }
 
 /** PARTICIPANT **/
@@ -141,6 +141,7 @@ html, body {
 .anim-video-delay {
     animation-delay: 0s;
 }
+
 .anim-video-delay-secondary {
     animation-delay: 1s;
 }
@@ -148,6 +149,7 @@ html, body {
 .anim-video-delay-long .anim-video-delay {
     animation-delay: 2.5s;
 }
+
 .anim-video-delay-long .anim-video-delay-secondary {
     animation-delay: 3.5s;
 }
@@ -184,7 +186,6 @@ html, body {
 .anim-video-delay-long .animation-subline-intro-after.after-video {
     animation-delay: 6.4s;
 }
-
 
 .scores {
     display: flex;
@@ -298,7 +299,6 @@ html, body {
 .disable-ignored-scores .participant-ignored-scores {
     display: none !important;
 }
-
 
 /** TODO we need a configuration option for the user to disable the second row in participant lists **/
 .participant-list-name {
