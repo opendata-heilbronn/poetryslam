@@ -69,7 +69,7 @@ html, body {
 }
 
 .box {
-    padding: 1%;
+    padding: 1.33%;
     box-sizing: border-box;
     text-transform: uppercase;
     opacity: 0.9;
@@ -278,7 +278,7 @@ html, body {
     font-size: 3vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     min-width: 10vw;
     font-weight: bold;
 }
@@ -297,4 +297,19 @@ html, body {
 .disable-ignored-scores .participant-second-total,
 .disable-ignored-scores .participant-ignored-scores {
     display: none !important;
+}
+
+
+/** TODO we need a configuration option for the user to disable the second row in participant lists **/
+.participant-list-name {
+    font-size: 3.5vh;
+    line-height: 4.5vh;
+}
+
+.participant-column-score {
+    font-size: 3.5vh;
+}
+
+.participant-list-slam {
+    display: none;
 }
