@@ -9,7 +9,7 @@
     <div class="overlay-center animated fadeInLeftBig remove-instant anim-video-delay"
          ng-if="presentation.phase == 'rating' || presentation.phase == 'total' || presentation.phase == 'ratingFinal'">
         <div class="overlay-highlight box box-highlight box-scores">
-            <ul class="scores animated" ng-class="{'zoomOut': presentation.phase == 'total'}">
+            <ul class="scores animated scores-count-{{presentation.scores.length}}" ng-class="{'zoomOut': presentation.phase == 'total'}">
                 <li class="animated" ng-repeat="score in presentation.scores track by $index"
                     ng-class="{'light': score.value === '', 'hinge': score.ignored && presentation.phase == 'ratingFinal'}">
                     <figure class="front">{{score.value ? (score.value | number: 1) : ''}}</figure>

@@ -218,7 +218,7 @@ html, body {
     height: 5.3vw;
     border: 0.75vw solid transparent;
     transform-style: preserve-3d;
-    transition: transform 1s;
+    transition: transform 600ms;
     position: relative;
 }
 
@@ -244,6 +244,11 @@ html, body {
 
 .scores li figure.back {
     transform: rotateY(180deg);
+}
+
+.scores.scores-count-7 {
+    width: 80%;
+    margin: 0 auto;
 }
 
 odometer {
