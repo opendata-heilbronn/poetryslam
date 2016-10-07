@@ -77,20 +77,19 @@
                 <section layout="row" flex>
                     <md-content flex layout="row" layout-wrap layout-padding layout-align="start start"
                                 style="margin: -1rem;">
-                        <audio id="media-audio"></audio>
-
-
-                        <md-progress-linear id="progress-bar" md-mode="determinate"
-                                            value="{{determinateValue}}"></md-progress-linear>
-
                         <md-list flex>
-                            <md-list-item ng-repeat="audio in event.sounds track by $index">
-                                <p>{{ audio.name && audio.name.length > 40 ? audio.name.substr(0, 40) + '...' : audio.name }}</p>
-                                <md-button class="md-secondary md-icon-button" ng-click="playSound($event, audio, $index)">
-                                    <md-icon ng-if="audiomode.lastIndex == $index"
-                                             md-svg-icon="av:{{audiomode.symbol}}"></md-icon>
-                                    <md-icon ng-if="audiomode.lastIndex != $index"
-                                             md-svg-icon="av:play_arrow"></md-icon>
+                            <md-list-item ng-repeat="sound in event.sounds track by $index">
+                                <p>{{ sound.name && sound.name.length > 40 ? sound.name.substr(0, 40) + '...' :
+                                    sound.name }}</p>
+                                <md-button class="md-secondary md-icon-button" ng-if="event.sound !== sound || (event.sound === sound && soundState === 'pause')"
+                                           aria-label="Play"
+                                           ng-click="playSound(sound)">
+                                    <md-icon md-svg-icon="av:play_arrow"></md-icon>
+                                </md-button>
+                                <md-button class="md-secondary md-icon-button" ng-if="event.sound === sound && soundState !== 'pause'"
+                                           aria-label="Pause"
+                                           ng-click="pauseSound(sound)">
+                                    <md-icon md-svg-icon="av:pause"></md-icon>
                                 </md-button>
                             </md-list-item>
                         </md-list>
@@ -101,7 +100,7 @@
                             md-is-locked-open="true"
                             md-whiteframe="4">
                         <md-content layout-padding>
-                            <md-button ng-click="stopSound($event)" aria-label="Stop">
+                            <md-button ng-click="stopSound()" aria-label="Stop">
                                 <md-icon md-svg-icon="av:stop"></md-icon>
                             </md-button>
                         </md-content>

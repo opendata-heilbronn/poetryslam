@@ -65,9 +65,13 @@
     <script src="modules/admin/offerPresentationWindowDirective.js"></script>
     <script src="modules/admin/VideoAdminCtrl.js"></script>
     <script src="modules/admin/SoundAdminCtrl.js"></script>
+    <script src="modules/admin/backgroundAudioDirective.js"></script>
+    <script src="modules/admin/audioShortcutsDirective.js"></script>
     <!-- endbuild -->
 </head>
 <body layout="row" ng-app="psadmin">
+<background-audio audio-shortcuts></background-audio>
+
 <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
     <a href="admin.html#/"><img src="/media/logo/logo-stuttgart.png" class="sidebar-logo"/></a>
 
