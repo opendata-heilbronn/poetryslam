@@ -6,30 +6,29 @@
             templateUrl: '/modules/admin/partials/mediaPanel.html',
             scope: true,
             link: function (scope) {
-            //shortcuts strg/ctrl + numberkey = play/pause song and strg + s = stop
-                if (window.addEventListener)
-                    window.addEventListener("keydown", keycodes, false);
-                else if (window.attachEvent)
-                    var e = window.attachEvent("onkeydown", keycodes(e));
-                function keycodes (e) {
-                  console.log('keycodes');
-                        if (e.ctrlKey) {
-                            console.log('with ctrl');
-                            if(e.key == "S" || e.key == "s"){
-                                scope.stopSound(null);
-                            }else{
-                                var index = parseInt(e.key) - 1;
-                                    // 1 =^ 0, 2 =^ 1,... and 0 =^ 10  (key =^ soundindex)
-                                    if (index == -1 ){
-                                        index = 10;
-                                    }
-                                    if (!isNaN(index) && index <= scope.$root.event.sounds.length && index <11) {
-                                        scope.playSound(null, scope.$root.event.sounds[index], index);
-
-                                    }
+                //shortcuts strg/ctrl + numberkey = play/pause song and strg + s = stop
+                window.addEventListener("keydown", keycodes);
+                function keycodes(e) {
+                    if (e.ctrlKey) {
+                        if (e.key == "S" || e.key == "s") {
+                            scope.stopSound(null);
+                        } else {
+                            var index = parseInt(e.key) - 1;
+                            // 1 =^ 0, 2 =^ 1,... and 0 =^ 10  (key =^ soundindex)
+                            if (index == -1) {
+                                index = 10;
+                            }
+                            console.log(scope.$root);
+                            if (!isNaN(index) && index < 11 && Array.isArray(scope.$root.event.sounds) && scope.$root.event.sounds[index]) {
+                                scope.playSound(null, scope.$root.event.sounds[index], index);
                             }
                         }
+                    }
                 }
+
+                scope.$on('$destroy', function () {
+                    window.removeEventListener("keydown", keycodes);
+                });
 
                 scope.event = scope.$root.event;
                 scope.setScreen = scope.$parent.setScreen;
@@ -85,14 +84,14 @@
                         scope.element.volume = 0;
                         setTimeout(function () {
                             scope.element.pause();
-                        },2);
+                        }, 2);
 
                     } else {
                         scope.audiomode.symbol = "pause";
                         scope.audiomode.playing = true;
-                        if(index == scope.audiomode.lastIndex){
+                        if (index == scope.audiomode.lastIndex) {
                             playWithFadeIn(scope.audiomode.time);
-                        }else {
+                        } else {
                             scope.audiomode.lastIndex = index;
                             scope.element = getAudioElement();
                             scope.selectedAudio = sound;
@@ -115,7 +114,7 @@
                         try {
                             scope.element.currentTime = timeToStart;
                         }
-                        catch(err) {
+                        catch (err) {
                             console.log(err);
                         }
                         scope.element.play();
@@ -124,7 +123,7 @@
 
                             // Only fade if past the fade out point or not at zero already
 
-                            if ((scope.element.currentTime <= 0.02+timeToStart) && (scope.element.volume !== 1.0)) {
+                            if ((scope.element.currentTime <= 0.02 + timeToStart) && (scope.element.volume !== 1.0)) {
                                 //multip. for parabel fade
 
                                 scope.element.volume = 1;
@@ -136,7 +135,7 @@
                         }, 1);
                         // Set the point in playback that fadeout begins. This is for a 2 second fade out.
                         var detectCloseToEnd = setInterval(function () {
-                            if(scope.element.currentTime >= (fadePoint - 1.1) || scope.element.volume == 0) {
+                            if (scope.element.currentTime >= (fadePoint - 1.1) || scope.element.volume == 0) {
                                 var fadeAudioEnd = setInterval(function () {
 
                                     // Only fade if past the fade out point or not at zero already
@@ -163,7 +162,7 @@
                     scope.audiomode.symbol = "play_arrow";
                     setTimeout(function () {
                         element.pause();
-                    },1);
+                    }, 1);
                 };
             }
         };
