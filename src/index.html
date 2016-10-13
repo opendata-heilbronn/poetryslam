@@ -37,6 +37,7 @@
     <script src="modules/presentation/html2canvas.js"></script>
     <script src="modules/presentation/backgroundVideoDirective.js"></script>
     <script src="modules/presentation/clipDirective.js"></script>
+    <script src="modules/presentation/fullscreenDirective.js"></script>
     <!-- endbuild -->
 </head>
 <body ng-app="ps" class="anim-video-delay-long" ng-class="{'disable-ignored-scores': !presentation.enableIgnoredScores}">
@@ -52,6 +53,9 @@
         <group-ratings ng-switch-when="groupRatings"></group-ratings>
         <competition-ratings ng-switch-when="competitionRatings"></competition-ratings>
     </div>
+</div>
+<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 100000000;" fullscreen>
+    
 </div>
 </body>
 </html>
