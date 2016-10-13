@@ -1,5 +1,5 @@
 (function () {
     'use strict';
 
-    angular.module('ps.presentation', []);
+    angular.module('ps.presentation', ['ngMaterial' ]);
 })();

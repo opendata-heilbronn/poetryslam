@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="fonts/SourceSansPro-Light.css"/>
     <link href="fonts/RobotoFonts.css" rel="stylesheet">
     <!-- build:css index.min.css -->
+    <link rel="stylesheet" href="components/angular-material/angular-material.css">
     <link rel="stylesheet" href="components/animate.css/animate.css"/>
     <link rel="stylesheet" href="components/odometer/themes/odometer-theme-minimal.css"/>
     <link rel="stylesheet" href="modules/ps.css"/>
@@ -15,8 +16,11 @@
     <!-- build:js index.min.js -->
     <script src='components/jquery/dist/jquery.min.js'></script>
     <script src="components/angular/angular.js"></script>
-    <script src="components/angular-i18n/angular-locale_de-de.js"></script>
+
+    <script src="components/angular-aria/angular-aria.js"></script>
     <script src="components/angular-animate/angular-animate.js"></script>
+    <script src="components/angular-material/angular-material.js"></script>
+    <script src="components/angular-i18n/angular-locale_de-de.js"></script>
     <script src="components/odometer/odometer.js"></script>
     <script src="components/Flowtype.js/flowtype.js"></script>
     <script src="components/angular-flowtype/angular-flowtype.js"></script>
@@ -40,7 +44,7 @@
     <script src="modules/presentation/fullscreenDirective.js"></script>
     <!-- endbuild -->
 </head>
-<body ng-app="ps" class="anim-video-delay-long" ng-class="{'disable-ignored-scores': !presentation.enableIgnoredScores}">
+<body ng-app="ps" class="anim-video-delay-long" ng-class="{'disable-ignored-scores': !presentation.enableIgnoredScores}" fullscreen>
 <div class="screen-container" id="screen-container">
     <background-video url="presentation.bgVideoUrl" delay-switch></background-video>
     <clip url="presentation.videoUrl" start-at="presentation.startVideoAt" ></clip>
@@ -54,7 +58,6 @@
         <competition-ratings ng-switch-when="competitionRatings"></competition-ratings>
     </div>
 </div>
-<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 100000000;" fullscreen>
     
 </div>
 </body>
