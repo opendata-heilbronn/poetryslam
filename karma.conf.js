@@ -21,6 +21,8 @@ module.exports = function (config) {
             'src/components/angular-animate/angular-animate.js',
             'src/components/angular-aria/angular-aria.js',
             'src/components/angular-route/angular-route.js',
+            'src/components/angular-messages/angular-messages.js',
+            'src/components/angular-material-data-table/dist/md-data-table.js',
             'src/components/Sortable/Sortable.js',
             'src/components/Sortable/ng-sortable.js',
             'src/components/odometer/odometer.js',
@@ -31,6 +33,7 @@ module.exports = function (config) {
             'node_modules/angular-mocks/angular-mocks.js',
             'src/modules/presentation/ps.presentation.js',
             'src/modules/sync/ps.sync.js',
+            'src/modules/storage/ps.storage.js',
             'src/modules/ps.js',
             'src/modules/admin/ps.admin.js',
             'src/modules/**/*.js',
@@ -79,7 +82,7 @@ module.exports = function (config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['PhantomJS'],
+        browsers: ['Chrome'],
 
 
         // Continuous Integration mode

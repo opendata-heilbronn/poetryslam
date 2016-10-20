@@ -6,7 +6,7 @@
             scope: false,
             link: function (scope, element, attrs) {
                 scope.$watch(attrs['provideParticipant'], function (participantId) {
-                    const competition = scope.getCompetition();
+                    var competition = scope.getCompetition();
                     scope.participant = PresentationService.findGroupParticipant(competition, participantId);
                 })
             }
