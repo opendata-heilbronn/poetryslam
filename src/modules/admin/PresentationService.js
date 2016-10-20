@@ -53,7 +53,7 @@
             return Math.round(total * 10) / 10;
         };
 
-        this.sumScoreSecond = function (scores) {
+        this.sumScoreSecond = function (scores, enableIgnoredScores) {
             var total = 0;
             scores.forEach(function (score) {
                 if (score.value) {
@@ -69,7 +69,7 @@
             }
         };
 
-        this.markIgnoredScores = function (scores, enableIgnoredScores) {
+        this.markIgnoredScores = function (scores) {
             var lowest = 99999, highest = -99999;
             var counterForRealNumbers = 0;
             scores.forEach(function (score) {
@@ -232,9 +232,9 @@
                 if (cGroupParticipant.extraScore) {
                     cGroupParticipant.extraScore = cGroupParticipant.extraScore.replace(/,/, '.');
                 }
-                that.markIgnoredScores(cGroupParticipant.scores, enableIgnoredScores);
+                that.markIgnoredScores(cGroupParticipant.scores);
                 cGroupParticipant.totalScore = that.sumScore(cGroupParticipant.scores);
-                cGroupParticipant.secondTotalScore = that.sumScoreSecond(cGroupParticipant.scores);
+                cGroupParticipant.secondTotalScore = enableIgnoredScores ? that.sumScoreSecond(cGroupParticipant.scores) : cGroupParticipant.totalScore;
                 cGroupParticipant.thirdTotalScore = addExtraScore(cGroupParticipant.extraScore, cGroupParticipant.secondTotalScore);
             }
         };
