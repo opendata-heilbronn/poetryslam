@@ -246,6 +246,10 @@ html, body {
     transform: rotateY(180deg);
 }
 
+.scores li.hinge figure.back {
+    display: none;
+}
+
 .scores.scores-count-7 {
     width: 80%;
     margin: 0 auto;

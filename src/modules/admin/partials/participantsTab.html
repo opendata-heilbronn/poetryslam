@@ -40,7 +40,7 @@
                     ng-class="{'md-primary': event.view.phase == 'rating' && event.view.bgVideo != 'pause'}">
                 2. Wertungen anzeigen
             </md-button>
-            <md-button ng-disabled="!event.view.participantId" ng-show="event.view.enableIgnoredScores"
+            <md-button ng-disabled="!event.view.participantId"
                        ng-click="setScreen('participant', 'ratingFinal')"
                        ng-class="{'md-primary': event.view.phase == 'ratingFinal' && event.view.bgVideo != 'pause'}">
                 3. höchste / niedrigste Wertung streichen
@@ -49,13 +49,13 @@
                     ng-disabled="!event.view.participantId"
                     ng-click="setScreen('participant', 'total')"
                     ng-class="{'md-primary': event.view.phase == 'total' && event.view.bgVideo != 'pause'}">
-                {{event.view.enableIgnoredScores ? '4' : '3'}}. Wertungssumme anzeigen
+                4. Wertungssumme anzeigen
             </md-button>
             <md-button
                     ng-click="setScreen('groupRatings')"
                     ng-class="{'md-primary': event.view.phase == 'groupRatings' && event.view.bgVideo != 'pause'}"
                     ng-disabled="!event.view.participantId || event.view.participantId == getGroup().sacrifice.id">
-                {{event.view.enableIgnoredScores ? '5' : '4'}}. Zwischenstand der Gruppe anzeigen
+                5. Zwischenstand der Gruppe anzeigen
             </md-button>
         </md-content>
     </md-sidenav>

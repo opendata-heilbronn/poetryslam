@@ -70,13 +70,6 @@
         };
 
         this.markIgnoredScores = function (scores, enableIgnoredScores) {
-            if (!enableIgnoredScores) {
-                scores.forEach(function (score) {
-                    score.ignored = false;
-                });
-                return scores;
-            }
-
             var lowest = 99999, highest = -99999;
             var counterForRealNumbers = 0;
             scores.forEach(function (score) {
