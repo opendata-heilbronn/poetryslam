@@ -2,7 +2,7 @@
 * Jonathan - ja
 * Moritz - ja 
 * Adrian - nein
-* Jan - 
+* Jan - ja
 * Lukas - ja
 * Henrie - 
 * Marie - am samstag 2x
