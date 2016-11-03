@@ -28,6 +28,9 @@
                     if (url && url !== currentUrl) {
                         currentVideoElement = document.createElement('video');
                         currentVideoElement.classList.add('fullscreen-video');
+                        if (window.location.search && window.location.search.indexOf('embedded=1') >= 0) {
+                            currentVideoElement.muted = true;
+                        }
                         currentVideoElement.addEventListener('canplay', function () {
                             element[0].style.display = 'block';
                             currentVideoElement.play();

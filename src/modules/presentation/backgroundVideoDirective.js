@@ -27,6 +27,9 @@
                         // we have to do this to avoid flickering
                         var newVideoElement = document.createElement('video');
                         newVideoElement.classList.add('fullscreen-video');
+                        if (window.location.search && window.location.search.indexOf('embedded=1') >= 0) {
+                            newVideoElement.muted = true;
+                        }
                         newVideoElement.addEventListener('canplay', function () {
                             newVideoElement.play();
                             element[0].appendChild(newVideoElement);
