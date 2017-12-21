@@ -5,7 +5,7 @@
         return {
             restrict: 'E',
             scope: true,
-            template: '<md-button class="md-secondary md-raised" ng-click="click()">Akutelle Veranstaltung herunterladen</md-button>',
+            template: '<md-button class="md-secondary md-raised" ng-click="click()">Aktuelle Veranstaltung herunterladen</md-button>',
             controller: function ($scope) {
                 $scope.click = function () {
                     StorageService.getItem('event').then(function (event) {
