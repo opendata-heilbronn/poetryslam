@@ -7,12 +7,17 @@
 * Regie - Dinge die während des Events erledigt werden
 
 
-
 ## Über
 
-Für den [BWSLAM 2016](http://www.bwslam16.de/) in Heilbronn hat die Initiative [Code for Heilbronn](http://codefor.de/heilbronn) für das [Popbüro Heilbronn](http://www.skjr-hn.de/index.php/popbuero) diese Präsentationssoftware ehrenamtlich entwickelt.
 Die Webanwendung ermöglicht, Teilnehmer, Wettbewerbe, Gruppen und Wertungen zu verwalten und während der Veranstaltung auf einem Beamer zu präsentieren.
 Das Hosting erfolgt über [GitHub Pages](https://pages.github.com).
+
+Für den [BWSLAM 2016](http://www.bwslam16.de/) in Heilbronn hat die Initiative [Code for Heilbronn](http://codefor.de/heilbronn) für das [Popbüro Heilbronn](http://www.skjr-hn.de/index.php/popbuero) diese Präsentationssoftware ehrenamtlich entwickelt.
+
+Die Software wurde u.a. bereits bei folgenden Events eingesetzt:
+* Landesmeisterschaft Heilbronn 2016 (BWSLAM)
+* Meisterschaft Stuttgart 2016
+* Meisterschaft Hannover 2017
 
 ### Funktionsweise
 
@@ -24,11 +29,11 @@ Einmal aufgerufen kann die Webanwendung auch offline verwendet werden.
 
 Steuerung der Präsentation:
 
-![Steuerung der Präsentation](/doc/screenshot-admin.png)
+![Steuerung der Präsentation](/doc/screenshot-admin-presentation.png)
 
 Admin-Oberfläche:
 
-![Admin-Oberfläche](/doc/screenshot-about.png)
+![Admin-Oberfläche](/doc/screenshot-admin-videos.png)
 
 Präsentation:
 
