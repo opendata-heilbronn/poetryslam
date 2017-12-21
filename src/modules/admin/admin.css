@@ -3,6 +3,16 @@ html, body {
     padding: 0;
 }
 
+.brand {
+    margin: 0.5rem 0 1rem 14px;
+}
+
+.brand a {
+    text-decoration: none;
+    font-size: 22px;
+    color: #000;
+}
+
 .clickable {
     cursor: pointer;
 }
