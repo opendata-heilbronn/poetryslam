@@ -1,21 +1,19 @@
 <div class="video-overlay">
     <div class="overlay-center remove-instant" ng-if="presentation.phase == 'name'">
-        <div class="overlay-highlight box box-highlight animated fadeInLeftBig animation-subline-intro-after"
-             ng-class="{'after-video': presentation.videoPlays}">
+        <div class="overlay-highlight box box-highlight animated fadeInLeftBig animation-subline-intro-after">
             {{presentation.participant.name}}
         </div>
-        <div class="overlay-subline animated animation-subline-intro"
-             ng-class="{'after-video': presentation.videoPlays}">{{presentation.participant.slam}}
+        <div class="overlay-subline animated animation-subline-intro">{{presentation.participant.slam}}
         </div>
     </div>
-    <div class="overlay-center animated fadeInLeftBig remove-instant"
-         ng-class="{'anim-video-delay': presentation.videoPlays}"
+    <div class="overlay-center animated fadeInLeftBig remove-instant anim-video-delay"
          ng-if="presentation.phase == 'rating' || presentation.phase == 'total' || presentation.phase == 'ratingFinal'">
-        <div class="overlay-highlight box box-highlight">
-            <ul class="scores animated" ng-class="{'zoomOut': presentation.phase == 'total'}">
+        <div class="overlay-highlight box box-highlight box-scores">
+            <ul class="scores animated scores-count-{{presentation.scores.length}}" ng-class="{'zoomOut': presentation.phase == 'total'}">
                 <li class="animated" ng-repeat="score in presentation.scores track by $index"
                     ng-class="{'light': score.value === '', 'hinge': score.ignored && presentation.phase == 'ratingFinal'}">
-                    {{score.value ? (score.value | number: 1) : '?'}}
+                    <figure class="front">{{score.value ? (score.value | number: 1) : ''}}</figure>
+                    <figure class="back">?</figure>
                 </li>
             </ul>
             <div class="animated fadeIn remove-instant" ng-if="presentation.phase == 'total'">

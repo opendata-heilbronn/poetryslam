@@ -1,0 +1,113 @@
+<section class="md-whiteframe-z2 admin-section">
+    <md-toolbar class="md-secondary">
+        <div class="md-toolbar-tools">
+            <span class="ng-binding">Einblendungen</span>
+        </div>
+    </md-toolbar>
+
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Text">
+                <section layout="row" flex>
+                    <md-content flex layout-padding>
+                        <div style="max-width:400px;">
+                            <md-input-container class="md-block">
+                                <label>Erste Zeile</label>
+                                <input ng-model="event.view.customText">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Zweite Zeile</label>
+                                <input ng-model="event.view.customTextSubline">
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                    <md-sidenav
+                            class="md-sidenav-right"
+                            md-component-id="groupsSidenav"
+                            md-is-locked-open="true"
+                            md-whiteframe="4">
+                        <md-content layout-padding>
+                            <md-button ng-disabled="!event.view.customText" ng-click="setScreen('customText')">
+                                Anzeigen
+                            </md-button>
+                        </md-content>
+                    </md-sidenav>
+                </section>
+            </md-tab>
+            <md-tab label="Videos">
+                <section layout="row" flex>
+                    <md-content flex layout="row" layout-wrap layout-padding layout-align="start start"
+                                style="margin: -1rem;">
+                        <div ng-repeat="video in event.videos track by $index" style="padding: 1rem">
+                            <div class="md-whiteframe-z2 video-preview-container"
+                                 ng-class="{selected: selected.video === video}">
+                                <dynamic-video video-id="video.id" ng-click="selected.video = video"
+                                               class="clickable video-preview-dimensions"></dynamic-video>
+                                <div style="padding:0.5rem;">{{ video.name }}</div>
+                            </div>
+                        </div>
+                    </md-content>
+                    <md-sidenav
+                            class="md-sidenav-right"
+                            md-component-id="groupsSidenav"
+                            md-is-locked-open="true"
+                            md-whiteframe="4">
+                        <md-content layout-padding>
+                            <md-button aria-label="Pause"
+                                       ng-disabled="!event.bgVideos.pause || event.view.bgVideo === 'pause'"
+                                       ng-click="playBgVideo('pause')">
+                                Zu Pause-Screen wechseln
+                            </md-button>
+                            <md-button ng-disabled="!selected.video" aria-label="Play"
+                                       ng-click="playClip(selected.video)">
+                                <md-icon md-svg-icon="av:play_arrow"></md-icon>
+                                Video abspielen
+                            </md-button>
+                            <md-button ng-disabled="!event.view.video" aria-label="Stop"
+                                       ng-click="stopClip()">
+                                <md-icon md-svg-icon="av:stop"></md-icon>
+                                Video stoppen
+                            </md-button>
+                        </md-content>
+                    </md-sidenav>
+
+                </section>
+            </md-tab>
+            <md-tab label="Audios">
+                <section layout="row" flex>
+                    <md-content flex layout="row" layout-wrap layout-padding layout-align="start start"
+                                style="margin: -1rem;">
+                        <md-list flex>
+                            <md-list-item ng-repeat="sound in event.sounds track by $index">
+                                <p>{{ sound.name && sound.name.length > 40 ? sound.name.substr(0, 40) + '...' :
+                                    sound.name }} <small class="shortcut-info" ng-show="$index <= 8">[Strg + {{$index + 1}}] </small></p>
+                                <md-button class="md-secondary md-icon-button" ng-show="event.sound !== sound || (event.sound === sound && event.soundState === 'pause')"
+                                           aria-label="Play"
+                                           ng-click="playSound(sound)">
+                                    <md-icon md-svg-icon="av:play_arrow"></md-icon>
+                                </md-button>
+                                <md-button class="md-secondary md-icon-button" ng-show="event.sound === sound && event.soundState !== 'pause'"
+                                           aria-label="Pause"
+                                           ng-click="pauseSound(sound)">
+                                    <md-icon md-svg-icon="av:pause"></md-icon>
+                                </md-button>
+                            </md-list-item>
+                        </md-list>
+                    </md-content>
+                    <md-sidenav
+                            class="md-sidenav-right"
+                            md-component-id="groupsSidenav"
+                            md-is-locked-open="true"
+                            md-whiteframe="4">
+                        <md-content layout-padding>
+                            <md-button ng-click="stopSound()" aria-label="Stop">
+                                <md-icon md-svg-icon="av:stop"></md-icon>
+                                <span class="shortcut-info">[Strg + S]</span>
+                            </md-button>
+                        </md-content>
+                    </md-sidenav>
+                </section>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</section>

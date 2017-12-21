@@ -5,19 +5,17 @@
     <title>Poetry Slam</title>
     <link rel="stylesheet" href="fonts/SourceSansPro-Black.css"/>
     <link rel="stylesheet" href="fonts/SourceSansPro-Light.css"/>
+    <link href="fonts/RobotoFonts.css" rel="stylesheet">
     <link rel="stylesheet" href="index.min.css"/>
 
     <script src="index.min.js"></script>
 </head>
-<body ng-app="ps">
-<div class="screen-container">
-    <video class="fullscreen-video" autoplay ng-if="presentation.video !== 'bg'">
-        <source src="/media/clips/bg_to_logo.mp4" type="video/mp4">
-    </video>
-    <video class="fullscreen-video" autoplay ng-if="presentation.video === 'bg'">
-        <source src="/media/clips/logo_to_bg.mp4" type="video/mp4">
-    </video>
-    <div ng-switch="presentation.screen" ng-hide="presentation.video === 'pause'">
+<body ng-app="ps" class="anim-video-delay-long" ng-class="{'disable-ignored-scores': !presentation.enableIgnoredScores}" fullscreen>
+<div class="screen-container" id="screen-container">
+    <background-video url="presentation.bgVideoUrl" delay-switch></background-video>
+    <clip url="presentation.videoUrl" start-at="presentation.startVideoAt" ></clip>
+
+    <div ng-switch="presentation.screen" ng-hide="presentation.bgVideo === 'pause'">
         <intro ng-switch-when="intro"></intro>
         <group ng-switch-when="group"></group>
         <custom-text ng-switch-when="customText"></custom-text>
@@ -25,6 +23,8 @@
         <group-ratings ng-switch-when="groupRatings"></group-ratings>
         <competition-ratings ng-switch-when="competitionRatings"></competition-ratings>
     </div>
+</div>
+    
 </div>
 </body>
 </html>

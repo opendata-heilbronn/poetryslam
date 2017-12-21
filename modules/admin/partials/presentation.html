@@ -2,194 +2,33 @@
     <md-toolbar class="md-secondary">
         <div class="md-toolbar-tools">
             <h3 class="ng-binding">Präsentation</h3>
+            <span flex></span>
+            <md-button class="md-raised md-warn" ng-hide="!event.bgVideos.pause || event.view.bgVideo === 'pause'"
+                       ng-click="playBgVideo('pause')">Pause</md-button>
         </div>
     </md-toolbar>
 
-    <md-content class="md-padding">
-        <div>
-            <p>
-                <small style="color:rgba(0,0,0,0.54)">Freitext anzeigen:</small>
-            </p>
-            <md-input-container style="margin-bottom: 0">
-                <label>Erste Zeile</label>
-                <input ng-model="event.view.customText" ng-blur="updatePresentation()"
-                       ng-keydown="$event.which === 13 && updatePresentation()">
-            </md-input-container>
-            <md-input-container style="margin-bottom: 0">
-                <label>Zweite Zeile</label>
-                <input ng-model="event.view.customTextSubline" ng-blur="updatePresentation()"
-                       ng-keydown="$event.which === 13 && updatePresentation()">
-            </md-input-container>
-            <div ng-show="event.view.customText">
-                <md-button ng-click="setScreen('customText')">1. Text anzeigen
-                </md-button>
-                <br>
-                <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
-            </div>
-        </div>
-
-        <hr>
-        <div layout="row">
-            <md-input-container style="width:200px;">
-                <label>1. Wettbewerb auswählen</label>
-                <md-select ng-model="event.view.competitionId" ng-change="updatePresentation()"
-                           ng-disabled="event.view.competitionId">
-                    <md-option ng-repeat="competition in event.competitions" value="{{competition.id}}">
-                        {{competition.name}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-button ng-show="event.view.competitionId" ng-click="reset()">Zurücksetzen</md-button>
-        </div>
-        <div ng-show="event.view.competitionId">
-            <md-button ng-click="setScreen('intro')">1. Wettbewerb ankündigen</md-button>
-            <br>
-            <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
-        </div>
-
-        <div ng-if="event.view.competitionId">
-            <hr>
-            <div layout="row">
-                <md-input-container style="width:200px;">
-                    <label>2. Gruppe auswählen</label>
-                    <md-select ng-model="event.view.groupId" ng-change="updatePresentation()"
-                               ng-disabled="event.view.groupId">
-                        <md-option
-                                ng-repeat="group in getCompetition().groups"
-                                value="{{group.id}}">
-                            {{group.name}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <md-button ng-show="event.view.groupId" ng-click="resetGroup()">Zurücksetzen</md-button>
-            </div>
-        </div>
-        <div ng-show="event.view.groupId">
-            <md-button ng-click="setScreen('group')">1. Gruppe ankündigen</md-button>
-            <br>
-            <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
-        </div>
-
-
-        <div ng-if="event.view.groupId">
-            <hr>
-
-            <md-input-container>
-                <label>3. Teilnehmer auswählen</label>
-                <md-select ng-model="event.view.participantId" style="width:200px;">
-                    <md-option ng-if="getGroup().sacrifice" value="{{getGroup().sacrifice.id}}">OPFERLAMM, {{
-                        (getGroup().sacrifice.id | participantOfId).name }}, {{ (getGroup().sacrifice.id |
-                        participantOfId).slam }}
-                    </md-option>
-                    <md-option
-                            ng-repeat="participant in getGroup().participants"
-                            value="{{participant.id}}">
-                        {{ (participant.id | participantOfId).name }}, {{ (participant.id | participantOfId).slam }}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-
-            <div ng-if="event.view.participantId">
-                <md-button ng-click="setScreen('participant', 'name')"
-                           ng-class="{'md-primary': event.view.phase == 'name' && event.view.video != 'pause'}">1. Poet
-                    anzeigen
-                </md-button>
-                <br>
-                <md-button ng-click="setScreen('participant', 'rating')"
-                           ng-class="{'md-primary': event.view.phase == 'rating' && event.view.video != 'pause'}">2.
-                    Wertungen anzeigen
-                </md-button>
-                <br>
-                <md-button ng-click="setScreen('participant', 'ratingFinal')"
-                           ng-class="{'md-primary': event.view.phase == 'ratingFinal' && event.view.video != 'pause'}">
-                    3. höchste / niedrigste Wertung
-                    streichen
-                </md-button>
-                <br>
-                <md-button ng-click="setScreen('participant', 'total')"
-                           ng-class="{'md-primary': event.view.phase == 'total' && event.view.video != 'pause'}">4.
-                    Wertungssumme anzeigen
-                </md-button>
-                <br>
-                <md-button ng-click="setScreen('groupRatings')"
-                           ng-class="{'md-primary': event.view.phase == 'groupRatings' && event.view.video != 'pause'}"
-                           ng-disabled="event.view.participantId == getGroup().sacrifice.id">5. Zwischenstand der Gruppe
-                    anzeigen
-                </md-button>
-                <br>
-                <md-button ng-click="setVideo('pause')" ng-class="{'md-primary': event.view.video == 'pause'}">6.
-                    Pause-Screen anzeigen
-                </md-button>
-
-                <div ng-show="event.view.screen == 'participant' && event.view.phase != 'name'">
-                    <p>Wertungen</p>
-                    <md-input-container ng-repeat="score in getScores()">
-                        <label>Wertung {{$index+1}}</label>
-                        <input ng-model="score.value" ng-blur="updatePresentation()"
-                               ng-keydown="$event.which === 13 && updatePresentation()">
-                    </md-input-container>
-                </div>
-            </div>
-            <hr>
-            <div>
-                <p>
-                    <small style="color:rgba(0,0,0,0.54)">4. Wenn alle Teilnehmer bewertet wurden:</small>
-                </p>
-                <md-button ng-click="showGroupWinners()">1. Ergebnisse der Gruppe anzeigen</md-button>
-                <div ng-if="event.view.screen == 'groupRatings' && event.view.phase == 'winners'">
-                    <md-button ng-click="increaseWinnerCount()">1.1 Nächsten Poet anzeigen</md-button>
-                </div>
-                <br>
-                <md-button ng-click="setVideo('pause')">2. Pause-Screen</md-button>
-                <br>
-                <p style="padding-left:13px;">3. Gruppe zurücksetzen, falls noch nicht am Ende des Wettbewerbs (siehe
-                    oben)</p>
-
-                <div ng-if="event.view.screen == 'groupRatings' && event.view.phase == 'winners'">
-                    <br>
-                    <p>
-                        Extrapunkte
-                        <small style="color:rgba(0,0,0,0.54)">bei Punktgleichheit</small>
-                        :
-                    </p>
-                    <md-input-container ng-repeat="participant in getGroup().participants" style="margin: 0">
-                        <label>{{ (participant.id | participantOfId).name }}, {{ (participant.id |
-                            participantOfId).slam}}</label>
-                        <input ng-model="participant.extraScore" ng-blur="updatePresentation()"
-                               ng-keydown="$event.which === 13 && updatePresentation()">
-                    </md-input-container>
-                </div>
-            </div>
-        </div>
-        <div ng-show="event.view.competitionId">
-            <hr>
-            <p>
-                <small style="color:rgba(0,0,0,0.54)">5. Am Ende des Wettbewerbs:</small>
-            </p>
-            <md-button ng-click="showCompetitionWinners()">1. Gewinner des Wettbewerbs anzeigen</md-button>
-            <div ng-if="event.view.screen == 'competitionRatings'">
-                <md-button ng-click="increaseWinnerCount()">1.1 Nächsten Gewinner anzeigen</md-button>
-            </div>
-
-            <div ng-if="event.view.screen == 'competitionRatings'">
-                <br>
-                <p>
-                    Extrapunkte
-                    <small style="color:rgba(0,0,0,0.54)">bei Punktgleichheit</small>
-                    :
-                </p>
-                <div ng-repeat="group in getCompetition().groups">
-                    <p>
-                        <small style="color:rgba(0,0,0,0.54)">{{group.name}}</small>
-                    </p>
-                    <md-input-container ng-repeat="participant in group.participants">
-                        <label>{{ (participant.id | participantOfId).name }}, {{ (participant.id |
-                            participantOfId).slam}}</label>
-                        <input ng-model="participant.extraScore" ng-blur="updatePresentation()"
-                               ng-keydown="$event.which === 13 && updatePresentation()">
-                    </md-input-container>
-                </div>
-            </div>
-        </div>
+    <md-content>
+        <md-tabs md-selected="selectedTabIndex" md-dynamic-height md-border-bottom>
+            <md-tab label="Wettbewerb">
+                <competitions-tab></competitions-tab>
+            </md-tab>
+            <md-tab label="Gruppe">
+                <groups-tab></groups-tab>
+            </md-tab>
+            <md-tab label="Teilnehmer">
+                <participants-tab></participants-tab>
+            </md-tab>
+            <md-tab label="Ergebnis">
+                <results-tab></results-tab>
+            </md-tab>
+            <md-tab label="Ende">
+                <end-tab></end-tab>
+            </md-tab>
+        </md-tabs>
     </md-content>
 </section>
+
+<media-panel readonly="true"></media-panel>
+
+<offer-presentation-window></offer-presentation-window>

@@ -4,9 +4,15 @@ CACHE:
 admin.html
 admin.min.css
 admin.min.js
+background.js
 index.html
 index.min.css
 index.min.js
+manifest.json
+fonts/Roboto-400.woff2
+fonts/Roboto-700.woff2
+fonts/Roboto-900.woff2
+fonts/RobotoFonts.css
 fonts/SourceSansPro-Black.css
 fonts/SourceSansPro-Black.eot
 fonts/SourceSansPro-Black.svg
@@ -17,6 +23,7 @@ fonts/SourceSansPro-Light.eot
 fonts/SourceSansPro-Light.svg
 fonts/SourceSansPro-Light.ttf
 fonts/SourceSansPro-Light.woff
+fonts/roboto.woff2
 material-icons/action-icons.svg
 material-icons/alert-icons.svg
 material-icons/av-icons.svg
@@ -35,13 +42,27 @@ material-icons/toggle-icons.svg
 media/clips/bg.png
 media/clips/bg_to_logo.mp4
 media/clips/logo_to_bg.mp4
+media/logo/logo-128x128.png
+media/logo/logo-16x16.png
 media/logo/logo-compact.png
+media/logo/logo-stuttgart.png
 modules/admin/partials/about.html
-modules/admin/partials/competitionGroups.html
+modules/admin/partials/admistrationInterface.html
 modules/admin/partials/competitions.html
+modules/admin/partials/competitionsGroups.html
+modules/admin/partials/competitionsTab.html
+modules/admin/partials/csvExport.html
+modules/admin/partials/deleteButton.html
+modules/admin/partials/endTab.html
 modules/admin/partials/groupParticipants.html
+modules/admin/partials/groupsTab.html
+modules/admin/partials/mediaPanel.html
 modules/admin/partials/participants.html
+modules/admin/partials/participantsTab.html
 modules/admin/partials/presentation.html
+modules/admin/partials/resultsTab.html
+modules/admin/partials/sounds.html
+modules/admin/partials/videos.html
 modules/presentation/partials/competitionRatings.html
 modules/presentation/partials/customText.html
 modules/presentation/partials/group.html
@@ -56,4 +77,4 @@ modules/admin/partials/dialogs/participantDialog.html
 
 NETWORK:
 
-# hash: df2cbe328efda12a3b17b8539523889a13a523ede8f53ec1c75da4f46a263cbc
+# hash: 014e54329a1974468b228599010a9620e3ea2be291efca19f8558013c41e6396

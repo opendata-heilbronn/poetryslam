@@ -6,12 +6,14 @@
     </md-toolbar>
 
     <md-content class="md-padding">
-        <p>Offline-Verfügbarkeit</p>
-        <md-button class="md-secondary" ng-disabled="!appCache.offerReload"
-                   ng-class="{'md-primary': appCache.offerReload, 'md-raised': appCache.offerReload}"
-                   ng-click="reload()">
-            {{appCache.status}}
-        </md-button>
+        <div ng-if="isWeb">
+            <p>Offline-Verfügbarkeit</p>
+            <md-button class="md-secondary" ng-disabled="!appCache.offerReload"
+                       ng-class="{'md-primary': appCache.offerReload, 'md-raised': appCache.offerReload}"
+                       ng-click="reload()">
+                {{appCache.status}}
+            </md-button>
+        </div>
         <p>Version</p>
         <md-button class="md-secondary" ng-disabled>{{appCache.version}}</md-button>
     </md-content>
@@ -24,13 +26,17 @@
     </md-toolbar>
 
     <md-content class="md-padding">
-        <p>Erstellt von <a href="http://codefor.de/heilbronn">Code for Heilbronn</a></p>
+        <p>Erstellt von <a href="http://codefor.de/heilbronn">Code for Heilbronn</a>.
         <p>Mitwirkende:</p>
         <ul>
             <li>Jonathan Günz</li>
+            <li>Jan Kaltofen</li>
+            <li>Moritz Gruber</li>
+            <li>Marie-Luise Queßeleit</li>
+            <li>Felix Ebert</li>
             <li>Lukas Himsel</li>
             <li>Adrian Stabiszewski</li>
-            <li>Felix Ebert</li>
         </ul>
+        <p>Die erste Version wurde für den BWSLAM 2016 in enger Absprache mit dem <a href="http://www.popbuero-hn.de/">Popbüro Heilbronn-Franken</a> entwickelt.</p></p>
     </md-content>
 </section>

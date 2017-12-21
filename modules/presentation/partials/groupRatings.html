@@ -9,12 +9,11 @@
                 Zwischenstand {{presentation.groupName}}
             </div>
         </div>
-        <div class="participant-list animated fadeInLeftBig remove-instant hide-instant" ng-switch-when="winners"
-             style="animation-delay: 2s">
+        <div class="participant-list animated fadeInLeftBig remove-instant hide-instant anim-video-delay" ng-switch-when="winners">
             <rating-participant ng-repeat="participant in presentation.resultList track by $index"
                                 class="participant-row animated winner-row"
                                 ng-class="{'winner-row-visible': (presentation.resultList.length - $index) <= presentation.winnersToShow}"></rating-participant>
-            <div class="overlay-subline list-subline animated fadeIn" style="animation-delay: 2s">
+            <div class="overlay-subline list-subline animated fadeIn anim-video-delay">
                 Ergebnisse {{presentation.groupName}}
             </div>
         </div>

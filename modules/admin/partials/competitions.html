@@ -4,7 +4,7 @@
             <h3 class="ng-binding">Wettbewerbe</h3>
             <span flex></span>
 
-            <md-button class="md-primary" ng-click="addEntry()">hinzufügen</md-button>
+            <md-button class="md-accent" ng-click="addEntry()">hinzufügen</md-button>
         </div>
     </md-toolbar>
 
@@ -20,11 +20,9 @@
             </div>
 
             <div class="md-secondary">
-                <md-button class="md-icon-button" aria-label="Löschen"
-                           ng-click="deleteEntry(entry)">
-                    <md-icon md-svg-icon="action:delete"></md-icon>
-                </md-button>
+                <csv-export></csv-export>
 
+                <delete-button list="entries" entry="entry"></delete-button>
                 <md-button class="md-icon-button" aria-label="Bearbeiten"
                            ng-click="editEntry(entry)">
                     <md-icon md-svg-icon="image:edit"></md-icon>

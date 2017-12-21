@@ -1,0 +1,41 @@
+<section layout="row" flex>
+    <md-content flex layout-padding>
+        <md-table-container>
+            <table md-table>
+                <thead md-head>
+                <tr md-row>
+                    <th md-column>Poet</th>
+                    <th md-column>Wertung1</th>
+                    <th md-column ng-show="event.view.enableIgnoredScores">Wertung2</th>
+                    <th md-column>Bonus-Punkte</th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row ng-repeat="groupParticipant in groupResultList track by $index">
+                    <td md-cell>{{groupParticipant.name}}</td>
+                    <td md-cell>{{groupParticipant.totalScore | number: 1}}</td>
+                    <td md-cell ng-show="event.view.enableIgnoredScores">{{groupParticipant.secondTotalScore | number: 1}}</td>
+                    <td md-cell provide-participant="groupParticipant.participantId">
+                        <md-input-container style="width: 100px;margin:1.5rem 0 0 0;">
+                            <label>Bonus-Punkte</label>
+                            <input ng-model="participant.extraScore" aria-label="Extra-Punkte"
+                                   ng-blur="updatePresentation()"
+                                   ng-keydown="$event.which === 13 && updatePresentation()">
+                        </md-input-container>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </md-content>
+    <md-sidenav
+            class="md-sidenav-right"
+            md-component-id="resultsSidenav"
+            md-is-locked-open="true"
+            md-whiteframe="4">
+        <md-content layout-padding>
+            <md-button ng-click="showGroupWinners()">1. Ergebnisse der Gruppe ankündigen</md-button>
+            <md-button ng-click="increaseWinnerCount()">2. Nächsten Poet anzeigen</md-button>
+        </md-content>
+    </md-sidenav>
+</section>

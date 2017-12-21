@@ -11,8 +11,10 @@
     <script src="admin.min.js"></script>
 </head>
 <body layout="row" ng-app="psadmin">
+<background-audio audio-shortcuts></background-audio>
+
 <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
-    <a href="admin.html#/"><img src="/media/logo/logo-compact.png" class="sidebar-logo"/></a>
+    <h1 class="brand"><a href="admin.html#/">Poetry Slam - Verwaltung</a></h1>
 
     <md-content class="sidenav-menu">
         <sidenav-entry path="'/'" label="'Status'"></sidenav-entry>
@@ -30,9 +32,12 @@
                 </div>
             </div>
         </div>
+        <sidenav-entry path="'/videos'" label="'Videos'"></sidenav-entry>
+        <sidenav-entry path="'/sounds'" label="'Sounds'"></sidenav-entry>
+        <sidenav-entry path="'/AdmistrationInterface'" label="'Administration'"></sidenav-entry>
     </md-content>
 
-    <iframe src="/index.html" class="preview-frame"></iframe>
+    <iframe src="/index.html?embedded=1" class="preview-frame"></iframe>
 </md-sidenav>
 
 <md-content flex class="md-whiteframe-z2">
