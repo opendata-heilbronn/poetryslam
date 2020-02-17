@@ -181,7 +181,8 @@
       "styleext": "scss"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "app",
+      "styleext": "scss"
     }
   }
 }

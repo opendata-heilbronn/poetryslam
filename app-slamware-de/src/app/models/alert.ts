@@ -19,9 +19,9 @@ export class AlertAction {
 
 export default class Alert {
     Message: string;
-    Icon: string;
+    Icon: string = null;
     Level: AlertLevel
-    Action: AlertAction;
+    Action: AlertAction = null;
     Watched = false;
     Type: AlertType
 

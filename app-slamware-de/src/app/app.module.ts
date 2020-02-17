@@ -22,6 +22,9 @@ import { AlertComponent } from './components/admin/alert/alert.component';
 import { NavigationComponent } from './components/admin/navigation/navigation.component';
 import { HomeComponent } from './components/admin/home/home.component';
 import { TimelineComponent } from './components/admin/timeline/timeline.component';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { NewProjectComponent } from './components/admin/new-project/new-project.component';
+import { PreparationComponent } from './components/admin/preparation/preparation.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -29,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, PresentationComponent, CustomTextComponent, AlertComponent, NavigationComponent, HomeComponent, TimelineComponent],
+  declarations: [AppComponent, PresentationComponent, CustomTextComponent, AlertComponent, NavigationComponent, HomeComponent, TimelineComponent, DashboardComponent, NewProjectComponent, PreparationComponent],
   imports: [
     BrowserModule,
     FormsModule,
