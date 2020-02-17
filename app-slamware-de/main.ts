@@ -57,6 +57,8 @@ function createWindow(): BrowserWindow {
 
   // Create the browser window.
   windowAdmin = new BrowserWindow({
+    titleBarStyle: 'hidden',
+    frame: false,
     x: 0,
     y: 0,
     width: size.width,
@@ -91,6 +93,9 @@ function createWindow(): BrowserWindow {
     // when you should delete the corresponding element.
     windowAdmin = null;
   });
+
+  windowAdmin.setMenuBarVisibility(false);
+
 
   return windowAdmin;
 }

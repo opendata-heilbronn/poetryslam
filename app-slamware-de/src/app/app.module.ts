@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+import { ClarityModule } from '@clr/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,11 +14,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { HomeModule } from './home/home.module';
 
 import { AppComponent } from './app.component';
 import { PresentationComponent } from './components/presentation/presentation.component';
 import { CustomTextComponent } from './components/slides/custom-text/custom-text.component';
+import { AlertComponent } from './components/admin/alert/alert.component';
+import { NavigationComponent } from './components/admin/navigation/navigation.component';
+import { HomeComponent } from './components/admin/home/home.component';
+import { TimelineComponent } from './components/admin/timeline/timeline.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -26,14 +29,13 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, PresentationComponent, CustomTextComponent],
+  declarations: [AppComponent, PresentationComponent, CustomTextComponent, AlertComponent, NavigationComponent, HomeComponent, TimelineComponent],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     CoreModule,
-    SharedModule,
-    HomeModule,
+    ClarityModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {

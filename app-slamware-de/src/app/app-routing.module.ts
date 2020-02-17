@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from './shared/components';
 import { PresentationComponent } from './components/presentation/presentation.component';
+import { HomeComponent } from './components/admin/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'admin',
     pathMatch: 'full'
   },
   {
@@ -14,8 +14,12 @@ const routes: Routes = [
     component: PresentationComponent
   },
   {
+    path: "admin",
+    component: HomeComponent
+  },
+  {
     path: '**',
-    component: PageNotFoundComponent
+    redirectTo: "admin"
   }
 ];
 

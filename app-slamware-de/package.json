@@ -91,6 +91,11 @@
     "node": ">=10.13.0"
   },
   "dependencies": {
+    "@angular/animations": "9.0.1",
+    "@clr/angular": "2.3.7",
+    "@clr/icons": "2.3.7",
+    "@clr/ui": "2.3.7",
+    "@webcomponents/custom-elements": "1.0.0",
     "animate.css": "3.7.2",
     "tslib": "1.10.0"
   }
