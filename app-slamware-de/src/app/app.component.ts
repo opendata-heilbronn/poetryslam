@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ElectronService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
+import { ipcRenderer } from 'electron';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,9 @@ import { AppConfig } from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  appVersion = "unkown";
+
   constructor(
     public electronService: ElectronService,
     private translate: TranslateService
@@ -24,5 +28,12 @@ export class AppComponent {
     } else {
       console.log('Mode web');
     }
+
+    ipcRenderer.on('app_version', (event, arg) => {
+      ipcRenderer.removeAllListeners('app_version');
+      this.appVersion = arg.version;
+      
+    });
+    ipcRenderer.send('app_version');
   }
 }

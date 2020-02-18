@@ -1,4 +1,5 @@
 import { app, BrowserWindow, screen, ipcMain } from 'electron';
+import { autoUpdater } from 'electron-updater';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -76,7 +77,7 @@ function createWindow(): BrowserWindow {
     windowAdmin.loadURL('http://localhost:4200');
   } else {
     windowAdmin.loadURL(url.format({
-      pathname: path.join(__dirname, 'dist/index.html'),
+      pathname: 'index.html',
       protocol: 'file:',
       slashes: true
     }));
@@ -96,23 +97,37 @@ function createWindow(): BrowserWindow {
 
   windowAdmin.setMenuBarVisibility(false);
 
+  windowAdmin.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
+
+  autoUpdater.on('update-available', () => {
+    windowAdmin.webContents.send('update_available');
+  });
+  
+  autoUpdater.on('update-downloaded', () => {
+    windowAdmin.webContents.send('update_downloaded');
+  });
+
 
   return windowAdmin;
 }
 
 function appReady() {
+  console.log("path");
+  console.log(path);
 
   createWindow();
 
-  if (screen.getAllDisplays().length > 1) {
-    createPresentationWindow();
-  }
+  // if (screen.getAllDisplays().length > 1) {
+  //   createPresentationWindow();
+  // }
 
-  ipcMain.on('openPresentation', (event, arg) => {
-    if ( !windowPresentation ) {
-      createPresentationWindow();
-    }
-  });
+  // ipcMain.on('openPresentation', (event, arg) => {
+  //   if ( !windowPresentation ) {
+  //     createPresentationWindow();
+  //   }
+  // });
 
   ipcMain.on('updateData', (event, arg) => {
 
@@ -124,6 +139,12 @@ function appReady() {
       console.log("presentation window closed");
     }
   });
+
+  ipcMain.on('app_version', (event) => {
+    event.sender.send('app_version', { version: app.getVersion() });
+  });
+
+
 
 }
 

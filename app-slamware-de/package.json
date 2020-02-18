@@ -1,11 +1,15 @@
 {
-  "name": "angular-electron",
-  "version": "7.0.0",
-  "description": "Angular 9 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "name": "slamware",
+  "version": "2.0.1",
+  "description": "software for poetry slam events",
+  "homepage": "https://slamware.de",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "harmoniemand",
+    "email": "hello@hmnd.de"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/opendata-heilbronn/poetryslam.git"
   },
   "keywords": [
     "angular",
@@ -36,7 +40,9 @@
     "test": "ng test",
     "e2e": "npm run build:prod && cross-env TS_NODE_PROJECT='e2e/tsconfig.e2e.json' mocha --timeout 300000 --require ts-node/register e2e/**/*.e2e.ts",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "builder": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "8.4.1",
@@ -97,6 +103,7 @@
     "@clr/ui": "2.3.7",
     "@webcomponents/custom-elements": "1.0.0",
     "animate.css": "3.7.2",
+    "electron-updater": "4.2.2",
     "tslib": "1.10.0"
   }
 }
