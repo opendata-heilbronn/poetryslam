@@ -25,15 +25,22 @@ export class ProjectService {
 
       let d = JSON.parse(data);
       console.log(d);
+
+      if (!d.groups) {
+        d.groups = [];
+      }
+
       this.project.next(d);
 
-      this.updaterSub = this.project.subscribe(this.updateProjectFile);
+      this.updaterSub = this.project.subscribe(m=>this.updateProjectFile(m));
     });
   }
 
   updateProjectFile(project: Project) {
     if (this.electronFs){
       this.electronFs.writeFileSync(project.projectfile, JSON.stringify(project));
+    } else {
+      console.log("could not update project file, fs not found")
     }
   }
 }

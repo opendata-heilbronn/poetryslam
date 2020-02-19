@@ -6,8 +6,6 @@ import * as url from 'url';
 let windowAdmin: BrowserWindow = null;
 let windowPresentation: BrowserWindow = null;
 
-
-
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
 
@@ -43,7 +41,7 @@ function createPresentationWindow() {
 
   windowPresentation.webContents.on('did-finish-load', () => {
     console.log("window loaded");
-    windowPresentation.webContents.send('updateData','This is a test');
+    windowPresentation.webContents.send('updateData', 'This is a test');
   });
 
   if (serve) {
@@ -77,7 +75,7 @@ function createWindow(): BrowserWindow {
     windowAdmin.loadURL('http://localhost:4200');
   } else {
     windowAdmin.loadURL(url.format({
-      pathname: 'index.html',
+      pathname: path.join(__dirname, 'dist/index.html'),
       protocol: 'file:',
       slashes: true
     }));
@@ -104,7 +102,7 @@ function createWindow(): BrowserWindow {
   autoUpdater.on('update-available', () => {
     windowAdmin.webContents.send('update_available');
   });
-  
+
   autoUpdater.on('update-downloaded', () => {
     windowAdmin.webContents.send('update_downloaded');
   });
@@ -114,20 +112,18 @@ function createWindow(): BrowserWindow {
 }
 
 function appReady() {
-  console.log("path");
-  console.log(path);
 
   createWindow();
 
-  // if (screen.getAllDisplays().length > 1) {
-  //   createPresentationWindow();
-  // }
+  if (screen.getAllDisplays().length > 1) {
+    createPresentationWindow();
+  }
 
-  // ipcMain.on('openPresentation', (event, arg) => {
-  //   if ( !windowPresentation ) {
-  //     createPresentationWindow();
-  //   }
-  // });
+  ipcMain.on('openPresentation', (event, arg) => {
+    if ( !windowPresentation ) {
+      createPresentationWindow();
+    }
+  });
 
   ipcMain.on('updateData', (event, arg) => {
 

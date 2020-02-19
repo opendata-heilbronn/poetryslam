@@ -25,6 +25,8 @@ import { TimelineComponent } from './components/admin/timeline/timeline.componen
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { NewProjectComponent } from './components/admin/new-project/new-project.component';
 import { PreparationComponent } from './components/admin/preparation/preparation.component';
+import { EditorCompetitionComponent } from './components/admin/editor-competition/editor-competition.component';
+import { EditorGroupsComponent } from './components/admin/editor-groups/editor-groups.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -32,7 +34,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, PresentationComponent, CustomTextComponent, AlertComponent, NavigationComponent, HomeComponent, TimelineComponent, DashboardComponent, NewProjectComponent, PreparationComponent],
+  declarations: [AppComponent, PresentationComponent, CustomTextComponent, AlertComponent, NavigationComponent, HomeComponent, TimelineComponent, DashboardComponent, NewProjectComponent, PreparationComponent, EditorCompetitionComponent, EditorGroupsComponent],
   imports: [
     BrowserModule,
     FormsModule,
