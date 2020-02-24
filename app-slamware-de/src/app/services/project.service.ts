@@ -26,9 +26,9 @@ export class ProjectService {
       let d = JSON.parse(data);
       console.log(d);
 
-      if (!d.groups) {
-        d.groups = [];
-      }
+      if (!d.groups) { d.groups = []; }
+      if (!d.poets) { d.poets = []; }
+      if (!d.slides) { d.slides = []; }
 
       this.project.next(d);
 

@@ -1,0 +1,11 @@
+
+@import "./../../node_modules/@clr/ui/src/dark-theme.scss";
+
+.d-flex {
+    display: flex;
+}
+
+.border-right-dark {
+    border-right: solid 0.1rem;
+    border-color: $clr-popover-box-shadow-color;
+}

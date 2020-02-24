@@ -2,12 +2,35 @@
 
 @import "./../node_modules/animate.css/animate.css";
 
+@import "./styles/variables";
+@import "./styles/helper.scss";
+
+
+
+
+.ps-select {
+    
+  div.clr-select-wrapper {
+      width: 100% !important;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
 
 html, body {
   margin: 0;
   padding: 0;
 
+  background-color: $clr-global-app-background;
   height: 100%;
+
+  overflow: hidden;
+}
+
+.container-after-titlebar {
+  overflow: hidden !important;
 }
 
 

@@ -8,8 +8,8 @@
     "email": "hello@hmnd.de"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/opendata-heilbronn/poetryslam.git"
+    "type": "git",
+    "url": "https://github.com/opendata-heilbronn/poetryslam.git"
   },
   "keywords": [
     "angular",
@@ -103,6 +103,7 @@
     "@clr/ui": "2.3.7",
     "@webcomponents/custom-elements": "1.0.0",
     "animate.css": "3.7.2",
+    "custom-electron-titlebar": "3.2.2-hotfix62",
     "electron-updater": "4.2.2",
     "tslib": "1.10.0"
   }

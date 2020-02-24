@@ -3,6 +3,7 @@ import { ElectronService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
 import { ipcRenderer } from 'electron';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
 
   constructor(
     public electronService: ElectronService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     translate.setDefaultLang('en');
     console.log('AppConfig', AppConfig);
@@ -35,5 +37,19 @@ export class AppComponent {
       
     });
     ipcRenderer.send('app_version');
+
+
+    ipcRenderer.on('updateData', (event, arg) => {
+      router.navigate(['projector']);
+      let el: any = document.querySelector('.titlebar');
+      if (el) {
+        el.style.display = "none";
+      }
+
+      let elContainer: any = document.querySelector('.container-after-titlebar');
+      if (elContainer) {
+        elContainer.style.top = 0;
+      }
+    });
   }
 }

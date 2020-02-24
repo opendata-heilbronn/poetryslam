@@ -39,7 +39,8 @@ export class AppdataService {
   }
 
   saveAppData(data: Appdata) {
-    this.electronFs.writeFileSync(this.appDataFilePath, JSON.stringify(data));
+    console.log("updating app data");
+    this.electronFs.writeFileSync(this.appDataFilePath, JSON.stringify(data, null, 4));
   }
 
   createJsonIfNotExist() {

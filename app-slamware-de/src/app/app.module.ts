@@ -16,7 +16,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 
 import { AppComponent } from './app.component';
-import { PresentationComponent } from './components/presentation/presentation.component';
 import { CustomTextComponent } from './components/slides/custom-text/custom-text.component';
 import { AlertComponent } from './components/admin/alert/alert.component';
 import { NavigationComponent } from './components/admin/navigation/navigation.component';
@@ -27,6 +26,10 @@ import { NewProjectComponent } from './components/admin/new-project/new-project.
 import { PreparationComponent } from './components/admin/preparation/preparation.component';
 import { EditorCompetitionComponent } from './components/admin/editor-competition/editor-competition.component';
 import { EditorGroupsComponent } from './components/admin/editor-groups/editor-groups.component';
+import { EditorPoetsComponent } from './components/admin/editor-poets/editor-poets.component';
+import { ProjectorComponent } from './components/projector/projector.component';
+import { DialogNewSlideComponent } from './components/admin/dialog-new-slide/dialog-new-slide.component';
+import { PresentationComponent } from './components/admin/presentation/presentation.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -34,7 +37,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, PresentationComponent, CustomTextComponent, AlertComponent, NavigationComponent, HomeComponent, TimelineComponent, DashboardComponent, NewProjectComponent, PreparationComponent, EditorCompetitionComponent, EditorGroupsComponent],
+  declarations: [AppComponent, CustomTextComponent, AlertComponent, NavigationComponent, HomeComponent, TimelineComponent, DashboardComponent, NewProjectComponent, PreparationComponent, EditorCompetitionComponent, EditorGroupsComponent, EditorPoetsComponent, ProjectorComponent, DialogNewSlideComponent, PresentationComponent],
   imports: [
     BrowserModule,
     FormsModule,

@@ -56,7 +56,7 @@ function createWindow(): BrowserWindow {
 
   // Create the browser window.
   windowAdmin = new BrowserWindow({
-    titleBarStyle: 'hidden',
+    // titleBarStyle: 'hidden',
     frame: false,
     x: 0,
     y: 0,
@@ -93,7 +93,7 @@ function createWindow(): BrowserWindow {
     windowAdmin = null;
   });
 
-  windowAdmin.setMenuBarVisibility(false);
+  // windowAdmin.setMenuBarVisibility(false);
 
   windowAdmin.once('ready-to-show', () => {
     autoUpdater.checkForUpdatesAndNotify();
