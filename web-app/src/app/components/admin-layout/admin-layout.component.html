@@ -1,0 +1,70 @@
+<div class="main-container">
+    <!-- <div class="alert alert-app-level alert-info">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <cds-icon class="alert-icon" shape="info-circle"></cds-icon>
+          </div>
+          <div class="alert-text">
+            App Level Alert
+          </div>
+          <div class="alert-actions">
+            <button class="btn btn-sm alert-action">Action</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="close" aria-label="Close">
+        <cds-icon aria-hidden="true" shape="window-close"></cds-icon>
+      </button>
+    </div> -->
+    <header class="header header-6">
+        <div class="branding">
+            <a [routerLink]="['/admin/dashboard']">
+                <!-- <cds-icon shape="vm-bug"></cds-icon> -->
+                <span class="title">SlamWare</span>
+            </a>
+        </div>
+        <div class="header-nav">
+            <a class="nav-link nav-icon" (click)="openPresentation()" title="open projection">
+                <cds-icon shape="display"></cds-icon>
+            </a>
+            <a class="nav-link nav-icon" [routerLink]="['/admin/poets']" title="poets">
+                <cds-icon shape="user"></cds-icon>
+            </a>
+            <a class="nav-link nav-icon" [routerLink]="['/admin/groups']" title="groups">
+                <cds-icon shape="users"></cds-icon>
+            </a>
+            <a class="nav-link nav-icon" [routerLink]="['/admin/contest']" title="contest">
+                <cds-icon shape="merge"></cds-icon>
+            </a>
+        </div>
+
+        <div class="header-actions">
+            <!-- <a class="nav-link nav-icon" title="import">
+                <cds-icon shape="import"></cds-icon>
+            </a>
+            <a class="nav-link nav-icon" title="export">
+                <cds-icon shape="export"></cds-icon>
+            </a> -->
+            <div class="dropdown bottom-right" [ngClass]="{ 'open': dropDownOpen }">
+                <button class="dropdown-toggle btn btn-primary" (click)="dropDownOpen = !dropDownOpen">
+                  Dropdown
+                  <cds-icon shape="caret" direction="down"></cds-icon>
+                </button>
+                <div class="dropdown-menu">
+                  <h4 class="dropdown-header">Dropdown header</h4>
+                  <div class="dropdown-item active">First Action</div>
+                  <div class="dropdown-item disabled">Disabled Action</div>
+                  <div class="dropdown-divider"></div>
+                  <div class="dropdown-item">Link 1</div>
+                  <div class="dropdown-item">Link 2</div>
+                </div>
+              </div>
+              
+        </div>
+    </header>
+
+    <router-outlet></router-outlet>
+
+    
+</div>

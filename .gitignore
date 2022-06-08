@@ -1,8 +1,0 @@
-.DS_Store
-node_modules/
-.idea
-*.iml
-components/
-.vscode
-build/
-.publish
