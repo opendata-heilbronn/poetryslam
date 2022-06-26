@@ -24,7 +24,20 @@ export class AdminPoetsComponent implements OnInit {
   }
 
   openPoet(poet: Poet) {
-    this.router.navigate(['/admin/poets/' + poet.id]);
+    // this.router.navigate(['/admin/poets/' + poet.id]);
   }
 
+  add() {
+    let p = new Poet();
+    p.id = crypto.randomUUID();
+    this.poetService.addPoet(p);
+  }
+
+  update(poet: Poet) {
+    this.poetService.updatePoet(poet);
+  }
+
+  remove(poet: Poet) {
+    this.poetService.removePoet(poet);
+  }
 }

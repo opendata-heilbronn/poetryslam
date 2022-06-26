@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'slamware-app';
+
+  showSplashScreen = true;
+  loaderValue = 0;
+
+  ngOnInit() {
+    let interval = setInterval(() => {
+      this.loaderValue += 1
+
+      if (this.loaderValue > 100) {
+        this.showSplashScreen = false;
+        clearInterval(interval);
+      }
+
+    }, 50);
+  }
+  
+
 }

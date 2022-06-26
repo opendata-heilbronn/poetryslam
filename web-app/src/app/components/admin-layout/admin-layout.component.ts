@@ -9,6 +9,16 @@ import { Router } from '@angular/router';
 export class AdminLayoutComponent implements OnInit {
 
   dropDownOpen = false;
+  openModal = false;
+
+  rounds = [
+    {
+      id: "qwe",
+      name: "round 1",
+      countJury: 5,
+      countWinners: 2
+    }
+  ];
 
   constructor(
     private router: Router

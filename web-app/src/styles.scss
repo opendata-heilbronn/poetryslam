@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "./../node_modules/@clr/icons/clr-icons.css";
+@import "./../node_modules/drawflow/dist/drawflow.min.css";
 
 body[cds-theme="dark"] {
     @import "./../node_modules/@clr/ui/src/dark-theme.scss";

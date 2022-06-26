@@ -9,24 +9,30 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        frame: false,
+        icon: path.join(__dirname, "assets/microphone.png"),
         webPreferences: {
             nodeIntegration: true
         }
-    })
+    });
 
     mainWindow.loadURL(
         url.format({
-            pathname: path.join(__dirname, `index.html`),
-            protocol: "file:",
+            // pathname: path.join(__dirname, `index.html`),
+            pathname: "localhost:4200/admin",
+            protocol: "http:",
             slashes: true
         })
     );
+
+    mainWindow.maximize();
+
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', function () {
         mainWindow = null
-    })
+    });
 }
 
 let server = new Server();

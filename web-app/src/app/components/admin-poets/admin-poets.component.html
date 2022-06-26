@@ -1,45 +1,42 @@
-<nav class="subnav">
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/admin/poets/new']">add poet</a>
-        </li>
-    </ul>
-</nav>
-<div class="content-container">
-    <div class="content-area">
+<div class="clr-row">
+    <div class="clr-col">
 
-        <div class="clr-row">
-            <div class="clr-col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Name</th>
+                    <th style="text-align: left;">Slam</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="poets.length == 0">
+                    <td colspan="3" class="p-5">
+                        no poets found - create some
+                    </td>
+                </tr>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Slam</th>
-                            <th>Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngIf="poets.length == 0">
-                            <td colspan="3" class="p-5">
-                                no poets found - create some
-                            </td>
-                        </tr>
-
-                        <tr *ngFor="let poet of poets" (click)="openPoet(poet)">
-                            <td>{{ poet.name }}</td>
-                            <td>{{ poet.slam }}</td>
-                            <td>1</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-
-            <router-outlet></router-outlet>
+                <tr class="tr-input" *ngFor="let poet of poets" (click)="openPoet(poet)">
+                    <td>
+                        <input type="text" [(ngModel)]="poet.name" placeholder="poets name" (change)="update(poet)">
+                    </td>
+                    <td><input type="text" [(ngModel)]="poet.slam" placeholder="slam name" (change)="update(poet)"></td>
+                    <td>
+                        <button (click)="remove(poet)" class="btn btn-sm btn-link btn-icon">
+                            <cds-icon shape="trash"></cds-icon>
+                        </button>
+                    </td>
+                </tr>
 
 
-        </div>
+                <tr class="tr-input">
+                    <td colspan="3">
+                        <button (click)="add()" class="btn btn-sm btn-primary">add new poet</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
 </div>
