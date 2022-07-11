@@ -1,0 +1,82 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "./../node_modules/@clr/icons/clr-icons.css";
+@import "./../node_modules/drawflow/dist/drawflow.min.css";
+
+body[cds-theme="dark"] {
+    @import "./../node_modules/@clr/ui/src/dark-theme.scss";
+}
+@import "./../node_modules/@clr/ui/src/main.scss";
+
+
+@import "./../node_modules/animate.css/animate.css";
+
+
+.p-0 {
+    padding: 0 !important;
+}
+.p-1 {
+    padding: .25rem !important;
+}
+.p-2 {
+    padding: .5rem !important;
+}
+.p-3 {
+    padding: 1rem !important;
+}
+.p-4 {
+    padding: 1.5rem !important;
+}
+.p-5 {
+    padding: 3rem !important;
+}
+
+body {
+    background-color: #000 !important;
+}
+
+.poetry-header {
+    padding-left: 0;
+    padding-top: 0.9rem;
+    position: sticky;
+    top: 0;
+    background: #1b2a32;
+
+
+    .headline {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+
+        line-height: 1.8rem;
+
+        color: white;
+
+        border-bottom: 0.15rem solid var(--clr-nav-active-box-shadow-color);
+    }
+}
+
+.poetry-body {
+    height: calc(100% - 3rem);
+
+}
+
+.mt-0 { margin-top: 0 !important; }
+.mt-3 { margin-top: 1rem; }
+
+.w-100 {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.adl-5 { animation-delay: 5s; }
+.adl-3 { animation-delay: 3s; }
+.adl-1 { animation-delay: 1s; }
+
+.ad-5 { animation-duration: 5s; }
+.ad-3 { animation-duration: 3s; }
+.ad-1 { animation-duration: 1s; }
+
+.animated-nf {
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}

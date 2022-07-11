@@ -1,0 +1,70 @@
+<div class="poetry-header">
+    <section>
+        <div class="headline">Groups</div>
+    </section>
+</div>
+
+
+<!-- <div class="poetry-menu-bar">
+    <div class="btn-group btn-outline-primary btn-icon">
+        <button class="btn" (click)="exportEvent()">
+            <clr-icon shape="check" aria-label="Check"></clr-icon>
+            <span>EXPORT EVENT</span>
+        </button>
+
+        <button class="btn" (click)="fileInput.click()">
+            <clr-icon shape="check" aria-label="Check"></clr-icon>
+            <span>IMPORT EVENT</span>
+        </button>
+
+        <button class="btn" (click)="resetEvent()">
+            <clr-icon shape="check" aria-label="Check"></clr-icon>
+            <span>RESET EVENT</span>
+        </button>
+    </div>
+</div> -->
+
+
+<div class="poetry-body">
+    <div class="clr-row">
+        <div class="clr-col">
+
+            <table class="table" >
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Id</th>
+                        <th style="text-align: left;">Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tr-input" *ngFor="let group of groups">
+                        <td>
+                            <input type="text" placeholder="config key" [(ngModel)]="group.id" readonly>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="config value" [(ngModel)]="group.name" (change)="update(group)">
+                        </td>
+                        <td>
+                            <button (click)="remove(group.id)" class="btn btn-sm btn-link btn-icon">
+                                <cds-icon shape="trash"></cds-icon>
+                            </button>
+                        </td>
+                    </tr>
+
+
+                    <tr class="tr-input">
+                        <td colspan="3">
+                            <button (click)="add()" class="btn btn-sm btn-primary">add new group</button>
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+

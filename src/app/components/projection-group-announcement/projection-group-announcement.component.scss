@@ -1,0 +1,49 @@
+
+.projection-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    .projection-container-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        min-width: 100vw;
+        min-height: 100vh;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .projection-container-content {
+        width: 80vw;
+        margin-left: 10vw;
+        height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        justify-items: center;
+        align-items: center;
+
+        font-size: 10vh;
+        line-height: 15vh;
+
+        .projection-poet-name {
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 100%;
+            text-align: center;
+        }
+
+        .projection-poet-slam {
+            font-size: 0.4em;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}

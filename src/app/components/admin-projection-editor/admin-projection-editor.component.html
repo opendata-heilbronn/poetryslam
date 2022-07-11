@@ -1,0 +1,50 @@
+<div class="">
+
+    <table class="table mt-0">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Field</th>
+                <th style="text-align: left;">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="slide.fields && slide.fields.length == 0">
+                <td colspan="3" class="p-5">
+                    no config for this type of slide
+                </td>
+            </tr>
+
+            <tr class="tr-input" *ngFor="let field of slide.fields">
+                <td>
+                    <input type="text" [(ngModel)]="field.name" readonly>
+                </td>
+                <td [ngSwitch]="field.type">
+
+                    <select *ngSwitchCase="'poet[]'" name="options" [(ngModel)]="field.value"
+                        [ngClass]="{'placeholder': field.value == '' }">
+                        <option class="placeholder" value="" disabled selected>Select Poet</option>
+                        <option *ngFor="let p of sortBy(poets, 'name')" [ngValue]="p.id">{{ p.name }}</option>
+                    </select>
+
+                    <select *ngSwitchCase="'asset[]'" name="options" [(ngModel)]="field.value"
+                        [ngClass]="{'placeholder': field.value == '' }">
+                        <option class="placeholder" value="" disabled selected>Select Asset</option>
+                        <option *ngFor="let a of assets" [ngValue]="a.id">{{ a.name }}</option>
+                    </select>
+
+                    <select *ngSwitchCase="'group[]'" name="options" [(ngModel)]="field.value"
+                        [ngClass]="{'placeholder': field.value == '' }">
+                        <option class="placeholder" value="" disabled selected>Select Group</option>
+                        <option *ngFor="let a of groups" [ngValue]="a.id">{{ a.name }}</option>
+                    </select>
+
+                    <input *ngSwitchCase="'number'" type="number" [(ngModel)]="field.value" placeholder="Insert Value">
+
+                    <input *ngSwitchDefault type="text" [(ngModel)]="field.value">
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

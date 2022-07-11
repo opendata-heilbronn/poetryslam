@@ -1,0 +1,78 @@
+<div class="poetry-header">
+    <section>
+        <div class="headline">Projection</div>
+    </section>
+</div>
+
+<div class="poetry-body" style="padding-top: 1rem;">
+
+    <div class="clr-row" style="height: 100%;">
+        <div class="clr-col">
+            <div class="preview">
+
+                <div class="preview-settings" *ngIf="slidePreview">
+                    <div class="admin-projection-header">Preview - {{ slidePreview.name }}</div>
+
+                    <div class="admin-projection-header mt-3">Values</div>
+                    <app-admin-projection-editor [slide]="slidePreview"></app-admin-projection-editor>
+
+                    <div class="admin-projection-header mt-3">Actions</div>
+                    <div class="admin-projection-actions">
+                        <div *ngIf="slidePreview.actions == undefined || slidePreview.actions.length == 0">No Actions Available</div>
+                        <button class="btn btn-sm btn-outline w-100" *ngFor="let action of slidePreview.actions">{{ action.name }}</button>
+                    </div>
+
+                </div>
+                
+
+                <div class="preview-settings-bottom">
+                    <div class="preview-scene-selector">
+                        <div class="preview-scene-selector-header">Scenes</div>
+                        <div class="scene-selector-item" 
+                             [ngClass]="{ 'active': slidePreview && o.id == slidePreview.id }" 
+                             *ngFor="let o of slides" 
+                             (click)="selectPreview(o)">{{ o.name }}</div>
+                    </div>
+
+                    <div class="preview-scene-monitor">
+                        PREVIEW SCENE MONITOR
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider">
+            <button (click)="toggle()" class="btn btn-sm btn-primary w-100">toggle</button>
+        </div>
+        <div class="clr-col">
+
+            <div class="program" *ngIf="slideProgram">
+
+                <div class="preview-settings">
+                    <div class="admin-projection-header">Program - {{ slideProgram.name }}</div>
+
+                    <div class="admin-projection-header mt-3">Values</div>
+                    <app-admin-projection-editor [slide]="slideProgram"></app-admin-projection-editor>
+
+                    <div class="admin-projection-header mt-3">Actions</div>
+                    <div class="admin-projection-actions">
+                        <div *ngIf="slideProgram.actions == undefined || slideProgram.actions.length == 0">No Actions Available</div>
+                        <button class="btn btn-sm btn-outline w-100" *ngFor="let action of slideProgram.actions">{{ action.name }}</button>
+                    </div>
+
+                </div>
+                
+
+                <div class="preview-settings-bottom">
+                    <div class="preview-scene-selector">
+                        
+                    </div>
+
+                    <div class="preview-scene-monitor">
+                        PREVIEW SCENE MONITOR
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

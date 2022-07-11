@@ -1,0 +1,9 @@
+<div class="projection-container" [ngClass]="{'fadeIn': show,  'fadeOut': show == false }">
+    <div class="projection-container-background" *ngIf="bgImage" [ngStyle]="{ 'background-image': bgImage }"></div>
+
+    <div class="projection-container-content" *ngIf="event != undefined && config != undefined">
+        <div class="projection-poet-name ad-1" [ngClass]="{ 'slideIn': show, 'slideOut': show == false }"
+            [ngStyle]="{'color': config.textColor1, 'background-color': config.backgroundColor1 }">{{ event.name }}</div>
+    </div>
+</div>
+

@@ -1,0 +1,48 @@
+<div class="main-container">
+  
+  <header class="header header-6">
+    <div class="branding">
+      <a [routerLink]="['/admin/dashboard']">
+        <span class="title">SlamWare</span>
+      </a>
+    </div>
+
+    <div class="header-actions window-actions">
+      
+      <a class="nav-link nav-icon" title="contest"  (click)="openModal = true">
+        <cds-icon shape="window-close"></cds-icon>
+      </a>
+    </div>
+  </header>
+
+  <div class="content-container">
+
+    <clr-vertical-nav >
+      <a clrVerticalNavLink [routerLink]="['/admin/settings']" title="event" routerLinkActive="active">event</a>
+      <a clrVerticalNavLink [routerLink]="['/admin/groups']" title="poets" routerLinkActive="active">groups</a>
+      <a clrVerticalNavLink [routerLink]="['/admin/poets']" title="poets" routerLinkActive="active">poets</a>
+      <a clrVerticalNavLink [routerLink]="['/admin/rounds']" title="poets" routerLinkActive="active">rounds</a>
+      <a clrVerticalNavLink [routerLink]="['/admin/assets']" title="assets" routerLinkActive="active">assets</a>
+      <div class="nav-divider"></div>
+      <a clrVerticalNavLink [routerLink]="['/admin/presentation']" title="poets"
+        routerLinkActive="active">projection</a>
+    </clr-vertical-nav>
+
+    <div class="content-area">
+
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="openModal">
+  <h3 class="modal-title" style="color: #fff;">close slamware</h3>
+  <div class="modal-body">
+    <p>Do you really want to close slamware?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outlone" (click)="openModal = false">Close SlamWare</button>
+    <button type="button" class="btn btn-primary" (click)="openModal = false">Leave Open</button>
+  </div>
+</clr-modal>
