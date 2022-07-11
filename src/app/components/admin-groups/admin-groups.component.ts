@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import Drawflow from 'drawflow'
 import { Group } from 'src/app/models/group';
 import { Poet } from 'src/app/models/poet';
 import { GenericDataService } from 'src/app/services/generic-data.service';
