@@ -16,7 +16,6 @@ import { AdminGroupsComponent } from './components/admin-groups/admin-groups.com
 import { AdminSettingsComponent } from './components/admin-settings/admin-settings.component';
 import { AdminPresentationComponent } from './components/admin-presentation/admin-presentation.component';
 import { ProjectionPoetComponent } from './components/projection-poet/projection-poet.component';
-import { NgxElectronModule } from 'ngx-electron';
 import { UiProgressRingComponent } from './components/ui-progress-ring/ui-progress-ring.component';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 import { AdminAssetsComponent } from './components/admin-assets/admin-assets.component';
@@ -58,7 +57,6 @@ import { ProjectionGroupScoresComponent } from './components/projection-group-sc
     AppRoutingModule,
     ClarityModule,
     FormsModule,
-    NgxElectronModule
   ],
   providers: [
     { provide: 'GroupService', useFactory: (ds: DataService) => { let gds = new GenericDataService<Group>(ds); gds.Init('groups'); return gds; } },

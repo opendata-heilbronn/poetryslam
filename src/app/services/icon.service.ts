@@ -27,9 +27,5 @@ export class IconService {
     ClarityIcons.addIcons(exportIcon);
     ClarityIcons.addIcons(displayIcon);
     ClarityIcons.addIcons(trashIcon);
-
-
-    let mergeIcon: any = ['merge', require("!!raw-loader?!./../../assets/icons/merge-line.svg").default];
-    ClarityIcons.addIcons(mergeIcon);
   }
 }
