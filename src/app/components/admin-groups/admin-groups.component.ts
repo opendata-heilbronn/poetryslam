@@ -34,6 +34,14 @@ export class AdminGroupsComponent implements OnInit {
     this.groupService.Add(g);
   }
 
+  countPoets(group_id: string | undefined): number {
+    if (group_id) {
+      return this.poets.filter(m =>m.group == group_id).length;
+    }
+
+    return -1;
+  }
+
   update(group: Group) {
     this.groupService.Update(group);
   }

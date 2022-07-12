@@ -1,8 +1,9 @@
-<div class="projection-container animate__animated" [ngClass]="{'animate__fadeIn': show,  'animate__fadeOut': show == false }">
-    <div class="projection-container-background" *ngIf="bgImage" [ngStyle]="{ 'background-image': bgImage }"></div>
-
-    <div class="projection-container-content" *ngIf="group != undefined && group.name != undefined && config != undefined">
-        <div class="projection-poet-name  animate__animated" [ngClass]="{ 'animate__slideInLeft': show, 'animate__slideOutLeft': show == false }"
-            [ngStyle]="{'color': config.textColor1, 'background-color': config.backgroundColor1 }">{{ group.name }}</div>
+<div class="projection-container animate__animated" 
+     [ngClass]="{ 'animate__slideInLeft animate__fadeIn': show, 'animate__slideOutLeft animate__fadeOut': show == false }">
+    
+     <div class="projection-container-content" *ngIf="group != undefined && group.name != undefined && config != undefined">
+        <div class="projection-group-name" [ngStyle]="{'color': config.textColor1, 'background-color': config.backgroundColor1 }">
+            {{ group.name }}
+        </div>
     </div>
 </div>

@@ -4,4 +4,6 @@ export class Poet {
     slam: string | undefined;
     image: string | undefined;
     group: string | undefined;
+
+    scores: any[] = [];
 }

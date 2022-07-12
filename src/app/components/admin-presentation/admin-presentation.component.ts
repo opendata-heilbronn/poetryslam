@@ -52,11 +52,17 @@ export class AdminPresentationComponent implements OnInit {
   }
 
   toggle() {
-    let t = this.slideProgram;
-    this.slideProgram = this.slidePreview;
-    this.slidePreview = t;
-
+    this.slideProgram.fadeOut = true;
     this.update();
+
+    setTimeout(() => {
+      let t = this.slideProgram;
+      t.fadeOut = false;
+      this.slideProgram = this.slidePreview;
+      this.slidePreview = t;
+  
+      this.update();
+    }, 1000);
   }
 
   selectPreview(slide: any) {

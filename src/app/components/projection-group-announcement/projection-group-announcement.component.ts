@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, SecurityContext } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Config } from 'src/app/models/config';
 import { Group } from 'src/app/models/group';
-import { AssetService } from 'src/app/services/asset.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { GenericDataService } from 'src/app/services/generic-data.service';
 
@@ -27,8 +25,7 @@ export class ProjectionGroupAnnouncementComponent implements OnInit {
       return;
     }
 
-    this.show = true;
-    console.log(this._data);
+    this.show = !this._data.fadeOut;
 
     let group_id = this._data.fields.find((m: any) => m.id == 'group_id');
 
@@ -43,27 +40,14 @@ export class ProjectionGroupAnnouncementComponent implements OnInit {
   private _config: Config | undefined;
   @Input("config") set config(value: Config | undefined) {
     this._config = value;
-
-
-    if (this._config && this._config.backgroundImage) {
-      let asset = this.assetService.getAsset(this._config.backgroundImage);
-
-      if (asset) {
-        let url = this.sanitizer.sanitize(SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(asset.data))
-        this.bgImage = url ? 'url(' + url + ')' : "";
-      }
-    }
   }
   get config(): Config | undefined {
     return this._config;
   }
 
 
-  bgImage = "";
 
   constructor(
-    private sanitizer: DomSanitizer,
-    private assetService: AssetService,
     private configService: ConfigService,
     private groupService: GenericDataService<Group>
   ) {

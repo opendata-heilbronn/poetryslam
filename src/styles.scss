@@ -60,24 +60,3 @@ body {
     height: calc(100% - 3rem);
 
 }
-
-.mt-0 { margin-top: 0 !important; }
-.mt-3 { margin-top: 1rem; }
-
-.w-100 {
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-.adl-5 { animation-delay: 5s; }
-.adl-3 { animation-delay: 3s; }
-.adl-1 { animation-delay: 1s; }
-
-.ad-5 { animation-duration: 5s; }
-.ad-3 { animation-duration: 3s; }
-.ad-1 { animation-duration: 1s; }
-
-.animated-nf {
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-}

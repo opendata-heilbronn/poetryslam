@@ -1,66 +1,3 @@
-@keyframes slideIn {
-    0% {
-
-        transform: translateX(-100vw);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInDown {
-    0% {
-
-        transform: translateX(-100vw) translateY(-15vh);
-        font-size: 0.8em;
-    }
-    20% {
-        transform: translateX(0) translateY(-15vh);
-        font-size: 0.8em;
-    }
-
-    80% {
-        transform: translateX(0) translateY(-15vh);
-        font-size: 0.8em;
-    }
-
-    100% {
-        transform: translateX(0) translateY(0);
-        font-size: 0.4em;
-    }
-}
-
-
-@keyframes slideOut {
-    0% {
-        transform: translateX(0);
-    }
-    
-    100% {
-        transform: translateX(-100vw);
-    }
-}
-
-
-@keyframes fadeOut {
-    0% {
-        opacity: 100;
-    }
-    
-    100% {
-        opacity: 0;
-    }
-}
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    
-    100% {
-        opacity: 100;
-    }
-}
 
 .projection-container {
     position: absolute;
@@ -70,21 +7,11 @@
     height: 100vh;
     overflow: hidden;
 
-    .projection-container-background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        min-width: 100vw;
-        min-height: 100vh;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-    }
-
     .projection-container-content {
-        width: 80vw;
-        margin-left: 10vw;
+        width: 100vw;
+        margin-left: 0;
+        padding-left: 10vw;
+        padding-right: 10vw;
         height: 100vh;
 
         display: flex;
@@ -97,59 +24,10 @@
         font-size: 10vh;
         line-height: 15vh;
 
-        .projection-poet-name {
+        .projection-group-name {
             background-color: rgba(255, 255, 255, 0.5);
             width: 100%;
             text-align: center;
         }
-
-        .projection-poet-slam {
-            font-size: 0.4em;
-            width: 100%;
-            text-align: center;
-        }
     }
-}
-
-
-.adl-5 { animation-delay: 5s; }
-.adl-3 { animation-delay: 3s; }
-.adl-1 { animation-delay: 1s; }
-
-.ad-5 { animation-duration: 5s; }
-.ad-3 { animation-duration: 3s; }
-.ad-1 { animation-duration: 1s; }
-
-.slideIn {
-    transform: translateX(-100vw);
-    animation-name: slideIn;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-}
-
-.slideInDown {
-    transform: translateX(-100vw);
-    animation-name: slideInDown;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-}
-
-.slideOut {
-    transform: translateX(0);
-    animation-name: slideOut;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-}
-
-
-.fadeOut {
-    animation-name: fadeOut;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-    animation-delay: 1s;
-}
-.fadeIn {
-    animation-name: fadeIn;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
 }

@@ -21,7 +21,7 @@ export class ProjectionAssetComponent implements OnInit {
       return;
     }
 
-    this.show = true;
+    this.show = !this._data.fadeOut;
 
     console.log(this._data);
     let asset_id = this._data.fields.find((m: any) => m.id == 'asset_id');
@@ -41,21 +41,11 @@ export class ProjectionAssetComponent implements OnInit {
   private _config: Config | undefined;
   @Input("config") set config(value: Config | undefined) {
     this._config = value;
-
-    if (this._config && this._config.backgroundImage) {
-      let asset = this.assetService.getAsset(this._config.backgroundImage);
-
-      if (asset) {
-        let url = this.sanitizer.sanitize(SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(asset.data));
-        this.bgImage = url ? 'url(' + url + ')' : "";
-      }
-    }
   }
   get config(): Config | undefined {
     return this._config;
   }
 
-  bgImage = "";
   asset: any;
 
 

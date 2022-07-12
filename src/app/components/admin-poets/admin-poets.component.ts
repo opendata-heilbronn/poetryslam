@@ -15,6 +15,8 @@ export class AdminPoetsComponent implements OnInit {
 
   poets: Poet[] = [];
   groups: Group[] = [];
+  sortTableBy = 'name';
+  sortTableDir = 'asc';
 
   constructor(
     private poetService: PoetService,
@@ -28,8 +30,25 @@ export class AdminPoetsComponent implements OnInit {
     this.groupService.data.subscribe(d => this.groups = d);
   }
 
-  openPoet(poet: Poet) {
-    // this.router.navigate(['/admin/poets/' + poet.id]);
+  setSortTableBy(key: string) {
+    if (this.sortTableBy == key) {
+      if (this.sortTableDir == "asc") { this.sortTableDir = "desc"; }
+      else { this.sortTableDir = "asc"; }
+    } else {
+      this.sortTableBy = key;
+      this.sortTableDir = "asc";
+    }
+  }
+
+  sortBy(arr: any[], key: string): any[] {
+    return arr.sort((a, b) => {
+      if (this.sortTableDir == "asc") {
+        return a[key] > b[key] ? 1 : -1;
+      } else {
+        return a[key] > b[key] ? -1 : 1;
+
+      }
+    });
   }
 
   add() {

@@ -25,4 +25,8 @@ export class AdminLayoutComponent implements OnInit {
     this.router.navigate([]).then(result => { window.open(`/presentation`, '_blank'); });
   }
 
+  closeSlamware() {
+    window.close();
+  }
+
 }

@@ -1,7 +1,5 @@
 import { Component, Input, OnInit, SecurityContext } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Config } from 'src/app/models/config';
-import { AssetService } from 'src/app/services/asset.service';
 import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
@@ -23,7 +21,8 @@ export class ProjectionEventNameAnnouncementComponent implements OnInit {
       return;
     }
 
-    this.show = true;
+    this.show = !this._data.fadeOut;
+    
   }
   get data(): any | undefined {
     return this._data;
@@ -32,27 +31,12 @@ export class ProjectionEventNameAnnouncementComponent implements OnInit {
   private _config: Config | undefined;
   @Input("config") set config(value: Config | undefined) {
     this._config = value;
-
-
-    if (this._config && this._config.backgroundImage) {
-      let asset = this.assetService.getAsset(this._config.backgroundImage);
-
-      if (asset) {
-        let url = this.sanitizer.sanitize(SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(asset.data))
-        this.bgImage = url ? 'url(' + url + ')' : "";
-      }
-    }
   }
   get config(): Config | undefined {
     return this._config;
   }
 
-
-  bgImage = "";
-
   constructor(
-    private sanitizer: DomSanitizer,
-    private assetService: AssetService,
     private configService: ConfigService
   ) { }
 

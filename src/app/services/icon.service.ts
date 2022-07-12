@@ -1,6 +1,6 @@
 import { Injectable, Sanitizer } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ClarityIcons, userIcon, usersIcon, importIcon, exportIcon, displayIcon, trashIcon } from '@cds/core/icon';
+import { ClarityIcons, userIcon, usersIcon, importIcon, exportIcon, displayIcon, trashIcon, angleIcon } from '@cds/core/icon';
 
 
 import '@cds/core/icon/register.js';
@@ -27,5 +27,14 @@ export class IconService {
     ClarityIcons.addIcons(exportIcon);
     ClarityIcons.addIcons(displayIcon);
     ClarityIcons.addIcons(trashIcon);
+    ClarityIcons.addIcons(angleIcon);
+
+    // let tableSortNoneSvg = require("!!raw-loader?!./../../assets/icons/table-sort-none.svg").default;
+    // console.log(tableSortNoneSvg);
+    // let tableSortNone: any = ['table-sort-none', tableSortNoneSvg];
+    // ClarityIcons.addIcons(tableSortNone);
+
+    // let mergeIcon: any = ['merge', require("!!raw-loader?!./../../assets/icons/merge-line.svg").default];
+    // ClarityIcons.addIcons(mergeIcon);
   }
 }

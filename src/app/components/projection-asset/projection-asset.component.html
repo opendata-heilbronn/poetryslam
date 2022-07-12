@@ -1,13 +1,5 @@
-<div class="projection-container" [ngClass]="{'fadeIn': show, 'fadeOut': show == false, 'ad-1': show == false }">
-    <div>
-        ASSETS
-    </div>
-
-    <div class="projection-container-background" *ngIf="bgImage" [ngStyle]="{ 'background-image': bgImage }">
-    </div>
-
+<div class="projection-container animate__animated" [ngClass]="{'animate__fadeIn': show, 'animate__fadeOut': show == false }">
     <div class="projection-container-content">
-        <img [src]="asset" *ngIf="asset" class="ad-3" [ngClass]="{'fadeIn': show, 'fadeOut': show == false }" />
-
+        <img [src]="asset" *ngIf="asset" />
     </div>
 </div>

@@ -19,7 +19,6 @@ import { ProjectionPoetComponent } from './components/projection-poet/projection
 import { UiProgressRingComponent } from './components/ui-progress-ring/ui-progress-ring.component';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 import { AdminAssetsComponent } from './components/admin-assets/admin-assets.component';
-import { ProjectionBlankComponent } from './components/projection-blank/projection-blank.component';
 import { ProjectionAssetComponent } from './components/projection-asset/projection-asset.component';
 import { AdminProjectionEditorComponent } from './components/admin-projection-editor/admin-projection-editor.component';
 import { ProjectionEventNameAnnouncementComponent } from './components/projection-event-name-announcement/projection-event-name-announcement.component';
@@ -28,6 +27,7 @@ import { Group } from './models/group';
 import { DataService } from './services/data.service';
 import { ProjectionGroupAnnouncementComponent } from './components/projection-group-announcement/projection-group-announcement.component';
 import { ProjectionGroupScoresComponent } from './components/projection-group-scores/projection-group-scores.component';
+import { ProjectionPoetScoresComponent } from './components/projection-poet-scores/projection-poet-scores.component';
 
 @NgModule({
   declarations: [
@@ -44,12 +44,12 @@ import { ProjectionGroupScoresComponent } from './components/projection-group-sc
     UiProgressRingComponent,
     SplashScreenComponent,
     AdminAssetsComponent,
-    ProjectionBlankComponent,
     ProjectionAssetComponent,
     AdminProjectionEditorComponent,
     ProjectionEventNameAnnouncementComponent,
     ProjectionGroupAnnouncementComponent,
     ProjectionGroupScoresComponent,
+    ProjectionPoetScoresComponent,
   ],
   imports: [
     BrowserModule,

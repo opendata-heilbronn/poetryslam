@@ -34,6 +34,7 @@
                     <tr>
                         <th style="text-align: left;">Id</th>
                         <th style="text-align: left;">Name</th>
+                        <th style="text-align: left;">Poets Count</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -44,6 +45,9 @@
                         </td>
                         <td>
                             <input type="text" placeholder="config value" [(ngModel)]="group.name" (change)="update(group)">
+                        </td>
+                        <td>
+                            <input type="text" placeholder="config value" value="{{ countPoets(group.id) }}" readonly>
                         </td>
                         <td>
                             <button (click)="remove(group.id)" class="btn btn-sm btn-link btn-icon">

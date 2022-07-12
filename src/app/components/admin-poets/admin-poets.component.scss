@@ -1,6 +1,15 @@
 
 
+th {
+    div {
+        display: flex;
+        justify-content: space-between;
+        align-content: space-between;
+    }
+}
+
 .tr-input {
+    
     td {
         padding: 0;
     }

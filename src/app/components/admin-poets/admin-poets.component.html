@@ -13,9 +13,25 @@
                 <thead>
                     <tr>
                         <th style="text-align: left;">ID</th>
-                        <th style="text-align: left;">Name</th>
-                        <th style="text-align: left;">Slam</th>
-                        <th style="text-align: left;">Group</th>
+                        <th style="text-align: left;" (click)="setSortTableBy('name')">
+                            <div>
+                                <span>Name</span>
+                                <clr-icon shape="angle" *ngIf="sortTableBy == 'name' && sortTableDir == 'asc'"></clr-icon>
+                                <clr-icon shape="angle" flip="vertical" *ngIf="sortTableBy == 'name' && sortTableDir == 'desc'"></clr-icon>
+                            </div>
+                        </th>
+                        <th style="text-align: left;" (click)="setSortTableBy('slam')">
+                            <div>
+                                <span>Slam</span>
+                                <clr-icon shape="angle" *ngIf="sortTableBy == 'slam' && sortTableDir == 'asc'"></clr-icon>
+                                <clr-icon shape="angle" flip="vertical" *ngIf="sortTableBy == 'slam' && sortTableDir == 'desc'"></clr-icon>
+                            </div></th>
+                        <th style="text-align: left;" (click)="setSortTableBy('group')">
+                            <div>
+                                <span>Group</span>
+                                <clr-icon shape="angle" *ngIf="sortTableBy == 'group' && sortTableDir == 'asc'"></clr-icon>
+                                <clr-icon shape="angle" flip="vertical" *ngIf="sortTableBy == 'group' && sortTableDir == 'desc'"></clr-icon>
+                            </div></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -26,7 +42,7 @@
                         </td>
                     </tr>
 
-                    <tr class="tr-input" *ngFor="let poet of poets">
+                    <tr class="tr-input" *ngFor="let poet of sortBy(poets, sortTableBy)">
                         <td>
                             <input type="text" [(ngModel)]="poet.id" placeholder="poets id" readonly>
                         </td>
