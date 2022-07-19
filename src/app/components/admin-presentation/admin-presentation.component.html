@@ -51,7 +51,7 @@
                     <div class="admin-projection-header">Program - {{ slideProgram.name }}</div>
 
                     <div class="admin-projection-header mt-3">Values</div>
-                    <app-admin-projection-editor [slide]="slideProgram"></app-admin-projection-editor>
+                    <app-admin-projection-editor [slide]="slideProgram" (change)="onChanged()"></app-admin-projection-editor>
 
                     <div class="admin-projection-header mt-3">Actions</div>
                     <div class="admin-projection-actions">

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Asset } from 'src/app/models/asset';
 import { Eventdata } from 'src/app/models/eventdata';
 import { Group } from 'src/app/models/group';
@@ -18,6 +18,9 @@ export class AdminProjectionEditorComponent implements OnInit {
   poets: Poet[] = [];
   assets: Asset[] = [];
   groups: Group[] = [];
+
+  @Output()
+  change: EventEmitter<any> = new EventEmitter<any>();
 
   private _slide: any | undefined;
   @Input("slide") set slide(value: any | undefined) {
@@ -46,6 +49,10 @@ export class AdminProjectionEditorComponent implements OnInit {
     return arr.sort((a, b) => {
       return a[key] > b[key] ? 1 : -1;
     });
+  }
+
+  onChange(field: any) {
+    this.change.emit(field);
   }
 
 }

@@ -1,14 +1,16 @@
-<div class="projection-container" [ngClass]="{'fadeIn': show,  'fadeOut': show == false }">
-    <div class="projection-container-background" *ngIf="bgImage" [ngStyle]="{ 'background-image': bgImage }"></div>
+<div class="projection-container animate__animated"
+    [ngClass]="{ 'animate__slideInLeft animate__fadeIn': show, 'animate__slideOutLeft animate__fadeOut': show == false }">
 
-    <div class="projection-container-content" *ngIf="poet != undefined && config != undefined">
-        <div class="projection-poet-name ad-1" [ngClass]="{ 'slideIn': show, 'adl-3': show, 'slideOut': show == false }"
-            [ngStyle]="{'color': config.textColor2 }">{{ poet.name }}</div>
-            
-        
+    <div class="projection-container-content"
+        *ngIf="poet != undefined && poet.name != undefined && config != undefined">
+        <div class="projection-group-name"
+            [ngStyle]="{'color': config.textColor1, 'background-color': config.backgroundColor2 }">
+            {{ poet.name }}
+        </div>
+
         <div class="projection-poet-scores">
-            <div class="score"[ngStyle]="{'color': config.textColor1, 'background-color': config.backgroundColor1 }" *ngFor="let score of scores">
-                5
+            <div class="score" *ngFor="let score of scores" [ngStyle]="{'color': config.textColor1, 'background-color': config.backgroundColor1 }">
+                {{ score }}
             </div>
         </div>
     </div>

@@ -37,12 +37,12 @@ export class AdminPresentationComponent implements OnInit {
     let poet_score_slide = this.slides.find(m => m.id == "poet_scores");
 
     if (config != undefined && config.countJury != undefined) {
-        for (let i = 0; i < config.countJury; i++) {
-          poet_score_slide.fields.push({
-            id: "jury_score_" + (i+1), name: "Jury " + (i+1), value: "", type: "number"
-          });
-        }
+      for (let i = 0; i < config.countJury; i++) {
+        poet_score_slide.fields.push({
+          id: "jury_score_" + (i + 1), name: "Jury " + (i + 1), value: "", type: "number"
+        });
       }
+    }
 
   }
 
@@ -60,7 +60,7 @@ export class AdminPresentationComponent implements OnInit {
       t.fadeOut = false;
       this.slideProgram = this.slidePreview;
       this.slidePreview = t;
-  
+
       this.update();
     }, 1000);
   }

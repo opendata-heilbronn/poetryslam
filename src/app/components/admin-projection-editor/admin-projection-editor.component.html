@@ -21,26 +21,26 @@
                 <td [ngSwitch]="field.type">
 
                     <select *ngSwitchCase="'poet[]'" name="options" [(ngModel)]="field.value"
-                        [ngClass]="{'placeholder': field.value == '' }">
+                        [ngClass]="{'placeholder': field.value == '' }" (changed)="onChange(field)">
                         <option class="placeholder" value="" disabled selected>Select Poet</option>
                         <option *ngFor="let p of sortBy(poets, 'name')" [ngValue]="p.id">{{ p.name }}</option>
                     </select>
 
                     <select *ngSwitchCase="'asset[]'" name="options" [(ngModel)]="field.value"
-                        [ngClass]="{'placeholder': field.value == '' }">
+                        [ngClass]="{'placeholder': field.value == '' }" (changed)="onChange(field)">
                         <option class="placeholder" value="" disabled selected>Select Asset</option>
                         <option *ngFor="let a of assets" [ngValue]="a.id">{{ a.name }}</option>
                     </select>
 
                     <select *ngSwitchCase="'group[]'" name="options" [(ngModel)]="field.value"
-                        [ngClass]="{'placeholder': field.value == '' }">
+                        [ngClass]="{'placeholder': field.value == '' }" (changed)="onChange(field)">
                         <option class="placeholder" value="" disabled selected>Select Group</option>
                         <option *ngFor="let a of groups" [ngValue]="a.id">{{ a.name }}</option>
                     </select>
 
-                    <input *ngSwitchCase="'number'" type="number" [(ngModel)]="field.value" placeholder="Insert Value">
+                    <input *ngSwitchCase="'number'" type="number" [(ngModel)]="field.value" placeholder="Insert Value" (changed)="onChange(field)">
 
-                    <input *ngSwitchDefault type="text" [(ngModel)]="field.value">
+                    <input *ngSwitchDefault type="text" [(ngModel)]="field.value" (changed)="onChange(field)">
                 </td>
             </tr>
 

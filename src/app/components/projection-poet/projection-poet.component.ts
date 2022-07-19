@@ -25,9 +25,7 @@ export class ProjectionPoetComponent implements OnInit {
       return;
     }
 
-    this.show = true;
-
-    console.log(this._data);
+    this.show = !this._data.fadeOut;
     
     let poet_id = this._data.fields.find((m: any) => m.id == 'poet_id');
 

@@ -11,12 +11,13 @@ import { PoetService } from 'src/app/services/poet.service';
   templateUrl: './projection-poet-scores.component.html',
   styleUrls: ['./projection-poet-scores.component.scss']
 })
-export class ProjectionPoetScoresComponent  implements OnInit {
+export class ProjectionPoetScoresComponent implements OnInit {
 
   scores: number[] = [];
 
   show: boolean = false;
   poet: Poet | undefined;
+
 
   private _data: any | undefined;
   @Input("data") set data(value: any | undefined) {
@@ -27,16 +28,29 @@ export class ProjectionPoetScoresComponent  implements OnInit {
       return;
     }
 
-    this.show = true;
+    this.show = !this._data.fadeOut;
 
-    console.log(this._data);
-    
     let poet_id = this._data.fields.find((m: any) => m.id == 'poet_id');
 
     if (poet_id) {
       this.poet = this.poetService.getPoet(poet_id.value);
     }
-    
+
+    if (this._config && this._config.countJury) {
+      for (let i = 0; i < this._config.countJury; i++) {
+
+        let s = this._data.fields.find((m: any) => m.id == "jury_score_" + (i + 1));
+        if (s != undefined && s.value !== undefined && s.value !== "") {
+          this.scores[i] = s.value;
+        } else {
+          this.scores[i] = -1;
+          console.log("score " + i + " is undefined")
+        }
+      }
+    }
+
+    console.log(this.scores);
+
   }
   get data(): any | undefined {
     return this._data;
@@ -46,7 +60,7 @@ export class ProjectionPoetScoresComponent  implements OnInit {
   @Input("config") set config(value: Config | undefined) {
     this._config = value;
 
-    if (this._config && this._config.countJury) {
+    if (this.scores.length == 0 && this._config && this._config.countJury) {
       for (let i = 0; i < this._config.countJury; i++) {
         this.scores.push(-1);
       }
