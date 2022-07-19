@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+
+$imported-modules: null;
+
+@import "./../node_modules/@clr/icons/clr-icons.css";
+
+body[cds-theme="dark"] {
+    @import "./../node_modules/@clr/ui/src/dark-theme.scss";
+}
+@import "./../node_modules/@clr/ui/src/main.scss";
+
+
+@import "./../node_modules/animate.css/animate.css";
+
+
+.p-0 {
+    padding: 0 !important;
+}
+.p-1 {
+    padding: .25rem !important;
+}
+.p-2 {
+    padding: .5rem !important;
+}
+.p-3 {
+    padding: 1rem !important;
+}
+.p-4 {
+    padding: 1.5rem !important;
+}
+.p-5 {
+    padding: 3rem !important;
+}
+
+body {
+    background-color: #000 !important;
+}
+
+.poetry-header {
+    padding-left: 0;
+    padding-top: 0.9rem;
+    position: sticky;
+    top: 0;
+    background: #1b2a32;
+
+
+    .headline {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+
+        line-height: 1.8rem;
+
+        color: white;
+
+        border-bottom: 0.15rem solid var(--clr-nav-active-box-shadow-color);
+    }
+}
+
+.poetry-body {
+    height: calc(100% - 3rem);
+
+}

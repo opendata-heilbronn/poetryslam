@@ -1,0 +1,17 @@
+<div class="projection-background animate__animated"
+    [ngClass]="{'animate__fadeIn': data.id != 'blank', 'animate__fadeOut': data.id == 'blank' }"
+    [ngStyle]="{ 'background-image': bgImage }"></div>
+
+
+<div [ngSwitch]="data.id">
+    <app-projection-event-name-announcement *ngSwitchCase="'event_name_announcement'" [config]="config" [data]="data">
+    </app-projection-event-name-announcement>
+    <app-projection-asset *ngSwitchCase="'asset'" [config]="config" [data]="data"></app-projection-asset>
+
+    <app-projection-group-announcement *ngSwitchCase="'group_announcement'" [config]="config" [data]="data">
+    </app-projection-group-announcement>
+
+    <app-projection-poet *ngSwitchCase="'poet_announcement'" [config]="config" [data]="data"></app-projection-poet>
+    <app-projection-poet-scores *ngSwitchCase="'poet_scores'" [config]="config" [data]="data">
+    </app-projection-poet-scores>
+</div>

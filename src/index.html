@@ -1,64 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" manifest="app.manifest">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Poetry Slam</title>
-    <link rel="stylesheet" href="fonts/SourceSansPro-Black.css"/>
-    <link rel="stylesheet" href="fonts/SourceSansPro-Light.css"/>
-    <link href="fonts/RobotoFonts.css" rel="stylesheet">
-    <!-- build:css index.min.css -->
-    <link rel="stylesheet" href="components/angular-material/angular-material.css">
-    <link rel="stylesheet" href="components/animate.css/animate.css"/>
-    <link rel="stylesheet" href="components/odometer/themes/odometer-theme-minimal.css"/>
-    <link rel="stylesheet" href="modules/ps.css"/>
-    <!-- endbuild -->
-
-    <!-- build:js index.min.js -->
-    <script src='components/jquery/dist/jquery.min.js'></script>
-    <script src="components/angular/angular.js"></script>
-
-    <script src="components/angular-aria/angular-aria.js"></script>
-    <script src="components/angular-animate/angular-animate.js"></script>
-    <script src="components/angular-material/angular-material.js"></script>
-    <script src="components/angular-i18n/angular-locale_de-de.js"></script>
-    <script src="components/odometer/odometer.js"></script>
-    <script src="components/Flowtype.js/flowtype.js"></script>
-    <script src="components/angular-flowtype/angular-flowtype.js"></script>
-    <script src="modules/ps.js"></script>
-    <script src="modules/sync/ps.sync.js"></script>
-    <script src="modules/sync/SyncService.js"></script>
-    <script src="modules/storage/ps.storage.js"></script>
-    <script src="modules/storage/StorageService.js"></script>
-    <script src="modules/presentation/ps.presentation.js"></script>
-    <script src="modules/presentation/introDirective.js"></script>
-    <script src="modules/presentation/participantDirective.js"></script>
-    <script src="modules/presentation/groupDirective.js"></script>
-    <script src="modules/presentation/groupRatingsDirective.js"></script>
-    <script src="modules/presentation/odometerDirective.js"></script>
-    <script src="modules/presentation/ratingParticipantDirective.js"></script>
-    <script src="modules/presentation/competitionRatingsDirective.js"></script>
-    <script src="modules/presentation/customTextDirective.js"></script>
-    <script src="modules/presentation/html2canvas.js"></script>
-    <script src="modules/presentation/backgroundVideoDirective.js"></script>
-    <script src="modules/presentation/clipDirective.js"></script>
-    <script src="modules/presentation/fullscreenDirective.js"></script>
-    <!-- endbuild -->
+  <meta charset="utf-8">
+  <title>SlamwareApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-<body ng-app="ps" class="anim-video-delay-long" ng-class="{'disable-ignored-scores': !presentation.enableIgnoredScores}" fullscreen>
-<div class="screen-container" id="screen-container">
-    <background-video url="presentation.bgVideoUrl" delay-switch></background-video>
-    <clip url="presentation.videoUrl" start-at="presentation.startVideoAt" ></clip>
-
-    <div ng-switch="presentation.screen" ng-hide="presentation.bgVideo === 'pause'">
-        <intro ng-switch-when="intro"></intro>
-        <group ng-switch-when="group"></group>
-        <custom-text ng-switch-when="customText"></custom-text>
-        <participant ng-switch-when="participant"></participant>
-        <group-ratings ng-switch-when="groupRatings"></group-ratings>
-        <competition-ratings ng-switch-when="competitionRatings"></competition-ratings>
-    </div>
-</div>
-    
-</div>
+<body cds-theme="dark">
+  <app-root></app-root>
 </body>
 </html>

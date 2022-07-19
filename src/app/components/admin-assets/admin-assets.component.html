@@ -1,0 +1,66 @@
+<div class="poetry-header">
+    <section>
+        <div class="headline">Assets</div>
+    </section>
+</div>
+
+<div class="poetry-body">
+
+    <div class="clr-row">
+        <div class="clr-col">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Id</th>
+                        <th style="text-align: left;">Name</th>
+                        <th style="text-align: left;">Type</th>
+                        <th style="text-align: left;">Data</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="assets.length == 0">
+                        <td colspan="3" class="p-5">
+                            no assets found - create some
+                        </td>
+                    </tr>
+
+                    <tr class="tr-input" *ngFor="let asset of assets">
+                        <td>
+                            <input type="text" [(ngModel)]="asset.id" placeholder="file id" readonly>
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="asset.name" placeholder="file name" (change)="update(asset)">
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="asset.type" placeholder="file type" (change)="update(asset)">
+                        </td>
+                        <td>
+                            <img [src]="asset.dataUrl" style="max-width: 100px" />
+                        </td>
+                        <td>
+                            <button (click)="remove(asset)" class="btn btn-sm btn-link btn-icon">
+                                <cds-icon shape="trash"></cds-icon>
+                            </button>
+                        </td>
+                    </tr>
+
+
+                    <tr class="tr-input">
+                        <td colspan="3">
+
+                            <button type="button" class="btn btn-sm btn-primary" (click)="fileInput.click()">
+                                Choose File
+                            </button>
+                            <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
