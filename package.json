@@ -1,6 +1,6 @@
 {
   "name": "slamware-app",
-  "version": "0.0.0",
+  "version": "v3.0.1-beta",
   "main": "./src/electron/app.js",
   "scripts": {
     "ng": "ng",
