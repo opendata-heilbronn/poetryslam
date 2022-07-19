@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { Group } from 'src/app/models/group';
 import { Poet } from 'src/app/models/poet';
 import { GenericDataService } from 'src/app/services/generic-data.service';
-
 import { PoetService } from 'src/app/services/poet.service';
 
 @Component({
@@ -36,7 +34,7 @@ export class AdminGroupsComponent implements OnInit {
 
   countPoets(group_id: string | undefined): number {
     if (group_id) {
-      return this.poets.filter(m =>m.group == group_id).length;
+      return this.poets.filter(m => m.group == group_id).length;
     }
 
     return -1;
