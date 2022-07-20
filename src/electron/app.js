@@ -31,7 +31,7 @@ function createMainWindow(display) {
     mainWindow.maximize();
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', function () {
         mainWindow = null
@@ -67,7 +67,7 @@ function createPresentationWindow(display) {
         })
     );
 
-    presentationWindow.webContents.openDevTools();
+    // presentationWindow.webContents.openDevTools();
 
 
     presentationWindow.on('closed', function () {
