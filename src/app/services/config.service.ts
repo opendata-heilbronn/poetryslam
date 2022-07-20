@@ -30,6 +30,6 @@ export class ConfigService {
 
 
   update(config: Config) {
-    this.dataService.update(this.dataKey, config);
+    this.dataService.Update(this.dataKey, config);
   }
 }

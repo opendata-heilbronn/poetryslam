@@ -59,11 +59,15 @@ export class AdminSettingsComponent implements OnInit {
   }
 
   resetEvent() {
-    this.create();
+    this.dataService.Remove();
   }
 
   exportEvent() {
     let fileContent = JSON.stringify(this.dataService._data);
+
+    fileContent = this.encodeSpecialChars(fileContent);
+
+    console.log("file content", fileContent);
 
     if (this.config) {
 
@@ -78,27 +82,46 @@ export class AdminSettingsComponent implements OnInit {
     }
   }
 
+  sCharsList = [
+    { d: "ü", e: "&uuml;" },
+    { d: "ä", e: "&auml;" },
+    { d: "ö", e: "&ouml;" },
+    { d: "Ü", e: "&Uuml;" },
+    { d: "Ä", e: "&Auml;" },
+    { d: "Ö", e: "&Ouml;" },
+  ];
+
+  private encodeSpecialChars(str: string): string {
+    
+    for (let i = 0; i < this.sCharsList.length; i++) {
+      let regex = new RegExp(this.sCharsList[i].d, "g");
+      str = str.replace(regex, this.sCharsList[i].e);
+    }
+    
+    return str;
+  }
+
+  private decodeSpecialChars(str: string): string {
+
+    for (let i = 0; i < this.sCharsList.length; i++) {
+      let regex = new RegExp(this.sCharsList[i].e, "g");
+      str = str.replace(regex, this.sCharsList[i].d);
+    }
+    
+    return str;
+  }
+
   importEvent(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-
-      // console.log(file);
-      // console.log(reader.result);
-
-      let data = JSON.parse(atob((reader.result as string).replace("data:application/json;base64,", "")));
+      let jsonString = atob((reader.result as string).replace("data:application/json;base64,", ""));
+      let decodedString = this.decodeSpecialChars(jsonString);
+      console.log(decodedString);
+      let data = JSON.parse(decodedString);
       console.log(data);
-
-      // let asset: Asset = {
-      //   id: crypto.randomUUID(),
-      //   name: file.name,
-      //   type: file.type,
-      //   data: reader.result,
-      //   dataUrl: undefined
-      // };
-
-      // this.assetService.addAsset(asset);
+      this.dataService.Load(data);
     };
   }
 

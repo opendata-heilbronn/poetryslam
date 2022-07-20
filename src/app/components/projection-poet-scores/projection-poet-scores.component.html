@@ -9,8 +9,11 @@
         </div>
 
         <div class="projection-poet-scores">
-            <div class="score" *ngFor="let score of scores" [ngStyle]="{'color': config.textColor1, 'background-color': config.backgroundColor1 }">
-                {{ score }}
+            <div class="score" *ngFor="let score of scores; index as i">
+
+                <div *ngIf="score >= 0" class="score_defined animate__animated" [ngClass]="{ 'animate__backInUp animate__delay-1s': score >= 0 && lowest != i && highest != i, 'animate__backOutDown': lowest == i || highest == i }"
+                    [ngStyle]="{'color': config.textColor1, 'background-color': config.backgroundColor1 }">{{ score }}</div>
+
             </div>
         </div>
     </div>

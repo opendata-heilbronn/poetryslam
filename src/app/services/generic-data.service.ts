@@ -34,7 +34,7 @@ export class GenericDataService<T> {
 
     this._data.push(entry);
     this.data.next(this._data);
-    this.dataService.update(this.dataKey, this._data);
+    this.dataService.Update(this.dataKey, this._data);
     return entry;
   }
 
@@ -58,12 +58,12 @@ export class GenericDataService<T> {
       (p as any)[key] = (entry as any)[key];
     });
 
-    this.dataService.update(this.dataKey, this._data);
+    this.dataService.Update(this.dataKey, this._data);
     return p;
   }
 
   Remove(entry: T) {
     this._data = this._data.filter(m => (m as any).id != (entry as any).id);
-    this.dataService.update(this.dataKey, this._data);
+    this.dataService.Update(this.dataKey, this._data);
   }
 }

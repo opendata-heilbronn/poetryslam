@@ -52,6 +52,9 @@ export class AdminProjectionEditorComponent implements OnInit {
   }
 
   onChange(field: any) {
+    if (field.type == 'number') {
+      field.value = undefined;
+    }
     this.change.emit(field);
   }
 

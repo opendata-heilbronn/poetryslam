@@ -37,14 +37,28 @@
             .score {
                 padding-top: 0;
                 padding-bottom: 0;
-                padding-left: 3vw;
-                padding-right: 3vw;
 
                 margin: 1rem;
 
-                font-size: 10vh;
+                font-size: 8vh;
                 line-height: 15vh;
+                height: 15vh;
 
+                .score_defined {
+                    width: 15vh;
+                    height: 15vh;
+                    text-align: center;
+                }
+
+                .score_undefined {
+                    height: 15vh;
+                    width: 15vh;
+                    text-align: center;
+                }
+
+                .hide {
+                    display: none;
+                }
 
             }
         }

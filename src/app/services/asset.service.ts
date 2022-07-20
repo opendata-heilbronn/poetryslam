@@ -30,7 +30,7 @@ export class AssetService {
   addAsset(asset: Asset): Asset {
     this._assets.push(asset);
     this.assets.next(this._assets);
-    this.dataService.update(this.dataKey, this._assets);
+    this.dataService.Update(this.dataKey, this._assets);
     return asset;
   }
 
@@ -40,13 +40,13 @@ export class AssetService {
 
   updateAsset(asset: Asset): Asset | undefined {
     let p = this._assets.find(m => m.id == asset.id);
-    this.dataService.update(this.dataKey, this._assets);
+    this.dataService.Update(this.dataKey, this._assets);
     return p;
   }
 
   removeAsset(asset: Asset) {
     this._assets = this._assets.filter(m => m.id != asset.id);
-    this.dataService.update(this.dataKey, this._assets);
+    this.dataService.Update(this.dataKey, this._assets);
   }
 
 }

@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Asset } from 'src/app/models/asset';
 import { Config } from 'src/app/models/config';
 import { Poet } from 'src/app/models/poet';
+import { Slide } from 'src/app/models/slide';
 import { AssetService } from 'src/app/services/asset.service';
 import { PoetService } from 'src/app/services/poet.service';
 
@@ -18,9 +19,15 @@ export class ProjectionPoetScoresComponent implements OnInit {
   show: boolean = false;
   poet: Poet | undefined;
 
+  highest: number | undefined;
+  lowest: number | undefined;
 
-  private _data: any | undefined;
-  @Input("data") set data(value: any | undefined) {
+
+  private _data: Slide | undefined;
+  @Input("data") set data(value: Slide | undefined) {
+    if (value === undefined)
+      return;
+
     this._data = value;
 
     if (this._data.id != "poet_scores") {
@@ -36,17 +43,30 @@ export class ProjectionPoetScoresComponent implements OnInit {
       this.poet = this.poetService.getPoet(poet_id.value);
     }
 
-    if (this._config && this._config.countJury) {
-      for (let i = 0; i < this._config.countJury; i++) {
+    this.scores = this.poetService.SlideToScore(this._data, this._config);
 
-        let s = this._data.fields.find((m: any) => m.id == "jury_score_" + (i + 1));
-        if (s != undefined && s.value !== undefined && s.value !== "") {
-          this.scores[i] = s.value;
-        } else {
-          this.scores[i] = -1;
-          console.log("score " + i + " is undefined")
+    let remove_high_low = this._data.fields.find((m: any) => m.id == 'remove_high_low');
+    if (remove_high_low !== undefined && remove_high_low.value === true) {
+      let h = 0;
+      let l = 11;
+      
+      for (let i = 0; i < this.scores.length; i++) {
+        if (this.scores[i] > h) {
+          this.highest = i;
+          h = this.scores[i];
+        }
+
+        if (this.scores[i] < l) {
+          this.lowest = i;
+          l = this.scores[i];
         }
       }
+
+      console.log("highest: " + h + " - position: " + this.highest);
+      console.log("lowest: " + l + " - position: " + this.lowest);
+    } else {
+      this.lowest = undefined;
+      this.highest = undefined;
     }
 
     console.log(this.scores);
@@ -60,7 +80,7 @@ export class ProjectionPoetScoresComponent implements OnInit {
   @Input("config") set config(value: Config | undefined) {
     this._config = value;
 
-    if (this.scores.length == 0 && this._config && this._config.countJury) {
+    if (this.scores.length === 0 && this._config !== undefined && this._config.countJury !== undefined) {
       for (let i = 0; i < this._config.countJury; i++) {
         this.scores.push(-1);
       }

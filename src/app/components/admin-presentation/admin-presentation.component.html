@@ -16,12 +16,6 @@
                     <div class="admin-projection-header mt-3">Values</div>
                     <app-admin-projection-editor [slide]="slidePreview"></app-admin-projection-editor>
 
-                    <div class="admin-projection-header mt-3">Actions</div>
-                    <div class="admin-projection-actions">
-                        <div *ngIf="slidePreview.actions == undefined || slidePreview.actions.length == 0">No Actions Available</div>
-                        <button class="btn btn-sm btn-outline w-100" *ngFor="let action of slidePreview.actions">{{ action.name }}</button>
-                    </div>
-
                 </div>
                 
 
@@ -52,12 +46,6 @@
 
                     <div class="admin-projection-header mt-3">Values</div>
                     <app-admin-projection-editor [slide]="slideProgram" (change)="onChanged()"></app-admin-projection-editor>
-
-                    <div class="admin-projection-header mt-3">Actions</div>
-                    <div class="admin-projection-actions">
-                        <div *ngIf="slideProgram.actions == undefined || slideProgram.actions.length == 0">No Actions Available</div>
-                        <button class="btn btn-sm btn-outline w-100" *ngFor="let action of slideProgram.actions">{{ action.name }}</button>
-                    </div>
 
                 </div>
                 

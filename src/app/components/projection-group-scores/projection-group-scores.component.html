@@ -1,1 +1,30 @@
-<p>projection-group-scores works!</p>
+<div class="projection-container animate__animated"
+    [ngClass]="{ 'animate__slideInLeft animate__fadeIn': show, 'animate__slideOutLeft animate__fadeOut': show == false }">
+
+    <div class="projection-container-content"
+        *ngIf="group != undefined && group.name != undefined && config != undefined">
+        <div class="projection-group-name"
+            [ngStyle]="{'color': config.textColor1, 'background-color': config.backgroundColor2 }">
+            {{ group.name }}
+        </div>
+
+        <div class="scores" *ngIf="config.countWinners !== undefined">
+            <div class="scores-entry" *ngFor="let poet of orderPoets(poets); index as i">
+                <div class="scores-entry-container animate__animated" 
+                [ngClass]="{ 'animate__fadeIn': poets !== undefined && i > (poets.length - poets_show_count -1) }">
+                    <div class="score-entry-sum" [ngStyle]="{'color': i < config.countWinners ? config.textColor1: config.textColor2, 'background-color': i < config.countWinners ? config.backgroundColor1: config.backgroundColor2 }">
+                        {{ i + 1 }}
+                    </div>
+                    <div class="score-entry-poet" [ngStyle]="{'color': i < config.countWinners ? config.textColor1: config.textColor2, 'background-color': i < config.countWinners ? config.backgroundColor1: config.backgroundColor2 }">
+                        {{ poet.name }}
+                    </div>
+                    <div class="score-entry-sum" [ngStyle]="{'color': i < config.countWinners ? config.textColor1: config.textColor2, 'background-color': i < config.countWinners ? config.backgroundColor1: config.backgroundColor2 }">
+                        {{ getScore(poet) }}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>

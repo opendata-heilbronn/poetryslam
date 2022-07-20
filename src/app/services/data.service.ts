@@ -50,10 +50,18 @@ export class DataService {
     return (this._data as any)[key];
   }
 
-  update(key: string, data: any) {
-    (this._data as any)[key] = data;
-    // this.data.next(this._data);
+  Load(data: any) {
+    this._data = data;
     this.saveToLocalStorage();
+  }
+
+  Update(key: string, data: any) {
+    (this._data as any)[key] = data;
+    this.saveToLocalStorage();
+  }
+
+  Remove() {
+    localStorage.removeItem(this.lskey);
   }
 
 }

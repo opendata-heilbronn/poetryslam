@@ -1,7 +1,6 @@
 const { app, BrowserWindow, screen } = require('electron')
 const url = require("url");
 const path = require("path");
-const Server = require("./server");
 
 let mainWindow;
 let presentationWindow;
@@ -100,10 +99,6 @@ function onAppReady() {
 
 
 }
-
-let server = new Server();
-server.init();
-
 
 app.on('ready', onAppReady)
 

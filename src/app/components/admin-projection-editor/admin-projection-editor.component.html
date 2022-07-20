@@ -38,7 +38,29 @@
                         <option *ngFor="let a of groups" [ngValue]="a.id">{{ a.name }}</option>
                     </select>
 
-                    <input *ngSwitchCase="'number'" type="number" [(ngModel)]="field.value" placeholder="Insert Value" (changed)="onChange(field)">
+                    <div *ngSwitchCase="'increment'">
+                        <div>
+                            <button
+                                (click)="field.value = field.value > 0 ? field.value -1: field.value; onChange(field)"
+                                class="btn btn-sm btn-primary w-100">previous</button>
+                            <button (click)="field.value = field.value +1; onChange(field)"
+                                class="btn btn-sm btn-primary w-100">next</button>
+                        </div>
+                        <div>
+                            <button (click)="field.value = 0; onChange(field)"
+                                class="btn btn-sm btn-primary w-100">none</button>
+                            <button (click)="field.value = 9999; onChange(field)"
+                                class="btn btn-sm btn-primary w-100">all</button>
+                        </div>
+                    </div>
+
+                    <div *ngSwitchCase="'bool'">
+                        <input type="checkbox" clrCheckbox [(ngModel)]="field.value"
+                            (click)="field.value = !field.value; onChange(field)" />
+                    </div>
+
+                    <input *ngSwitchCase="'number'" type="number" [(ngModel)]="field.value" placeholder="Insert Value"
+                        (changed)="onChange(field)">
 
                     <input *ngSwitchDefault type="text" [(ngModel)]="field.value" (changed)="onChange(field)">
                 </td>
