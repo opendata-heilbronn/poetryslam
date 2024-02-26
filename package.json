@@ -1,58 +1,60 @@
 {
-  "name": "slamware-app",
-  "version": "v3.0.1-beta",
-  "main": "./src/electron/app.js",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "electron": "electron ."
-  },
+  "name": "slammaster",
+  "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps"
+  },
+  "main": "background.js",
   "dependencies": {
-    "@angular/animations": "~13.3.0",
-    "@angular/common": "~13.3.0",
-    "@angular/compiler": "~13.3.0",
-    "@angular/core": "~13.3.0",
-    "@angular/forms": "~13.3.0",
-    "@angular/platform-browser": "~13.3.0",
-    "@angular/platform-browser-dynamic": "~13.3.0",
-    "@angular/router": "~13.3.0",
-    "@cds/city": "^1.1.0",
-    "@cds/core": "^6.0.0",
-    "@clr/angular": "^13.3.0",
-    "@clr/icons": "^13.0.2",
-    "@clr/ui": "^13.3.0",
-    "@webcomponents/webcomponentsjs": "^2.6.0",
-    "animate.css": "^4.1.1",
-    "express": "^4.18.1",
-    "moment": "^2.29.4",
-    "ngx-electron": "^2.2.0",
-    "path-browserify": "^1.0.1",
-    "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
-    "ws": "^8.7.0",
-    "zone.js": "~0.11.4"
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/vue-fontawesome": "^3.0.6",
+    "core-js": "^3.8.3",
+    "pinia": "^2.1.7",
+    "vue": "^3.2.13",
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^13.1.0",
-    "@angular-devkit/build-angular": "~13.3.6",
-    "@angular/cli": "~13.3.6",
-    "@angular/compiler-cli": "~13.3.0",
-    "@types/jasmine": "~3.10.0",
-    "@types/node": "^12.20.55",
-    "electron": "^18.2.4",
-    "electron-builder": "^23.1.0",
-    "jasmine-core": "~4.0.0",
-    "karma": "~6.3.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.1.0",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "~1.7.0",
-    "node-polyfill-webpack-plugin": "^1.1.4",
-    "raw-loader": "^4.0.2",
-    "typescript": "~4.6.2"
-  }
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "electron": "^13.0.0",
+    "electron-devtools-installer": "^3.1.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "node-sass": "^9.0.0",
+    "sass-loader": "^14.1.1",
+    "vue-cli-plugin-electron-builder": "~2.1.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
 }
