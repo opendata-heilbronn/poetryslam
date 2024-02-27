@@ -7,14 +7,15 @@ export const useConfigStore = defineStore('config', {
         id: '',
         name: 'Beispiel Slam',
         textColor1: '#7cdeb9',
-        textColor2: '#a7c4cd',
         backgroundColor1: '#008552',
+        textColor2: '#a7c4cd',
         backgroundColor2: '#005470',
         backgroundImage: '',
 
         countWinners: 1,
         countJury: 5,
-        gameMode: 'simple'
+        gameMode: 'simple',
+        resolution: '1920x1080',
     }),
 
     actions: {
@@ -60,6 +61,10 @@ export const useConfigStore = defineStore('config', {
 
         setGameMode(mode) {
             this.gameMode = mode
+        },
+
+        setResolution(resolution) {
+            this.resolution = resolution
         }
     }
 })

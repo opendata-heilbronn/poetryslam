@@ -8,6 +8,7 @@ import NavBar from '@/components/NavBar.vue'
 
     .main-content {
         color: white;
+        width: 100%;
     }
 }
 
@@ -20,7 +21,6 @@ import NavBar from '@/components/NavBar.vue'
 
         <div class="main-content">
             <slot />
-
         </div>
     </div>
 </template>

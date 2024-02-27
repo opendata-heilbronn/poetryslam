@@ -8,16 +8,17 @@ const config = useConfigStore()
 </script>
 
 <style scoped lang="scss">
-
 .card-container {
     display: flex;
     flex-wrap: wrap;
 }
+
 .card {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
+    width: 32%;
 
     .card-header {
         background-color: #42b983;
@@ -31,11 +32,12 @@ const config = useConfigStore()
         .form-group {
             margin-bottom: 20px;
 
-            input {
+            input,
+            select {
                 height: 32px;
 
                 width: 100%;
-                padding: 10px;
+                padding: 0 10px;
                 margin-bottom: 10px;
                 border: none;
             }
@@ -63,6 +65,7 @@ const config = useConfigStore()
         label {
             display: block;
             margin-bottom: 5px;
+            font-size: 16px;
         }
 
     }
@@ -77,7 +80,9 @@ const config = useConfigStore()
 
 
                 <div class="card">
-                    <div class="card-header" :style="{ 'background-color': config.backgroundColor1, 'color': config.textColor1 }">About the Slam</div>
+                    <div class="card-header"
+                        :style="{ 'background-color': config.backgroundColor1, 'color': config.textColor1 }">About the Slam
+                    </div>
                     <div class="card-content">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -97,7 +102,7 @@ const config = useConfigStore()
                         <div class="form-group">
                             <label for="gameMode">Game mode</label>
                             <select id="gameMode" name="gameMode" v-model="config.gameMode">
-                                <option value="simple"  :selected="config.gameMode == 'simple'">Simple</option>
+                                <option value="simple" :selected="config.gameMode == 'simple'">Simple</option>
                                 <option value="bw-slam" :selected="config.gameMode == 'bw-slam'">BW Slam</option>
                             </select>
                         </div>
@@ -105,7 +110,8 @@ const config = useConfigStore()
                 </div>
 
                 <div class="card">
-                    <div class="card-header" :style="{ 'background-color': config.backgroundColor2, 'color': config.textColor2 }">Colors</div>
+                    <div class="card-header"
+                        :style="{ 'background-color': config.backgroundColor2, 'color': config.textColor2 }">Colors</div>
                     <div class="card-content">
 
                         <div class="form-group">
@@ -145,12 +151,28 @@ const config = useConfigStore()
                                     v-model="config.backgroundColor2">
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"
+                        :style="{ 'background-color': config.backgroundColor1, 'color': config.textColor1 }">Projection
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label for="resolution">Resolution</label>
+                            <select id="resolution" name="resolution" v-model="config.resolution">
+                                <option value="800x600" :selected="config.resolution == '800x600'">800x600</option>
+                                <option value="1024x768" :selected="config.resolution == '1024x768'">1024x768</option>
+                                <option value="1280x720" :selected="config.resolution == '1280x720'">1280x720</option>
+                                <option value="1920x1080" :selected="config.resolution == '1920x1080'">1920x1080</option>
+                                <option value="3840x2160" :selected="config.resolution == '3840x2160'">3840x2160</option>
+
+                            </select>
+                        </div>
 
                     </div>
-
-
                 </div>
             </div>
         </form>
-    </LayoutMain>
-</template>
+    </LayoutMain></template>
